@@ -1,0 +1,9 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+elasticsearch:
+  host: 34.64.234.251
+  port: 9200
+  username: elastic
+  password: hansung
