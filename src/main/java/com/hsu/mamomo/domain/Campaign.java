@@ -10,6 +10,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -29,14 +31,14 @@ public class Campaign {
     @Field(name = "url", type = FieldType.Keyword)
     private String url;
 
-    @Field(name = "title", type = FieldType.Keyword)
+    @Field(name = "title", type = FieldType.Text)
     private String title;
 
     @ElementCollection
-    @Field(name = "tags", type = FieldType.Keyword)
+    @Field(name = "tags")
     private List<String> tags;
 
-    @Field(name = "body", type = FieldType.Keyword)
+    @Field(name = "body", type = FieldType.Text)
     private String body;
 
     @Field(name = "organization_name", type = FieldType.Keyword)
@@ -46,19 +48,19 @@ public class Campaign {
     private String thumbnail;
 
     // 편의상 String으로 설정
-    @Field(name = "due_date", type = FieldType.Keyword)
-    private String dueDate;
+    @Field(name = "due_date", type = FieldType.Date)
+    private LocalDate dueDate;
 
-    @Field(name = "start_date", type = FieldType.Keyword)
-    private String startDate;
+    @Field(name = "start_date", type = FieldType.Date)
+    private LocalDate startDate;
 
-    @Field(name = "target_price", type = FieldType.Keyword)
-    private String targetPrice;
+    @Field(name = "target_price", type = FieldType.Long)
+    private Long targetPrice;
 
-    @Field(name = "status_price", type = FieldType.Keyword)
-    private String statusPrice;
+    @Field(name = "status_price", type = FieldType.Long)
+    private Long statusPrice;
 
-    @Field(name = "percent", type = FieldType.Keyword)
-    private String percent;
+    @Field(name = "percent", type = FieldType.Integer)
+    private Integer percent;
 
 }

@@ -7,3 +7,4 @@ elasticsearch:
   port: 9200
   username: elastic
   password: hansung
+  connectTimeout: 6000
