@@ -3,6 +3,7 @@ package com.hsu.mamomo.elastic;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.RestClients;
@@ -29,10 +30,12 @@ public class ElasticsearchConfig extends AbstractElasticsearchConfiguration {
     @Bean
     public RestHighLevelClient elasticsearchClient() {
 
-        final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo(host + ":" + port)
-                .withBasicAuth(username, password)
-                .build();
+        final ClientConfiguration clientConfiguration =
+                ClientConfiguration
+                        .builder()
+                        .connectedTo(host + ":" + port)
+                        .withBasicAuth(username, password)
+                        .build();
 
         return RestClients.create(clientConfiguration).rest();
     }
