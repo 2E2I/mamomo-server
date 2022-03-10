@@ -3,7 +3,7 @@ spring:
     allow-bean-definition-overriding: true
 
 elasticsearch:
-  host: 34.64.234.251
+  host: 34.64.197.28
   port: 9200
   username: elastic
   password: hansung
