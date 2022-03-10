@@ -3,9 +3,7 @@ package com.hsu.mamomo.controller;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.service.CampaignService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,13 @@ public class CampaignController {
     private final CampaignService campaignService;
 
     @GetMapping("/campaigns")
-    public List<Campaign> getAllCampaigns() {
-        return campaignService.findAll();
+    public List<Campaign> getAllCampaignsBySort(@RequestParam(required = false, defaultValue = "1") int sort) {
+        if (sort == 1) {
+            return campaignService.findAllByStartDate();
+        } else if (sort == 2)
+            return campaignService.findAllByDueDate();
+
+        return null;
     }
+
 }
