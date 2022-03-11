@@ -21,16 +21,8 @@ public class CampaignSearchController {
 
     @GetMapping("/search")
     public List<Campaign> searchByTitleOrBody(@RequestParam(value = "keyword") String keyword,
-                                              @RequestParam(value = "sort", required = false) String sort) {
-        String[] _sort = new String[2];
-
-        if (sort != null) {
-            _sort = sort.split(",");
-        } else { // 정확도순
-            _sort[0] = "none";
-            _sort[1] = "none";
-        }
-
+            @RequestParam(value = "sort", defaultValue = "none,none") String sort) {
+        String[] _sort = sort.split(",");
         // sort = [field, direction]
         return campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]);
     }
