@@ -4,16 +4,8 @@ endif::[]
 
 == REQUEST
 
-include::{snippets}/reviews/create/http-request.adoc[]
+include::{snippets}/top 10 tags/http-request.adoc[]
 
 == RESPONSE
 
-include::{snippets}/reviews/create/http-response.adoc[]
-
-== REQUEST
-
-include::{snippets}/reviews/student-search/http-request.adoc[]
-
-== RESPONSE
-
-include::{snippets}/reviews/student-search/http-response.adoc[]
+include::{snippets}/top 10 tags/http-response.adoc[]
