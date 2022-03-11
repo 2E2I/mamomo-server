@@ -5,7 +5,6 @@ import com.hsu.mamomo.repository.CampaignSearchRepository;
 import com.hsu.mamomo.service.CampaignSearchService;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
