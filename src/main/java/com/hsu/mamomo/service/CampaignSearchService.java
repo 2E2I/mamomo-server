@@ -72,22 +72,22 @@ public class CampaignSearchService {
      * 상위 태그 반환
      * */
     @SneakyThrows
-    public List<String> findTag() {
+    public List<String> findTop10Tags() {
 
-        final TermsAggregationBuilder aggregation =
+        TermsAggregationBuilder aggregation =
                 AggregationBuilders.terms("tags")
                         .field("tags.keyword");
 
-        final SearchSourceBuilder builder = new SearchSourceBuilder().aggregation(aggregation);
-        final SearchRequest searchRequest = new SearchRequest("campaigns").source(builder);
+        SearchSourceBuilder builder = new SearchSourceBuilder().aggregation(aggregation);
+        SearchRequest searchRequest = new SearchRequest("campaigns").source(builder);
 
-        final SearchResponse response = elasticsearchClient.search(searchRequest,
+        SearchResponse response = elasticsearchClient.search(searchRequest,
                 RequestOptions.DEFAULT);
 
-        final Map<String, Aggregation> results = response.getAggregations()
+        Map<String, Aggregation> results = response.getAggregations()
                 .asMap();
 
-        final ParsedStringTerms topTags = (ParsedStringTerms) results.get("tags");
+        ParsedStringTerms topTags = (ParsedStringTerms) results.get("tags");
 
         return topTags.getBuckets()
                 .stream()
