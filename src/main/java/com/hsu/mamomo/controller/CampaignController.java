@@ -11,16 +11,14 @@ import java.util.List;
 @RequestMapping("/api")
 @RestController
 public class CampaignController {
+
     private final CampaignService campaignService;
 
     @GetMapping("/campaigns")
-    public List<Campaign> getAllCampaignsBySort(@RequestParam(required = false, defaultValue = "1") int sort) {
-        if (sort == 1) {
-            return campaignService.findAllByStartDate();
-        } else if (sort == 2)
-            return campaignService.findAllByDueDate();
-
-        return null;
+    public List<Campaign> getAllCampaignsBySort(
+            @RequestParam(value = "sort", defaultValue = "start_date,desc") String sort) {
+        String[] _sort = sort.split(",");
+        // sort = [field, direction]
+        return campaignService.findAll(_sort[0], _sort[1]);
     }
-
 }
