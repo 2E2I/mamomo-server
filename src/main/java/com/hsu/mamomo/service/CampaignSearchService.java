@@ -1,10 +1,27 @@
 package com.hsu.mamomo.service;
 
+import static java.util.stream.Collectors.toList;
+
 import com.hsu.mamomo.domain.Campaign;
+import com.hsu.mamomo.elastic.ElasticsearchConfig;
 import com.hsu.mamomo.repository.CampaignSearchRepository;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
+import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -18,6 +35,7 @@ public class CampaignSearchService {
 
     private final CampaignSearchRepository campaignSearchRepository;
     private final ElasticSearchFactory factory;
+    private final RestHighLevelClient elasticsearchClient;
 
     /*
      * 제목 + 본문 검색 (OR)
@@ -32,9 +50,9 @@ public class CampaignSearchService {
                 .withQuery(multiMatchQueryBuilder);
 
         /*
-        * none == 정확도순
-        * none != 필드값 기준 정렬
-        * */
+         * none == 정확도순
+         * none != 필드값 기준 정렬
+         * */
         if (!item.equals("none")) {
             FieldSortBuilder sortBuilder = factory.createSortBuilder(item, direction);
             queryBuilder.withSorts(sortBuilder);
@@ -47,5 +65,34 @@ public class CampaignSearchService {
 
         // 4. Map SearchHits to Campaign list
         return factory.getCampaignList(searchHits);
+    }
+
+
+    /*
+     * 상위 태그 반환
+     * */
+    @SneakyThrows
+    public List<String> findTag() {
+
+        final TermsAggregationBuilder aggregation =
+                AggregationBuilders.terms("tags")
+                        .field("tags.keyword");
+
+        final SearchSourceBuilder builder = new SearchSourceBuilder().aggregation(aggregation);
+        final SearchRequest searchRequest = new SearchRequest("campaigns").source(builder);
+
+        final SearchResponse response = elasticsearchClient.search(searchRequest,
+                RequestOptions.DEFAULT);
+
+        final Map<String, Aggregation> results = response.getAggregations()
+                .asMap();
+
+        final ParsedStringTerms topTags = (ParsedStringTerms) results.get("tags");
+
+        return topTags.getBuckets()
+                .stream()
+                .map(MultiBucketsAggregation.Bucket::getKeyAsString)
+                .sorted()
+                .collect(toList());
     }
 }

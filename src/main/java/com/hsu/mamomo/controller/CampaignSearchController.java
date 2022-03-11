@@ -26,4 +26,9 @@ public class CampaignSearchController {
         // sort = [field, direction]
         return campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]);
     }
+
+    @GetMapping("/tag")
+    public List<String> searchTag() {
+        return campaignSearchService.findTag();
+    }
 }
