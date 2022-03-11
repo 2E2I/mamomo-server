@@ -26,13 +26,21 @@ public class CampaignSearchService {
 
         // 1. Setting up Builder
         MultiMatchQueryBuilder multiMatchQueryBuilder = factory.createQueryBuilder(keyword);
-        FieldSortBuilder sortBuilder = factory.createSortBuilder(item, direction);
 
         // 2. Create Query
-        NativeSearchQuery query = new NativeSearchQueryBuilder()
-                .withQuery(multiMatchQueryBuilder)
-                .withSorts(sortBuilder)
-                .build();
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder()
+                .withQuery(multiMatchQueryBuilder);
+
+        /*
+        * none == 정확도순
+        * none != 필드값 기준 정렬
+        * */
+        if (!item.equals("none")) {
+            FieldSortBuilder sortBuilder = factory.createSortBuilder(item, direction);
+            queryBuilder.withSorts(sortBuilder);
+        }
+
+        NativeSearchQuery query = queryBuilder.build();
 
         // 3. Execute search
         SearchHits<Campaign> searchHits = factory.getSearchHits(query);
