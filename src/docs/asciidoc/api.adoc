@@ -1,0 +1,19 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== REQUEST
+
+include::{snippets}/reviews/create/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/reviews/create/http-response.adoc[]
+
+== REQUEST
+
+include::{snippets}/reviews/student-search/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/reviews/student-search/http-response.adoc[]
