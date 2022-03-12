@@ -1,4 +1,4 @@
-package com.hsu.mamomo.controller;
+package com.hsu.mamomo.document;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
