@@ -1,7 +1,7 @@
 package com.hsu.mamomo.controller;
 
-import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
-import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
+import static com.hsu.mamomo.controller.ApiDocumentUtils.getDocumentRequest;
+import static com.hsu.mamomo.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
