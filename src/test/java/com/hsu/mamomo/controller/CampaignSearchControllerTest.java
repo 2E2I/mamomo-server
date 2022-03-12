@@ -1,5 +1,7 @@
 package com.hsu.mamomo.controller;
 
+import static com.hsu.mamomo.controller.ApiDocumentUtils.getDocumentRequest;
+import static com.hsu.mamomo.controller.ApiDocumentUtils.getDocumentResponse;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
@@ -33,8 +35,11 @@ class CampaignSearchControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.top_10_tags").isArray())
                 .andExpect(jsonPath("$.top_10_tags", hasSize(10)))
-                .andDo(document("top 10 tags", responseFields(
-                        fieldWithPath("top_10_tags").description("상위 10개 태그 반환")
-                )));
+                .andDo(document("top 10 tags",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("top_10_tags").description("상위 10개 태그 반환")
+                        )));
     }
 }

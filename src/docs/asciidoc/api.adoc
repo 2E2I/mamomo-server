@@ -9,3 +9,12 @@ include::{snippets}/top 10 tags/http-request.adoc[]
 == RESPONSE
 
 include::{snippets}/top 10 tags/http-response.adoc[]
+
+== REQUEST
+
+include::{snippets}/campaigns-default/http-request.adoc[]
+
+== RESPONSE
+
+include::{snippets}/campaigns-default/http-response.adoc[]
+
