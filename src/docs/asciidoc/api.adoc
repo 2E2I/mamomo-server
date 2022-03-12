@@ -2,19 +2,63 @@ ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
 
-== REQUEST
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 1
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
 
-include::{snippets}/top 10 tags/http-request.adoc[]
+= MaMoMo API Document
+2022 HSU Capstone
 
-== RESPONSE
+[[overview]]
+= 개요
 
-include::{snippets}/top 10 tags/http-response.adoc[]
+소개
 
-== REQUEST
+[[campaigns]]
+= 캠페인
+
+소개
+
+[[campaigns-all]]
+== 캠페인 모두보기
+
+=== REQUEST
 
 include::{snippets}/campaigns-default/http-request.adoc[]
 
-== RESPONSE
+=== RESPONSE
 
 include::{snippets}/campaigns-default/http-response.adoc[]
+
+=== RESPONSE FIELDS
+
+include::{snippets}/campaigns-default/response-fields.adoc[]
+
+
+[[campaigns-category]]
+== 캠페인 카테고리별 보기
+
+[[search]]
+= 검색
+
+소개
+
+[[search-tags]]
+== 태그 목록 보기
+=== REQUEST
+
+include::{snippets}/top 10 tags/http-request.adoc[]
+
+=== RESPONSE
+
+include::{snippets}/top 10 tags/http-response.adoc[]
+
+[[starch-by-keyword]]
+== 검색어로 검색
+
 
