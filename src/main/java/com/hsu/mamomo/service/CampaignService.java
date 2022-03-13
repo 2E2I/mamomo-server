@@ -44,10 +44,11 @@ public class CampaignService {
     /*
      * 캠페인 카테고리 별로 보기
      * */
-    public List<Campaign> findAllOfCategory(String item, String direction, String category) {
+    public List<Campaign> findAllOfCategory(String item, String direction, Integer category_id) {
 
         // 1. Setting up Builder
-        QueryBuilder queryBuilder = categoryFactory.createQueryBuilder(category);
+        String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
+        QueryBuilder queryBuilder = categoryFactory.createQueryBuilder(keyword);
         FieldSortBuilder sortBuilder = categoryFactory.createSortBuilder(item, direction);
 
         // 2. Create Query
