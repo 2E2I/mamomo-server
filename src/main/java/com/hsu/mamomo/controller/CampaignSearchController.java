@@ -29,11 +29,15 @@ public class CampaignSearchController {
     }
 
     @GetMapping("/search/campaigns")
-    public List<Campaign> searchByTitleOrBody(@RequestParam(value = "keyword") String keyword,
+    public Map<String, List<Campaign>> searchByTitleOrBody(@RequestParam(value = "keyword") String keyword,
             @RequestParam(value = "sort", defaultValue = "none,none") String sort) {
+        Map<String, List<Campaign>> result = new HashMap<>();
+
         String[] _sort = sort.split(",");
         // sort = [field, direction]
-        return campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]);
+        result.put("campaigns", campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]));
+
+        return result;
     }
 
 }
