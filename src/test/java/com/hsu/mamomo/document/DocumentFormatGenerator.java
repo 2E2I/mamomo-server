@@ -11,7 +11,7 @@ public interface DocumentFormatGenerator {
     }
 
     static Attributes.Attribute getCategoryFormat() {
-        return key("format").value("{카테고리 이름}");
+        return key("format").value("{카테고리 id}");
     }
 
 

@@ -41,7 +41,7 @@ class CampaignControllerTest {
     void Campaign() throws Exception {
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/campaigns?")
                         .param("sort", "start_date,desc")
-                        .param("category", "우리사회")
+                        .param("category", String.valueOf(8))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.campaigns").isArray())
@@ -76,7 +76,16 @@ class CampaignControllerTest {
                                 parameterWithName("category").description(
                                                 "- 캠페인 카테고리\n\n"
                                                         + "- 사용 가능한 값:\n\n"
-                                                        + "아동|청소년, 어르신, 장애인, 어려운이웃, 다문화, 지구촌, 가족|여성, 우리사회, 동물, 환경")
+                                                        + "1: 아동|청소년\n\n"
+                                                        + "2: 어르신\n\n"
+                                                        + "3: 장애인\n\n"
+                                                        + "4: 어려운이웃\n\n"
+                                                        + "5: 다문화\n\n"
+                                                        + "6: 지구촌\n\n"
+                                                        + "7: 가족|여성\n\n"
+                                                        + "8: 우리사회\n\n"
+                                                        + "9: 동물\n\n"
+                                                        + "10: 환경")
                                         .optional()
                                         .attributes(getCategoryFormat())
                         ),
@@ -139,7 +148,7 @@ class CampaignControllerTest {
     @Test
     void Campaign_Category() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                        .param("category", "우리사회")
+                        .param("category", String.valueOf(8))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-category",
                         getDocumentRequest(),
