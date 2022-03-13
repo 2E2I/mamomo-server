@@ -20,48 +20,44 @@ endif::[]
 소개
 
 [[campaigns]]
-= 캠페인
+== 캠페인
 
 캠페인 API는 캠페인 리스트를 반환합니다.
-
-캠페인 리스트는 [전체 리스트]와 [카테고리 리스트]로 두 가지로 나눠 볼 수 있습니다.
 
 [[campaigns-all]]
 == - 전체 리스트
 
-=== 요청 [파라미터 X]
-사용자가 아직 정렬 기능을 선택하지 않은, 캠페인 초기 화면을 요청할 때 사용합니다.
+===  요청
 
-캠페인 전체 리스트를 최신 순 정렬로 반환합니다.
 include::{snippets}/campaigns-default/http-request.adoc[]
 
-=== 요청 [파라미터 O]
-캠페인 전체 리스트를 최신 순 정렬로 반환합니다.
+정렬 추가 시
 
-include::{snippets}/campaigns-latest/http-request.adoc[]
-
-=== 요청 [파라미터 O]
-캠페인 전체 리스트를 마감 순 정렬로 반환합니다.
-
-include::{snippets}/campaigns-deadline/http-request.adoc[]
-
-=== 요청 파라미터
-
-include::{snippets}/campaigns-latest/request-fields.adoc[]
-
-=== 응답 바디
-
-include::{snippets}/campaigns-default/response-fields.adoc[]
-
-=== 응답 예시
-
-include::{snippets}/campaigns-default/http-response.adoc[]
-
-
-
+include::{snippets}/campaigns-sort/http-request.adoc[]
 
 [[campaigns-category]]
 == - 카테고리 리스트
+
+=== 요청
+
+include::{snippets}/campaigns-category/http-request.adoc[]
+
+정렬 추가 시
+
+include::{snippets}/campaigns/http-request.adoc[]
+
+=== 요청 파라미터
+
+include::{snippets}/campaigns/path-parameters.adoc[]
+
+=== 응답 바디
+
+include::{snippets}/campaigns/response-fields.adoc[]
+
+=== 응답 예시
+
+include::{snippets}/campaigns/http-response.adoc[]
+
 
 [[search]]
 = 검색
