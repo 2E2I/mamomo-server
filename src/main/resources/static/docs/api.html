@@ -532,7 +532,7 @@ Host: localhost:8080</code></pre>
 <h4 id="_요청_2"><a class="link" href="#_요청_2">요청</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=%EC%9A%B0%EB%A6%AC%EC%82%AC%ED%9A%8C HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=8 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -542,7 +542,7 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?sort=start_date%2Cdesc&amp;category=%EC%9A%B0%EB%A6%AC%EC%82%AC%ED%9A%8C HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?sort=start_date%2Cdesc&amp;category=8 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -582,10 +582,19 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 이름}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 id}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 카테고리</p>
 <p class="tableblock">- 사용 가능한 값:</p>
-<p class="tableblock">아동|청소년, 어르신, 장애인, 어려운이웃, 다문화, 지구촌, 가족|여성, 우리사회, 동물, 환경</p></td>
+<p class="tableblock">1: 아동|청소년</p>
+<p class="tableblock">2: 어르신</p>
+<p class="tableblock">3: 장애인</p>
+<p class="tableblock">4: 어려운이웃</p>
+<p class="tableblock">5: 다문화</p>
+<p class="tableblock">6: 지구촌</p>
+<p class="tableblock">7: 가족|여성</p>
+<p class="tableblock">8: 우리사회</p>
+<p class="tableblock">9: 동물</p>
+<p class="tableblock">10: 환경</p></td>
 </tr>
 </tbody>
 </table>
