@@ -10,5 +10,9 @@ public interface DocumentFormatGenerator {
         return key("format").value("{정렬대상}, {정렬방법}");
     }
 
+    static Attributes.Attribute getCategoryFormat() {
+        return key("format").value("{카테고리 이름}");
+    }
+
 
 }
