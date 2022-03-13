@@ -3,8 +3,8 @@ package com.hsu.mamomo.service;
 import static java.util.stream.Collectors.toList;
 
 import com.hsu.mamomo.domain.Campaign;
-import com.hsu.mamomo.elastic.ElasticsearchConfig;
 import com.hsu.mamomo.repository.CampaignSearchRepository;
+import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -20,14 +20,10 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -64,6 +60,7 @@ public class CampaignSearchService {
         SearchHits<Campaign> searchHits = factory.getSearchHits(query);
 
         // 4. Map SearchHits to Campaign list
+        System.out.println("searchHits = " + searchHits);
         return factory.getCampaignList(searchHits);
     }
 
