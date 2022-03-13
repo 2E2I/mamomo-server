@@ -3,6 +3,8 @@ package com.hsu.mamomo.service;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.repository.CampaignRepository;
 import lombok.RequiredArgsConstructor;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
@@ -16,7 +18,8 @@ import java.util.List;
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
-    private final ElasticSortFactory factory;
+    private final ElasticSortFactory sortFactory;
+    private final ElasticCategoryFactory categoryFactory;
 
     /*
      * 캠페인 전체 보기
@@ -24,7 +27,7 @@ public class CampaignService {
     public List<Campaign> findAll(String item, String direction) {
 
         // 1. Setting up Builder
-        FieldSortBuilder sortBuilder = factory.createSortBuilder(item, direction);
+        FieldSortBuilder sortBuilder = sortFactory.createSortBuilder(item, direction);
 
         // 2. Create Query
         NativeSearchQuery query = new NativeSearchQueryBuilder()
@@ -32,10 +35,32 @@ public class CampaignService {
                 .build();
 
         // 3. Execute search
-        SearchHits<Campaign> searchHits = factory.getSearchHits(query);
+        SearchHits<Campaign> searchHits = sortFactory.getSearchHits(query);
 
         // 4. Map SearchHits to Campaign list
-        return factory.getCampaignList(searchHits);
+        return sortFactory.getCampaignList(searchHits);
+    }
+
+    /*
+     * 캠페인 카테고리 별로 보기
+     * */
+    public List<Campaign> findAllOfCategory(String item, String direction, String category) {
+
+        // 1. Setting up Builder
+        QueryBuilder queryBuilder = categoryFactory.createQueryBuilder(category);
+        FieldSortBuilder sortBuilder = categoryFactory.createSortBuilder(item, direction);
+
+        // 2. Create Query
+        NativeSearchQuery query = new NativeSearchQueryBuilder()
+                .withQuery(queryBuilder)
+                .withSorts(sortBuilder)
+                .build();
+
+        // 3. Execute search
+        SearchHits<Campaign> searchHits = sortFactory.getSearchHits(query);
+
+        // 4. Map SearchHits to Campaign list
+        return sortFactory.getCampaignList(searchHits);
     }
 
 
