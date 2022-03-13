@@ -35,6 +35,10 @@ public class Campaign {
     private String title;
 
     @ElementCollection
+    @Field(name = "category")
+    private List<String> category;
+
+    @ElementCollection
     @Field(name = "tags")
     private List<String> tags;
 
