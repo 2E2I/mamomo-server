@@ -6,8 +6,10 @@ endif::[]
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
-:toclevels: 1
+:toclevels: 3
 :sectlinks:
+:sectnums:
+:sectnumlevels: 2
 :operation-curl-request-title: Example request
 :operation-http-response-title: Example response
 
@@ -17,7 +19,7 @@ endif::[]
 [[overview]]
 = 개요
 
-소개
+MaMoMo API 문서입니다.
 
 [[campaigns]]
 == 캠페인
@@ -25,9 +27,9 @@ endif::[]
 캠페인 API는 캠페인 리스트를 반환합니다.
 
 [[campaigns-all]]
-== - 전체 리스트
+=== 전체 리스트
 
-===  요청
+====  요청
 
 include::{snippets}/campaigns-default/http-request.adoc[]
 
@@ -36,9 +38,9 @@ include::{snippets}/campaigns-default/http-request.adoc[]
 include::{snippets}/campaigns-sort/http-request.adoc[]
 
 [[campaigns-category]]
-== - 카테고리 리스트
+=== 카테고리 리스트
 
-=== 요청
+==== 요청
 
 include::{snippets}/campaigns-category/http-request.adoc[]
 
@@ -46,35 +48,55 @@ include::{snippets}/campaigns-category/http-request.adoc[]
 
 include::{snippets}/campaigns/http-request.adoc[]
 
-=== 요청 파라미터
+==== 요청 파라미터
 
 include::{snippets}/campaigns/path-parameters.adoc[]
 
-=== 응답 바디
+==== 응답 바디
 
 include::{snippets}/campaigns/response-fields.adoc[]
 
-=== 응답 예시
+==== 응답 예시
 
 include::{snippets}/campaigns/http-response.adoc[]
 
 
 [[search]]
-= 검색
+== 검색
 
-소개
+검색 API 입니다.
 
 [[search-tags]]
-== 태그 목록 보기
-=== REQUEST
+=== 상위 10개 태그 반환
 
-include::{snippets}/top 10 tags/http-request.adoc[]
+검색 페이지에서 필요한 상위 10개 태그를 반환합니다.
 
-=== RESPONSE
+==== 요청
 
-include::{snippets}/top 10 tags/http-response.adoc[]
+include::{snippets}/return-top-10-tags/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/return-top-10-tags/http-response.adoc[]
 
 [[starch-by-keyword]]
-== 검색어로 검색
+=== 키워드 검색
 
+키워드로 캠페인을 검색합니다.
+
+==== 요청
+
+include::{snippets}/search-campaigns-by-keyword/http-request.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/search-campaigns-by-keyword/request-parameters.adoc[]
+
+==== 응답
+
+include::{snippets}/search-campaigns-by-keyword/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/search-campaigns-by-keyword/response-fields.adoc[]
 
