@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/search")
 @RestController
 public class CampaignSearchController {
 
     private final CampaignSearchService campaignSearchService;
 
-    @GetMapping("/search")
+    @GetMapping
     public Map<String, List<String>> searchTag() {
 
         Map<String, List<String>> result = new HashMap<>();
@@ -28,14 +28,16 @@ public class CampaignSearchController {
         return result;
     }
 
-    @GetMapping("/search/campaigns")
-    public Map<String, List<Campaign>> searchByTitleOrBody(@RequestParam(value = "keyword") String keyword,
+    @GetMapping("/campaigns")
+    public Map<String, List<Campaign>> searchByTitleOrBody(
+            @RequestParam(value = "keyword") String keyword,
             @RequestParam(value = "sort", defaultValue = "none,none") String sort) {
         Map<String, List<Campaign>> result = new HashMap<>();
 
         String[] _sort = sort.split(",");
         // sort = [field, direction]
-        result.put("campaigns", campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]));
+        result.put("campaigns",
+                campaignSearchService.searchByTitleOrBody(keyword, _sort[0], _sort[1]));
 
         return result;
     }
