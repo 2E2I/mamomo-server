@@ -1,6 +1,13 @@
 spring:
   main:
     allow-bean-definition-overriding: true
+  jpa:
+    show-sql: true
+  datesource:
+    driver-class-name: com.mysql.cj.jdbc.Driber
+    url: jdbc:mysql://34.64.197.28:3306/mamomo?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: mamomo!mysql
 
 elasticsearch:
   host: 34.64.197.28
