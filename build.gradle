@@ -43,6 +43,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	// spring rest docs
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	// jwt
+	implementation 'com.auth0:java-jwt:3.18.2'
+// spring security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
