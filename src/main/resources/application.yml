@@ -15,3 +15,7 @@ elasticsearch:
   username: elastic
   password: hansung
   connectTimeout: 6000
+
+jwt:
+  secret: 678c95112e35ae4231e3c97dd6ec9388ea8c94fc84f7fe3913f7200d3c76c0c58df814a330368440cc49c28bd5a8276ecb4c5e8bf6d4ae263d85e3d46dbc80a4
+  token-validity-in-seconds: 86400
