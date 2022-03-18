@@ -702,6 +702,12 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
 Content-Length: 81331
 
 {
@@ -1028,10 +1034,16 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 185
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 183
 
 {
-  "top_10_tags" : [ "교육지원", "생계 및 기초생활지원", "아동", "어르신", "의료", "인식 및 정책 개선", "장애인", "주거", "지구촌", "청소년" ]
+  "top10Tags" : [ "교육지원", "생계 및 기초생활지원", "아동", "어르신", "의료", "인식 및 정책 개선", "장애인", "주거", "지구촌", "청소년" ]
 }</code></pre>
 </div>
 </div>
@@ -1092,6 +1104,12 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
 Content-Length: 119567
 
 {
@@ -1651,7 +1669,7 @@ Content-Length: 119567
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-03-13 20:54:05 +0900
+Last updated 2022-03-14 19:16:53 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

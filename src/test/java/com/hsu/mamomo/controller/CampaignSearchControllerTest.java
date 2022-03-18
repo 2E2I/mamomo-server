@@ -41,13 +41,13 @@ class CampaignSearchControllerTest {
     public void returnTop10Tags() throws Exception {
         mockMvc.perform(get("/api/search").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.top_10_tags").isArray())
-                .andExpect(jsonPath("$.top_10_tags", hasSize(10)))
+                .andExpect(jsonPath("$.top10Tags").isArray())
+                .andExpect(jsonPath("$.top10Tags", hasSize(10)))
                 .andDo(document("return-top-10-tags",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         responseFields(
-                                fieldWithPath("top_10_tags").description("상위 10개 태그 반환")
+                                fieldWithPath("top10Tags").description("상위 10개 태그 반환")
                         )));
     }
 
