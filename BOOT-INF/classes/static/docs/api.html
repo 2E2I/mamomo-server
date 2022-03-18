@@ -532,7 +532,7 @@ Host: localhost:8080</code></pre>
 <h4 id="_요청_2"><a class="link" href="#_요청_2">요청</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=8 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=%EC%9A%B0%EB%A6%AC%EC%82%AC%ED%9A%8C HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -542,7 +542,7 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?sort=start_date%2Cdesc&amp;category=8 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?sort=start_date%2Cdesc&amp;category=%EC%9A%B0%EB%A6%AC%EC%82%AC%ED%9A%8C HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -582,19 +582,10 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 id}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 이름}</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 카테고리</p>
 <p class="tableblock">- 사용 가능한 값:</p>
-<p class="tableblock">1: 아동|청소년</p>
-<p class="tableblock">2: 어르신</p>
-<p class="tableblock">3: 장애인</p>
-<p class="tableblock">4: 어려운이웃</p>
-<p class="tableblock">5: 다문화</p>
-<p class="tableblock">6: 지구촌</p>
-<p class="tableblock">7: 가족|여성</p>
-<p class="tableblock">8: 우리사회</p>
-<p class="tableblock">9: 동물</p>
-<p class="tableblock">10: 환경</p></td>
+<p class="tableblock">아동|청소년, 어르신, 장애인, 어려운이웃, 다문화, 지구촌, 가족|여성, 우리사회, 동물, 환경</p></td>
 </tr>
 </tbody>
 </table>
@@ -698,11 +689,8 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
 Content-Type: application/json
-Content-Length: 81331
+Content-Length: 81330
 
 {
   "campaigns" : [ {
@@ -732,24 +720,9 @@ Content-Length: 81331
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/oqZNv/btrvwIhuMuR/32vfC6I6F7ijKKXnBbyKAK/c360.jpg",
     "dueDate" : "2022-06-10",
     "startDate" : "2022-03-10",
-    "targetPrice" : 1168000,
-    "statusPrice" : 251600,
-    "percent" : 22
-  }, {
-    "id" : "94817",
-    "siteType" : "kakao",
-    "url" : "https://together.kakao.com/fundraisings/94817",
-    "title" : "[산불피해 산림 복원 프로젝트] 다시, 숲에 싹을 틔워요",
-    "category" : [ "우리사회", "환경" ],
-    "tags" : [ "환경", "우리사회", "환경생태보호", "강원도", "산불피해긴급모금", "울진군" ],
-    "body" : "2019년 강원 산불 복구를 위해 심은 어린 나무 조차 다 타 버렸습니다. 서울 면적 3분의 1이 넘는 산림이 소실 되었습니다.  산불은 사그러져도, 우리 마음의 온기는 계속 되어야 합니다. 피해복구 이제부터 시작입니다. 2022년 3월 발생한 산불의 이름은 기후위기입니다. 3월 4일, 경북 울진에서 시작한 산불은 순식간에 거센 바람을 타고 강원 삼척까지 번졌습니다. 울진 소광리 금강소나무 보호구역을 비롯한 오래된 숲들을 위협하고 있습니다.  3월 5일 강원 강릉, 동해에서 발생한 산불은 강한 바람을 타고, 2019년의 아픔이 치유되지도 않은 숲들을 사라지게 했습니다. 2019년 강원산불피해로 다시 심겨진, 이제 막 자리를 잡은 어린나무까지도 까만 재로 변하게 했습니다.  현재 3월 10일까지 산불로 인해 사라진 숲의 면적은 서울의 1/3이나 되며, 강원 지역에서 사라진 숲은 여의도 면적의 13배나 되고 있습니다. 숲만 사라진 것이 아닙니다. 강릉, 동해에서는 주택 140채가 전소되고 57채가 일부 타는 등 숲과 함께 살아온 주민들은 삶의 터전을 잃었습니다. 한순간에 재로 변한 숲과 집은 ‘아픔’ 그 자체입니다.  기후위기로 인한 건조한 날씨, 적은 강수량과 강우량은 숲을 더 건조하게 하고, 우리나라 동해안 지역의 지형, 기후, 숲의 구조는 대형산불의 원인으로 지적되고 있습니다. 22년 우리가 마주한 산불은 ‘기후위기’의 다른 이름입니다. 1 / 2 이전 다음 기후위기시대, 산불 피해를 줄일 수 있는 숲 조성과 관리가 필요합니다 숲에는 나무만 살지 않습니다. 수많은 동식물들이 살고 있고, 숲과 기대어 사람들이 살고 있습니다. 산불은 예방이 우선이지만, 산불 이후에 어떻게 다시 함께 살아갈것인가에 대한 방법이 마련되어야 합니다. 재난안전관리 측면에서 숲을 조성하고 관리하는 방안이 마련되어야 합니다. 마을과 숲의 거리두기, 또는 마을 주변에 심어야 하는 나무에 대해 논의되고, 실행되어야 합니다.  울진에서 발생한 산불은 담뱃불이 주요한 원인으로 밝혀지고 있습니다. 한 순간의 실수로 수백년, 수십년 우리를 지켜준 숲과 삶터를 앗아갈 수 있습니다. 시민들과 함께 모니터링하고, 산불의 위험성에 대해 더 많은 시민들이 함께 알아갈 수 있도록 하는 것도 중요합니다. 그리고 산불피해지 모니터링을 통해 어떤 생태적 변화가 있는지도 기록해야 합니다. 숲에 적합한 나무를 찾고, 심고, 가꾸며 다시 숲으로 복원할 수 있는 방법을 찾아야 합니다. 산불이 앗아간 숲, 시민들의 힘으로 다시, 숲으로 갑니다. 산불피해지는 자연적으로 회복하기 위해서는 수 많은 시간이 필요합니다. 흙쓸림이나 산사태 위험도 높아지고, 숲으로 갈 수 있는 환경이 되지 못하기도 합니다. 생명의숲은 사라진 숲들이 다시 숲으로 회복될 수 있도록, 시민들과 나무를 심고 가꿔갑니다.  이제는 불이 꺼지고 난 뒤에 발생할 수 있는 산사태나 초미세 먼지 발생 같은 2차 재난도 미리 준비해야 합니다. 이를 막기 위한 산림 복원에는 막대한 시간과 비용이 필요합니다.  생명의 숲은 '산불 피해 산림 복원 프로젝트'를 통해 2022년 재난안전관리 측면에서 숲을 조성하고 관리하는 방법을 논의하고자 합니다. 또, 시민 모니터링을 하며 산불피해지의 숲 생태 현황을 진단하고, 시민과 소통할 계획입니다. 2023년에는 시민참여, 기금모금 숲조성 및 관리를 하며 산불피해지 숲의 회복에 최선을 다하겠습니다. 댓글 10개가 모이면 나무 한 그루를 심을 수 있습니다. 모금함 댓글을 남겨주시면 댓글 10개 당 나무 한 그루를 심을 수 있도록 카카오가 생명의 숲 환경 기금에 기부합니다. 불 타버린 숲에 이제 다시 나무를 심을 때 입니다. 여러분이 숲에 생명을 불어넣어 주실 수 있습니다.  우리들의 생명의 터전인 숲의 복원을 위해 함께 마음을 모아주세요!",
-    "organizationName" : "사단법인 생명의숲",
-    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/bB1Rp5/btrvyipDXdJ/gokfKUYrKaAOUW36yQ9o10/c360.jpg",
-    "dueDate" : "2022-04-10",
-    "startDate" : "2022-03-10",
-    "targetPrice" : 700000000,
-    "statusPrice" : 555462400,
-    "percent" : 80
+    "targetPrice" : 175800,
+    "statusPrice" : 1168000,
+    "percent" : 16
   }, {
     "id" : "94598",
     "siteType" : "kakao",
@@ -762,9 +735,24 @@ Content-Length: 81331
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/B8krD/btruTjiENRt/eT34tklQug9WOdca7anzQ0/c360.jpg",
     "dueDate" : "2022-06-10",
     "startDate" : "2022-03-10",
-    "targetPrice" : 10000000,
-    "statusPrice" : 293400,
-    "percent" : 3
+    "targetPrice" : 182100,
+    "statusPrice" : 10000000,
+    "percent" : 2
+  }, {
+    "id" : "94817",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94817",
+    "title" : "[산불피해 산림 복원 프로젝트] 다시, 숲에 싹을 틔워요",
+    "category" : [ "우리사회", "환경" ],
+    "tags" : [ "환경", "우리사회", "환경생태보호", "강원도", "산불피해긴급모금", "울진군" ],
+    "body" : "2019년 강원 산불 복구를 위해 심은 어린 나무 조차 다 타 버렸습니다. 서울 면적 3분의 1이 넘는 산림이 소실 되었습니다.  산불은 사그러져도, 우리 마음의 온기는 계속 되어야 합니다. 피해복구 이제부터 시작입니다. 2022년 3월 발생한 산불의 이름은 기후위기입니다. 3월 4일, 경북 울진에서 시작한 산불은 순식간에 거센 바람을 타고 강원 삼척까지 번졌습니다. 울진 소광리 금강소나무 보호구역을 비롯한 오래된 숲들을 위협하고 있습니다.  3월 5일 강원 강릉, 동해에서 발생한 산불은 강한 바람을 타고, 2019년의 아픔이 치유되지도 않은 숲들을 사라지게 했습니다. 2019년 강원산불피해로 다시 심겨진, 이제 막 자리를 잡은 어린나무까지도 까만 재로 변하게 했습니다.  현재 3월 10일까지 산불로 인해 사라진 숲의 면적은 서울의 1/3이나 되며, 강원 지역에서 사라진 숲은 여의도 면적의 13배나 되고 있습니다. 숲만 사라진 것이 아닙니다. 강릉, 동해에서는 주택 140채가 전소되고 57채가 일부 타는 등 숲과 함께 살아온 주민들은 삶의 터전을 잃었습니다. 한순간에 재로 변한 숲과 집은 ‘아픔’ 그 자체입니다.  기후위기로 인한 건조한 날씨, 적은 강수량과 강우량은 숲을 더 건조하게 하고, 우리나라 동해안 지역의 지형, 기후, 숲의 구조는 대형산불의 원인으로 지적되고 있습니다. 22년 우리가 마주한 산불은 ‘기후위기’의 다른 이름입니다. 1 / 2 이전 다음 기후위기시대, 산불 피해를 줄일 수 있는 숲 조성과 관리가 필요합니다 숲에는 나무만 살지 않습니다. 수많은 동식물들이 살고 있고, 숲과 기대어 사람들이 살고 있습니다. 산불은 예방이 우선이지만, 산불 이후에 어떻게 다시 함께 살아갈것인가에 대한 방법이 마련되어야 합니다. 재난안전관리 측면에서 숲을 조성하고 관리하는 방안이 마련되어야 합니다. 마을과 숲의 거리두기, 또는 마을 주변에 심어야 하는 나무에 대해 논의되고, 실행되어야 합니다.  울진에서 발생한 산불은 담뱃불이 주요한 원인으로 밝혀지고 있습니다. 한 순간의 실수로 수백년, 수십년 우리를 지켜준 숲과 삶터를 앗아갈 수 있습니다. 시민들과 함께 모니터링하고, 산불의 위험성에 대해 더 많은 시민들이 함께 알아갈 수 있도록 하는 것도 중요합니다. 그리고 산불피해지 모니터링을 통해 어떤 생태적 변화가 있는지도 기록해야 합니다. 숲에 적합한 나무를 찾고, 심고, 가꾸며 다시 숲으로 복원할 수 있는 방법을 찾아야 합니다. 산불이 앗아간 숲, 시민들의 힘으로 다시, 숲으로 갑니다. 산불피해지는 자연적으로 회복하기 위해서는 수 많은 시간이 필요합니다. 흙쓸림이나 산사태 위험도 높아지고, 숲으로 갈 수 있는 환경이 되지 못하기도 합니다. 생명의숲은 사라진 숲들이 다시 숲으로 회복될 수 있도록, 시민들과 나무를 심고 가꿔갑니다.  이제는 불이 꺼지고 난 뒤에 발생할 수 있는 산사태나 초미세 먼지 발생 같은 2차 재난도 미리 준비해야 합니다. 이를 막기 위한 산림 복원에는 막대한 시간과 비용이 필요합니다.  생명의 숲은 '산불 피해 산림 복원 프로젝트'를 통해 2022년 재난안전관리 측면에서 숲을 조성하고 관리하는 방법을 논의하고자 합니다. 또, 시민 모니터링을 하며 산불피해지의 숲 생태 현황을 진단하고, 시민과 소통할 계획입니다. 2023년에는 시민참여, 기금모금 숲조성 및 관리를 하며 산불피해지 숲의 회복에 최선을 다하겠습니다. 댓글 10개가 모이면 나무 한 그루를 심을 수 있습니다. 모금함 댓글을 남겨주시면 댓글 10개 당 나무 한 그루를 심을 수 있도록 카카오가 생명의 숲 환경 기금에 기부합니다. 불 타버린 숲에 이제 다시 나무를 심을 때 입니다. 여러분이 숲에 생명을 불어넣어 주실 수 있습니다.  우리들의 생명의 터전인 숲의 복원을 위해 함께 마음을 모아주세요!",
+    "organizationName" : "사단법인 생명의숲",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/bB1Rp5/btrvyipDXdJ/gokfKUYrKaAOUW36yQ9o10/c360.jpg",
+    "dueDate" : "2022-04-10",
+    "startDate" : "2022-03-10",
+    "targetPrice" : 522481800,
+    "statusPrice" : 600000000,
+    "percent" : 88
   }, {
     "id" : "H000000183433",
     "siteType" : "happybean",
@@ -867,9 +855,9 @@ Content-Length: 81331
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/daupeg/btrtZ7D5uKy/bwk42uhcwPO7VdeoLC7oc1/c360.jpg",
     "dueDate" : "2022-05-02",
     "startDate" : "2022-03-02",
-    "targetPrice" : 2824370,
-    "statusPrice" : 1056700,
-    "percent" : 38
+    "targetPrice" : 999900,
+    "statusPrice" : 2824370,
+    "percent" : 36
   }, {
     "id" : "93946",
     "siteType" : "kakao",
@@ -882,8 +870,8 @@ Content-Length: 81331
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/fceJo/btrtb25anq6/K81Hb4nK1w4p4rpuHUrwaK/c360.jpg",
     "dueDate" : "2022-05-10",
     "startDate" : "2022-02-23",
-    "targetPrice" : 9670750,
-    "statusPrice" : 1403400,
+    "targetPrice" : 1374600,
+    "statusPrice" : 9670750,
     "percent" : 15
   }, {
     "id" : "H000000183165",
@@ -957,8 +945,8 @@ Content-Length: 81331
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/bXgXJt/btrqQe5KrFY/NoXJrtLa4tzYwBgUYMfqX1/c360.jpg",
     "dueDate" : "2022-04-26",
     "startDate" : "2022-01-26",
-    "targetPrice" : 7100000,
-    "statusPrice" : 4891500,
+    "targetPrice" : 4857300,
+    "statusPrice" : 7100000,
     "percent" : 69
   }, {
     "id" : "H000000182656",
@@ -1024,9 +1012,6 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
 Content-Type: application/json
 Content-Length: 185
 
@@ -1088,9 +1073,6 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
 Content-Type: application/json
 Content-Length: 119567
 
@@ -1107,8 +1089,8 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/cpAS3j/btrt9TdDrqr/Kz5qmSHT6VAmuwwgkax9T1/c360.jpg",
     "dueDate" : "2022-06-30",
     "startDate" : "2022-03-02",
-    "targetPrice" : 18000000,
-    "statusPrice" : 15426500,
+    "targetPrice" : 15395000,
+    "statusPrice" : 18000000,
     "percent" : 86
   }, {
     "id" : "94647",
@@ -1122,9 +1104,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/hop3s/btruYTRyBRY/0t4bDkkFHKnHbj6vqu2or0/c360.jpg",
     "dueDate" : "2022-06-11",
     "startDate" : "2022-03-11",
-    "targetPrice" : 3000000,
-    "statusPrice" : 247100,
-    "percent" : 9
+    "targetPrice" : 126500,
+    "statusPrice" : 3000000,
+    "percent" : 5
   }, {
     "id" : "93990",
     "siteType" : "kakao",
@@ -1137,9 +1119,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/PU7xP/btrtCoLXmJG/X6O23oOKWQlWOVqxpz0vP0/c360.jpg",
     "dueDate" : "2022-05-18",
     "startDate" : "2022-02-18",
-    "targetPrice" : 3900000,
-    "statusPrice" : 945600,
-    "percent" : 25
+    "targetPrice" : 916300,
+    "statusPrice" : 3900000,
+    "percent" : 24
   }, {
     "id" : "93536",
     "siteType" : "kakao",
@@ -1152,8 +1134,8 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/cdBnIg/btrqBd7rP9c/3Py0F5WfebsC3BcFK5cwVK/c360.jpg",
     "dueDate" : "2022-04-20",
     "startDate" : "2022-01-20",
-    "targetPrice" : 9460000,
-    "statusPrice" : 3854800,
+    "targetPrice" : 3832700,
+    "statusPrice" : 9460000,
     "percent" : 41
   }, {
     "id" : "H000000183160",
@@ -1197,9 +1179,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/Ox557/btruh6jaxVK/ek9kQl5LFzk9pXrplzONW0/c360.jpg",
     "dueDate" : "2022-04-03",
     "startDate" : "2022-03-03",
-    "targetPrice" : 8000000,
-    "statusPrice" : 907500,
-    "percent" : 12
+    "targetPrice" : 873800,
+    "statusPrice" : 8000000,
+    "percent" : 11
   }, {
     "id" : "H000000183153",
     "siteType" : "happybean",
@@ -1227,9 +1209,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/bh97Yq/btrrfmXruU6/ulQX0ENsvADip6NvYsWru0/c360.jpg",
     "dueDate" : "2022-03-27",
     "startDate" : "2022-01-27",
-    "targetPrice" : 3100000,
-    "statusPrice" : 2306500,
-    "percent" : 75
+    "targetPrice" : 2292200,
+    "statusPrice" : 3100000,
+    "percent" : 74
   }, {
     "id" : "H000000183535",
     "siteType" : "happybean",
@@ -1302,9 +1284,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/w179c/btrrotIzo6q/9aFn6eLLwPDbfOa4LGjtAK/c360.jpg",
     "dueDate" : "2022-04-11",
     "startDate" : "2022-02-11",
-    "targetPrice" : 2131500,
-    "statusPrice" : 1719800,
-    "percent" : 81
+    "targetPrice" : 1685300,
+    "statusPrice" : 2131500,
+    "percent" : 80
   }, {
     "id" : "94022",
     "siteType" : "kakao",
@@ -1317,9 +1299,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/rAopu/btrsS75AzSO/LeH2jYb58G1vkKgjTJ0YE0/c360.jpg",
     "dueDate" : "2022-03-18",
     "startDate" : "2022-02-18",
-    "targetPrice" : 7000000,
-    "statusPrice" : 2437200,
-    "percent" : 35
+    "targetPrice" : 2326100,
+    "statusPrice" : 7000000,
+    "percent" : 34
   }, {
     "id" : "H000000182870",
     "siteType" : "happybean",
@@ -1456,21 +1438,6 @@ Content-Length: 119567
     "statusPrice" : 10300,
     "percent" : 1
   }, {
-    "id" : "94448",
-    "siteType" : "kakao",
-    "url" : "https://together.kakao.com/fundraisings/94448",
-    "title" : "독거 어르신들께 '건강한 안부'를 배달합니다!",
-    "category" : [ "어르신" ],
-    "tags" : [ "기본생활지원", "실버세대", "독거노인", "식사지원" ],
-    "body" : "\"오늘 당장 죽어도 아무도 모를 거예요...\" 진해구 태평동에 거주하는 박영희(가명) 어르신의 한숨은 깊어만 갑니다. 어려운 경제사정에 파지를 모아서 생계를 겨우 이어나가는 상황에서 최근 병세가 악화되면서 집 안에서만 지내는 시간이 늘어났습니다. 척추와 관절은 성한 곳이 없는 데다 손발이 자주 저리고 감각이 없어 문 밖을 나서는 것조차 어렵습니다.   “나는 가족도 없고, 자식도 없어요. 다리가 아파서 유모차 끌고 겨우겨우 나가는데 어디 굴러서 다치기라도 할까 봐 겁나요. 아무도 없어서”   부축해줄 사람도, 끼니를 챙겨줄 사람도 없는 어르신은 오늘도 아픈 몸을 겨우 이끌고 나와 누룽지로 점심을 해결합니다. 오고 가는 이 없는 좁디좁은 집은 어르신이 기댈 수 있는 유일한 곳이지만 여기서 홀로 죽음을 맞이하게 될까 늘 두렵습니다. &lt;찾아오는 이 하나 없이 홀로 계신 어르신&gt; 1 / 2 이전 다음 ‘고독사’라는 말.. 많이 들어보셨지요? 현재 초고령사회를 앞둔 우리나라는 1인 노인가구의 증가와 코로나19 상황으로 인해 매년 무연고 사망자가 꾸준히 늘고 있습니다. 서울 금천구에서는 70대 독거노인이 사망한 지 열흘만에, 성북구에서는 60대 남성이 이미 시신의 부패가 심하게 진행된 상태에서 발견되기도 했습니다. 이렇듯 보살핌을 받지 못한 채 무관심 속에서 방치되어 죽음을 맞는 고독사는 심각한 문제가 되고 있습니다.   인구 대비 노인 비율이 높은 이곳, 진해구도 예외는 아닙니다. 앞이 거의 보이지 않는 어르신, 낡고 오래된 창고에 거주하는 어르신, 화장실이 야외에 있어서 항상 불안한 어르신 등.. 아직도 곳곳에는 복지 사각지대에서 놓여 제대로 도움을 받지 못한 채 외로움과 싸우고 있습니다.   게다가 고령의 독거어르신 대부분은 만성 질환과 불편한 거동 때문에 끼니마저 거르는 일이 다반사여서 더욱 사회적 관심과 보살핌이 필요한 상황입니다. 건강을 담은 음료와 죽, &lt;건강한 안부&gt;를 배달해주세요! 코로나19의 장기화는 독거어르신들의 삶을 더욱 힘들게 만들고 있습니다. 가족의 부재와 사회 관계의 단절로 우울감까지 호소하고 있는 독거 어르신들. 어르신들의 우울함을 달래기 위해 자원봉사자와 후원자의 손길이 그 어느 때보다 더 절실하지만 코로나에 가장 취약한 대상이 어르신이라 자원봉사자의 활동이 어려운 요즘입니다. 이에 저희 복지관은 한국야쿠르트의 프레시 매니저의 도움을 받아 주 2회 건강음료를 전달하며 정기적으로 어르신들의 안부를 확인하고자 합니다. 또한, 영양결핍에 노출되어 있는 어르신들에게는 월 2회 영양죽을 제공함으로써 영양결핍을 예방하고 고위험군 독거노인의 고독사를 예방하고자 합니다. 고립된 어르신들에게 작은 음료 하나, 죽 한 끼는 내일을 살아갈 수 있는 큰 희망이 됩니다.  음료와 죽에 건강한 안부를 담아 사랑을 배달해주세요. 우리 같이, 큰 가치를 만들 수 있게 카카오같이가치 후원자 여러분들께서 힘을 모아주세요!",
-    "organizationName" : "진해서부노인종합복지관",
-    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b8IipV/btruc6kydSd/XKA4MINUZi20pZbkmKZCGk/c360.jpg",
-    "dueDate" : "2022-05-03",
-    "startDate" : "2022-03-03",
-    "targetPrice" : 3640000,
-    "statusPrice" : 1609600,
-    "percent" : 45
-  }, {
     "id" : "94512",
     "siteType" : "kakao",
     "url" : "https://together.kakao.com/fundraisings/94512",
@@ -1482,9 +1449,24 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/jt4en/btruAr8Px8h/YA84AThwLKNkWxZy1m40L1/c360.jpg",
     "dueDate" : "2022-05-11",
     "startDate" : "2022-03-11",
-    "targetPrice" : 6000000,
-    "statusPrice" : 268600,
-    "percent" : 5
+    "targetPrice" : 135700,
+    "statusPrice" : 6000000,
+    "percent" : 3
+  }, {
+    "id" : "94448",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94448",
+    "title" : "독거 어르신들께 '건강한 안부'를 배달합니다!",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "독거노인", "식사지원" ],
+    "body" : "\"오늘 당장 죽어도 아무도 모를 거예요...\" 진해구 태평동에 거주하는 박영희(가명) 어르신의 한숨은 깊어만 갑니다. 어려운 경제사정에 파지를 모아서 생계를 겨우 이어나가는 상황에서 최근 병세가 악화되면서 집 안에서만 지내는 시간이 늘어났습니다. 척추와 관절은 성한 곳이 없는 데다 손발이 자주 저리고 감각이 없어 문 밖을 나서는 것조차 어렵습니다.   “나는 가족도 없고, 자식도 없어요. 다리가 아파서 유모차 끌고 겨우겨우 나가는데 어디 굴러서 다치기라도 할까 봐 겁나요. 아무도 없어서”   부축해줄 사람도, 끼니를 챙겨줄 사람도 없는 어르신은 오늘도 아픈 몸을 겨우 이끌고 나와 누룽지로 점심을 해결합니다. 오고 가는 이 없는 좁디좁은 집은 어르신이 기댈 수 있는 유일한 곳이지만 여기서 홀로 죽음을 맞이하게 될까 늘 두렵습니다. &lt;찾아오는 이 하나 없이 홀로 계신 어르신&gt; 1 / 2 이전 다음 ‘고독사’라는 말.. 많이 들어보셨지요? 현재 초고령사회를 앞둔 우리나라는 1인 노인가구의 증가와 코로나19 상황으로 인해 매년 무연고 사망자가 꾸준히 늘고 있습니다. 서울 금천구에서는 70대 독거노인이 사망한 지 열흘만에, 성북구에서는 60대 남성이 이미 시신의 부패가 심하게 진행된 상태에서 발견되기도 했습니다. 이렇듯 보살핌을 받지 못한 채 무관심 속에서 방치되어 죽음을 맞는 고독사는 심각한 문제가 되고 있습니다.   인구 대비 노인 비율이 높은 이곳, 진해구도 예외는 아닙니다. 앞이 거의 보이지 않는 어르신, 낡고 오래된 창고에 거주하는 어르신, 화장실이 야외에 있어서 항상 불안한 어르신 등.. 아직도 곳곳에는 복지 사각지대에서 놓여 제대로 도움을 받지 못한 채 외로움과 싸우고 있습니다.   게다가 고령의 독거어르신 대부분은 만성 질환과 불편한 거동 때문에 끼니마저 거르는 일이 다반사여서 더욱 사회적 관심과 보살핌이 필요한 상황입니다. 건강을 담은 음료와 죽, &lt;건강한 안부&gt;를 배달해주세요! 코로나19의 장기화는 독거어르신들의 삶을 더욱 힘들게 만들고 있습니다. 가족의 부재와 사회 관계의 단절로 우울감까지 호소하고 있는 독거 어르신들. 어르신들의 우울함을 달래기 위해 자원봉사자와 후원자의 손길이 그 어느 때보다 더 절실하지만 코로나에 가장 취약한 대상이 어르신이라 자원봉사자의 활동이 어려운 요즘입니다. 이에 저희 복지관은 한국야쿠르트의 프레시 매니저의 도움을 받아 주 2회 건강음료를 전달하며 정기적으로 어르신들의 안부를 확인하고자 합니다. 또한, 영양결핍에 노출되어 있는 어르신들에게는 월 2회 영양죽을 제공함으로써 영양결핍을 예방하고 고위험군 독거노인의 고독사를 예방하고자 합니다. 고립된 어르신들에게 작은 음료 하나, 죽 한 끼는 내일을 살아갈 수 있는 큰 희망이 됩니다.  음료와 죽에 건강한 안부를 담아 사랑을 배달해주세요. 우리 같이, 큰 가치를 만들 수 있게 카카오같이가치 후원자 여러분들께서 힘을 모아주세요!",
+    "organizationName" : "진해서부노인종합복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b8IipV/btruc6kydSd/XKA4MINUZi20pZbkmKZCGk/c360.jpg",
+    "dueDate" : "2022-05-03",
+    "startDate" : "2022-03-03",
+    "targetPrice" : 1567100,
+    "statusPrice" : 3640000,
+    "percent" : 44
   }, {
     "id" : "H000000182674",
     "siteType" : "happybean",
@@ -1512,9 +1494,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/368KD/btrrDpfQAtj/SqV0zy0MF2kCnjNTfnk8nK/c360.jpg",
     "dueDate" : "2022-04-09",
     "startDate" : "2022-02-09",
-    "targetPrice" : 3000000,
-    "statusPrice" : 1866900,
-    "percent" : 63
+    "targetPrice" : 1848900,
+    "statusPrice" : 3000000,
+    "percent" : 62
   }, {
     "id" : "94131",
     "siteType" : "kakao",
@@ -1527,9 +1509,9 @@ Content-Length: 119567
     "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b4qDJk/btrtb3oVWxu/IWcLAStYqegzw8puDJ15x0/c360.jpg",
     "dueDate" : "2022-04-17",
     "startDate" : "2022-02-17",
-    "targetPrice" : 6873000,
-    "statusPrice" : 2922300,
-    "percent" : 43
+    "targetPrice" : 2832600,
+    "statusPrice" : 6873000,
+    "percent" : 42
   }, {
     "id" : "H000000183265",
     "siteType" : "happybean",
@@ -1651,7 +1633,7 @@ Content-Length: 119567
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-03-13 20:54:05 +0900
+Last updated 2022-03-13 19:21:21 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
