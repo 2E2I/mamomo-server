@@ -59,21 +59,20 @@ public class JwtTokenProvider implements InitializingBean {
     }
 
     // JWT 토큰 생성
-    public String createToken(String userPk, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는는
-        claims.put("roles", roles); // key-value 쌍의 클레임
+    public String createToken(Authentication authentication) {
+        String authorities = authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
 
-        Date now = new Date();
+        long now = (new Date()).getTime();
+        Date validity = new Date(now + this.tokenValidityInMilliseconds);
+        log.info("JWT 토큰을 발급하였습니다");
 
         return Jwts.builder()
-                .setClaims(claims) // 클레임 설정
-                .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(new Date(now.getTime() + tokenValidityInMilliseconds)) // 유효 시간
-                /*
-                 * 사용할 암호화 알고리즘과 signature에 들어갈 scret값 세팅
-                 * String X, Key 로 변환해 사용
-                 * */
-                .signWith(key, SignatureAlgorithm.ES256)
+                .setSubject(authentication.getName())
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .setExpiration(validity)
                 .compact();
     }
 
