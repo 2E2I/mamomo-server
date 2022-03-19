@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.repository.elastic.CampaignSearchRepository;
+import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;

@@ -1,14 +1,9 @@
 package com.hsu.mamomo.controller;
 
-import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.TagDto;
 import com.hsu.mamomo.service.CampaignSearchService;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

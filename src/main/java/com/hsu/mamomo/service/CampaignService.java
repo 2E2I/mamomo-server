@@ -2,6 +2,8 @@ package com.hsu.mamomo.service;
 
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
+import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
+import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
