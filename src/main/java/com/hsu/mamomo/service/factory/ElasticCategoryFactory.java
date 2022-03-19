@@ -1,4 +1,4 @@
-package com.hsu.mamomo.service;
+package com.hsu.mamomo.service.factory;
 
 import com.hsu.mamomo.domain.Campaign;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
