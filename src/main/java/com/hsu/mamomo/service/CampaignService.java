@@ -1,9 +1,8 @@
 package com.hsu.mamomo.service;
 
 import com.hsu.mamomo.domain.Campaign;
-import com.hsu.mamomo.repository.CampaignRepository;
+import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.springframework.data.elasticsearch.core.SearchHits;
