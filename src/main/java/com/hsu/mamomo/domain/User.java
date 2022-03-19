@@ -1,7 +1,6 @@
 package com.hsu.mamomo.domain;
 
 import java.util.Date;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,7 +23,7 @@ import lombok.Setter;
 public class User {
 
     @Id
-    private UUID id;
+    private String id;
 
     @Column
     private String email;
@@ -44,9 +43,4 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date birth;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date create_date;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modify_date;
 }

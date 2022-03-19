@@ -19,7 +19,7 @@ public class UserService {
     @Transactional
     public User signUp(UserDto userDto) {
         User user = User.builder()
-                .id(Generators.randomBasedGenerator().generate())
+                .id(Generators.randomBasedGenerator().generate().toString())
                 .email(userDto.getEmail())
                 .password(userDto.getPassword())
                 .nickname(userDto.getNickname())
