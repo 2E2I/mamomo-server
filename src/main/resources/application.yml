@@ -5,12 +5,15 @@ spring:
     show-sql: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
   datesource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://34.64.197.28:3306/mamomo?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: mamomo!mysql
-
 
 elasticsearch:
   host: 34.64.197.28
