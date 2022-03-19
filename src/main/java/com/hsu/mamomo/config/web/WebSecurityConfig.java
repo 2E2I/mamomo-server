@@ -48,10 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 접근 허용
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/campaigns").permitAll()
-                .antMatchers("/api/search/**").permitAll()
-                .antMatchers("/docs/api.html").permitAll()
-                .antMatchers("/api/signup").permitAll()
+                .antMatchers("/api/**").permitAll()
+                .antMatchers("/docs/**").permitAll()
                 .anyRequest().authenticated()
 
                 .and()
