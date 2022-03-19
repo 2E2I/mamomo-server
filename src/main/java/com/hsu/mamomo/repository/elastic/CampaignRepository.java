@@ -1,4 +1,4 @@
-package com.hsu.mamomo.repository;
+package com.hsu.mamomo.repository.elastic;
 
 import com.hsu.mamomo.domain.Campaign;
 import org.springframework.data.domain.Page;

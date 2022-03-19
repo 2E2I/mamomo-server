@@ -1,4 +1,4 @@
-package com.hsu.mamomo.repository2;
+package com.hsu.mamomo.repository.jpa;
 
 import com.hsu.mamomo.domain.User;
 import java.util.UUID;

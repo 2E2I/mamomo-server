@@ -1,4 +1,4 @@
-package com.hsu.mamomo.webconfig;
+package com.hsu.mamomo.config.web;
 
 import com.hsu.mamomo.jwt.JwtAccessDeniedHandler;
 import com.hsu.mamomo.jwt.JwtAuthenticationEntryPoint;

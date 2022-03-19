@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverter;
 
-public abstract class AbstractElasticsearchConfiguration extends ElasticsearchConfigurationSupport {
+public abstract class AbstractElasticsearchConfig extends ElasticsearchConfigurationSupport {
 
     @Bean
     public abstract RestHighLevelClient elasticsearchClient();
