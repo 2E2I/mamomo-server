@@ -3,11 +3,14 @@ spring:
     allow-bean-definition-overriding: true
   jpa:
     show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   datesource:
-    driver-class-name: com.mysql.cj.jdbc.Driber
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://34.64.197.28:3306/mamomo?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: mamomo!mysql
+
 
 elasticsearch:
   host: 34.64.197.28
