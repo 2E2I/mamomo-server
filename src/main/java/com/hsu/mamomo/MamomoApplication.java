@@ -1,21 +1,19 @@
 package com.hsu.mamomo;
 
-import com.hsu.mamomo.domain.Campaign;
-import com.hsu.mamomo.repository.CampaignRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@EnableJpaRepositories("com.hsu.mamomo.repository2")
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@EnableJpaRepositories("com.hsu.mamomo.repository.jpa")
 public class MamomoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MamomoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MamomoApplication.class, args);
+    }
 
 }
