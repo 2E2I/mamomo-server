@@ -1,4 +1,4 @@
-package com.hsu.mamomo.service;
+package com.hsu.mamomo.service.factory;
 
 import com.hsu.mamomo.domain.Campaign;
 import lombok.RequiredArgsConstructor;
