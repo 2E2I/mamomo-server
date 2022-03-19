@@ -1,4 +1,4 @@
-package com.hsu.mamomo.elastic;
+package com.hsu.mamomo.config.elastic;
 
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.context.annotation.Bean;
