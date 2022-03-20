@@ -16,7 +16,7 @@ public class JpaConfig {
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://34.64.197.28:3306/mamomo?serverTimezone=UTC&characterEncoding=UTF-8")
+                .url("jdbc:mysql://34.64.234.137:3306/mamomo?serverTimezone=UTC&characterEncoding=UTF-8")
                 .username("root")
                 .password("mamomo!mysql")
                 .build();
