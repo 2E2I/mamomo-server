@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,9 @@ public class UserService {
 
     }
 
-    public String signin(LoginDto loginDto) {
+    public String authenticate(LoginDto loginDto) {
         User user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
+                .orElseThrow(() -> new AuthenticationServiceException("가입되지 않은 E-MAIL 입니다."));
 
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
@@ -52,4 +54,24 @@ public class UserService {
         roles.add("USER");
         return jwtTokenProvider.createToken(user.getUsername(), roles);
     }
+
+    public UserDto getUserInfo(String email) {
+        if (userRepository.findByEmail(email).isPresent()) {
+            User user = userRepository.findByEmail(email).get();
+            UserDto userInfo = UserDto.builder()
+                    .email(user.getEmail())
+                    .password("")
+                    .profile(user.getProfile())
+                    .sex(user.getSex())
+                    .birth(user.getBirth())
+                    .nickname(user.getNickname())
+                    .profile(user.getProfile())
+                    .build();
+            return userInfo;
+        } else {
+            throw new UsernameNotFoundException("가입되지 않은 E-MAIL 입니다.");
+        }
+    }
+
+
 }
