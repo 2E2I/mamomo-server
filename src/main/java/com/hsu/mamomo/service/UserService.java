@@ -2,9 +2,16 @@ package com.hsu.mamomo.service;
 
 import com.fasterxml.uuid.Generators;
 import com.hsu.mamomo.domain.User;
+import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.UserDto;
+import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.jpa.UserRepository;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,20 +21,35 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public User signUp(UserDto userDto) {
         User user = User.builder()
                 .id(Generators.randomBasedGenerator().generate().toString())
                 .email(userDto.getEmail())
-                .password(userDto.getPassword())
+                .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
                 .sex(userDto.getSex())
                 .birth(userDto.getBirth())
+                .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 권한 USER
                 .build();
 
         return userRepository.save(user);
 
+    }
+
+    public String signin(LoginDto loginDto) {
+        User user = userRepository.findByEmail(loginDto.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));
+
+        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
+        }
+        List<String> roles = new ArrayList<>();
+        roles.add("USER");
+        return jwtTokenProvider.createToken(user.getUsername(), roles);
     }
 }
