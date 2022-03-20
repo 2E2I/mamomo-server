@@ -1,6 +1,7 @@
 package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.domain.User;
+import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final UserService userService;
@@ -23,8 +24,13 @@ public class UserController {
      * @param userDto
      * @return
      */
-    @PostMapping("/user/signup")
+    @PostMapping("/signup")
     public ResponseEntity<User> signUp(@RequestBody UserDto userDto) {
         return ResponseEntity.ok(userService.signUp(userDto));
+    }
+
+    @PostMapping("/signin")
+    public String signUp(@RequestBody LoginDto loginDto) {
+        return userService.signin(loginDto);
     }
 }
