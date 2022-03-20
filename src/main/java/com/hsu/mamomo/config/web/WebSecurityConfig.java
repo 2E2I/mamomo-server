@@ -2,6 +2,7 @@ package com.hsu.mamomo.config.web;
 
 import com.hsu.mamomo.jwt.JwtAccessDeniedHandler;
 import com.hsu.mamomo.jwt.JwtAuthenticationEntryPoint;
+import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtSecurityConfig;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -32,28 +34,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic().disable()
                 // 토큰 방식을 사용하므로 csrf 설정을 disable
                 .csrf().disable()
 
+                // 토큰 기반 인증. 세션 STATELESS
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
                 // 예외처리
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .accessDeniedHandler(jwtAccessDeniedHandler)
-
-                // 세션 사용 X
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
                 // 접근 허용
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll()
                 .antMatchers("/docs/**").permitAll()
-                .anyRequest().authenticated()
 
+                // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 앞에
                 .and()
-                .apply(new JwtSecurityConfig(jwtTokenProvider));
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
