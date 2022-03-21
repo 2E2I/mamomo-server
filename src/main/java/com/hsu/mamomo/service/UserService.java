@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +28,13 @@ public class UserService {
 
     @Transactional
     public User signUp(UserDto userDto) {
+        if (userRepository.findByEmail(userDto.getEmail()).orElse(null) != null) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        }
+        if (userRepository.findByNickname(userDto.getNickname()).orElse(null) != null) {
+            throw new RuntimeException("이미 사용 중인 닉네임입니다.");
+        }
+
         User user = User.builder()
                 .id(Generators.randomBasedGenerator().generate().toString())
                 .email(userDto.getEmail())
