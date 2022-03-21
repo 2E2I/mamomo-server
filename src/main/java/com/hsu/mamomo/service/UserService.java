@@ -1,27 +1,41 @@
 package com.hsu.mamomo.service;
 
 import com.fasterxml.uuid.Generators;
+import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
+import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
+import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.jwt.SecurityUtil;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Autowired
     private PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -35,6 +49,10 @@ public class UserService {
             throw new RuntimeException("이미 사용 중인 닉네임입니다.");
         }
 
+        Authority authority = Authority.builder()
+                .authorityName("ROLE_USER")
+                .build();
+
         User user = User.builder()
                 .id(Generators.randomBasedGenerator().generate().toString())
                 .email(userDto.getEmail())
@@ -42,41 +60,31 @@ public class UserService {
                 .nickname(userDto.getNickname())
                 .sex(userDto.getSex())
                 .birth(userDto.getBirth())
-                .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 권한 USER
+                .authorities(Collections.singleton(authority)) // 최초 가입시 권한 USER
                 .build();
 
         return userRepository.save(user);
 
     }
 
-    public String authenticate(LoginDto loginDto) {
-        User user = userRepository.findByEmail(loginDto.getEmail())
-                .orElseThrow(() -> new AuthenticationServiceException("가입되지 않은 E-MAIL 입니다."));
+    public ResponseEntity<TokenDto> authenticate(LoginDto loginDto) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
-        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
-        }
-        List<String> roles = new ArrayList<>();
-        roles.add("USER");
-        return jwtTokenProvider.createToken(user.getUsername(), roles);
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtTokenProvider.createToken(authentication);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtAuthenticationFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
 
-    public UserDto getUserInfo(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            User user = userRepository.findByEmail(email).get();
-            UserDto userInfo = UserDto.builder()
-                    .email(user.getEmail())
-                    .password("")
-                    .profile(user.getProfile())
-                    .sex(user.getSex())
-                    .birth(user.getBirth())
-                    .nickname(user.getNickname())
-                    .profile(user.getProfile())
-                    .build();
-            return userInfo;
-        } else {
-            throw new UsernameNotFoundException("가입되지 않은 E-MAIL 입니다.");
-        }
+    public Optional<User> getUserInfo() {
+        log.info("현재 로그인 된 유저 = {}", SecurityUtil.getCurrentUsername());
+        return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByEmail);
     }
 
 

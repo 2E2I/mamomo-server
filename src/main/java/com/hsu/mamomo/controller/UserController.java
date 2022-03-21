@@ -2,11 +2,13 @@ package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
+import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,13 +36,14 @@ public class UserController {
     }
 
     @PostMapping("/authenticate")
-    public String signUp(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<TokenDto> signUp(@RequestBody LoginDto loginDto) {
         return userService.authenticate(loginDto);
     }
 
+    @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/{email}")
-    public UserDto getUserInfo(@PathVariable String email) {
+    public User getUserInfo(@PathVariable String email) {
         log.info("{} 의 정보를 찾습니다 ..", email);
-        return userService.getUserInfo(email);
+        return userService.getUserInfo().get();
     }
 }
