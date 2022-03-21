@@ -5,9 +5,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.uuid.Generators;
+import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.User;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.Date;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,6 +33,7 @@ class UserControllerTest {
     MockMvc mockMvc;
 
     private User user;
+    private Authority authority;
 
     @BeforeEach
     void setData() throws ParseException {
@@ -40,6 +44,10 @@ class UserControllerTest {
         String day = "20000101";
         Date date = new java.text.SimpleDateFormat("yyyyMMdd").parse(day);
 
+        authority = Authority.builder()
+                .authorityName("ROLE_USER")
+                .build();
+
         user = User.builder()
                 .id(id)
                 .email("user@email.com")
@@ -47,6 +55,7 @@ class UserControllerTest {
                 .nickname("user1")
                 .sex("M")
                 .birth(date)
+                .authorities(Collections.singleton(authority))
                 .build();
     }
 
@@ -60,6 +69,5 @@ class UserControllerTest {
                         .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
     }
-
 
 }
