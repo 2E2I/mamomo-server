@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/campaigns")
 @RestController
 public class CampaignController {
 
     private final CampaignService campaignService;
 
-    @GetMapping("/campaigns")
+    @GetMapping
     public Map<String, List<Campaign>> getAllCampaigns(
             @RequestParam(value = "sort", defaultValue = "start_date,desc", required = false) String sort,
             @RequestParam(value = "category", required = false) Integer category_id) {
