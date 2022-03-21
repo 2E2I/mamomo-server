@@ -100,3 +100,18 @@ include::{snippets}/search-campaigns-by-keyword/http-response.adoc[]
 
 include::{snippets}/search-campaigns-by-keyword/response-fields.adoc[]
 
+[[categories]]
+== 카테고리
+
+카테고리를 반환합니다.
+
+==== 요청
+
+include::{snippets}/categories/http-request.adoc[]
+
+==== 응답
+
+include::{snippets}/categories/http-response.adoc[]
+
+
+
