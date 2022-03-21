@@ -1,16 +1,27 @@
 package com.hsu.mamomo.controller;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
+import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.isEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.uuid.Generators;
 import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.User;
+import com.hsu.mamomo.dto.TokenDto;
+import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.jwt.SecurityUtil;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,6 +33,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,11 +44,17 @@ class UserControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    private User user;
-    private Authority authority;
+    @Autowired
+    ObjectMapper objectMapper;
 
-    @BeforeEach
-    void setData() throws ParseException {
+    static private User user;
+    static private Authority authority;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @BeforeAll
+    static void setData() throws ParseException {
         String id = Generators.randomBasedGenerator().generate().toString();
 
         System.out.println("id = " + id);
@@ -62,12 +80,33 @@ class UserControllerTest {
     @Test
     @DisplayName("회원가입 테스트")
     void signUpTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(user)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("로그인 테스트")
+    void authenticationTest() throws Exception {
+
+        Map<String, String> input = new HashMap<>();
+        input.put("email", "user@email.com");
+        input.put("password", "user1234");
+
+        MvcResult mvcResult = mockMvc.perform(post("/api/user/authenticate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        // 응답 바디의 jwt 토큰 추출
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        TokenDto tokenDto = objectMapper.readValue(responseBody, TokenDto.class);
+
+        // 발급된 토큰이 유효한 jwt 토큰인지 확인
+        assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));
     }
 
 }
