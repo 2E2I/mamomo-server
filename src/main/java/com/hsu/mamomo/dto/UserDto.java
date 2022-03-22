@@ -1,11 +1,10 @@
 package com.hsu.mamomo.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Builder
 @Getter
@@ -23,5 +22,5 @@ public class UserDto {
 
     private String sex;
 
-    private Date birth;
+    private LocalDate birth;
 }

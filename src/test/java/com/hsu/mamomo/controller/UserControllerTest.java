@@ -1,11 +1,7 @@
 package com.hsu.mamomo.controller;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.isEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,15 +10,11 @@ import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
-import com.hsu.mamomo.jwt.SecurityUtil;
-import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -54,13 +46,10 @@ class UserControllerTest {
     private JwtTokenProvider jwtTokenProvider;
 
     @BeforeAll
-    static void setData() throws ParseException {
+    static void setData() {
         String id = Generators.randomBasedGenerator().generate().toString();
 
         System.out.println("id = " + id);
-
-        String day = "20000101";
-        Date date = new java.text.SimpleDateFormat("yyyyMMdd").parse(day);
 
         authority = Authority.builder()
                 .authorityName("ROLE_USER")
@@ -72,7 +61,7 @@ class UserControllerTest {
                 .password("user1234")
                 .nickname("user1")
                 .sex("M")
-                .birth(date)
+                .birth(LocalDate.of(2000,1,1))
                 .authorities(Collections.singleton(authority))
                 .build();
     }
