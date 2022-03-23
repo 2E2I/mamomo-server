@@ -1,13 +1,10 @@
 package com.hsu.mamomo.controller;
 
-import com.hsu.mamomo.domain.Campaign;
+import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.service.CampaignService;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/campaigns")
@@ -17,24 +14,21 @@ public class CampaignController {
     private final CampaignService campaignService;
 
     @GetMapping
-    public Map<String, List<Campaign>> getAllCampaigns(
+    public CampaignDto getAllCampaigns(
             @RequestParam(value = "sort", defaultValue = "start_date,desc", required = false) String sort,
             @RequestParam(value = "category", required = false) Integer category_id) {
 
-        Map<String, List<Campaign>> result = new HashMap<>();
-
+        CampaignDto campaignDto;
         String[] _sort = sort.split(",");
         // sort = [field, direction]
 
         if (category_id != null) {
-            result.put("campaigns",
-                    campaignService.findAllOfCategory(_sort[0], _sort[1], category_id));
+            campaignDto = new CampaignDto(campaignService.findAllOfCategory(_sort[0], _sort[1], category_id));
         } else {
-            result.put("campaigns", campaignService.findAll(_sort[0], _sort[1]));
+            campaignDto = new CampaignDto(campaignService.findAll(_sort[0], _sort[1]));
         }
 
-        return result;
-
+        return campaignDto;
     }
 
 }
