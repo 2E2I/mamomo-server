@@ -51,10 +51,6 @@ class UserControllerTest {
 
         System.out.println("id = " + id);
 
-        authority = Authority.builder()
-                .authorityName("ROLE_USER")
-                .build();
-
         user = User.builder()
                 .id(id)
                 .email("user@email.com")
@@ -62,7 +58,6 @@ class UserControllerTest {
                 .nickname("user1")
                 .sex("M")
                 .birth(LocalDate.of(2000,1,1))
-                .authorities(Collections.singleton(authority))
                 .build();
     }
 
