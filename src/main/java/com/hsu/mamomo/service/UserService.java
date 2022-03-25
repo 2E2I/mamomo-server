@@ -1,6 +1,10 @@
 package com.hsu.mamomo.service;
 
+import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_EMAIL;
+import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_NICKNAME;
+
 import com.fasterxml.uuid.Generators;
+import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
@@ -10,17 +14,17 @@ import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.SecurityUtil;
 import com.hsu.mamomo.repository.jpa.UserRepository;
-import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -41,12 +45,12 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public User signUp(UserDto userDto) {
+    public ResponseEntity<UserDto> signUp(UserDto userDto) {
         if (userRepository.findByEmail(userDto.getEmail()).orElse(null) != null) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+            throw new CustomException(DUPLICATE_EMAIL);
         }
         if (userRepository.findByNickname(userDto.getNickname()).orElse(null) != null) {
-            throw new RuntimeException("이미 사용 중인 닉네임입니다.");
+            throw new CustomException(DUPLICATE_NICKNAME);
         }
 
         Authority authority = Authority.builder()
@@ -59,19 +63,23 @@ public class UserService {
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
                 .sex(userDto.getSex())
-                .birth(userDto.getBirth())
+                .birth(LocalDate.parse(userDto.getBirth()))
                 .authorities(Collections.singleton(authority)) // 최초 가입시 권한 USER
                 .build();
 
-        return userRepository.save(user);
-
+        userRepository.save(user);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(new MediaType("application", "json", StandardCharsets.UTF_8));
+        return new ResponseEntity<>(userDto, httpHeaders, HttpStatus.CREATED);
     }
 
     public ResponseEntity<TokenDto> authenticate(LoginDto loginDto) {
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(),
+                        loginDto.getPassword());
 
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        Authentication authentication = authenticationManagerBuilder.getObject()
+                .authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = jwtTokenProvider.createToken(authentication);
@@ -84,7 +92,8 @@ public class UserService {
 
     public Optional<User> getUserInfo() {
         log.info("현재 로그인 된 유저 = {}", SecurityUtil.getCurrentUsername());
-        return SecurityUtil.getCurrentUsername().flatMap(userRepository::findOneWithAuthoritiesByEmail);
+        return SecurityUtil.getCurrentUsername()
+                .flatMap(userRepository::findOneWithAuthoritiesByEmail);
     }
 
 
