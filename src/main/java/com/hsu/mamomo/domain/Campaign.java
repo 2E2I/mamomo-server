@@ -1,19 +1,21 @@
 package com.hsu.mamomo.domain;
 
+import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
-import javax.persistence.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
-
 @Getter
+@Setter
 @RequiredArgsConstructor
 @ToString
 @Document(indexName = "campaigns")
@@ -65,5 +67,7 @@ public class Campaign {
 
     @Field(name = "percent", type = FieldType.Integer)
     private Integer percent;
+
+    private Boolean isHeart = false;
 
 }
