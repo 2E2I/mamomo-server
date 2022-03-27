@@ -4,11 +4,11 @@ import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
-import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.repository.jpa.HeartRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -17,8 +17,6 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -41,12 +39,15 @@ public class CampaignService {
             campaignDto = new CampaignDto(findAll(_sort[0], _sort[1]));
         }
 
-        // 로그인 된 상태일때 좋아요 정보까지 불러오기
-        for (Campaign campaign : campaignDto.getCampaigns()) {
-            Boolean isHearted = getIsHearted(campaign.getId(), userId);
-            if (isHearted) {
-                campaign.setIsHeart(true);
+        if (!userId.isEmpty()) {
+            // 로그인 된 상태일때 좋아요 정보까지 불러오기
+            for (Campaign campaign : campaignDto.getCampaigns()) {
+                Boolean isHearted = getIsHearted(campaign.getId(), userId);
+                if (isHearted) {
+                    campaign.setIsHeart(true);
+                }
             }
+
         }
 
         return campaignDto;
