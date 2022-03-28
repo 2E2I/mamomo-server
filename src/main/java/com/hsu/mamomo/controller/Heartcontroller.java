@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,15 +28,15 @@ public class Heartcontroller {
      * */
 
     @PostMapping
-    public HttpStatus heart(@RequestBody @Valid HeartDto heartDto) {
+    public ResponseEntity<HeartDto> heart(@RequestBody @Valid HeartDto heartDto) {
         heartService.heart(heartDto);
-        return HttpStatus.CREATED;
+        return new ResponseEntity<>(heartDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping
-    public HttpStatus unHeart(@RequestBody @Valid HeartDto heartDto) {
+    public ResponseEntity<HeartDto> unHeart(@RequestBody @Valid HeartDto heartDto) {
         heartService.unHeart(heartDto);
-        return HttpStatus.OK;
+        return new ResponseEntity<>(heartDto, HttpStatus.OK);
     }
 
 }

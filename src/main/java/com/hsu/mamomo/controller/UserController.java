@@ -21,6 +21,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,12 @@ public class UserController {
         return userService.signUp(userDto);
     }
 
+    /**
+     * 로그인 -> jwt 토큰 발급
+     *
+     * @param loginDto
+     * @return
+     */
     @PostMapping("/authenticate")
     public ResponseEntity<TokenDto> signUp(@RequestBody LoginDto loginDto) {
         return userService.authenticate(loginDto);
@@ -57,10 +64,16 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/{email}")
-    public User getUserInfo(@PathVariable String email, @RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorization) {
+    public User getUserInfo(@PathVariable String email,
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorization) {
         log.info("{} 의 정보를 찾습니다 ..", email);
         log.info("getUserPk() = {}", jwtTokenProvider.getUserPk(authorization.substring(7)));
         return userService.getUserInfo().get();
+    }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<String> deleteUser(@PathVariable String email) {
+        return userService.deleteUser(email);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)

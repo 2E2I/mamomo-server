@@ -2,6 +2,7 @@ package com.hsu.mamomo.service;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_EMAIL;
 import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_NICKNAME;
+import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 import com.fasterxml.uuid.Generators;
 import com.hsu.mamomo.controller.exception.CustomException;
@@ -102,6 +103,16 @@ public class UserService {
     public Boolean isEqualUserTokenInfoAndUserInfo(String token, String userId) {
         String userEmail = userRepository.findUserById(userId).get().getEmail();
         return jwtTokenProvider.getUserPk(token).equals(userEmail);
+    }
+
+    public ResponseEntity<String> deleteUser(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+        } else {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+        return new ResponseEntity<>(email + " 유저 삭제됨", HttpStatus.OK);
     }
 
 }
