@@ -13,6 +13,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,26 +23,20 @@ import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.jpa.UserRepository;
-import com.hsu.mamomo.service.UserService;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import javax.swing.text.html.Option;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -84,17 +79,27 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("1. 회원가입")
+    @DisplayName("1. 회원가입_성공")
     void signUpTest() throws Exception {
 
         mockMvc.perform(post("/api/user/signup")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @Test
-    @DisplayName("2. 토큰 발급 (로그인)")
+    @DisplayName("2. 회원가입_실패_중복")
+    void signUpConflictFailTest() throws Exception {
+
+        mockMvc.perform(post("/api/user/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(user)))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    @DisplayName("3. 로그인_성공")
     void authenticationTest() throws Exception {
 
         Map<String, String> input = new HashMap<>();
@@ -138,7 +143,7 @@ class UserControllerTest {
         assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));
     }
 
-    @DisplayName("3. 발급된 토큰으로 유저 정보 조회")
+    @DisplayName("4. 유저정보조회_성공")
     @Test
     public void getUserInfoTest() throws Exception {
         MvcResult mvcResult = mockMvc
@@ -167,7 +172,9 @@ class UserControllerTest {
                                 fieldWithPath("create_date").description("회원가입 시간"),
                                 fieldWithPath("modify_date").description("마지막 회원 정보 수정 시간"),
                                 fieldWithPath("authorities").ignored(),
-                                fieldWithPath("authorities.[].authorityName").ignored()
+                                fieldWithPath("authorities.[].authorityName").description("계정 정보"),
+                                fieldWithPath("likes").description("유저 좋아요 정보"),
+                                fieldWithPath("likes.[]").ignored()
                         )))
                 .andDo(print())
                 .andReturn();
@@ -179,17 +186,24 @@ class UserControllerTest {
         // 맞는 User를 반환했는지 검증
         assertThat(responseUser)
                 .usingRecursiveComparison()
-                .ignoringFields("id", "password", "create_date", "modify_date", "authorities")
+                .ignoringFields("id", "password", "create_date", "modify_date", "authorities",
+                        "likes")
                 .ignoringFieldsOfTypes(User.class)
                 .isEqualTo(user);
     }
 
-    // findByEmail Null 리턴함.
-    @AfterAll
-    static void deleteUser() {
-        Optional<User> selectUser = userRepository
-                .findByEmail(user.getEmail()); // Optional is Empty
-        selectUser.ifPresent(value -> userRepository.delete(value));
+    @DisplayName("5. 회원탈퇴_성공")
+    @Test
+    public void deleteUserTest() throws Exception {
+        mockMvc.perform(delete("/api/user/{email}", user.getEmail()))
+                .andExpect(status().isOk());
+    }
+
+    @DisplayName("6. 회원탈퇴_실패_회원없음")
+    @Test
+    public void deleteUserNotFoundFailTest() throws Exception {
+        mockMvc.perform(delete("/api/user/{email}", user.getEmail()))
+                .andExpect(status().isNotFound());
     }
 
 }

@@ -10,7 +10,6 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,6 +73,7 @@ class CampaignSearchControllerTest {
                 .andExpect(jsonPath("$.campaigns.[0].['targetPrice']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['statusPrice']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['percent']").isNumber())
+                .andExpect(jsonPath("$.campaigns.[0].['isHeart']").isBoolean())
 
                 .andDo(document("search-campaigns-by-keyword",
                         getDocumentRequest(),
@@ -123,7 +123,9 @@ class CampaignSearchControllerTest {
                                 fieldWithPath("campaigns.[].statusPrice").type(JsonFieldType.NUMBER)
                                         .description("현재 금액"),
                                 fieldWithPath("campaigns.[].percent").type(JsonFieldType.NUMBER)
-                                        .description("달성 정도")
+                                        .description("달성 정도"),
+                                fieldWithPath("campaigns.[].isHeart").type(JsonFieldType.BOOLEAN)
+                                        .description("좋아요 여부")
                         )));
     }
 }

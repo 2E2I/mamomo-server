@@ -5,10 +5,8 @@ import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
 import static com.hsu.mamomo.document.DocumentFormatGenerator.getCategoryFormat;
 import static com.hsu.mamomo.document.DocumentFormatGenerator.getSortFormat;
-
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
@@ -59,6 +57,7 @@ class CampaignControllerTest {
                 .andExpect(jsonPath("$.campaigns.[0].['targetPrice']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['statusPrice']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['percent']").isNumber())
+                .andExpect(jsonPath("$.campaigns.[0].['isHeart']").isBoolean())
                 .andDo(document("campaigns",
                         getDocumentRequest(),
                         getDocumentResponse(),
@@ -119,7 +118,9 @@ class CampaignControllerTest {
                                 fieldWithPath("campaigns.[].statusPrice").type(JsonFieldType.NUMBER)
                                         .description("현재 금액"),
                                 fieldWithPath("campaigns.[].percent").type(JsonFieldType.NUMBER)
-                                        .description("달성 정도")
+                                        .description("달성 정도"),
+                                fieldWithPath("campaigns.[].isHeart").type(JsonFieldType.BOOLEAN)
+                                        .description("좋아요 여부")
                         )
                 ));
     }
