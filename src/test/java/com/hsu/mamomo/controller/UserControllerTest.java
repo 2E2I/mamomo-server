@@ -22,17 +22,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
-import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -48,7 +47,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-@TestMethodOrder(value = MethodOrderer.DisplayName.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserControllerTest {
 
     @Autowired
@@ -63,8 +62,6 @@ class UserControllerTest {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-    @Mock
-    private static UserRepository userRepository;
 
     @BeforeAll
     static void setData() {
@@ -79,7 +76,8 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("1. 회원가입_성공")
+    @Order(100)
+    @DisplayName("회원가입 테스트 - 성공")
     void signUpTest() throws Exception {
 
         mockMvc.perform(post("/api/user/signup")
@@ -89,7 +87,8 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("2. 회원가입_실패_중복")
+    @Order(101)
+    @DisplayName("회원가입 테스트 - 실패 :: 중복")
     void signUpConflictFailTest() throws Exception {
 
         mockMvc.perform(post("/api/user/signup")
@@ -99,7 +98,8 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("3. 로그인_성공")
+    @Order(200)
+    @DisplayName("로그인 테스트 - 성공")
     void authenticationTest() throws Exception {
 
         Map<String, String> input = new HashMap<>();
@@ -143,7 +143,8 @@ class UserControllerTest {
         assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));
     }
 
-    @DisplayName("4. 유저정보조회_성공")
+    @Order(300)
+    @DisplayName("유저 정보 조회 테스트 - 성공 :: ROLE_USER 권한이 있을 때")
     @Test
     public void getUserInfoTest() throws Exception {
         MvcResult mvcResult = mockMvc
@@ -192,14 +193,16 @@ class UserControllerTest {
                 .isEqualTo(user);
     }
 
-    @DisplayName("5. 회원탈퇴_성공")
+    @Order(400)
+    @DisplayName("회원탈퇴 테스트 - 성공")
     @Test
     public void deleteUserTest() throws Exception {
         mockMvc.perform(delete("/api/user/{email}", user.getEmail()))
                 .andExpect(status().isOk());
     }
 
-    @DisplayName("6. 회원탈퇴_실패_회원없음")
+    @Order(500)
+    @DisplayName("회원탈퇴 테스트 - 실패 :: 존재하지 않는 회원일때")
     @Test
     public void deleteUserNotFoundFailTest() throws Exception {
         mockMvc.perform(delete("/api/user/{email}", user.getEmail()))
