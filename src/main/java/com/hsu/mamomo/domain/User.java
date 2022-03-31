@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table
+@Table(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -71,4 +71,11 @@ public class User {
             orphanRemoval = true,
             fetch = FetchType.LAZY)
     private List<Heart> likes = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<FavTopic> favTopic = new ArrayList<>();
 }
