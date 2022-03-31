@@ -1,5 +1,8 @@
 package com.hsu.mamomo.service;
 
+import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
+
+import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
@@ -11,6 +14,7 @@ import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -18,6 +22,7 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CampaignService {
@@ -39,15 +44,22 @@ public class CampaignService {
             campaignDto = new CampaignDto(findAll(_sort[0], _sort[1]));
         }
 
-        if (!userId.isEmpty()) {
-            // 로그인 된 상태일때 좋아요 정보까지 불러오기
-            for (Campaign campaign : campaignDto.getCampaigns()) {
-                Boolean isHearted = getIsHearted(campaign.getId(), userId);
-                if (isHearted) {
-                    campaign.setIsHeart(true);
-                }
+        if (!userId.isEmpty()) { // 로그인 된 상태일때 좋아요 정보까지 불러오기
+            Optional<User> user = userRepository.findUserById(userId);
+            if (user.isEmpty()) {
+                throw new CustomException(MEMBER_NOT_FOUND);
             }
 
+            List<Heart> hearts = user.get().getHearts();
+            List<Campaign> campaigns = campaignDto.getCampaigns();
+
+            for (Heart heart : hearts) {
+                String campaignId = heart.getCampaignId();
+                campaigns
+                        .stream().filter(campaign -> campaign.getId().equals(campaignId))
+                        .findFirst().get()
+                        .setIsHeart(true);
+            }
         }
 
         return campaignDto;
@@ -94,12 +106,6 @@ public class CampaignService {
 
         // 4. Map SearchHits to Campaign list
         return sortFactory.getCampaignList(searchHits);
-    }
-
-    public Boolean getIsHearted(String campaignId, String userId) {
-        User user = userRepository.findUserById(userId).get();
-        Optional<Heart> heart = heartRepository.findHeartByUserAndCampaignId(user, campaignId);
-        return heart.isPresent();
     }
 
 }
