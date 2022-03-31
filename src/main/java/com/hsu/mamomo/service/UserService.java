@@ -3,15 +3,18 @@ package com.hsu.mamomo.service;
 import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_EMAIL;
 import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_NICKNAME;
 import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
+import static com.hsu.mamomo.controller.exception.ErrorCode.TOPIC_NOT_FOUND;
 
 import com.fasterxml.uuid.Generators;
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Authority;
 import com.hsu.mamomo.domain.FavTopic;
+import com.hsu.mamomo.domain.Topic;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
+import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.SecurityUtil;
@@ -81,14 +84,18 @@ public class UserService {
          * */
         if (userDto.getFavTopics() != null) {
             List<FavTopic> favTopics = new ArrayList<>();
-
             userDto.getFavTopics().forEach(
                     topicId -> {
-                        FavTopic favTopic = FavTopic.builder()
-                                .user(user)
-                                .topic(topicRepository.getById(topicId))
-                                .build();
-                        favTopics.add(favTopic);
+                        Optional<Topic> topic = topicRepository.findTopicById(topicId);
+                        if (topic.isPresent()) {
+                            FavTopic favTopic = FavTopic.builder()
+                                    .user(user)
+                                    .topic(topic.get())
+                                    .build();
+                            favTopics.add(favTopic);
+                        } else {
+                            throw new CustomException(TOPIC_NOT_FOUND);
+                        }
                     }
             );
             user.setFavTopic(favTopics);
@@ -117,10 +124,15 @@ public class UserService {
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
 
-    public Optional<User> getUserInfo() {
+    public UserInfoDto getUserInfo() {
         log.info("현재 로그인 된 유저 = {}", SecurityUtil.getCurrentUsername());
-        return SecurityUtil.getCurrentUsername()
+        Optional<User> user = SecurityUtil.getCurrentUsername()
                 .flatMap(userRepository::findOneWithAuthoritiesByEmail);
+        if (user.isPresent()) {
+            return new UserInfoDto(user.get());
+        } else {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
     }
 
     /*
