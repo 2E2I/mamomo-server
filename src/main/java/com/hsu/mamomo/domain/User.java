@@ -70,7 +70,7 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private List<Heart> likes = new ArrayList<>();
+    private List<Heart> hearts = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "user",
