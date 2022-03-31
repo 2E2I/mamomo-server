@@ -7,6 +7,7 @@ import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 import com.fasterxml.uuid.Generators;
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Authority;
+import com.hsu.mamomo.domain.FavTopic;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.TokenDto;
@@ -14,10 +15,14 @@ import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.SecurityUtil;
+import com.hsu.mamomo.repository.jpa.FavTopicRepository;
+import com.hsu.mamomo.repository.jpa.TopicRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +45,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final FavTopicRepository favTopicRepository;
+    private final TopicRepository topicRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -58,8 +65,9 @@ public class UserService {
                 .authorityName("ROLE_USER")
                 .build();
 
+        String user_id = Generators.randomBasedGenerator().generate().toString();
         User user = User.builder()
-                .id(Generators.randomBasedGenerator().generate().toString())
+                .id(user_id)
                 .email(userDto.getEmail())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
@@ -67,6 +75,24 @@ public class UserService {
                 .birth(LocalDate.parse(userDto.getBirth()))
                 .authorities(Collections.singleton(authority)) // 최초 가입시 권한 USER
                 .build();
+
+        /*
+         * 회원가입 요청에 관심 기부 분야 리스트가 있으면 저장
+         * */
+        if (userDto.getFavTopics() != null) {
+            List<FavTopic> favTopics = new ArrayList<>();
+
+            userDto.getFavTopics().forEach(
+                    topicId -> {
+                        FavTopic favTopic = FavTopic.builder()
+                                .user(user)
+                                .topic(topicRepository.getById(topicId))
+                                .build();
+                        favTopics.add(favTopic);
+                    }
+            );
+            user.setFavTopic(favTopics);
+        }
 
         userRepository.save(user);
         HttpHeaders httpHeaders = new HttpHeaders();
