@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Fav_Topic")
+@Table(name = "fav_topic")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Fav_Topic {
+public class FavTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

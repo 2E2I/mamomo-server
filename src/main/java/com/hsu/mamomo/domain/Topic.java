@@ -12,7 +12,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Topic")
+@Table(name = "topic")
 @Getter
 @Setter
 @Builder
@@ -21,7 +21,8 @@ import lombok.Setter;
 public class Topic {
 
     @Id
-    private Long id;
+    @Column(name= "topic_id")
+    private Integer id;
 
     @Column(name = "topic_name")
     @NonNull
