@@ -1,8 +1,7 @@
 package com.hsu.mamomo.controller;
 
-import static com.hsu.mamomo.controller.exception.ErrorCode.ABSENCE_OF_ESSENTIAL_FIELD;
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_FIELD;
-import static com.hsu.mamomo.controller.exception.ErrorCode.TOPIC_NOT_FOUND;
+import static com.hsu.mamomo.controller.exception.ErrorCode.WRONG_OBJECT;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.controller.exception.ErrorResponse;
@@ -12,7 +11,6 @@ import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.service.UserService;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -91,8 +89,8 @@ public class UserController {
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleNotReadableException() {
-        log.error("handleNotReadableException throw Exception : {}", ABSENCE_OF_ESSENTIAL_FIELD);
-        return ErrorResponse.toResponseEntity(ABSENCE_OF_ESSENTIAL_FIELD);
+        log.error("handleNotReadableException throw Exception : {}", WRONG_OBJECT);
+        return ErrorResponse.toResponseEntity(WRONG_OBJECT);
     }
 
     @ExceptionHandler(value = CustomException.class)

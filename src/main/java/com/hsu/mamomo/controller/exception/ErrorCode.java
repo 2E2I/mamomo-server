@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     /* 400 BAD_REQUEST : 잘못된 요청 */
-    ABSENCE_OF_ESSENTIAL_FIELD(HttpStatus.BAD_REQUEST, "필수 인자가 존재하지 않습니다."),
+    WRONG_OBJECT(HttpStatus.BAD_REQUEST, "객체 변환이 되지 않습니다. 옳은 형식을 보내주세요."),
     INVALID_FIELD(HttpStatus.BAD_REQUEST, "인자 형식이 맞지 않습니다."),
 
     /* 404 NOT_FOUND : Resource 를 찾을 수 없음 */
