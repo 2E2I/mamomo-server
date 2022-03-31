@@ -2,15 +2,17 @@ package com.hsu.mamomo.controller;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.ABSENCE_OF_ESSENTIAL_FIELD;
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_FIELD;
+import static com.hsu.mamomo.controller.exception.ErrorCode.TOPIC_NOT_FOUND;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.controller.exception.ErrorResponse;
-import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
+import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.service.UserService;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -64,11 +66,11 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/{email}")
-    public User getUserInfo(@PathVariable String email,
+    public UserInfoDto getUserInfo(@PathVariable String email,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorization) {
         log.info("{} 의 정보를 찾습니다 ..", email);
         log.info("getUserPk() = {}", jwtTokenProvider.getUserPk(authorization.substring(7)));
-        return userService.getUserInfo().get();
+        return userService.getUserInfo();
     }
 
     @DeleteMapping("/{email}")
@@ -98,6 +100,5 @@ public class UserController {
         log.error("handleCustomException throw CustomException : {}", e.getErrorCode());
         return ErrorResponse.toResponseEntity(e.getErrorCode());
     }
-
 
 }
