@@ -16,6 +16,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.pathPara
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -88,13 +89,44 @@ class UserControllerTest {
 
     @Test
     @Order(101)
-    @DisplayName("회원가입 테스트 - 실패 :: 중복")
-    void signUpConflictFailTest() throws Exception {
+    @DisplayName("회원가입 테스트 - 실패 :: 이메일 중복")
+    void signUpConflictEmailFailTest() throws Exception {
+
+        User duplicatedEmailUser = User.builder()
+                .email("user@email.com")
+                .password("user1234")
+                .nickname("unique")
+                .sex("M")
+                .birth(LocalDate.of(2000, 1, 1))
+                .build();
 
         mockMvc.perform(post("/api/user/signup")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(user)))
-                .andExpect(status().isConflict());
+                .content(objectMapper.writeValueAsString(duplicatedEmailUser)))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("DUPLICATE_EMAIL"))
+                .andExpect(jsonPath("$.message").value("이미 가입된 이메일입니다."));
+    }
+
+    @Test
+    @Order(102)
+    @DisplayName("회원가입 테스트 - 실패 :: 닉네임 중복")
+    void signUpConflictNicknameFailTest() throws Exception {
+
+        User duplicatedNicknameUser = User.builder()
+                .email("unique@email.com")
+                .password("user1234")
+                .nickname("user1")
+                .sex("M")
+                .birth(LocalDate.of(2000, 1, 1))
+                .build();
+
+        mockMvc.perform(post("/api/user/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(duplicatedNicknameUser)))
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("DUPLICATE_NICKNAME"))
+                .andExpect(jsonPath("$.message").value("이미 사용 중인 닉네임입니다."));
     }
 
     @Test
@@ -201,7 +233,7 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Order(500)
+    @Order(401)
     @DisplayName("회원탈퇴 테스트 - 실패 :: 존재하지 않는 회원일때")
     @Test
     public void deleteUserNotFoundFailTest() throws Exception {
