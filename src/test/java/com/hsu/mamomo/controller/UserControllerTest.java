@@ -238,7 +238,9 @@ class UserControllerTest {
     @Test
     public void deleteUserNotFoundFailTest() throws Exception {
         mockMvc.perform(delete("/api/user/{email}", user.getEmail()))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("MEMBER_NOT_FOUND"))
+                .andExpect(jsonPath("$.message").value("해당 유저 정보를 찾을 수 없습니다"));
     }
 
 }
