@@ -118,6 +118,18 @@ include::{snippets}/categories/http-response.adoc[]
 
 === 회원가입
 
+==== 요청
+include::{snippets}/signup-success/http-request.adoc[]
+
+==== 요청 필드 정보
+include::{snippets}/signup-success/request-fields.adoc[]
+
+==== 응답
+include::{snippets}/signup-success/http-response.adoc[]
+
+==== 응답 필드 정보
+include::{snippets}/signup-success/response-fields.adoc[]
+
 === 토큰 발급 (로그인)
 유저 이메일, 비밀번호로 유효한 JWT 토큰을 발급받습니다.
 

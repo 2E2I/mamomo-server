@@ -2,6 +2,12 @@ package com.hsu.mamomo.controller;
 
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserBirthFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserEmailFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserFavTopicFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserNicknameFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserPasswordFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getUserSexFormat;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -99,12 +105,12 @@ class UserControllerTest {
                         getDocumentResponse(),
                         // 요청 필드 문서화
                         requestFields(
-                                fieldWithPath("email").description("회원 이메일"),
-                                fieldWithPath("password").description("회원 비밀번호"),
-                                fieldWithPath("nickname").description("회원 닉네임"),
-                                fieldWithPath("sex").description("회원 성별"),
-                                fieldWithPath("birth").description("회원 생년월일"),
-                                fieldWithPath("favTopics").description("회원 관심 기부 분야")
+                                fieldWithPath("email").description("회원 이메일").attributes(getUserEmailFormat()),
+                                fieldWithPath("password").description("회원 비밀번호").attributes(getUserPasswordFormat()),
+                                fieldWithPath("nickname").description("회원 닉네임").attributes(getUserNicknameFormat()),
+                                fieldWithPath("sex").description("회원 성별").attributes(getUserSexFormat()),
+                                fieldWithPath("birth").description("회원 생년월일").optional().attributes(getUserBirthFormat()),
+                                fieldWithPath("favTopics").description("회원 관심 기부 분야").optional().attributes(getUserFavTopicFormat())
                         ),
                         // 응답 바디 문서화
                         responseFields(
@@ -285,9 +291,10 @@ class UserControllerTest {
                                 fieldWithPath("user.modify_date").description("마지막 회원 정보 수정 시간"),
                                 fieldWithPath("user.authorities").ignored(),
                                 fieldWithPath("user.authorities.[].authorityName").description("계정 정보"),
-                                fieldWithPath("user.likes").description("유저 좋아요 정보"),
-                                fieldWithPath("user.likes.[]").ignored(),
-                                subsectionWithPath("user.favTopic").description("유저 관심 기부 분야")
+                                fieldWithPath("user.hearts").description("유저 좋아요 정보"),
+                                fieldWithPath("user.hearts.[]").ignored(),
+                                subsectionWithPath("user.favTopic").description("유저 관심 기부 분야"),
+                                subsectionWithPath("user.favTopic.[].topic").description("기부 분야(카테고리) 정보")
                         )))
                 .andDo(print())
                 .andReturn();
