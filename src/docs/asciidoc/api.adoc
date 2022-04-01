@@ -149,3 +149,28 @@ include::{snippets}/get-user-info-with-jwtToken/http-response.adoc[]
 
 ==== 응답 필드 정보
 include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
+
+[[heart]]
+== 좋아요
+
+=== 좋아요
+
+==== 요청
+include::{snippets}/doHeart-success/http-request.adoc[]
+
+==== 요청 필드 정보
+include::{snippets}/doHeart-success/request-fields.adoc[]
+
+==== 응답
+include::{snippets}/doHeart-success/http-response.adoc[]
+
+=== 좋아요 취소
+
+==== 요청
+include::{snippets}/unHeart-success/http-request.adoc[]
+
+==== 요청 필드 정보
+include::{snippets}/unHeart-success/request-fields.adoc[]
+
+==== 응답
+include::{snippets}/unHeart-success/http-response.adoc[]
