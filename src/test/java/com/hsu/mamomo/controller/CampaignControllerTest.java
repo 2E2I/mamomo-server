@@ -58,6 +58,7 @@ class CampaignControllerTest {
                 .andExpect(jsonPath("$.campaigns.[0].['statusPrice']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['percent']").isNumber())
                 .andExpect(jsonPath("$.campaigns.[0].['isHeart']").isBoolean())
+                .andExpect(jsonPath("$.campaigns.[0].['heartCount']").isNumber())
                 .andDo(document("campaigns",
                         getDocumentRequest(),
                         getDocumentResponse(),
@@ -120,7 +121,9 @@ class CampaignControllerTest {
                                 fieldWithPath("campaigns.[].percent").type(JsonFieldType.NUMBER)
                                         .description("달성 정도"),
                                 fieldWithPath("campaigns.[].isHeart").type(JsonFieldType.BOOLEAN)
-                                        .description("좋아요 여부")
+                                        .description("좋아요 여부"),
+                                fieldWithPath("campaigns.[].heartCount").type(JsonFieldType.NUMBER)
+                                        .description("좋아요 갯수")
                         )
                 ));
     }

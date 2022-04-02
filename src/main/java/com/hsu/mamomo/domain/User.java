@@ -70,12 +70,11 @@ public class User {
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private List<Heart> hearts = new ArrayList<>();
-
+    private List<Heart> hearts;
     @OneToMany(
             mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY)
-    private List<FavTopic> favTopic = new ArrayList<>();
+    private List<FavTopic> favTopic;
 }

@@ -70,4 +70,6 @@ public class Campaign {
 
     private Boolean isHeart = false;
 
+    private Integer heartCount = 0;
+
 }

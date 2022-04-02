@@ -12,7 +12,9 @@ import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -44,7 +46,11 @@ public class CampaignService {
             campaignDto = new CampaignDto(findAll(_sort[0], _sort[1]));
         }
 
-        if (!userId.isEmpty()) { // 로그인 된 상태일때 좋아요 정보까지 불러오기
+        /*
+         * 로그인 했을 경우
+         * 좋아요(isHearted) true/false 정보 불러옴
+         * */
+        if (!userId.equals("")) {
             Optional<User> user = userRepository.findUserById(userId);
             if (user.isEmpty()) {
                 throw new CustomException(MEMBER_NOT_FOUND);
@@ -57,10 +63,23 @@ public class CampaignService {
                 String campaignId = heart.getCampaignId();
                 campaigns
                         .stream().filter(campaign -> campaign.getId().equals(campaignId))
-                        .findFirst().get()
-                        .setIsHeart(true);
+                        .findFirst().get();
             }
         }
+
+        /*
+         * 캠페인당 좋아요 갯수
+         * */
+        List<Heart> hearts = heartRepository.findAll();
+        Map<String, List<Heart>> heartMap = hearts.stream()
+                .collect(Collectors.groupingBy(Heart::getCampaignId));
+        heartMap.keySet().forEach(campaignId -> {
+            int count = heartMap.get(campaignId).size(); // 해당 캠페인 좋아요 수
+            Optional<Campaign> campaignOpt = campaignDto.getCampaigns().stream()
+                    .filter(v -> v.getId().equals(campaignId))
+                    .findFirst();
+            campaignOpt.ifPresent(campaign -> campaign.setHeartCount(count));
+        });
 
         return campaignDto;
     }
