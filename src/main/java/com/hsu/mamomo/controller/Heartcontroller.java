@@ -21,12 +21,6 @@ public class Heartcontroller {
 
     private final HeartService heartService;
 
-    /*
-     * 리턴 형식같은것은 추후에 수정 할 예정!!
-     * 일단 기능 구현 먼저 하였음..
-     * user 검증 과정 필요함!
-     * */
-
     @PostMapping
     public ResponseEntity<HeartDto> heart(@RequestBody @Valid HeartDto heartDto) {
         heartService.heart(heartDto);

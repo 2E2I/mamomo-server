@@ -12,10 +12,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsu.mamomo.config.jpa.JpaConfig;
 import com.hsu.mamomo.domain.Campaign;
+import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
+import com.hsu.mamomo.repository.jpa.HeartRepository;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import org.elasticsearch.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +46,8 @@ public class HeartControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private CampaignRepository campaignRepository;
+    @Autowired
+    private HeartRepository heartRepository;
 
     ObjectMapper objectMapper = new ObjectMapper();
     Map<String, String> input = new HashMap<>();
@@ -98,6 +104,13 @@ public class HeartControllerTest {
                                 fieldWithPath("userId").description("좋아요 취소 누르는 유저 ID")
                         )));
 
+    }
+
+    @Test
+    public void countHeartGroupingByCampaignId() {
+        List<Heart> hearts = heartRepository.findAll();
+        Map<String, List<Heart>> heartsMap = hearts.stream().collect(Collectors.groupingBy(Heart::getCampaignId));
+        System.out.println("heartsMap = " + heartsMap);
     }
 
 }
