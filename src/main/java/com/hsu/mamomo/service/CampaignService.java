@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.swing.text.html.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -61,9 +62,10 @@ public class CampaignService {
 
             for (Heart heart : hearts) {
                 String campaignId = heart.getCampaignId();
-                campaigns
+                Optional<Campaign> campaignOpt = campaigns
                         .stream().filter(campaign -> campaign.getId().equals(campaignId))
-                        .findFirst().get();
+                        .findFirst();
+                campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
             }
         }
 
