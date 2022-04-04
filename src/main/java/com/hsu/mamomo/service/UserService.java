@@ -136,11 +136,13 @@ public class UserService {
     }
 
     /*
-     * JWT 토큰을 디코딩 하여 유저 정보와 일치하는지 확인
+     * JWT 토큰에서 유저 아이디 추출
      * */
-    public Boolean isEqualUserTokenInfoAndUserInfo(String token, String userId) {
-        String userEmail = userRepository.findUserById(userId).get().getEmail();
-        return jwtTokenProvider.getUserPk(token).equals(userEmail);
+    public String getUserIdByJwtToken(String token) {
+        Optional<User> user = userRepository.findByEmail(jwtTokenProvider.getUserPk(token));
+        if (user.isEmpty())
+            throw new CustomException(MEMBER_NOT_FOUND);
+        return user.get().getId();
     }
 
     public ResponseEntity<String> deleteUser(String email) {
