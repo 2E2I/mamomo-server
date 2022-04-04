@@ -24,7 +24,7 @@ MaMoMo API 문서입니다.
 [[campaigns]]
 == 캠페인
 
-캠페인 API는 캠페인 리스트를 반환합니다.
+캠페인 API 입니다.
 
 [[campaigns-all]]
 === 전체 리스트
@@ -52,6 +52,23 @@ include::{snippets}/campaigns/http-request.adoc[]
 
 include::{snippets}/campaigns/path-parameters.adoc[]
 
+[[starch-by-keyword]]
+=== 키워드 검색
+
+키워드로 캠페인을 검색합니다.
+
+==== 요청
+
+include::{snippets}/campaigns-search/http-request.adoc[]
+
+정렬 추가 시
+
+include::{snippets}/search-campaigns-by-keyword/http-request.adoc[]
+
+==== 요청 파라미터
+
+include::{snippets}/campaigns/path-parameters.adoc[]
+
 ==== 응답 바디
 
 include::{snippets}/campaigns/response-fields.adoc[]
@@ -61,10 +78,10 @@ include::{snippets}/campaigns/response-fields.adoc[]
 include::{snippets}/campaigns/http-response.adoc[]
 
 
-[[search]]
-== 검색
+[[tag]]
+== 태그
 
-검색 API 입니다.
+태그 API 입니다.
 
 [[search-tags]]
 === 상위 10개 태그 반환
@@ -79,31 +96,10 @@ include::{snippets}/return-top-10-tags/http-request.adoc[]
 
 include::{snippets}/return-top-10-tags/http-response.adoc[]
 
-[[starch-by-keyword]]
-=== 키워드 검색
-
-키워드로 캠페인을 검색합니다.
-
-==== 요청
-
-include::{snippets}/search-campaigns-by-keyword/http-request.adoc[]
-
-==== 요청 필드 정보
-
-include::{snippets}/search-campaigns-by-keyword/request-parameters.adoc[]
-
-==== 응답
-
-include::{snippets}/search-campaigns-by-keyword/http-response.adoc[]
-
-==== 응답 필드 정보
-
-include::{snippets}/search-campaigns-by-keyword/response-fields.adoc[]
-
 [[categories]]
 == 카테고리
 
-카테고리를 반환합니다.
+카테고리 API 입니다.
 
 ==== 요청
 
@@ -115,6 +111,8 @@ include::{snippets}/categories/http-response.adoc[]
 
 [[user]]
 == 유저
+
+유저 API 입니다.
 
 === 회원가입
 
@@ -164,6 +162,8 @@ include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 
 [[heart]]
 == 좋아요
+
+좋아요 API 입니다.
 
 === 좋아요
 

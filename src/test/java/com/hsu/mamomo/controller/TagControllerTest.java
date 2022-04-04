@@ -23,7 +23,6 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -32,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
-class CampaignSearchControllerTest {
+class TagControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -52,36 +51,5 @@ class CampaignSearchControllerTest {
                         )));
     }
 
-    @DisplayName("검색 키워드로 캠페인 글 검색")
-    @Test
-    public void searchCampaignsByKeyword() throws Exception {
 
-        ResultActions resultActions = mockMvc.perform(get("/api/search/campaigns?")
-                .param("keyword", "노인")
-                .contentType(MediaType.APPLICATION_JSON))
-
-                .andDo(document("search-campaigns-by-keyword",
-                getDocumentRequest(),
-                getDocumentResponse(),
-                requestParameters(
-                        parameterWithName("keyword").description(
-                                "2글자 이상 검색어 입력"
-                        ),
-                        parameterWithName("sort").description(
-                                "- 캠페인 리스트 정렬 방식\n\n"
-                                        + "default 값은 정확도순\n\n"
-                                        + "- 사용 가능한 값:\n\n"
-                                        + "정렬 대상: start_date, due_date\n\n"
-                                        + "정렬 방법: asc, desc\n\n"
-                                        + "예) sort=start_date,desc (최신 순)\n\n"
-                                        + "sort=due_date,asc (마감 순)")
-                                .optional()
-                                .attributes(getSortFormat())
-                ),
-                CampaignDocumentUtil.getCampaignResponseFields()
-        ));
-
-        // then
-        resultActions = CampaignDocumentUtil.getCampaignExpect(resultActions);
-    }
 }
