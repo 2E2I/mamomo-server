@@ -1,5 +1,6 @@
 package com.hsu.mamomo.service;
 
+import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_JWT_TOKEN;
 import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 import com.hsu.mamomo.controller.exception.CustomException;
@@ -7,22 +8,19 @@ import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
+import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.jpa.HeartRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
+import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.swing.text.html.Option;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -31,26 +29,62 @@ import org.springframework.stereotype.Service;
 public class CampaignService {
 
     private final UserRepository userRepository;
-    private final ElasticSortFactory sortFactory;
     private final ElasticCategoryFactory categoryFactory;
+    private final ElasticSearchFactory searchFactory;
     private final HeartRepository heartRepository;
 
-    public CampaignDto getCampaigns(String sort, Integer category_id, String userId) {
-        CampaignDto campaignDto;
-        String[] _sort = sort.split(","); // sort = [field, direction]
+    private final JwtTokenProvider jwtTokenProvider;
+    private final UserService userService;
 
-        // 전체보기
-        if (category_id != null) {
-            campaignDto = new CampaignDto(
-                    findAllOfCategory(_sort[0], _sort[1], category_id));
-        } else { // 카테고리 별로 보기
-            campaignDto = new CampaignDto(findAll(_sort[0], _sort[1]));
+    private CampaignDto campaignDto;
+
+    public String getUserIdFromAuth(String authorization) {
+        String jwtToken = authorization.substring(7);
+
+        // 유효한 토큰인지 검증
+        if (!jwtTokenProvider.validateToken(jwtToken)) {
+            throw new CustomException(INVALID_JWT_TOKEN);
         }
 
-        /*
-         * 로그인 했을 경우
-         * 좋아요(isHearted) true/false 정보 불러옴
-         * */
+        return userService.getUserIdByJwtToken(jwtToken);
+    }
+
+    public CampaignDto getCampaigns(String sort, Integer category_id, String keyword,
+            String authorization) {
+        String[] _sort = sort.split(","); // sort = [field, direction]
+
+        if (keyword != null) {
+            campaignDto = new CampaignDto(
+                    searchByTitleOrBody(keyword, _sort[0], _sort[1]));
+        } else {
+            if (Objects.equals(_sort[0], "none") && Objects.equals(_sort[1], "none")) {
+                _sort[0] = "start_date";
+                _sort[1] = "desc";
+            }
+
+            if (category_id != null) {
+                campaignDto = new CampaignDto(
+                        findAllOfCategory(category_id, _sort[0], _sort[1]));
+            } else {
+                campaignDto = new CampaignDto(
+                        findAll(_sort[0], _sort[1]));
+            }
+        }
+
+        if(authorization!=null){
+            String userId = getUserIdFromAuth(authorization);
+            campaignDto = addHeartInfo(userId);
+        }
+
+        return campaignDto;
+
+    }
+
+    /*
+     * 로그인 했을 경우
+     * 좋아요(isHearted) true/false 정보 불러옴
+     * */
+    public CampaignDto addHeartInfo(String userId) {
         if (!userId.equals("")) {
             Optional<User> user = userRepository.findUserById(userId);
             log.info("userID = {}", userId);
@@ -65,7 +99,7 @@ public class CampaignService {
             for (Heart heart : hearts) {
                 String campaignId = heart.getCampaignId();
                 Optional<Campaign> campaignOpt = campaigns
-                        .stream().filter(campaign -> campaign.getId().equals(campaignId))
+                        .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
                         .findFirst();
                 campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
             }
@@ -80,7 +114,7 @@ public class CampaignService {
         heartMap.keySet().forEach(campaignId -> {
             int count = heartMap.get(campaignId).size(); // 해당 캠페인 좋아요 수
             Optional<Campaign> campaignOpt = campaignDto.getCampaigns().stream()
-                    .filter(v -> v.getId().equals(campaignId))
+                    .filter(v -> Objects.equals(v.getId(), campaignId))
                     .findFirst();
             campaignOpt.ifPresent(campaign -> campaign.setHeartCount(count));
         });
@@ -92,43 +126,22 @@ public class CampaignService {
      * 캠페인 전체 보기
      * */
     public List<Campaign> findAll(String item, String direction) {
-
-        // 1. Setting up Builder
-        FieldSortBuilder sortBuilder = sortFactory.createSortBuilder(item, direction);
-
-        // 2. Create Query
-        NativeSearchQuery query = new NativeSearchQueryBuilder()
-                .withSorts(sortBuilder)
-                .build();
-
-        // 3. Execute search
-        SearchHits<Campaign> searchHits = sortFactory.getSearchHits(query);
-
-        // 4. Map SearchHits to Campaign list
-        return sortFactory.getCampaignList(searchHits);
+        return categoryFactory.getCampaignList(ElasticSortFactory.createBasicQuery(item, direction));
     }
 
     /*
      * 캠페인 카테고리 별로 보기
      * */
-    public List<Campaign> findAllOfCategory(String item, String direction, Integer category_id) {
-
-        // 1. Setting up Builder
+    public List<Campaign> findAllOfCategory(Integer category_id, String item, String direction) {
         String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
-        QueryBuilder queryBuilder = categoryFactory.createQueryBuilder(keyword);
-        FieldSortBuilder sortBuilder = categoryFactory.createSortBuilder(item, direction);
-
-        // 2. Create Query
-        NativeSearchQuery query = new NativeSearchQueryBuilder()
-                .withQuery(queryBuilder)
-                .withSorts(sortBuilder)
-                .build();
-
-        // 3. Execute search
-        SearchHits<Campaign> searchHits = sortFactory.getSearchHits(query);
-
-        // 4. Map SearchHits to Campaign list
-        return sortFactory.getCampaignList(searchHits);
+        return categoryFactory.getCampaignList(categoryFactory.createQuery(keyword, item, direction));
     }
 
+    /*
+     * 캠페인 검색 결과 보기
+     * 제목 + 본문 검색 (OR)
+     * */
+    public List<Campaign> searchByTitleOrBody(String keyword, String item, String direction) {
+        return searchFactory.getCampaignList(searchFactory.createQuery(keyword, item, direction));
+    }
 }
