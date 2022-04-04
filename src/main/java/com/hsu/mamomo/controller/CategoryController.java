@@ -1,6 +1,5 @@
 package com.hsu.mamomo.controller;
 
-import com.hsu.mamomo.service.CampaignSearchService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CategoryController {
 
-    private final CampaignSearchService campaignSearchService;
     private static final List<String> categoryList
             = List.of("아동|청소년",
             "어르신",

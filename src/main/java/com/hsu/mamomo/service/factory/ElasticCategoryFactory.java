@@ -1,18 +1,19 @@
 package com.hsu.mamomo.service.factory;
 
-import com.hsu.mamomo.domain.Campaign;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHit;
-import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ElasticCategoryFactory extends ElasticFactory {
+public class ElasticCategoryFactory extends ElasticSortFactory {
+
+    public ElasticCategoryFactory(
+            ElasticsearchOperations elasticsearchOperations) {
+        super(elasticsearchOperations);
+    }
 
     private static final Map<Integer, String> categoryMap
             = Map.of(1, "아동|청소년",
@@ -26,24 +27,17 @@ public class ElasticCategoryFactory extends ElasticFactory {
             9, "동물",
             10, "환경");
 
-    public ElasticCategoryFactory(
-            ElasticsearchOperations elasticsearchOperations) {
-        super(elasticsearchOperations);
+
+    @Override
+    public NativeSearchQuery createQuery(String keyword, String item, String direction) {
+        return new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery("category", keyword))
+                .withSorts(createSortBuilder(item, direction))
+                .build();
     }
 
     public String matchCategoryNameByCategoryId(int category_id) {
         return categoryMap.get(category_id);
     }
 
-    @Override
-    public QueryBuilder createQueryBuilder(String keyword) {
-        return QueryBuilders.matchQuery("category",keyword);
-    }
-
-    @Override
-    public List<Campaign> getCampaignList(SearchHits<Campaign> searchHits) {
-        return searchHits.stream()
-                .map(SearchHit::getContent)
-                .collect(Collectors.toList());
-    }
 }
