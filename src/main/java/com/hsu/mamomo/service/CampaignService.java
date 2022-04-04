@@ -53,6 +53,8 @@ public class CampaignService {
          * */
         if (!userId.equals("")) {
             Optional<User> user = userRepository.findUserById(userId);
+            log.info("userID = {}", userId);
+            log.info("로그인 된 유저 = {}", user);
             if (user.isEmpty()) {
                 throw new CustomException(MEMBER_NOT_FOUND);
             }
