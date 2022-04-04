@@ -39,6 +39,7 @@ public class CampaignService {
     private CampaignDto campaignDto;
 
     public String getUserIdFromAuth(String authorization) {
+
         String jwtToken = authorization.substring(7);
 
         // 유효한 토큰인지 검증
@@ -51,6 +52,7 @@ public class CampaignService {
 
     public CampaignDto getCampaigns(String sort, Integer category_id, String keyword,
             String authorization) {
+
         String[] _sort = sort.split(","); // sort = [field, direction]
 
         if (keyword != null) {
@@ -71,10 +73,13 @@ public class CampaignService {
             }
         }
 
-        if(authorization!=null){
+        if (authorization != null) {
             String userId = getUserIdFromAuth(authorization);
-            campaignDto = addHeartInfo(userId);
+            campaignDto = addIsHeartInfo(userId);
         }
+
+        // 좋아요 갯수 추가
+        campaignDto = addHeartCountInfo();
 
         return campaignDto;
 
@@ -84,11 +89,12 @@ public class CampaignService {
      * 로그인 했을 경우
      * 좋아요(isHearted) true/false 정보 불러옴
      * */
-    public CampaignDto addHeartInfo(String userId) {
+    public CampaignDto addIsHeartInfo(String userId) {
+
         if (!userId.equals("")) {
+
             Optional<User> user = userRepository.findUserById(userId);
-            log.info("userID = {}", userId);
-            log.info("로그인 된 유저 = {}", user);
+
             if (user.isEmpty()) {
                 throw new CustomException(MEMBER_NOT_FOUND);
             }
@@ -104,6 +110,11 @@ public class CampaignService {
                 campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
             }
         }
+
+        return campaignDto;
+    }
+
+    public CampaignDto addHeartCountInfo() {
 
         /*
          * 캠페인당 좋아요 갯수
@@ -126,7 +137,8 @@ public class CampaignService {
      * 캠페인 전체 보기
      * */
     public List<Campaign> findAll(String item, String direction) {
-        return categoryFactory.getCampaignList(ElasticSortFactory.createBasicQuery(item, direction));
+        return categoryFactory
+                .getCampaignList(ElasticSortFactory.createBasicQuery(item, direction));
     }
 
     /*
@@ -134,7 +146,8 @@ public class CampaignService {
      * */
     public List<Campaign> findAllOfCategory(Integer category_id, String item, String direction) {
         String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
-        return categoryFactory.getCampaignList(categoryFactory.createQuery(keyword, item, direction));
+        return categoryFactory
+                .getCampaignList(categoryFactory.createQuery(keyword, item, direction));
     }
 
     /*
