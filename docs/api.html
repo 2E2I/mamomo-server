@@ -461,24 +461,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_요청_2">요청</a></li>
 <li><a href="#_요청_파라미터">요청 파라미터</a></li>
-</ul>
-</li>
-<li><a href="#starch-by-keyword">1.3. 키워드 검색</a>
-<ul class="sectlevel3">
-<li><a href="#_요청_3">요청</a></li>
-<li><a href="#_요청_파라미터_2">요청 파라미터</a></li>
 <li><a href="#_응답_바디">응답 바디</a></li>
 <li><a href="#_응답_예시">응답 예시</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#tag">2. 태그</a>
+<li><a href="#search">2. 검색</a>
 <ul class="sectlevel2">
 <li><a href="#search-tags">2.1. 상위 10개 태그 반환</a>
 <ul class="sectlevel3">
-<li><a href="#_요청_4">요청</a></li>
+<li><a href="#_요청_3">요청</a></li>
 <li><a href="#_응답">응답</a></li>
+</ul>
+</li>
+<li><a href="#starch-by-keyword">2.2. 키워드 검색</a>
+<ul class="sectlevel3">
+<li><a href="#_요청_4">요청</a></li>
+<li><a href="#_요청_필드_정보">요청 필드 정보</a></li>
+<li><a href="#_응답_2">응답</a></li>
+<li><a href="#_응답_필드_정보">응답 필드 정보</a></li>
 </ul>
 </li>
 </ul>
@@ -486,7 +488,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#categories">3. 카테고리</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_5">요청</a></li>
-<li><a href="#_응답_2">응답</a></li>
+<li><a href="#_응답_3">응답</a></li>
 </ul>
 </li>
 <li><a href="#user">4. 유저</a>
@@ -494,26 +496,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_회원가입">4.1. 회원가입</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_6">요청</a></li>
-<li><a href="#_요청_필드_정보">요청 필드 정보</a></li>
-<li><a href="#_응답_3">응답</a></li>
-<li><a href="#_응답_필드_정보">응답 필드 정보</a></li>
+<li><a href="#_요청_필드_정보_2">요청 필드 정보</a></li>
+<li><a href="#_응답_4">응답</a></li>
+<li><a href="#_응답_필드_정보_2">응답 필드 정보</a></li>
 </ul>
 </li>
 <li><a href="#_토큰_발급_로그인">4.2. 토큰 발급 (로그인)</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_7">요청</a></li>
-<li><a href="#_요청_필드_정보_2">요청 필드 정보</a></li>
-<li><a href="#_응답_4">응답</a></li>
+<li><a href="#_요청_필드_정보_3">요청 필드 정보</a></li>
+<li><a href="#_응답_5">응답</a></li>
 <li><a href="#_응답_헤더_정보">응답 헤더 정보</a></li>
-<li><a href="#_응답_필드_정보_2">응답 필드 정보</a></li>
+<li><a href="#_응답_필드_정보_3">응답 필드 정보</a></li>
 </ul>
 </li>
 <li><a href="#_유저_정보_조회">4.3. 유저 정보 조회</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_8">요청</a></li>
 <li><a href="#_요청_헤더_정보">요청 헤더 정보</a></li>
-<li><a href="#_응답_5">응답</a></li>
-<li><a href="#_응답_필드_정보_3">응답 필드 정보</a></li>
+<li><a href="#_응답_6">응답</a></li>
+<li><a href="#_응답_필드_정보_4">응답 필드 정보</a></li>
 </ul>
 </li>
 </ul>
@@ -523,15 +525,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_좋아요">5.1. 좋아요</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_9">요청</a></li>
-<li><a href="#_요청_필드_정보_3">요청 필드 정보</a></li>
-<li><a href="#_응답_6">응답</a></li>
+<li><a href="#_요청_필드_정보_4">요청 필드 정보</a></li>
+<li><a href="#_응답_7">응답</a></li>
 </ul>
 </li>
 <li><a href="#_좋아요_취소">5.2. 좋아요 취소</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_10">요청</a></li>
-<li><a href="#_요청_필드_정보_4">요청 필드 정보</a></li>
-<li><a href="#_응답_7">응답</a></li>
+<li><a href="#_요청_필드_정보_5">요청 필드 정보</a></li>
+<li><a href="#_응답_8">응답</a></li>
 </ul>
 </li>
 </ul>
@@ -552,7 +554,7 @@ MaMoMo API 문서입니다.
 <h2 id="campaigns"><a class="link" href="#campaigns">1. 캠페인</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>캠페인 API 입니다.</p>
+<p>캠페인 API는 캠페인 리스트를 반환합니다.</p>
 </div>
 <div class="sect2">
 <h3 id="campaigns-all"><a class="link" href="#campaigns-all">1.1. 전체 리스트</a></h3>
@@ -646,95 +648,6 @@ Host: localhost:8080</code></pre>
 <p class="tableblock">8: 우리사회</p>
 <p class="tableblock">9: 동물</p>
 <p class="tableblock">10: 환경</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="starch-by-keyword"><a class="link" href="#starch-by-keyword">1.3. 키워드 검색</a></h3>
-<div class="paragraph">
-<p>키워드로 캠페인을 검색합니다.</p>
-</div>
-<div class="sect3">
-<h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Host: localhost:8080</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>정렬 추가 시</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/search/campaigns?sort=start_date%2Cdesc&amp;keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_요청_파라미터_2"><a class="link" href="#_요청_파라미터_2">요청 파라미터</a></h4>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. /api/campaigns</caption>
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Parameter</th>
-<th class="tableblock halign-left valign-top">Required</th>
-<th class="tableblock halign-left valign-top">Form</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{정렬대상}, {정렬방법}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 리스트 정렬 방식</p>
-<p class="tableblock">default값은 최신 순</p>
-<p class="tableblock">- 사용 가능한 값:</p>
-<p class="tableblock">정렬 대상: start_date, due_date</p>
-<p class="tableblock">정렬 방법: asc, desc</p>
-<p class="tableblock">예) sort=start_date,desc (최신 순)</p>
-<p class="tableblock">sort=due_date,asc (마감 순)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 id}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 카테고리</p>
-<p class="tableblock">- 사용 가능한 값:</p>
-<p class="tableblock">1: 아동|청소년</p>
-<p class="tableblock">2: 어르신</p>
-<p class="tableblock">3: 장애인</p>
-<p class="tableblock">4: 어려운이웃</p>
-<p class="tableblock">5: 다문화</p>
-<p class="tableblock">6: 지구촌</p>
-<p class="tableblock">7: 가족|여성</p>
-<p class="tableblock">8: 우리사회</p>
-<p class="tableblock">9: 동물</p>
-<p class="tableblock">10: 환경</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
 </tr>
 </tbody>
 </table>
@@ -835,11 +748,6 @@ Host: localhost:8080</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">좋아요 여부</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].heartCount</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">좋아요 갯수</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -858,7 +766,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 82224
+Content-Length: 81787
 
 {
   "campaigns" : [ {
@@ -876,8 +784,7 @@ Content-Length: 82224
     "targetPrice" : 2000000,
     "statusPrice" : 200,
     "percent" : 1,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "94511",
     "siteType" : "kakao",
@@ -893,8 +800,7 @@ Content-Length: 82224
     "targetPrice" : 1168000,
     "statusPrice" : 251600,
     "percent" : 22,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "94817",
     "siteType" : "kakao",
@@ -910,8 +816,7 @@ Content-Length: 82224
     "targetPrice" : 700000000,
     "statusPrice" : 555462400,
     "percent" : 80,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "94598",
     "siteType" : "kakao",
@@ -927,8 +832,7 @@ Content-Length: 82224
     "targetPrice" : 10000000,
     "statusPrice" : 293400,
     "percent" : 3,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183433",
     "siteType" : "happybean",
@@ -944,8 +848,7 @@ Content-Length: 82224
     "targetPrice" : 8000000,
     "statusPrice" : 500,
     "percent" : 1,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183435",
     "siteType" : "happybean",
@@ -961,8 +864,7 @@ Content-Length: 82224
     "targetPrice" : 5000000,
     "statusPrice" : 12700,
     "percent" : 1,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183381",
     "siteType" : "happybean",
@@ -978,8 +880,7 @@ Content-Length: 82224
     "targetPrice" : 3000000,
     "statusPrice" : 71400,
     "percent" : 2,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183319",
     "siteType" : "happybean",
@@ -995,8 +896,7 @@ Content-Length: 82224
     "targetPrice" : 9925000,
     "statusPrice" : 26700,
     "percent" : 1,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183333",
     "siteType" : "happybean",
@@ -1012,8 +912,7 @@ Content-Length: 82224
     "targetPrice" : 9900000,
     "statusPrice" : 128700,
     "percent" : 1,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183320",
     "siteType" : "happybean",
@@ -1029,8 +928,7 @@ Content-Length: 82224
     "targetPrice" : 3000000,
     "statusPrice" : 2069400,
     "percent" : 68,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "94371",
     "siteType" : "kakao",
@@ -1046,8 +944,7 @@ Content-Length: 82224
     "targetPrice" : 2824370,
     "statusPrice" : 1056700,
     "percent" : 38,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "93946",
     "siteType" : "kakao",
@@ -1063,8 +960,7 @@ Content-Length: 82224
     "targetPrice" : 9670750,
     "statusPrice" : 1403400,
     "percent" : 15,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000183165",
     "siteType" : "happybean",
@@ -1080,8 +976,7 @@ Content-Length: 82224
     "targetPrice" : 50000000,
     "statusPrice" : 3933400,
     "percent" : 7,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000182919",
     "siteType" : "happybean",
@@ -1097,8 +992,7 @@ Content-Length: 82224
     "targetPrice" : 2000000,
     "statusPrice" : 377800,
     "percent" : 18,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000182907",
     "siteType" : "happybean",
@@ -1114,8 +1008,7 @@ Content-Length: 82224
     "targetPrice" : 1000000,
     "statusPrice" : 127600,
     "percent" : 12,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000182852",
     "siteType" : "happybean",
@@ -1131,8 +1024,7 @@ Content-Length: 82224
     "targetPrice" : 2000000,
     "statusPrice" : 849800,
     "percent" : 42,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "93613",
     "siteType" : "kakao",
@@ -1148,8 +1040,7 @@ Content-Length: 82224
     "targetPrice" : 7100000,
     "statusPrice" : 4891500,
     "percent" : 69,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000182656",
     "siteType" : "happybean",
@@ -1165,8 +1056,7 @@ Content-Length: 82224
     "targetPrice" : 9900000,
     "statusPrice" : 3336500,
     "percent" : 33,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   }, {
     "id" : "H000000182318",
     "siteType" : "happybean",
@@ -1182,8 +1072,7 @@ Content-Length: 82224
     "targetPrice" : 5000000,
     "statusPrice" : 1494800,
     "percent" : 29,
-    "isHeart" : false,
-    "heartCount" : 0
+    "isHeart" : false
   } ]
 }</code></pre>
 </div>
@@ -1193,10 +1082,10 @@ Content-Length: 82224
 </div>
 </div>
 <div class="sect1">
-<h2 id="tag"><a class="link" href="#tag">2. 태그</a></h2>
+<h2 id="search"><a class="link" href="#search">2. 검색</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>태그 API 입니다.</p>
+<p>검색 API 입니다.</p>
 </div>
 <div class="sect2">
 <h3 id="search-tags"><a class="link" href="#search-tags">2.1. 상위 10개 태그 반환</a></h3>
@@ -1204,7 +1093,7 @@ Content-Length: 82224
 <p>검색 페이지에서 필요한 상위 10개 태그를 반환합니다.</p>
 </div>
 <div class="sect3">
-<h4 id="_요청_4"><a class="link" href="#_요청_4">요청</a></h4>
+<h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/search HTTP/1.1
@@ -1237,13 +1126,662 @@ Content-Length: 183
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="starch-by-keyword"><a class="link" href="#starch-by-keyword">2.2. 키워드 검색</a></h3>
+<div class="paragraph">
+<p>키워드로 캠페인을 검색합니다.</p>
+</div>
+<div class="sect3">
+<h4 id="_요청_4"><a class="link" href="#_요청_4">요청</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/search/campaigns?keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_필드_정보"><a class="link" href="#_요청_필드_정보">요청 필드 정보</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2글자 이상 검색어 입력</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 리스트 정렬 방식</p>
+<p class="tableblock">default 값은 정확도순</p>
+<p class="tableblock">- 사용 가능한 값:</p>
+<p class="tableblock">정렬 대상: start_date, due_date</p>
+<p class="tableblock">정렬 방법: asc, desc</p>
+<p class="tableblock">예) sort=start_date,desc (최신 순)</p>
+<p class="tableblock">sort=due_date,asc (마감 순)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_2"><a class="link" href="#_응답_2">응답</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 120287
+
+{
+  "campaigns" : [ {
+    "id" : "94405",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94405",
+    "title" : "노인들에게 안전한 주거환경을 제공해주세요",
+    "category" : [ "어르신", "환경" ],
+    "tags" : [ "환경", "실버세대", "다가치펀드", "카카오크루" ],
+    "body" : "노인들의 노후된 집을 안락하고 안전한 집으로 만드는 기적 우리 사회는 고령화 시대를 넘어서서 초고령화 시대를 바라보고 있습니다. 빠르게 진행되고 있는 고령화 사회에서 노인은 어떠한 삶을 누릴 때 만족감을 갖게 될까요?  바로 돌봄이 제공되며 안락한 공간에서 거주할 때 만족감이 높다고 합니다.  이러한 문제를 해결하기 위해 한국해비타트는 여러분의 관심이 절실히 필요합니다. 곰팡이 제거 및 도배,타일, 창호 교체 후 부엌모습 다 녹슨 보일러실 (공사전) 1 / 4 이전 다음 노인 취약계층 대상 주거환경개선 지원이 시급합니다. 노인들은 점점 활동성이 떨어지고 기력이 없어지면서, 자연스럽게 바깥활동보다는 집에서 보내는 시간이 많아집니다. 요즘 같은 코로나19 시기에 노인들은 더 많은 시간을 집에서 보낼 수밖에 없는 환경에 처했습니다.   이렇게 하루 중 집에서 보내는 시간이 길어지면서 노후된 주택에 거주하시는 분들은 위험에 노출되는 경우가 많이 있습니다. 곰팡이가 건강에 안좋다는 걸 알면서도 바꾸지 못하시는 노인 세대, 오래된 천장이 무너질까 혹은 노출된 전기선이 위험하지는 않을까라는 생각을 하며 집에 계시는 노인 세대 대부분은 경제적으로 어렵거나 도와줄 사람이 없어 집을 고치지 못하고 거주하고 있습니다.   이러한 문제를 해결하기 위해 한국해비타트는 2020년부터 같이가치 모금을 통해 고령화된 지역에 살고 있는 노인 가구를 대상으로 주거환경개선사업을 진행하고 있습니다. 2020년에는 천안 남산지구 내 25세대 노인 가구를 대상으로, 2021년에는 춘천지역에 있는 6세대를 대상으로 주거환경개선사업을 진행하며 노인분들에게 쾌적한 주거환경을 제공하고 그들의 경제적, 심리적 불안감을 해결하는 데 기여하고 있습니다. 노인들의 열악한 집을 안락하고 안전하게 바꿔드리겠습니다! 이번 모금을 통해 저희는 열악한 주거환경에 거주하시는 저소득 어르신 2세대를 선정하여, 따뜻하고 안락한 공간을 제공하고 싶습니다. 주거환경개선을 통해 삶에 만족감을 드리고 집에서 생활하시는 동안 불편함 없는 그런 거주 공간. 안전하고 어르신들의 안전하고 편리한 집에 거주하실 수 있도록 함께해주세요!",
+    "organizationName" : "(사)한국해비타트",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/cpAS3j/btrt9TdDrqr/Kz5qmSHT6VAmuwwgkax9T1/c360.jpg",
+    "dueDate" : "2022-06-30",
+    "startDate" : "2022-03-02",
+    "targetPrice" : 18000000,
+    "statusPrice" : 15426500,
+    "percent" : 86,
+    "isHeart" : false
+  }, {
+    "id" : "94647",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94647",
+    "title" : "\"선\"한마음 \"식\"생활지원, 어르신의 영양을 지켜주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "식사지원", "저소득가정" ],
+    "body" : "영양불균형! 어르신들의 질병 원인입니다 노년기에 비타민과 미네랄과 같은 영양소가 부족하면 면역력 저하와 신체 기능 저하로 이어져 폐렴, 대상포진, 당뇨병, 고혈압, 골다공증, 각막염 같은 질환에 노출되기 쉽게 만듭니다.   비타민A가 부족하면 안구건조증에 걸릴 위험이 증가하고 면역력이 저하돼 각종 감염 질환에 걸릴 위험이 증가합니다. 코로나19와 같은 감염성 질환뿐 아니라 만성질환에도 취약해질 수 있으며 질병이 있을 경우 회복 속도가 더뎌지고 이로 인해 사망률이 증가할 수 있습니다. 어르신들의 영양실태, 알고 계시나요? 질병관리본부에 따르면 우리나라 65세 이상 노인의 32.7%가 에너지의 필요 추정량의 75% 미만으로 섭취하고 있고, 단백질, 인, 철을 제외한 나머지 영양소의 경우 평균 필요량 미만 섭취자 비율이 50%를 넘는 것으로 나타났습니다. 특히 칼슘과 리보플라빈(비타민 B2)은 부족 비율이 70% 이상으로 나타나 노인 인구에게 가장 부족한 영양소로 나타났습니다. 영양소별 영양섭취부족 노인 비율 영양소별 영양섭취부족 노인 비율 어르신들의 영양불균형의 원인 “연하곤란” 노인의 영양 불량의 원인은 노화가 진행되면서 신체적, 생리적 기능이 저하되기 때문인데, 미각, 후각 기능 감퇴, 소화 흡수능력 저하, 치아상태 불량, 경제적인 어려움과 노년기 우울증, 약물 복용으로 인한 식욕 저하 등 복합적인 요인이 작용하고 있습니다.   특히, 60세 이상 인구에서 10명 중 3명 이상이 겪고 있는 연하곤란(삼킴 장애, 연하장애)은 음식물을 삼키는데 장애를 느끼는 증상으로, 노인 영양 결핍의 주요한 원인이 되고 있습니다. 연령별 저작불편 호소율 연령별 저작불편 호소율 하루에 한 끼만이라도 해결하고 싶습니다. 버드내노인복지관의 재가복지서비스를 받고 계시는 신*철 어르신은 당뇨를 앓고 있어, 규칙적인 식사와 영양소를 골고루 섭취하는 것이 매우 중요하지만, 연하곤란으로 인해 집에서 홀로 하는 식사에서 영양소를 골고루 챙겨 먹기는 어려움이 많습니다.   \"혼자 먹으면서 그걸 어떻게 하나하나 다 챙겨 먹겠어, 월세에 병원비 만으로도 빠듯해...\" 연하곤란으로 만성 영양불균형인 어르신들에게 건강한 선식을 지원해주세요 결식 우려의 저소득 어르신 35명에게 영양 가득한 선식 지원을 통해 따뜻한 봄과 활기 있는 여름을 지내실 수 있게 도와주세요.   여러분의 후원으로 마련된 선식을 35명의 생활지원사 선생님들이 선식과 함께 어르신 가정에 직접 방문하여 질병 관리 교육과 영양 정보를 함께 제공해드리고자 합니다.   버드내노인복지관의 저소득 어르신 가정에 여러분의 따뜻한 관심과 사랑을 전해주세요. 여러분의 소중한 참여가 어르신의 삶을 변화시킬 수 있습니다. 버드내와 함께 해주세요.",
+    "organizationName" : "버드내노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/hop3s/btruYTRyBRY/0t4bDkkFHKnHbj6vqu2or0/c360.jpg",
+    "dueDate" : "2022-06-11",
+    "startDate" : "2022-03-11",
+    "targetPrice" : 3000000,
+    "statusPrice" : 247100,
+    "percent" : 9,
+    "isHeart" : false
+  }, {
+    "id" : "93990",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/93990",
+    "title" : "위기 노인의 내일을 살게할 힘!",
+    "category" : [ "어르신" ],
+    "tags" : [ "건강한삶", "실버세대", "행복한노후", "심리상담", "독거노인" ],
+    "body" : "우리나라의 독거노인, 얼마나 될까요? 한국은 지난 2000년 고령화 사회에 들어선 후 2018년 고령인구 비중이 14%를 넘기며 고령사회에 진입하였습니다. 그 후 7년 만인 2025년에 초고령 사회가 될 것으로 예측되어 고령화 속도가 매우 빠르다고 할 수 있습니다.   본 기관이 위치한 대구광역시 동구의 60세 이상 노인 인구는 전체 332,100명 중 96,248명(29%)으로 나타났으며 전년도 대비 2.3% 증가하여 인구의 고령화가 가속과 더불어 독거노인의 수도 증가할 것으로 예상되고 있습니다. 독거노인이 직면한 다양한 어려움 현대사회에서 독거노인이 혼자 생활하는 이유는 다양하며 독거노인이 직면한 어려움 또한 경제적·정서적·사회적 등 다양하게 나타납니다.   특히 독거노인은 스트레스, 우울·불안 등 다양한 심리·정서적 어려움을 겪고 있지만 연령별 스트레스 해소 방법을 살펴보면 60세 이상의 응답자들이 해소 방법 없음에 16% 이상, TV 등 휴식에 51.2% 이상 응답함에 따라 노인들은 다양한 스트레스 상황에 직면하게 되지만, 마땅히 해소할 통로가 마련되어있지 않아 어려움을 겪고 있음을 알 수 있습니다. 2020년 대구 사회지표 보고서 2020년 대구 사회지표 보고서 노인자살의 심각성 노인의 심리·정서적 문제를 방치하게 되면 노인 우울증, 노인 자살 등의 위기상황을 야기할 수 있습니다. 연령대별 자살 현황을 살펴보면 80세 이상(67.4%), 70대(46.2%), 60대(33.7%) 순으로 높은 자살률 보여 노인의 자살의 심각성을 확인할 수 있습니다.   자살 동기로는 61세 이상 남성 노인은 육체적 어려움, 여성 노인은 정신적 어려움이 많으며 지역별 연령표준화 자살률을 살펴보면 대구광역시가 전국에서 네 번째로 높은 자살률을 보이고 있습니다.   '코로나 때문에 더 우울해지는 것 같아요, 얼마 남지 않은 생.. 마음을 편하게 가지고 싶은데 방법이 없다 방법이... 선생님 뭐라도 좀 하게 해 줘요. 꼭 연락 주세요'   본 기관 이용자 중 우울증 약을 복용하고 있는 86세의 어르신은 담당자에게 우울감을 호소하며 살아갈 방법을 찾고자 합니다. 위기노인을 위한 심리·정서지원 프로그램에 함께해주세요 본 기관에서는 심리·정서적으로 취약한 독거노인 및 자살위험군 어르신들의 노년기 안정된 삶을 영위할 수 있도록 맞춤형 전문 상담 및 프로그램을 지원해나가고자 합니다.  여러분들의 관심으로 지역 내 다양한 심리·정서적 어려움을 겪고 있는 독거 어르신들이 내일을 기대하며, 살아가실 수 있는 원동력을 얻을 수 있습니다. 내일을 살게 할 힘! 작은 나눔으로 만드는 큰 행복! 함께해주세요.",
+    "organizationName" : "팔공노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/PU7xP/btrtCoLXmJG/X6O23oOKWQlWOVqxpz0vP0/c360.jpg",
+    "dueDate" : "2022-05-18",
+    "startDate" : "2022-02-18",
+    "targetPrice" : 3900000,
+    "statusPrice" : 945600,
+    "percent" : 25,
+    "isHeart" : false
+  }, {
+    "id" : "93536",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/93536",
+    "title" : "든든한 밑반찬으로 어르신의 삶에 원동력을 선물해주세요!",
+    "category" : [ "어르신" ],
+    "tags" : [ "건강한삶", "실버세대", "식사지원", "건강한식생활", "독거노인" ],
+    "body" : "균형 잡힌 식사가 가장 어려운 1인가구 어르신 2021년 통계청의 ‘2021 고령자통계’에 따르면 우리나라 65세 노인 인구는 전체 인구의 16.5%(853만 7천 명)로 노인 인구는 지속해서 증가하고 있으나 이와 대조적으로 도시화에 따른 산업구조의 변화, 전통적인 가족 기능의 약화 등으로 노인 단독가구(노인부부 및 독거노인)가 보편화되고 있는 상황입니다.  이러한 상황 속에서 여성가족부 「가족실태조사」 결과에 따르면, 혼자 살고 있는 어르신들의 어려움 중 가장 높은 어려움으로 무려 42.4%가 “균형 잡힌 식사를 하기 어렵다”로 응답하였습니다. 이와 같은 수치를 통해 노인복지영역에서 식사 지원 서비스는 꼭 필요한 사업임을 알 수 있습니다. 균형 잡힌 밑반찬(고기, 야채 등)과 제철과일 구성 식사 환경이 열악한 1인가구 어르신 댁 1 / 2 이전 다음 이에 따라 군포시노인복지관에서도 어르신의 결식예방과 지역사회 안전망 형성을 위해 밑반찬 지원 서비스를 진행하고 있습니다.   군포시노인복지관에서 밑반찬을 받고 계시는 어르신들의 평균연령은 80대이며, 대부분 1인 가구로 코로나19 상황으로 인해 식사의 어려움뿐만 아니라 우울증과 소외감, 고독감, 불안감이 느껴지는 고립된 생활이 장기화 되고 있는 상황에 처한 어르신들께 작년 한 해 동안 총 1,116회 밑반찬을 지원하여 다양한 영양소 제공을 통한 결식예방을 할 수 있었습니다. “밑반찬과 함께 나를 찾아준다는 그 따듯한 마음이 참 좋아” 윤태(가명) 어르신은 매번 봉사 오는 분들을 위해 감사의 마음을 표현하고 싶다며 매일 아침 박카스를 하나씩 준비해놓고는 합니다. 이렇게 어르신들에게 밑반찬은 영양 측면에서 균형 잡힌 삶을 살아갈 수 있게 하는 힘도 되지만, 그들을 위로하고 지지하여 시설에 가지 않고 지역사회에서 스스로 살아갈 수 있는 원동력 될 수 있게 합니다.  남덕(가명) 어르신은 군포시노인복지관에서 밑반찬을 받는 대상자입니다. 처음에는 남덕 어르신께 복지관 직원이 밑반찬을 배달해드렸습니다. 혼자 살고 계신 남덕 어르신께 직원이 직접 밑반찬을 가져다드리며 안부 확인과 함께 대화를 하며 지속적인 정서 지지를 해나갔고, 시간이 흘러 남덕 어르신께서는 직접 복지관에 오셔서 밑반찬을 수령하고 인사 나누고 싶다는 말씀을 해주셨습니다. 1인가구 어르신댁 가가호호 방문 전달 1인가구 어르신댁 가가호호 방문 전달 이렇게 해서 남덕 어르신은 집 밖으로 나와 산책도 하며 복지관에 와서 밑반찬을 가져가셨습니다. 그 이후 또 한 번의 결심이 선 어르신께서는 “이젠 제 밑반찬을 가지러 오는 것과 함께 밑반찬을 직접 받으러 오지 못하는 거동력이 약한 이웃에게 전달 봉사를 하고 싶어요. 밑반찬을 받으면서 살아갈 힘을 얻었어요. 내가 경제적으로는 도움 주기 어려워도 내 두 다리, 기억력이 괜찮은 지금 내 주변 사람들에게 마음을 나누고 싶어요.”라고 말씀해주셨습니다.  어르신들께 밑반찬은 그저 단순한 식사가 아닌 살아갈 수 있는 원동력이며, 나눌 힘을 만들어주는 원동력입니다. 밑반찬을 받는 어르신들은 밑반찬을 전달하는 사회복지사, 자원봉사자들과 눈을 마주치고 밑반찬을 건네받는 순간만으로도 한 주를 살아갈 힘을 얻고, 더 나아가고자 하는 원동력을 얻습니다.  2022년도에도 22명의 어르신들에게 1주일에 한 번씩 1인 1만 원 상당으로 건강한 밑반찬과 제철 과일 지원을 통해 결식예방과 함께 안부 확인을 진행하고자 합니다. 여러분들의 따뜻한 마음이 남덕 어르신처럼 더 많은 지역사회 어르신들에게 닿아 한 주를 살아갈 수 있는 든든한 원동력이 될 수 있도록 하겠습니다.",
+    "organizationName" : "군포시노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/cdBnIg/btrqBd7rP9c/3Py0F5WfebsC3BcFK5cwVK/c360.jpg",
+    "dueDate" : "2022-04-20",
+    "startDate" : "2022-01-20",
+    "targetPrice" : 9460000,
+    "statusPrice" : 3854800,
+    "percent" : 41,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183160",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183160",
+    "title" : "치매어르신의 보람찬 오늘을 치매프로그램으로 채워주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "의료", "어르신" ],
+    "body" : "각자의 추억과 기억 속에서 저마다 다른 생각으로 하루를 보내고 있는 치매 어르신센터를 이용하시는 치매 어르신들의 하루는 각자 다른 생각으로 보람차게 흘러갑니다. 미술치료 프로그램이 진행되는 날이면 치매 어르신들은 추억과 기억 속에서 저마다 다른 생각을 하며 공예 수업에 참여합니다. “손거울 예쁘게 만들어서 오늘 우리 손녀에게 갖다 줄 거야! 예쁘다고 좋아하겠지?”, “나는 손거울을 만드는 일을 하고 있어! 열심히 만들 거야!”, “나는 나만의 방법으로 좀 다르게 예쁘게 만들어 볼래!” 가족과 함께했던 소중한 추억을 떠올리는 김*자(82세) 어르신도, 열심히 일해왔었던 과거의 기억을 생각하고 계신 권*순(98세) 어르신도, 젊었을 적 만들기 취미활동을 좋아했던 김*순(73세) 어르신도 각자의 생각 속에서 재미있게 프로그램에 참여하며 보람찬 하루를 보내고 계십니다.서서히 줄어드는 기억력과 스스로 할 수 있었던 것들을 점차 할 수 없게 되는 치매중앙치매센터에서 발간한 “대한민국 치매현황 2020”에 따르면 2019년 65세 이상 치매 상병자 수는 864,805명이며, 65세 이상 노인 인구 수 대비 치매 노인 인구 수의 비율은 11.2%로 계속해서 증가하고 있습니다. 치매를 앓고 있는 시간이 지속 될수록 어르신들의 기억력은 점차 줄어들어 서서히 작년, 지난달, 어제, 오늘, 아침, 바로 전에 있었던 일들을 기억하지 못하게 됩니다. 또한 보행 등의 신체기능이 저하되며, 목욕하기, 옷 갈아입기, 식사하기, 화장실 이용하기 등 일상 생활에서 스스로 할 수 있었던 것들을 점차 할 수 없게 됩니다. 스스로 할 수 있었던 것들이 점점 줄어들면서 어르신들은 슬픔과 우울한 감정을 느끼기도 합니다.치매전문 프로그램을 통해 치매 어르신들께 보람찬 오늘을 선물해주세요!치매 어르신들의 기억력과 신체기능 저하 속도를 늦추기 위해서는 치매전문 프로그램 제공의 노력이 필요합니다. 종이공예, 미술치료 등의 인지기능 유지 및 향상 프로그램을 통해 손가락의 미세한 감각 사용 및 손가락 마디마디 소근육 발달과 더불어 집중력 발휘, 고민하고 생각하는 과정을 통한 뇌 기능을 사용을 도모할 수 있습니다. 또한 치매 어르신들은 점차 일상 생활을 할 수 없어지는 것을 느끼는 우울한 하루가 아니라 누군가를 생각하고, 남아있는 추억과 기억을 통해 새롭고 즐거운 마음으로 프로그램에 참여하며 보람찬 오늘을 보낼 수 있습니다. 해피빈 후원자분들께서 관심과 사랑으로 모금해주신 소중한 모금액으로 치매전문 프로그램을 통해 치매 어르신들께 보람찬 오늘을 선물해주세요!",
+    "organizationName" : "강동구립 해공데이케어센터",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220218_70/164516546080736ySA_JPEG/MicrosoftTeams-image_(7).jpg?type=a360",
+    "dueDate" : "2022-05-19",
+    "startDate" : "2022-02-18",
+    "targetPrice" : 5540000,
+    "statusPrice" : 218300,
+    "percent" : 3,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183369",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183369",
+    "title" : "코로나로 고립된 독거노인의 마음 건강을 지켜주세요.",
+    "category" : [ "어르신" ],
+    "tags" : [ "의료", "어르신" ],
+    "body" : "장기화 되는 코로나로 어르신은 지쳐갑니다. 코로나19에 오미크론 변이까지 더해져 확진자가 하루 13만 명 이상 육박하게 되었고, 면역에 취약한 노인의 일상생활은 많은 제약과 변화를 겪게 되었습니다. 실제로 복지관을 이용하던 김순애(가명,88세) 어르신께서는 집에 있는 시간이 많아지다보니 건강이 악화되는 것 같다며, “전에는 코로나 때문에 집 밖을 안 나갔는데 이제는 집에 있는게 더 고통스러워... 차라리 나가고 싶어”, “집에서 얘기 나눌 사람도 없고 TV만 보니까 바보가 되어가는 것 같아...”며 답답함을 호소하셨습니다. 이처럼 대부분의 어르신들께서는 고립감으로 인한 고통을 호소하고 계신 상황입니다. 코로나로 어르신의 정신건강이 위험합니다.코로나19가 장기화되면서 ‘코로나블루'라는 말이 생겼습니다. 아무래도 많은 사람들이 코로나로 인해 취미 생활과 사적 모임이 제한되면서 우울감이 발생하게 되었는데, 노인도 예외는 아니었습니다. 특히, 노인은 다른 사람들과 달리 코로나19 대응이 어렵다보니 코로나블루 취약 대상이 되었습니다. 감염의 위험 때문에 바깥 활동을 삼가게 되었고, 그로 인해 유일하게 찾아가던 복지관과 경로당을 갈 수 없게 되면서 고독감이 짙어졌기 때문입니다. 실제로, 하당노인복지관의 대다수 독거노인은 종일 집에만 머무르면서 외부와 단절된 생활을 하다 보니, 우울감을 호소하는 분들을 많이 볼 수 있는 상황입니다. 어르신들의 웃음을 되찾아 드리고 싶습니다. 복지관 박경남(가명, 86세) 어르신께서는 “집에만 있으니 나만 혼자인 것 같고, 기운만 자꾸 떨어지는 것 같아...”며 우울감을 호소하였습니다. 더욱 안타까운 것은 복지관에서는 박경남 어르신뿐만 아니라 많은 분들이 무기력한 모습을 보이고 있고, 노인 우울증으로 이어질까 걱정되는 상황입니다. 노인 우울증은 인지 기능을 저하시킬 수 있고 치매까지 이어질 수 있어 더욱 각별한 관심이 필요하지만, 여건이 부족한 탓에 그저 지켜만 보았습니다. 하지만 이제는 갈수록 악화되는 어르신들의 건강을 위해, 본 복지관에서는 코로나의 여파로 정신 건강을 위협받는 어르신을 대상으로 정서지원 및 심리 방역 프로그램을 실시하고자 합니다. 어르신께 건강하고 행복한 노후를 선물해주세요.특히 정서적 지지체계가 부족한 독거노인을 대상으로 실시하고자 하며, 대상자 발굴은 본 복지관에서 관리하는 약 1,200명의 대상자 중에 긴급히 필요한 분들로 하고자 합니다. 장기화되는 코로나19의 여파로 모두가 힘든 상황이지만, 아무런 대응조차 할 수가 없어 더욱 힘들어하는 우리 어르신들을 도와주세요. 이번 해피빈 모금함을 통해 정말 도움이 필요한 분들을 꼭 돕고 싶습니다. 지쳐가는 어르신의 삶 속에 웃음과 희망을 선물할 수 있도록 많은 분께서 함께해 주세요. 관련 콘텐츠하당노인복지관 홈페이지하당노인복지관 페이스북하당노인복지관 인스타그램하당노인복지관 유튜브하당노인복지관 블로그",
+    "organizationName" : "하당노인복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220303_238/1646290714909tdztY_JPEG/%ED%95%B4%ED%94%BC%EB%B9%88_%EC%82%AC%EC%A7%84.JPG?type=a360",
+    "dueDate" : "2022-06-01",
+    "startDate" : "2022-03-03",
+    "targetPrice" : 7300000,
+    "statusPrice" : 177200,
+    "percent" : 2,
+    "isHeart" : false
+  }, {
+    "id" : "94441",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94441",
+    "title" : "어버이날, 텅빈 어르신의 마음을 효드림으로 채워주세요!",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "행복한노후", "남양주시" ],
+    "body" : "푸른 하늘이 보이는 봄날, 어르신의 마음은 점점 어두워지고 있습니다 보통 사람들은 자살률이 겨울에 많다고 생각하지만 추운 겨울이 지나고 봄이 오면 역설적이게도 노인들의 자살률은 높아져 갑니다. 2021년 자살예방 백서에 따르면 오히려 봄인 5월에 가장 높은 자살률이 나타납니다.   또한 노인 자살률은 OECD 국가 중 우리나라 노인 자살률은 OECD 국가 평균 기준보다 2.7배가 높은 46.6%로 세계 최고 수준일 정도로 우리나라의 심각한 사회 문제입니다. 또한 노인실태조사에 따르면 중위소득별로는 중위소득이 낮을수록 우울증상이 높게 나타납니다.   중위소득 대비 50% 미만인 군(17%)은 중위소득 대비 150% 이상인 군(9.6%) 보다 우울증상 비율이 7.4% 포인트 높은 경향을 보이며 소득이 낮은 노인일수록 우울증상이 높게 나타나며 이는 자살로 이어질 수 있습니다.   추운 겨울이 지나 따뜻한 봄이 찾아왔지만 3년째 지속되는 코로나19로 인해 어르신들의 우울감은 해마다 높아져가고 있어 어르신들의 건강이 염려가 됩니다. 홀로 외로히 사는 어르신은 오늘도 외롭고 쓸쓸합니다. 어버이날, 어르신들께 카네이션 한송이 선물하고싶습니다. 1 / 2 이전 다음 따뜻한 봄이 오고 있지만 어르신의 마음 한구석은 여전히 차갑습니다 어르신들이 코로나19로 제일 힘든 것은 외로움이라고 합니다. 복지관에서 밑반찬을 지원받는 한○○ 어르신께서는 박○○ 사회복지사에게 반가운 인사를 하면서 “몇 년째 얘기할 사람이 없어서 너무나 외롭다.. 5분만 잠깐 대화하자.”라며 눈치를 보시면서 말씀을 하셨습니다. 코로나19로 인해 잠깐 만나는 사회복지사와의 짧은 대화마저도 너무나 소중한 시간입니다.   비좁은 반지하방에 홀로 거주하고 있는 안◯◯ 어르신은 지속되는 코로나19로 인해 우울증을 겪게 되어 우울증 약을 복용하고 있습니다. 매월 간신히 생활하던 어르신은 우울증 약으로 인한 추가적인 지출과 치솟는 물가로 인해 마트에서 야채를 사는 것도 고민이 되신다면서 하소연하셨습니다.   코로나19로 인해 어린 손주들을 오랫동안 만나지 못한 정◯◯ 어르신은 “손주들과 함께 오순도순 얘기하고 어버이날 손주 손으로 카네이션 한번 받아보고 싶다.”라며 깊은 한숨을 내쉽니다.   올해도 외로운 설날 명절을 보내신 이◯◯ 어르신은 “올해 봄이 다가와도 너무 외롭고 쓸쓸하다..”라고 말하는 등 코로나19로 집에 홀로 계시는 어르신들은 외로움과 고독으로 힘겹게 살아가고 있습니다. 어르신들의 마음속에 온기 가득한 효드림(Dream)키트와 꽃 한송이를 선물해주세요 어르신을 공경하는 경로효친의 전통적 미덕을 기리는 어버이날에도 집에서 홀로 지내는 어르신들은 지속되는 코로나19로 인해 외부 외출도 하지 못하고 집에 계시는 외로움으로 마음은 쓸쓸해지고 걱정으로 깊은 밤을 보내고 있습니다.   남양주시동부노인복지관은 5월 8일인 어버이날을 맞이하여 어르신들의 마음을 온기로 가득 채워드리기 위해 복지관 홀몸노인 및 노부부 어르신 500분께 “효드림(dream) 키트”를 선물하고자 합니다. 함께 효드림 해주세요.",
+    "organizationName" : "남양주시동부노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/Ox557/btruh6jaxVK/ek9kQl5LFzk9pXrplzONW0/c360.jpg",
+    "dueDate" : "2022-04-03",
+    "startDate" : "2022-03-03",
+    "targetPrice" : 8000000,
+    "statusPrice" : 907500,
+    "percent" : 12,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183153",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183153",
+    "title" : "3년전 돌연사로 떠난 딸,모든 것이 무너져 내렸습니다.",
+    "category" : [ "어르신" ],
+    "tags" : [ "문화예술", "어르신" ],
+    "body" : "갑자기 떠난 딸, 하루에도 수십번 딸 곁으로 가고 싶습니다. 박영자(가명) 어르신은 3년전 돌연사로 딸을 잃었습니다. “왜 죽었는지, 갑자기 나만 두고 떠났는지, 알 수가 없어요. 딸이 떠난 이후로 저도 딸 곁으로 따라가고자 자살기도를 한 적도 있지요. 하루에도 수십번 딸 곁으로 달려가고 싶은 마음뿐입니다. 그럴 때마다 딸이 꿈에 나타나 자살기도는 멈추었지요. 딸이 원하는 것은 이게 아니였나봐요.”라며 눈물을 흘리셨습니다. 한동안 집에서만 생활하는 박영자(가명) 어르신은 “집에 있는데 갑갑하고 힘이 듭니다. 3년 정도 지나니까 누군가와 이야기를 하면 이 답답한 마음이 풀리지 않을까? 라는 생각을 하였습니다. 하지만  밖에 나가면 휑한 바람만 맞다 옵니다.”라며 친구들을 만나고 싶지만, 어디로 가야 하는지, 어떻게 하면 우울감이 나아질 수 있는지 방법조차 알지 못해 고개를 떨구셨습니다. 벽만 바라보다 잠에 들곤 합니다.연락이 되지 않아 즉시 가정에 방문한 담당자는 벽만 바라보며 울고 있는 이미화(가명)어르신을 만났습니다. “어르신, 무슨 일 있으세요?”라는 사회복지사의 질문에 \"아무도 찾아오지 않는 집에 혼자있기 적적하여 티비를 켜놓고 있었습니다. 하루종일 티비만 보니 머리가 아파 누워있었습니다. 누워만 있으니 속이 좋지 않아 멍하니 앉아 기도를 하지요. 365일 이런 나날이 반복되면 죽고 싶다는 생각 뿐입니다. 근데 혼자 눈을 감는 것 조차도 남에게 피해를 되지는 않을까' 하는 불안감과 죄스러움에 잠 조차 이루지 못하고 계십니다.OECD 국가 중 자살율 1위, 중랑구 서울시 자살율 2위우리나라 자살율은 OECD 국가 중 1위이며, 중랑구 자살율은 금천구 1위에 이어 2위(2019년말 기준, 중앙자살예방센터)로 높다는 사실을 알 수 있습니다. 이러한 근거로 노년기의 여러 질환 중에서도 노년기 자살과 우울 완화를 위한 우울예방 전문 프로그램이 필요한 상황입니다.   이에 시립중랑노인복지관은 중랑구 저소득 독거 어르신을 대상으로 2013년부터 우울예방프로그램 '내 마음의 두(Do)드림(Dream)'을 진행하고 있습니다. 또한 2020년부터 코로나19가 발생으로 코로나 블루에 빠진 어르신이 증가하는 상황에 놓여져 있습니다. 이와 관련하여 2022년에는 ‘신체 건강’과 ‘우울예방’ 2가지에 집중하여 우울예방 전문 프로그램을 진행함으로서 건강한 신체를 유지하고 행복한 노후 생활을 보낼 수 있도록 하고자 합니다.행복한 미소로 집에 돌아가실 수 있도록 희망합니다.지속적으로 노인 인구가 증가함에 따라 이들이 건강하고 질 높은 삶을 영위할 수 있도록 지원하는 것이 중요한 복지문제로 대두되고 있습니다. 우울은 노년기에 자주 발생하는 만성 정신질환 중 하나로, 2020년 노인실태조사에 따르면 노인 5명 중 1명이 우울 증상이 있는 것으로 나타났습니다. 노인의 우울은 슬픔, 공허와 같은 정서적 증상, 사고력, 기억력과 판단력의 저하와 같은 이지적 증상, 말과 행동의 느림, 무기력, 피로감, 급격한 체중 변화, 수면의 어려움과 같은 행동적 증상을 동반하고 만성질환 및 신체 기능상실의 초래하며 자살의 위험을 높이는 요인으로 보고되고 있습니다.  더 이상은 우울증에 파묻혀진 어르신들을 지켜볼 수만은 없습니다. 해피빈 후원자님들의 관심과 사랑으로 독거 어르신 한 분 한 분의 손을 잡아주세요. 우리 이웃들이 아픔을 겪지 않는 사회, 소외된 이웃이 없는 세상을 만들기 위해 해피빈 후원자님들의 따뜻한 관심과 사랑을 부탁드립니다.관련 콘텐츠시립중랑노인종합복지관 홈페이지",
+    "organizationName" : "시립중랑노인종합복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220225_283/16457759427069bkHk_JPEG/%ED%98%BC%EC%9E%90_%EC%9E%88%EB%8A%94_%EC%96%B4%EB%A5%B4%EC%8B%A0.jpg?type=a360",
+    "dueDate" : "2022-03-31",
+    "startDate" : "2022-02-18",
+    "targetPrice" : 3000000,
+    "statusPrice" : 33500,
+    "percent" : 1,
+    "isHeart" : false
+  }, {
+    "id" : "93678",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/93678",
+    "title" : "독거 어르신들에게 희미해진 어버이날을 찾아주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "독거노인", "행복한노후", "동두천시" ],
+    "body" : "갈 곳 없는 어버이의 현실 젊은 시절 자식을 키우면서 손꼽아 기다리는 그 날, 바로 어버이날. 고사리손으로 접은 카네이션을 아침 일찍 일어나 “엄마 아빠 키워주셔서 감사합니다. 앞으로 커서 효도할게요. 사랑해요.”라며 달아주던 그 날을 잊지 못합니다. 눈시울을 적시던 그날이지만, 그런 자식들이 지금은 어디서 무얼 하는지 생사조차 알 수 없는 독거 어르신들이 있습니다.   매년 돌아오는 5월 8일 어버이날, 우리 독거 어르신들에게는 그저 어제와 오늘, 그리고 내일처럼 다를 것 없이 똑같이 홀로 외롭게 흘러가는 의미 없는 하루입니다. 동두천시 노인 인구 19,325명 중 독거노인 인구는 5,659명으로 노인 인구에 29.2% 차지하고 있습니다.   대부분 어르신은 교류하는 가족, 친인척이 없어 복지관 직원들을 자식처럼 생각하며 남은 일생을 보내고 계십니다. 설상가상으로 이번 어버이날은 일요일(복지관 휴관일)로 독거 어르신들에게는 아무데도 갈 곳이 없어 더 외로운 하루입니다. 가정의 달, 더욱 외로운 독거 어르신의 삶 강OO 어르신(85세)은 6.25 전쟁 때, 가족들과 뿔뿔이 헤어지시고 이곳(남한)에서 홀로 외롭게 남은 생을 보내고 계십니다. 어르신은 가족의 생사라도 알고 싶다며 상담할 때마다 눈물을 흘리십니다.  해마다 어르신에게 어버이날은 꿈속에서나 가족들과 함께하는 기념일입니다. 자녀들에게 좋은 부모가 되어주지 못했다는 자책감에 “나한테 어버이 은혜는 사치야. 나 같은 사람도 부모라고 무슨 염치가 있겠어..” 라며 어제와 다를 것 없는 하루라고 하십니다.  변OO 어르신(79세)은 자녀의 경제적 어려움으로 어린 손자를 키우며 살아오셨습니다. 손자가 커 갈수록 지출 비중이 커지면서 어르신은 생활고에 시달리셨습니다. 그런 상황에서도 손자는 지속해서 돈을 요구했고, 더는 돈을 줄 수 없다는 말에 집에 불을 내고 도망가 지금 어디서 살고 있는지조차 모릅니다. 그렇게 어르신은 집도, 남은 가족도 모든 걸 잃었습니다. 그래도 어르신은 그런 손주가 언제 찾아올지 모른다며 명절, 어버이날이면 집 앞을 서성이십니다. “내가 그때 돈을 빌려서라도 손주한테 줬더라면 나를 떠나지 않았을텐데… 그때는 미워도 가족이 있었는데… 지금은 아무도 없네…” 라며 원망하기보다는 그때 손주를 지켜주지 못했다는 미안함을 느끼며 노년을 보내십니다.  박OO 어르신(77세)은 복지관 직원들과 함께 출근해서 함께 퇴근하십니다. 어르신은 금요일이면 “복지관이 우리 집인데.. 왜 닫는거야.. 난 주말이 제일 싫어. 김 선생은 주말이 제일 좋지?”라며 축 처진 모습을 보이십니다. 담당자는 주말이면 가족 또는 사랑하는 사람과 함께할 수 있어 행복하고 짧은 휴일이지만, 어르신에게는 대화할 상대가 없어, 종일 멍하니 창문만 바라보는 길고 긴 생활입니다. 당신에 나눔에 살아갈 의미를 찾습니다 그간 지역 내에 후원업체의 지원을 받아 어르신들께 카네이션, 생필품 등 나눔을 드릴 수 있었으나, 코로나19 상황 악화로 인해 지원이 중단되면서 독거 어르신들의 어버이날은 한없이 외로운 날이 되었습니다.  이번 어버이날은 일요일(복지관 휴관일)로 독거 어르신들은 끼니를 거르시지 않을까 걱정도 많습니다. 이번 후원을 통하여 독거 어르신들께 어버이날을 기념하여 따뜻한 밥상과 카네이션을 전달하여 이 세상 누구보다 행복한 어버이날을 선물하고 싶습니다. 여러분의 따뜻한 손길로 얼어붙은 독거 어르신들의 마음을 녹일 수 있도록 도와주세요",
+    "organizationName" : "동두천시노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/bh97Yq/btrrfmXruU6/ulQX0ENsvADip6NvYsWru0/c360.jpg",
+    "dueDate" : "2022-03-27",
+    "startDate" : "2022-01-27",
+    "targetPrice" : 3100000,
+    "statusPrice" : 2306500,
+    "percent" : 75,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183535",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183535",
+    "title" : "기저귀가 필요하지만 살 수 없는 어르신들을 도와주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "의료", "어르신" ],
+    "body" : "어르신들에게 가장 필요한 것은 기저귀입니다고령화 사회에 들어서면서 어르신들에게 필요한 것들이 많이 생겨났습니다. 그 중에 하나가 성인용기저귀입니다. 처음 성인용 기저귀를 위한 모금함을 만든 계기가 된 것이 정부 지원 없이 운영하고 있는 요양원에 보내기 위해서였습니다. 그런데 주위에 어려운 소외 계층에 어르신들이 비싼 기저귀 값을 감당하지 못하고 있다는 소식을 접하게 되었습니다. 그동안 지속적으로 30명이 넘는 어르신들에게 성인용 기저귀를 보내드렸습니다. 얼마 전, 아직도 기저귀를 받고자 하시는 분들이 많다는 소식을 듣고 모금함을 만들게 되었습니다.혼자 사시는 어르신들이 점점 늘어나고 있습니다우리나라 농촌에서 70세 이상 인구 비중은 73만 명으로 30 퍼센트을 넘어섰습니다. 100세 시대에 들면서 앞으로 고령화 사회는 심각해질 것으로 보입니다. 통계청에 따르면 '2015년 고령자 통계'에 2015년 65세 이상 인구는 전체 인구의 13.1퍼센트로 662만 4000명이라고 합니다. 실제 노인 실태 조사 결과 전체 노인의 89.5%가 만성질환을 앓고 있고 3개 이상의 만성 질환을 지닌 노인이 절반을 넘어서는 상황입니다. 시골에는 젊은 사람들은 도시로 떠나고 어르신들만 고향을 지키며 살아가시는 곳이 많이 있습니다. 사람의 관심이 닿지 않는 곳에 혼자서 힘들게 사시는 어르신들에게 가장 고통스러운 것은 병든 것이고 병든 몸에 필요한 기저귀도 살 형편이 되지 않는다는 것입니다.여러분들의 사랑과 후원으로 어르신들을 돕기 원합니다.아픈 것도 힘들지만 필요한 기저귀 조차 살 수 없는 현실에 어르신들은 더 절망할 수 밖에 없습니다. 여러분의 사랑과 후원으로 누워 계시는 어르신들에게 조금이라도 도움을 드리고 싶습니다.",
+    "organizationName" : "글로컬다문화복지협회",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220313_44/1647119405581To2dt_JPEG/%EC%84%B1%EC%9D%B8%EC%9A%A9_%EA%B8%B0%EC%A0%80%EA%B7%80.jpg?type=a360",
+    "dueDate" : "2022-06-11",
+    "startDate" : "2022-03-13",
+    "targetPrice" : 5000000,
+    "statusPrice" : 900,
+    "percent" : 1,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183235",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183235",
+    "title" : "특별한 수업, 어르신들이 치매에 걸리지 않게 도와주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "교육지원", "어르신" ],
+    "body" : "사회적 단절은 기억도 멀어지게 합니다.복지관이 장기 휴관하게 되면서 집에서 홀로 계시는 시간이 많아졌다는 어르신들. “하루 종일 집에서 멍하게 있으니까, 생각도 잘 안 나고 바보가 된 것 같아….”“복지관이 열었으면 사람들이랑 밥도 먹고 이야기도 할 텐데 너무 심심해.”매일 아침이면 부지런히 준비하고 복지관에 나오시던 어르신들의 일상은 하루아침에 바뀌었습니다. 적적함을 달래려 시끄럽게 TV를 틀어보지만 외로움과 답답함만 늘어납니다.어르신들이 가장 두려워하는 질병 “치매”어르신들이 가장 두려워하는 질병은 무엇일까요? 어르신들이 공통적으로 꼽는 것이 바로 치매입니다.‘암보다 무섭다’, ‘죽음보다 치매가 두렵다.’ 치매는 당사자뿐만 아니라 사랑하는 가족과 주변사람들까지 힘들게 하기 때문입니다. 중앙치매센터 자료에 따르면 우리나라 65세 이상 노인 10명중 1명은 치매 증상을 겪고 있다고 합니다. 치매는 이미 우리의 생각보다 가까이, 생활 속 깊숙이 스며들어 있습니다. 특히 최근에는 장기화된 코로나 확산까지 더해져 대인관계의 어려움, 고립 등으로 인한 우울감 증가로 인하여 치매의 위험성이 더욱 높아졌습니다.치매, 예방할 수 있습니다.누구나 피하고 싶고 두려운 치매...하지만 안타깝게도 아직까지 치매를 완치할 수 있는 방법은 없습니다.그래서 무엇보다 예방이 중요합니다. 경도인지장애 단계부터 관련증상을 조기 발견하고 인지능력 훈련과 적절한 치료를 병행하면 치매 유병률을 80%까지 낮출 수 있다고 합니다.통합치매예방프로그램 “두뇌톡톡교실”저희 꽃밭정이노인복지관에서는 고령의 어르신을 대상으로 교재를 활용한 인지훈련, 치매예방 운동, 음식 만들기 활동, 걷기 캠페인 등을 통해 효과적으로 치매를 예방할 뿐 아니라 우울감을 감소시키고 사회참여도를 높일 수 있는 통합적이고 체계적인 두뇌톡톡 치매예방교실을 운영하고자 합니다.어르신들이 홀로 치매 및 질병에 대한 두려움 없이 활기찬 노후를 보낼 수 있도록 후원자 여러분들의 많은 관심과 사랑 부탁드립니다.",
+    "organizationName" : "꽃밭정이노인복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220224_249/16456692406016vyE1_JPEG/%ED%95%B4%ED%94%BC%EB%B9%881.jpg?type=a360",
+    "dueDate" : "2022-03-31",
+    "startDate" : "2022-02-24",
+    "targetPrice" : 2400000,
+    "statusPrice" : 745600,
+    "percent" : 31,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182272",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182272",
+    "title" : "코로나속에서도 마음놓고 센터를 이용할 수 있게 해주세요",
+    "category" : [ "장애인" ],
+    "tags" : [ "의료", "장애인" ],
+    "body" : "코로나19, 조심스러워진 우리의 일상, 불안한 환경 하루 7,000명의 확진자가 발생하는 코로나19는 발병 이후 우리의 일상을 완전히 바꿔놓았습니다. 이러한 일상의 변화는 주간보호센터를 이용 중인 성인중증발달장애인들에게도 예외는 아니었는데요, 혹여나 코로나에 감염될까 평소 좋아하는 산책 활동과 외부활동 모두 자제한 채 오로지 주간보호센터와 집만이 일상의 전부가 되어버린 것입니다. 물론 코로나의 감염 우려를 생각한다면 주간보호센터 이용도 조심해야 하는 게 맞습니다. 하지만 이용인 부모님의 대부분이 맞벌이거나 낮 시간 동안 함께하기 어려운 상황이며, 기능적 퇴화가 빠르게 지속되고있는 성인중증발달장애인의 특성상 꾸준한 활동과 인지훈련이 반드시 필요하기에 불안해도 어쩔 수 없이 센터 이용을 해야만 하는 상황입니다.이제는 좀 더 안전한 환경이 필요합니다.코로나로 인한 불안감 속에서도 선택의 여지없이 주간보호센터로 등원하고 있는 성인중증발달장애인들을 위해 희망아카데미장애인주간보호센터는 방역수칙 준수와 거리 두기를 적극 실천하고 있습니다. 그러나 이러한 노력만으로 많은 이용인들이 함께 맘 놓고 이용하기에는 여전히 불안할 수 밖에 없습니다. 처음엔 노인 일자리 사업으로 전문적인 방역 소독을 지원받았었으나, 거리두기 단계 격상에 따라 파견이 반복적으로 중단되고 결국 자체적으로 소독과 방역을 하게 되었습니다. 하지만 현재 보유하고 있는 방역용품만으로 철저히 관리하기에는 어려움이 있었기에 이번 해피빈 모금함을 통해 보다 전문적이고 체계적으로 관리가 가능한 출입자 관리, 체온체크, 방역용품 기기를 구입하여 성인중증발달장애인들이 마음 놓고 주간보호센터를 이용할 수 있도록 안전한 환경을 제공하고자 합니다.안전한 환경을 만들기 위해서는 많은 분들의 관심이 필요합니다.코로나19 위기 속 후원자님들의 따뜻한 나눔 동참은 제한된 일상을 살아가고 있는 성인중증발달장애인들에게 큰 위로와 격려가 됩니다. 또한 이번 모금함을 통해 이용인들이 주간보호센터를 이용하는 낮 시간만큼은 코로나 걱정없이 안전하고 마음 편히 시간을 보낼 수 있도록 후원자님들의 도움이 꼭 필요합니다. 성인중증발달장애인들을 위한 나눔에 동참해주세요 !",
+    "organizationName" : "희망터장애인사회적협동조합",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20211220_119/1639973642168aAzQV_JPEG/KakaoTalk_20211112_172304800_23.jpg?type=a360",
+    "dueDate" : "2022-03-20",
+    "startDate" : "2021-12-20",
+    "targetPrice" : 2787000,
+    "statusPrice" : 211700,
+    "percent" : 7,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182966",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182966",
+    "title" : "어르신들이 코로나를 이기실 수 있도록 도와주세요",
+    "category" : [ "어르신" ],
+    "tags" : [ "생계 및 기초생활지원", "어르신" ],
+    "body" : "먹을 것이 없으신 어르신들에게 도움이 필요합니다.3년 전부터 식료품이 필요한 가정의 어르신들이 많이 있다는 소식을 듣고 10만어치의 식료품(각 가정마다 가장 필요한 것의 목록을 받아서)을 지원해드리고 있습니다. 국가에서 지원을 받으시는 분들도 있지만 자녀가 있어서 차상위나 영세민에 들어가지 못해 어렵게 살아가시는 어르신들이 있습니다. 매달 이분들에게 먹을 수 있으신 것만이라도 지원해드리고 싶다는 생각에 모금함을 만들었습니다.코로나바이러스에 회관도 문이 닫혀있어 하루 식사도 버거운 어르신들에게 도움이 필요하다는 연락을 받았습니다.도와주시면 더 많은 분들에게 식료품을 전달하겠습니다.한국 사회 전체 인구의 15%인 700만 명이 빈곤층이라고 합니다.IMF 이후 지속되는 중산층 붕괴와 핵가족화,가정 해체 속에 자식이 부모를 모시는 전통적인 효도관이 급속히 허물어지고 있습니다. 통계청이 발표한 ‘2003년 고령자 통계’에 따르면 65세 이상 인구중 자식이 없거나 자식과 떨어져 혼자 사는 독거 노인의 비율은 1990년 100명당 9명꼴이었으나 10년이 지난 2000년에는 100명당 16명꼴로 배 가까이 늘었습니다. 현재의 연금 제도나 사회복지제도 아래에서는 노인들이 최소한의 빈곤도 해결하기 어려운 사각지대에 놓일 수밖에 없는 상황이라고 합니다. 2001년 65세 이상 고령인구 중 기초생활 보장 수급률은 9.3%에 불과하며 2002년 말 국민 연금 등 공적 연금을 받는 수급자도 10%에 불과해 노인 10명 중 1명만이 제도적 도움을 받고 있는 형편입니다.도움이 필요한 분들을 위해 사랑의 후원이 필요합니다.코로나바이러스가 종식이 되어 어르신들이 회관에서 식사도 하시고 친구분들도 만나는 날이 빨리 왔으면 좋겠습니다. 한 달에 한번 10만원어치의 식료품이지만 어려운 어르신들에게 많은 도움이 되리라 생각합니다. 여러분의 사랑의 후원으로 지원이 멈추지 않도록 도와주세요.지원할 가정마다 필요한 것이 달라서 담당자와 의논하여 가장 기본적인 식료품(라면, 떡국, 참치캔, 누룽지, 화장지, 즉석 미역국, 간장, 콩기름 등)을 사서 보내드릴 것입니다.",
+    "organizationName" : "글로컬다문화복지협회",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220206_270/1644098117305g9hfn_JPEG/%EC%88%98%EC%A0%95%EB%90%A8_%EC%8B%9D%EB%A3%8C%ED%92%88%EC%A7%80%EC%9B%90_3.jpg?type=a360",
+    "dueDate" : "2022-05-07",
+    "startDate" : "2022-02-06",
+    "targetPrice" : 6000000,
+    "statusPrice" : 43400,
+    "percent" : 1,
+    "isHeart" : false
+  }, {
+    "id" : "93777",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/93777",
+    "title" : "영양 가득 사랑 듬뿍! 갈비탕은 사랑을 싣고",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "식사지원", "대구시" ],
+    "body" : "또다시 매서운 겨울이 왔어요 선생님... 그래도 언제나 그랬듯 따뜻한 봄이 오겠죠?  선생님...  제 남은 인생에도 봄날이 올 수 있을까요?  추운 겨울 몇 장 남지 않은 연탄을 세며 한숨을 푹 내쉽니다. “매년 감사하게도 연탄을 지원받고 있지만, 올해는 절반밖에 들어오지 않았어.. 아직 겨울은 한참 남았는데 걱정이야” “하루에 7-8장을 쓰는데 있는 걸로는 한 달도 못써...” 김ㅇㅇ 어르신은 꺼져가는 연탄을 보며 “내 인생과 같아.. 희망이 없어... ”라는 말씀을 하십니다. 추운 날씨에 벗어둔 옷이 얼어버렸습니다. 어르신의 연탄창고 1 / 3 이전 다음 요즘 세상에 굶어 죽는 사람이 어디있어? 저희 기관 이용대상자는 모두 저소득 어르신으로 신체적, 경제적, 정신적으로 어려움을 겪고 있습니다. 제대로 된 조리도구 하나가 없어서 기관에서 지원되는 도시락으로 3끼를 나눠 먹습니다.   \"요즘 세상에 굶어 죽는 사람이 어디있어?\"  무심코 흘리는 사람들의 말에 어르신 마음의 상처는 깊어져만 갑니다. 조리 환경이 열악한 어르신의 주방 1 / 3 이전 다음 남성 1일 단백질 섭취 권장량 50g, 여성 1일 단백질 섭취 권장량 45g 노인은 영양 섭취를 제대로 하지 않으면 단백질 부족으로 인한 근육량 감소, 면역 기능 저하가 나타날 뿐 아니라, 폐렴 등 각종 감염 질환과 대사질환 위험이 증가합니다. 특히나 노인 그룹에서 부족한 영양소는 지방, 단백질, 칼슘, 비타민A입니다.  “대부분의 어르신은 사골국물로 단백질을 보충하려는 경우가 많은데 영양 분석을 해보면 사골에서 나오는 단백질의 양은 많지 않습니다. 더구나 이런 식단은 반찬 구성이 단조로워 단백질뿐만 아니라 비타민, 미네랄 부족도 불러올 수 있습니다\" 갈비탕에는 단백질 27.4g 외에도 비타민, 칼륨, 칼슘 등 영양성분이 가득 들어 있는 영양식입니다. 그렇기에 선한이웃재가노인돌봄센터에서는 어르신께 따끈한 갈비탕 한그릇으로 필수 영양소와 함께 따뜻한 사랑을 채워드리고자 합니다. 작지만 큰 사랑의 실천, 많은 분들이 동참해주시면 감사하겠습니다",
+    "organizationName" : "선한이웃 재가노인돌봄센터",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/w179c/btrrotIzo6q/9aFn6eLLwPDbfOa4LGjtAK/c360.jpg",
+    "dueDate" : "2022-04-11",
+    "startDate" : "2022-02-11",
+    "targetPrice" : 2131500,
+    "statusPrice" : 1719800,
+    "percent" : 81,
+    "isHeart" : false
+  }, {
+    "id" : "94022",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94022",
+    "title" : "건강한 치아로 행복을 맛볼 수 있게 도와주세요!",
+    "category" : [ "어려운이웃" ],
+    "tags" : [ "건강한삶", "어려운이웃", "의료비지원" ],
+    "body" : "기초생활수급 청년에게는 여전히 부담되는 치과 치료비 이정우(가명)씨는 코로나19 장기화로 일을 하고 싶어도 일을 구하기 쉽지 않은 상황이 지속되다 보니 저희 복지관으로 작년 12월 도움을 요청했습니다. 정우 씨는 미혼모에게 태어나자마자 입양되어 자랐고 21살 때 양아버지와 양어머니의 이혼 후로 연락이 끊겼고 친모도 찾지 못했다고 합니다.   20대부터 홀로 생계를 위해 일하던 중 2019년 배달 아르바이트를 하다 오토바이 사고로 다리를 크게 다쳐 재활 치료를 하느라 생계가 더욱 어려워졌습니다. 처음 만났을 당시 정우 씨는 어린 시절 적절한 돌봄과 치료를 받지 못해 치과 치료 시기를 놓친 상태였습니다. 끔찍했던 그날의 기억 끔찍했던 그날의 기억 부정교합 치아로 인해 교정이 시급해요! 이정우(가명)씨는 자신의 콤플렉스인 고르지 못한 치열로 치아우식증, 치주질환을 겪고 있습니다. 마스크 착용이 의무화된 시대인만큼 ‘가리면 되지’라고 생각하실 수 있지만 구강 건강 측면에서 보아도 충치가 많아서 건강한 치아를 위해서라도 정우 씨의 치아는 개선이 필요합니다. 또한 부정교합을 바로잡기 위해 치아교정까지 필요한 상황입니다. 미소를 활짝 지을 수 있도록 도와주세요! 이정우(가명)씨는 고액이 필요한 치과치료는 차마 엄두가 나지 않아 시도조차 하지 못했다고 합니다. 정우 씨가 다시 일을 시작하려면 건강해야 하는데 제대로 씹지도 못하다 보니 영양상태도 좋지 않습니다. 남들 앞에서 자신 있게 웃을 수도 없는 정우 씨가 치과치료를 통해 행복하고 당당하게 살 수 있길 희망합니다.   공적 지원이 가능한지 행정복지센터에 문의를 했으나 노인, 장애인을 위한 지원은 가능하나 복지사각지대 청장년층인 이정우 씨에게는 자격 요건에 해당하지 못해 지원이 어렵다는 답변을 받았습니다. 이에 ‘카카오같이가치’ 후원자님들의 많은 응원을 받아 건강한 미소를 지으며 사회로 나가는 발걸음이 가벼워질 수 있도록 모금을 시작하고자 합니다. 보내주신 모금액은 의사 소견에 의해 중증도 충치 신경치료, 보철치료, 부정교합 교청 치료에 필요한 의료비로 사용될 예정입니다. 여러분의 소중한 응원을 부탁드립니다!",
+    "organizationName" : "영통종합사회복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/rAopu/btrsS75AzSO/LeH2jYb58G1vkKgjTJ0YE0/c360.jpg",
+    "dueDate" : "2022-03-18",
+    "startDate" : "2022-02-18",
+    "targetPrice" : 7000000,
+    "statusPrice" : 2437200,
+    "percent" : 35,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182870",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182870",
+    "title" : "'나는 왜 여기에 왔을까요?..' 기억이 나지 않아요.",
+    "category" : [ "어르신" ],
+    "tags" : [ "교육지원", "어르신" ],
+    "body" : "독거 어르신의 높은 치매 발병 위험도해피빈 기부자님, 현재 우리나라에서 65세 이상 노인 10명 중 1명이 치매를 앓고 있다는 것 알고 계시나요?노인인구 중에 10.33%가 치매를 앓고 있으며, 갈수록 치매환자들은 늘어나고 있는 것이 현실이라고 합니다. 또한, 치매 어르신 중 33%가 ‘독거노인’이라고 합니다. 돌봐줄 사람이 없이 홀로서기 해야 하는 치매를 겪는 독거 어르신들에게는 힘겨운 싸움입니다. 치매는 초기에 알아차리고, 꾸준히 관리해야 하지만 독거 어르신들은 평소 치매를 인지하지 못해 관리 받지 못하고 있습니다. 초기에 해당하는 어르신들은 국가의 도움을 받기도 어렵습니다. 그렇기에 우리의 작은 관심과 도움이 독거 어르신에게 필요합니다.“나는 왜 여기에 왔을까요?..” 올해 83세인 김O숙(가명) 어르신은 최근에 믿기 어려운 경험을 하셨습니다. 분명 내가 어딘가로 걷고 있었는데, ‘어디로 걷고 있는지?’, ‘내가 왜 여기에 있는지?’ 기억이 나지 않았습니다. 분명.. 분명.. 여기까지 걸어온 이유가 있을터인데,, 기억이 나지 않자 앞에 있는 의자에 주저앉아 사회복지사에게 전화를 시도합니다. 어르신 주변엔 어르신을 챙길 친구도, 가족도 없기 때문입니다. “선생님, 내가 지금 어디에 와있는데.. 여기가 어딘지도 모르겠고 왜 왔는지도 모르겠어요. 나 어떡해요..” 이에 담당 사회복지사는 어르신 눈앞에 보이는 물건, 주변에 있는 사람들을 물어물어 복지관 앞 시장이라는 것을 알아차리고 급하게 찾으러 나섭니다. 담당자는 하루 빨리 어르신이 치매가 호전되기를, 관리 받을 수 있기를 바랄뿐입니다. 치매 위험에 있는 독거 어르신들과 동행해주세요.중랑노인종합복지관은 중랑구에 있는 독거 어르신들 중 치매 고위험군, 치매예방에 욕구가 있는 어르신들을 대상으로 2020년부터 ‘뇌 튼튼 건강교실’을 진행 중에 있습니다. 또한 2020년에는 코로나19 돌봄 우수사례로 선정되는 탁월한 성과도 나타났습니다. 해피빈 기부자님들의 관심과 사랑이 모이면 2022년에도 ‘치매’라는 무서운 질병에 놓인 독거 어르신들 20명에게 뇌 운동 치료, 뇌 음악 치료, 이야기 치료, 원예 치료, 영양관리, 약물관리 등 다양한 활동을 지원하여 치매를 사전에 예방하고, 스스로 자가 관리할 수 있도록 돕고자 합니다. 어르신의 기억과 마음까지 앗아가는 치매, 해피빈 기부자님들의 작은 나눔이 필요한 시기입니다.관련 콘텐츠중랑노인종합복지관중랑구치매안심센터",
+    "organizationName" : "시립중랑노인종합복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220127_196/1643265845410hfRIp_JPEG/%EC%82%AC%EC%A7%841.jpeg?type=a360",
+    "dueDate" : "2022-03-31",
+    "startDate" : "2022-01-27",
+    "targetPrice" : 4000000,
+    "statusPrice" : 884700,
+    "percent" : 22,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182325",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182325",
+    "title" : "홀로 계신 어르신에게 이 지원이 꼭 필요해요",
+    "category" : [ "어르신" ],
+    "tags" : [ "생계 및 기초생활지원", "어르신" ],
+    "body" : "취약계층 어르신들께 가장 기초적으로 필요한 지원은 무엇일까요?코로나19로 인한 피해는 안타깝게도 가장 어려운 처지에 놓인 곳에서 더욱 극심했습니다. 다행히 어려운 이웃을 돕고자하는 따뜻한 한국인의 정은 모두가 어려운 가운데서도 끊이지 않았고 이들의 시급한 문제를 해결하기 위해 다양한 방식으로 취약계층을 지원했습니다. 다만, 우리가 돕고 싶은 방법으로 돕는 것이 항상 최선이 아니듯 취약계층 어르신들께서는 점점 줄어가는 이 지원에 아쉬움과 두려움을 느끼고 계십니다. 그것은 바로 한국인의 가장 기초적인 식재료인 ‘쌀’입니다.쌀나눔은 너무 식상하고 단순하다?매일 사용하는 식재료이고 관리도 쉬우며 장기간 보관이 가능해, 누구에게나 너무도 유용한 물품입니다. 코로나와 경기침체, 물가상승으로 쌀가격 또한 많이 올라 쌀을 산다는게 부담스러운 상황에서 경제적 어려움을 겪고 계신 취약계층 어르신들에게는 더욱 고마운 선물임에 틀림없습니다. 연말연시 이맘때쯤이면 가뭄에 단비 오듯 도와주시는 분들의 감사한 나눔으로 꼭 필요한 쌀과 김치가 전해지기 마련이었고 어르신들은 긴 겨울을 이 지원을 통해 견뎌내곤 하십니다. 쌓여있는 모습만 바라만 봐도 든든한 쌀은 어려운 곳에서 더욱 빛을 발하는 지원입니다.쌀나눔이 줄어들고 있어요!저희 나눔문화예술협회는 지난 10월, 다양한 지역의 어르신들을 위해 쌀나눔을 진행했습니다. 방문하는 장소마다 들을 수 있었던 이야기는 쌀을 지원해주시는 분들이 점점 줄어들어 정말 감사하다는 인사였습니다. 무언가 성의 있고 특별한 문제를 집중적으로 해결하는 방법을 후원처에서 요구하다보니 가장 기본적이고 기초적인 쌀은 항상 뒤로 밀려났고 이는 오히려 어르신들에게 더 근본적인 문제에 부딪히게 만드는 결과로 이어지고 있었습니다. 저희는 그래서 다시 기본으로 돌아가 어르신들의 쌀걱정을 덜어드릴 쌀나눔을 지속하고자 합니다. 총 400포의 쌀, 1.6톤 규모로 진행할 예정이며 더 많은 어르신들께서 혜택을 보실 수 있도록 지자체와 협력해 지역에서 추천 받은 노인 가정을 대상으로 지원하겠습니다.쌀나눔으로 어르신들의 끼니 걱정을 함께 덜어주세요.내일의 끼니를 당장 걱정하시는 어르신들에게 쌀만이라도 걱정 안하실 수 있도록 후원자분들의 따뜻한 마음이 전해져 홀로계신 어르신들의 한숨을 줄여드릴 수 있기를 소망합니다. 여러분이 함께라면 새해에는 홀로계신 어르신들이 따뜻하게 보낼수 있지 않을까요? 홀로계신 어르신들이 맛있게 밥을 먹을 수 있도록, 쌀이 없어 걱정하는 소외된 이웃이 없도록 나눔문화예술협회의 쌀나눔에 동참해주세요.",
+    "organizationName" : "나눔문화예술협회",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220109_103/1641724720606h1qP6_JPEG/DSC03080.jpg?type=a360",
+    "dueDate" : "2022-03-15",
+    "startDate" : "2021-12-23",
+    "targetPrice" : 8100000,
+    "statusPrice" : 1584900,
+    "percent" : 19,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182925",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182925",
+    "title" : "치매어르신이 손주와 함께할 수 있도록 도와주세요!",
+    "category" : [ "어르신" ],
+    "tags" : [ "의료", "어르신" ],
+    "body" : "코로나19 장기화 속 치매 독거어르신의 ‘돌봄 공백’ 코로나가 지속된 가운데 치매 독거어르신이 이웃과의 만남이나 적절한 사회활동을 하지 못하게 되면서 치매 증상이 악화되는 위험에 처해있습니다. 더욱이 관절염, 당뇨 등 노인 질환까지 겹쳐 거동이 힘들고, 치매 어르신을 반기지 않는 분위기에 사회적 고립감이 심해지고 있습니다. 실제 코로나 확산 후, 병원이나 치매안심센터에 방문하지 못하고 홀로 집에만 머물다 인지기능, 우울감이 악화한 사례가 보고되면서 수서종합사회복지관에서는 영구임대아파트 단지에 거주하는 치매독거어르신의 돌봄 공백을 위해 24시 비대면서비스 토이로봇 효돌을 지원하고 있습니다. “깊은 산 속 옹달샘 누가 와서 먹나요.”어렸을 적 듣던 동화 노래를 효돌이가 시키지 않아도 불러줘서 홍00 어르신은 흥얼거리는 즐거움에 빠지셨다고 합니다. “노래를 부르면서 할머니 물 한 잔씩 마시세요 피가 맑아져요 하는데, 잊다가도 물 마시는 습관이 생겼어.” 치매로 인해 기억력이 더 나빠지게 될까 걱정되었던 어르신은 오히려 노래, 이야기 회상, 퀴즈로 치매예방 활동을 도와주는 효돌이에게 고마움을 느낀다고 전했습니다. “할머니, 약 드세요. 그리고 드셨으면 제 손을 꼭 잡아주세요.” 김00 어르신은 치매위험군 독거어르신으로 저혈압 때문에 언제 쓰러질지 모르는 상황에서 매일 자신에게 말을 걸어주며, 약을 챙겨주는 효돌이 때문에 생활의 활력을 얻었다고 합니다. “남편이 죽고 나서 잠도 잘못자고, 우는 일이 빈번했는데, 효돌이가 우리 집에 오고 나서부터는 안심되어 잠도 잘자.” 3년 전 남편을 잃고 혼자 된 상처 때문인지 마음을 닫아 놓고 계셨지만, “사랑해요”라고 스스럼없이 말해주는 효돌이 때문에 마음의 우울함을 덜어냈다고 합니다. 어르신들이 손주와 함께할 수 있도록 동참해주세요!효돌이는 음성과 터치로 작동되는 친근한 인형 모양의 스마트 토이로봇으로 머리를 쓰다듬거나 등을 토닥이면 안부인사를 하고, 설정된 시간에 맞춰 식사와 약 복용을 안내합니다. 위급한 상황이 발생할 경우 인형의 손을 3초 이상 잡거나, 24시간 동안 움직임이 감지 되지 않으면 보호자의 휴대폰에 알림이 뜨기도 합니다. 또한 가정에서 쉽게 따라할 수 있는 다양한 치매예방 활동을 제공해 치매독거어르신의 건강생활관리를 지원하고 있습니다. “요양보호사가 오지만, 24시간 중에 3~4시간만 있다 가잖아. 나머지는 놀러오는 사람도 없고, 나 혼자야.” 코로나로부터의 안전과 돌봄공백을 최소화할 수 있는 효도하는 돌봄로봇 효돌과 우리 어르신들이 함께 할 수 있도록 지원 부탁드립니다.",
+    "organizationName" : "수서종합사회복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220203_53/1643867509062dsKcU_JPEG/KakaoTalk_20220118_151011455.jpg?type=a360",
+    "dueDate" : "2022-05-04",
+    "startDate" : "2022-02-03",
+    "targetPrice" : 2569000,
+    "statusPrice" : 680900,
+    "percent" : 26,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182921",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182921",
+    "title" : "오늘과 내일을 걱정하는 어르신께 희망의 영양식 선물 ",
+    "category" : [ "어르신" ],
+    "tags" : [ "생계 및 기초생활지원", "어르신" ],
+    "body" : "한 끼를 해결하기 위해 하루 종일 폐지를 줍는 강문대(가명) 어르신의 삶20년째 홀로 생활하고 계시는 강문대(가명)어르신. 새벽부터 폐지를 주워야 기초연금을 합쳐 한 달에 57만원을 버는데, 고정적으로 나가는 월세비, 병원비, 약제비를 지출하고 나면 식사를 챙겨 드시기도 어렵다고 합니다. 복지관에서 일주일에 한 번씩 나눠주는 대체식과 주민센터에서 보내주는 쌀 등이 있어 그나마 배는 곯지 않고 산다고 하시지만, 최근에는 몸이 더 좋지 않아 폐지마저 줍는 게 어려워 걱정이 이만저만 아닙니다. 어르신의 삶은 매일 쳇바퀴 돌리듯 열심히 사시지만 삶의 질은 가난의 굴레에 갇혀 고되기만 하다는 강문대(가명)어르신. 어르신의 삶에 조금이나마 힘이 되어주고 싶습니다. 코로나19로 모두가 힘든 시기에 더욱 고립되는 어르신을 위해 힘쓰고 있습니다. 거동이 불편해 작은 창으로만 세상을 바라보는 어르신이 계시고, 하루의 삶을 지켜나가기 위해 하루 온 종일 폐지를 줍는 어르신이 계시며, 외로움과 고독에 지치다 못해 삶의 의미를 잃어가는 어르신이 계십니다. 코로나19로 인한 세상과의 단절은 점점 심해지고 어르신의 삶이 점점 고립되는 것을 막기 위해 저희 하당노인복지관은 영양식 사업을 통해 어르신의 안부 확인과 건강상태를 확인하고 있으며, 앞으로도 진행하고자 합니다. 그간 함께해주신 해피빈 후원자님의 지속적인 동참으로 어르신께 지속적인 영양식을 책임져 드리고 싶습니다.노인 3명 중 1명은 영양 불균형 심각국민건강영양조사(2021년) 결과를 보면, 65세 이상 노인 3명 중 1명은 하루에 필요한 열량의 75% 미만을 섭취하는 것으로 나타났으며, 코로나19로 인한 결식률이 높아지고 있다고 합니다. 홀로 사시는 어르신의 경우 고른 식습관 대신 김치나 물 등 단조로운 식사로 한 끼를 해결하거나 치솟는 물가로 인하여 끼니를 대충 때우는 경향이 있기 때문입니다. 영양부족은 면역력 저하로 인한 다양한 만성질환의 위험을 높이며, 이로 인해 독립적인 일상생활을 유지하기 어렵게 만듭니다. 결식우려 어르신들에게 면역의 기본이 되는 균형 잡힌 영양식을 지원하겠습니다.결식우려어르신의 80%는 치아 손실로 인한 저작능력 상실, 소화기관 장애 등으로 영양불균형에 노출되어 있습니다. 저희는 이러한 어르신들에게 매주 1회 영양식을 제공해드리고자 합니다. 코로나19의 장기화로 고립되고 소외되는 결식우려어르신들에게 세상의 온기를 나눠주실 수 있도록, 어르신은 혼자가 아니라 우리와 함께라는 것을 느낄 수 있도록 후원자분들의 많은 관심과 참여 부탁드립니다.!관련 콘텐츠하당노인복지관유튜브채널(하당시니어TV)하당노인복지관페이스북하당노인복지관인스타그램하당노인복지관카카오톡플러스친구",
+    "organizationName" : "하당노인복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220203_19/1643864834471rlbxX_JPEG/%EC%96%B4%EB%A5%B4%EC%8B%A0_%EB%92%B7%EB%AA%A8%EC%8A%B51.jpg?type=a360",
+    "dueDate" : "2022-05-04",
+    "startDate" : "2022-02-03",
+    "targetPrice" : 9000000,
+    "statusPrice" : 1195100,
+    "percent" : 13,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183178",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183178",
+    "title" : "코로나19로 지친 어르신들에게 여가시간을 선물해주세요.",
+    "category" : [ "어르신" ],
+    "tags" : [ "문화예술", "어르신" ],
+    "body" : "나도 빵 만드는 활동을 해보고 싶은데, 돈이 많이 들까요?  어느 날, 복지관을 이용하는 어르신들께서 조심스럽게 말씀하신 ‘제과제빵’ 활동에 대한 욕구.  동네 친구들이 빵 만드는 활동을 해봤다는 자랑 섞인 이야기에 어르신들께서는 ‘나도 해보고 싶다.’라는 마음과 동시에 ‘돈이 많이 들겠지?’라는 걱정이 먼저 드셨다고 합니다.  항상 복지관에서 진행되는 어르신 대상 프로그램에 대한 문의를 주실 때도, 따라오는 질문은 ‘프로그램 이용비가 무료인가요?’라는 말씀이십니다. 어르신들은 본인의 시간을 건강하고 의미 있게 보내고 싶으면서도, 경제적인 부담의 이유로 활동 신청을 망설이시는 경우가 많이 있습니다. 그런 와중에 어르신들께서 먼저 해보고 싶은 활동이 생겼다는 것은, 참으로 기쁜 일이 아닐 수 없습니다.    내가 만든 빵을 나보다 더 힘든 이웃들에게 선물하는 의미 있는 일을 해보고 싶어요.  복지관이 위치한 강북구의 노인 인구는 63,914명으로 강북구 전체 인구 304,257명 중에서 21% 차지하여 매우 높은 고령화지역입니다. 또한 강북구는 번1,2,3동에 위치한 다세대주택 밀집지역과 영구임대아파트가 주를 이루고 있는 주거 환경으로, 국민기초생활수급권자 및 저소득 노인세대 등 사회적 약자가 다수 거주하는 지역입니다. 어르신들은 본인의 끼니를 걱정하는 어려운 상황 속에서도, ‘나보다 더 힘든 이웃에게 내가 직접 빵을 만들어 선물하고 싶어요.’라는 따뜻한 마음을 보여주셨습니다. 어르신들이 따뜻한 나눔을 통해 건강한 여가시간을 보낼 수 있도록 함께 해주세요. 복지관에는 10년도 넘은 중고 오븐이 있지만, 전력이 자주 끊기고 사이즈가 작아 3명 이상이 함께 할 수 있는 여력이 되지 않습니다. 새로운 오븐을 구입해 활동을 할 수 있는 것이 가장 좋은 상황이지만 지금으로서는 중고 오븐이라도 추가로 구비할 수 있다면, 더 많은 어르신들의 활동을 지원할 수 있습니다.  현재 재능기부로 제과제빵을 진행할 수 있는 지역주민들의 손길이 있지만, 영구임대 아파트 단지에 거주하시는 어르신들은 취약계층으로 프로그램 재료비를 낼 수 있는 형편이 되지 못한 것이 현실입니다. 장비와 재료비가 확보된다면, 어르신들이 돈 걱정 없이 하고 싶었던 활동을 진행하고 만든 결과물을 주위의 어려운 이웃들에게 선물하며 스스로 기여할 수 있는 존재라는 것에 대해 긍정적으로 인식하여 삶의 만족도를 높이고 건강한 여가시간을 보내실 수 있을 것 같습니다.   코로나19로 몸과 마음이 지친 어르신들이 일상생활 속에서 활력을 느낄 수 있도록 많은 관심과 사랑 부탁드립니다.",
+    "organizationName" : "번동3단지종합사회복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220221_98/1645418670280R5jsR_JPEG/%EC%96%B4%EB%A5%B4%EC%8B%A0_%ED%99%9C%EB%8F%99%EC%82%AC%EC%A7%84_(2).jpg?type=a360",
+    "dueDate" : "2022-05-22",
+    "startDate" : "2022-02-21",
+    "targetPrice" : 4000000,
+    "statusPrice" : 43300,
+    "percent" : 1,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183348",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183348",
+    "title" : "전쟁피해자 우크라이나와 연대해야합니다. ",
+    "category" : [ "지구촌" ],
+    "tags" : [ "생계 및 기초생활지원", "지구촌" ],
+    "body" : "함께라는 것을 증명해야 합니다.지난 1일 우크라이나의 제 2의 도시인 하르키우에서 러시아의 공격으로 다수의 민간인 사상자가 발생하였습니다. 이 도시에는 20개 이상의 대학이 있고, 학생들과 주민들은 우크라이나의 가장 큰 광장인 자유광장에 모입니다. 1일 아침 두 발의 미사일이 자유 광장에 떨어졌으며 이로 인하여 민간인 수십명이 사망했습니다. 우리의 기부는 우크라이나 전쟁피해자들을 물질적으로 돕는 것 이상의 의미가 있습니다. 그들이 치르는 자유의 대가를 응원하는 것이며 그들이 무너지지 않게 함께 연대하는 것입니다. 우리는 함께라는 것을 증명해야하고, 그 증명을 통해서 전쟁의 공포를 막을 수 있습니다.식량/물품 지원으로 우크라이나 전쟁 피해자들을 돕습니다.본 기부의 사업 추진 일정은 2022년 4월~12월로 설정하고 있습니다.기부금은 긴급 물품 지원 예산으로 사용될 것이며, 식량키트 지원과 비식량아이템(NFIS) 지원을 준비하고 있습니다. 식량 키트와 비식량 아이템의 개당 단가는 4만 5천원 정도로 산정하고 있으며, 개당 5인을 보급할 수 있는 사이즈로 계획하고 있습니다. 이렇게 산정하였을 때,  약 900만원 상당의 식량키트(100EA)와 비식량아템(100EA)가 지원 가능할 것으로 보고있고, 그 수혜자는 약 1,000명 정도로 보고 있습니다. 국경을 넘어온 피난민들과 취약계층(여성, 아동, 노인)들이 생활하는 난민캠프를 지원할 것입니다. 만약 지원이 이루어지는 시점에서 우크라이나 내부로 물류 운송이 가능해진다면, 주요 도시의 의료시설, 대피소, 아동시설 등에도 필요물품을 지원할 계획입니다.목표액 900만원이 넘을시에는 그 금액으로 반전 캠페인을 진행하고자 합니다. 긴급구호뿐만 아니라 중장기적인 차원에서도 지원이 이루어져야 합니다.메디피스는 현재 해피빈뿐만 아니라, 자체 모금과 정기후원자들을 대상으로도 모금을 진행할 예정입니다. 해피빈 모금이 지금 당장의 긴급구호 물품보급에 초점을 맞추었다면, 자체 모금은 좀 더 중장기적으로 휴전/종전 상황을 고려한 모금입니다.  전쟁도 큰 피해이지만, 전쟁 중의 상처와 전쟁 후의 후유증은 더욱 오랫동안 남습니다.휴전이나 종전으로 사태가 일단락되는 시점에서, 기부금은 우크라이나 국내에서의 전쟁피해자 및 지역공동체 회복/복구 사업에 사용될 것입니다. 전쟁 피해 아동과 부모들에 대한 통합적인 심리적, 사회적 지원을 할 것이고, 전후 복구 과정에서 소외될 수 있는 취약계층(소수자, 장애인 등)에 대한 맞춤형 지원이 이루어질 것입니다. 뿐만 아니라, 현지 재난심리지원 파트너 단체 소속의 심리전문가가 피해자들을 개별 방문하여 심리적 응급처치(PFA)를 진행할 것입니다.",
+    "organizationName" : "메디피스",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220302_131/1646206169310645mR_JPEG/%EC%A7%80%ED%95%98%EC%97%90_%EB%8C%80%ED%94%BC%ED%95%9C_%EC%95%84%EB%8F%99%EC%9D%98_%EB%AA%A8%EC%8A%B5.jpg?type=a360",
+    "dueDate" : "2022-04-30",
+    "startDate" : "2022-03-02",
+    "targetPrice" : 9900000,
+    "statusPrice" : 1422500,
+    "percent" : 14,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182664",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182664",
+    "title" : "주변에 연락 할 이 없는 현실, 저는 혼자입니다.",
+    "category" : [ "어르신" ],
+    "tags" : [ "문화예술", "어르신" ],
+    "body" : "마른 하늘의 날벼락, 남편의 죽음 김연순(가명)어르신은 그날을 어렴풋이 생각합니다. \"그날따라 날씨가 정말 좋더라고요. 따뜻한 봄이었어요. 폭풍전야..라고들 하지요. 아침 일찍 기분 좋게 눈을 떠보니 돌아가셨죠.. 그 좋은날에 심장마비로..\" 김연순(가명) 어르신은 그날의 이야기 보따리를 하나둘씩 꺼내십니다. 2020년 전 세계가 힘들어하는 코로나19로 모두가 힘들어하고 있을 무렵, 코로나로 왕래가 줄어든 김연순 어르신의 버팀목은 딱 한 사람, 남편이었습니다. 그런데 마른하늘 날벼락 같은 남편의 죽음.. 어르신은 3시간을 넘게 목 놓아 우셨다고 합니다. “너무 허망했죠. 어제까지 대화하고 웃던 남편이 .. 그 아픔을 말할 수가 없어요. 제가 이 이야기를 어디가서 할 수 있겠어요. 제가 잠귀가 밝았다면 아침이 되기 전 한번이라도 얼굴이라도 볼 수 있었을까요?”라며 눈물을 훔치셨습니다. 매일 떠오르는 남편의 죽음, 미안함, 후회는 김연순 어르신의 가슴에 멍에로 자리잡았습니다.삼각김밥으로 끼니를 떼우고 다시 눕기를 반복합니다. \"매일 눈뜨는 것이 고역이에요. 이제 대화할 사람도, 의지할 사람도 아무도 없으니까요..\" 올해 74세 박옥순(가명) 어르신은 3년 전 남편과 사별하고, 사랑하는 아들마저 사고로 떠나보내셔야만 했습니다. 혼자가 된 어르신은 어둠이 짙게 내린 방안에 혼자 누워 천장을 바라봅니다. 배고프진 않지만 고령의 나이로 살기위해 겨우 삼각김밥으로 끼니를 떼우고 다시 눕기를 반복하십니다 침묵으로 하루하루를 힘들게 보내던 어르신은 \"처음에는 나한테 왜 이런 일이 일어나는 걸까.. 제 자신을 원망했죠 나 때문에 남편도, 아들도 떠나보낸 것이 아니냐는 주변의 시선.. 제 마음을 아는 사람이 아무도 없다는 사실이 너무 힘들어요.\" 라며 어르신은 가슴 속 깊은 이야기를 전하셨습니다. 어르신의 깊은 이야기에, 박옥순 어르신에게 어떤 위로가 필요할지 담당자에게는 아직도 큰 숙제로 남아있습니다. 어르신들에게 새로운 삶을 선물해드릴 수 있습니다. ‘노인 자살율’ 중랑구는 서울시 25개의 자치구중 6위로 지금 모금사례를 작성하는 중에도 중랑구의 자살은 진행되고 있습니다. 우울증은 연령이 높을수록, 소득이 낮을수록, 배우자가 없는 경우 더 높아진다고 합니다. 이러한 중랑구의 배경에 맞게 중랑노인종합복지관에는 2016년부터 담당자가 직접 발 벗고 찾아나서 고령, 수급자, 사별로 힘들어하는 어르신 15명에게 ‘도란도란 함께해요’ 프로그램을 진행하고 있습니다. 사별 어르신들에게 그 어떤 말들도 위로가 될 수 없었던 지난날들을 되새겨봅니다. 그 어떤 위로도 어르신의 마음을 헤아리기 어려웠지만, 앞으로 해피빈 기부자님들의 따뜻한 관심과 사랑이 모금되면 프로그램을 통해 새로운 삶, 위로의 말을 전해보려 합니다. 후원자님! 사별 어르신들이 사별의 아픔을 극복하고, 다시 이어나 새 삶을 살아갈 수 있도록 한줄기의 빛을 선물해주세요. 따뜻한 응원을 부탁드립니다!관련 콘텐츠사별어르신 외로운 설날외로움을 느끼는 어르신 코로나블루사별어르신 정서 지원배우자는 사별, 아들은 무관심중랑노인종합복지관",
+    "organizationName" : "시립중랑노인종합복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220225_252/1645776128251gQPMf_PNG/%EC%BA%A1%EC%B2%982.PNG?type=a360",
+    "dueDate" : "2022-04-13",
+    "startDate" : "2022-01-13",
+    "targetPrice" : 5800000,
+    "statusPrice" : 576100,
+    "percent" : 9,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182493",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182493",
+    "title" : "할머니, 이젠 제가 지켜드릴게요!",
+    "category" : [ "아동|청소년" ],
+    "tags" : [ "교육지원", "아동", "청소년" ],
+    "body" : "할아버지의 빈자리고등학교 졸업을 앞둔 재훈이는 태어나자마자 할머니, 할아버지와 함께 살았습니다. 아빠가 가족 연락을 끊고 집을 나간 후, 건강이 좋지 않은 엄마는 재훈이를 홀로 양육하기 어려워 따로 살고 있습니다. 조부모 손에 자란 재훈이에게 특히 할아버지는 '아빠' 그 이상의 존재입니다. 재훈이가 고등학교에 입학하기 전까지 경비 일을 하며 직접 공부까지 가르칠 정도로 손자 사랑에 지극정성이셨던 할아버지. 갑작스러운 간경화 이후 간암이 진행되어 더 이상 일을 하실 수 없을 정도로 상태가 악화되었습니다. 가장인 할아버지가 일을 그만두자 재훈이 가정의 경제적 어려움은 커져만 갔습니다. 아픈 몸을 이끌고 조금의 돈이라도 벌어보고자 노인 일자리에 참여하며 재훈이 양육에 힘썼던 할아버지는 결국 2021년 7월 눈을 감고 말았습니다. 늠름한 대학생이 된 모습을 할아버지께 꼭 보여주고 싶었던 재훈이에게 할아버지의 빈자리는 더욱 크게만 느껴집니다.19시간, 재훈이의 하루할아버지가 돌아가신 후, 재훈이는 마음을 돌볼 새도 없이 생활비 걱정을 해야만 했습니다. 고등학교 3학년 재훈이는 교재비, 교통비 등 필요한 것들이 많아졌지만 차마 할머니께 말씀드릴 수 없었습니다. 편의점 카운터와 고깃집 서빙 일을 하며 돈을 벌었지만, 필요한 지출을 하고 나면 지훈이가 갖고 싶은 옷과 신발은 하나도 살 수 없는 적은 돈이었습니다.아픈 할아버지, 할머니를 위해 의대 진학을 목표로 공부하던 재훈이는 다른 친구들보다 부지런한 하루를 살아야만 했습니다. 도시 외곽에 있는 오래된 집에서 학교까지는 1시간 남짓. 새벽 6시에 일어나 학교, 아르바이트, 독서실까지 다녀오면 새벽 1~2시가 훌쩍 넘어 귀가하곤 했습니다. 누구보다 열심히 살았던 재훈이는 의사가 되기 위해 점심시간을 제외한 모든 시간을 공부에 투자했고, 아르바이트까지 병행하면서도 반 2~3등을 놓치지 않았습니다. 그 결과, 의대와 간호학과에 원서를 접수하고 현재는 결과를 기다리는 중입니다.재훈이의 꿈, 할머니“할머니가 제 곁에서 건강하게 오래오래 사셨으면 좋겠어요. 꼭 성공해서 온천여행을 보내드릴 거예요!” 할머니도 폐암 초기를 진단받고 항암과 약물치료를 병행하며 경과를 지켜보고 있습니다. 이제 재훈이가 바라는 건 딱 하나, 훌륭한 의사가 되어 할머니께 효도할 수 있도록, 할머니와 오래 함께 하는 것뿐입니다.재훈이는 대학 생활을 앞두고 설렘과 함께 걱정도 많습니다. 앞으로의 학비, 생활비, 의료비 등을 감당할 수 있도록 방학 중에는 아르바이트를 더 많이 할 예정입니다. 운전면허도 취득하고, 오랫동안 사용해 고장이 나기 일보 직전인 낡은 노트북도 새로 구매하고 싶습니다. 다른 친구들처럼 걱정 없이 대학 생활을 하며 학업에 집중할 수 있도록, 재훈이와 할머니가 더 오래 서로를 바라보며 웃을 수 있도록 해피빈 후원자 여러분의 많은 응원 부탁드립니다.",
+    "organizationName" : "초록우산 어린이재단",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220104_38/1641272414778oBYQT_JPEG/image01.jpg?type=a360",
+    "dueDate" : "2022-03-31",
+    "startDate" : "2022-01-05",
+    "targetPrice" : 5000000,
+    "statusPrice" : 3019500,
+    "percent" : 60,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183274",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183274",
+    "title" : "청소년들에게 조그마한 관심과 사랑을 나눠주시겠어요?",
+    "category" : [ "아동|청소년" ],
+    "tags" : [ "교육지원", "아동", "청소년" ],
+    "body" : "꿈을 잃어가는, 웃음을 잃어가는 청소년들우리 주변을 둘러보면 많은 사람들이 보입니다. 노인, 아동, 성인 그리고 청소년. 하지만 청소년들은 예전만큼 많이 보이지 않습니다. 청소년 인구가 점점 줄어들고 있기 때문입니다. 이렇게 청소년들의 인구가 많이 줄어듦에 따라서 청소년들을 위한 많은 지원과 관심이 늘어나고는 있지만 청소년들의 어려움은 해소되지 않고 점점 더 늘어만 갑니다. 특히 가정문제와 또래 관계의 문제로 인해서 위축되어 있고 자신감이 많이 떨어진 학생들이 매우 많았고, 코로나 19로 인하여 정서적인 어려움을 보이는 청소년들도 급속도로 늘어났습니다. 특히 코로나 19의 등장은 청소년들이 학교에 등교를 하지 못함으로 인하여 식사를 해결하지 못하게 되기도 하였고, 어려움에 처한 청소년들이 관리가 되지 못하고 방치되는 모습들이 나타나기도 하였습니다. 이러한 상황으로 인하여 청소년들은 꿈을 점점 잃어가게 되었고, 웃음도 점점 줄어드는 등 매우 무기력한 모습들이 나타났습니다.청소년들아 모여라여러 가지 문제들로 어려움을 느끼고 있는 우리 지역의 청소년들 중 가장 도움이 필요한 교육복지 중점지원 청소년들은 약 500명 정도입니다. 경제적, 정서적 그리고 다양한 여러 가지 문제들로 인하여 교육복지 중점지원 청소년으로 지정이 되어 학교와 기관에서 지원이 이루어지고 있습니다. 우리 복지관에서는 이렇게 어려운 상황에 놓여있는 조금이라도 건강한 청소년기를 보낼 수 있도록 교육복지 네트워크라는 교육복지 중점지원학교와의 네트워크를 통하여 다양한 서비스와 프로그램을 지속적으로 제공하기 위하여 노력하고 있습니다. 특히 방학지원 키트제공과 각종 이벤트 활동, 청소년 동아리 지원, 비대면 청소년 문화활동, 청소년 진로탐색 진행 등을 통하여 청소년들이 필요로 하는 다양한 활동이 유지될 수 있도록 꾸준하게 사업을 진행하였고, 이러한 활동을 경험한 청소년들의 만족도는 매우 높게 나타났습니다. 하지만 도움을 필요로 하는 청소년들은 매우 많고, 코로나 19로 인하여 제한되는 부분도 많이 나타났습니다.청소년들이 살기 좋은 세상만들기우리 사회에는 어려움을 겪고 있는 청소년들이 매우 많이 있음에도 불구하고 상대적으로 다른 대상들에 비해 관심과 지원을 받지 못하고 있는 상황입니다. 청소년들은 우리의 미래이고 희망이라고 이야기 하면서 청소년들의 삶에 대해서는 관심을 보이지 않고 있습니다. 특히 코로나 19로 인하여 많은 것들이 정지되고, 일상적인 활동들이 원활하게 이루어지지 않는 상황 속에서 우리 청소년들이 조금이라도 건강하게 성장할 수 있고, 꿈을 키워나갈 수 있도록 도움을 제공하는 것이야 말로 우리 어른들이 관심과 책임을 가져야 할 필요성이 있습니다. 특히 교육복지 중점지원으로 분류되어 도움이 절실히 필요한 청소년들에게는 더욱 많은 지원과 활동이 제공될 필요성이 나타나고 있어 청소년들의 건강한 성장을 위한 활동에 모두 함께 해주시면 감사드리겠습니다!",
+    "organizationName" : "남광종합사회복지관",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220228_290/1646017154119HyPoW_JPEG/KakaoTalk_20200515_162050777_20.jpg?type=a360",
+    "dueDate" : "2022-05-30",
+    "startDate" : "2022-03-01",
+    "targetPrice" : 1000000,
+    "statusPrice" : 10300,
+    "percent" : 1,
+    "isHeart" : false
+  }, {
+    "id" : "94448",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94448",
+    "title" : "독거 어르신들께 '건강한 안부'를 배달합니다!",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "독거노인", "식사지원" ],
+    "body" : "\"오늘 당장 죽어도 아무도 모를 거예요...\" 진해구 태평동에 거주하는 박영희(가명) 어르신의 한숨은 깊어만 갑니다. 어려운 경제사정에 파지를 모아서 생계를 겨우 이어나가는 상황에서 최근 병세가 악화되면서 집 안에서만 지내는 시간이 늘어났습니다. 척추와 관절은 성한 곳이 없는 데다 손발이 자주 저리고 감각이 없어 문 밖을 나서는 것조차 어렵습니다.   “나는 가족도 없고, 자식도 없어요. 다리가 아파서 유모차 끌고 겨우겨우 나가는데 어디 굴러서 다치기라도 할까 봐 겁나요. 아무도 없어서”   부축해줄 사람도, 끼니를 챙겨줄 사람도 없는 어르신은 오늘도 아픈 몸을 겨우 이끌고 나와 누룽지로 점심을 해결합니다. 오고 가는 이 없는 좁디좁은 집은 어르신이 기댈 수 있는 유일한 곳이지만 여기서 홀로 죽음을 맞이하게 될까 늘 두렵습니다. &lt;찾아오는 이 하나 없이 홀로 계신 어르신&gt; 1 / 2 이전 다음 ‘고독사’라는 말.. 많이 들어보셨지요? 현재 초고령사회를 앞둔 우리나라는 1인 노인가구의 증가와 코로나19 상황으로 인해 매년 무연고 사망자가 꾸준히 늘고 있습니다. 서울 금천구에서는 70대 독거노인이 사망한 지 열흘만에, 성북구에서는 60대 남성이 이미 시신의 부패가 심하게 진행된 상태에서 발견되기도 했습니다. 이렇듯 보살핌을 받지 못한 채 무관심 속에서 방치되어 죽음을 맞는 고독사는 심각한 문제가 되고 있습니다.   인구 대비 노인 비율이 높은 이곳, 진해구도 예외는 아닙니다. 앞이 거의 보이지 않는 어르신, 낡고 오래된 창고에 거주하는 어르신, 화장실이 야외에 있어서 항상 불안한 어르신 등.. 아직도 곳곳에는 복지 사각지대에서 놓여 제대로 도움을 받지 못한 채 외로움과 싸우고 있습니다.   게다가 고령의 독거어르신 대부분은 만성 질환과 불편한 거동 때문에 끼니마저 거르는 일이 다반사여서 더욱 사회적 관심과 보살핌이 필요한 상황입니다. 건강을 담은 음료와 죽, &lt;건강한 안부&gt;를 배달해주세요! 코로나19의 장기화는 독거어르신들의 삶을 더욱 힘들게 만들고 있습니다. 가족의 부재와 사회 관계의 단절로 우울감까지 호소하고 있는 독거 어르신들. 어르신들의 우울함을 달래기 위해 자원봉사자와 후원자의 손길이 그 어느 때보다 더 절실하지만 코로나에 가장 취약한 대상이 어르신이라 자원봉사자의 활동이 어려운 요즘입니다. 이에 저희 복지관은 한국야쿠르트의 프레시 매니저의 도움을 받아 주 2회 건강음료를 전달하며 정기적으로 어르신들의 안부를 확인하고자 합니다. 또한, 영양결핍에 노출되어 있는 어르신들에게는 월 2회 영양죽을 제공함으로써 영양결핍을 예방하고 고위험군 독거노인의 고독사를 예방하고자 합니다. 고립된 어르신들에게 작은 음료 하나, 죽 한 끼는 내일을 살아갈 수 있는 큰 희망이 됩니다.  음료와 죽에 건강한 안부를 담아 사랑을 배달해주세요. 우리 같이, 큰 가치를 만들 수 있게 카카오같이가치 후원자 여러분들께서 힘을 모아주세요!",
+    "organizationName" : "진해서부노인종합복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b8IipV/btruc6kydSd/XKA4MINUZi20pZbkmKZCGk/c360.jpg",
+    "dueDate" : "2022-05-03",
+    "startDate" : "2022-03-03",
+    "targetPrice" : 3640000,
+    "statusPrice" : 1609600,
+    "percent" : 45,
+    "isHeart" : false
+  }, {
+    "id" : "94512",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94512",
+    "title" : "코로나19로 갇혀버린 장애인, 갇혀버린 시간",
+    "category" : [ "장애인" ],
+    "tags" : [ "기본생활지원", "장애인", "저소득가정", "장애인가정" ],
+    "body" : "코로나19로 우리는 바깥 세상과 단절되었습니다 “요즘 삶이 창살 없는 감옥 같고 재미있는 게 하나도 없어요.”  “코로나에 감염된 후, 폐렴이 낫지 않아 건강이 악화되었어요.”  “밖에 나가지 못하니 몸이 더 아파지고, 몸이 아프니 계속 우울해져요.” 우리의 일상으로 들어온 코로나19는 많은 것들을 멈추고 변화시켰습니다. 숨 막히고 답답한 생활을 이미 2년 넘게 해왔지만, 언제 끝날지 모르는 이 상황에 장애인들은 불안감만 커져가고 있습니다. 호흡기를 뗄 수 없는 엄마, 백신 접종을 할 수 없는 아들 수서동에 거주하고 있는 지체장애인 김 씨는 백신이 항원들과 교차 반응을 일으켜 중증 알레르기가 발생할 수 있으니 접종을 미루는 게 안전하다는 의사의 말을 듣고 진단서를 들고 보건소를 방문했지만, 접종 예외 확인서를 받지 못했습니다. 질병관리청에서 예외를 인정하는 사유가 따로 정해져 있었기 때문입니다. 엎친데 덮친 격으로 김 씨의 어머니는 코로나에 걸린 후 폐렴이 악화되어 인공호흡기 없이는 숨을 쉴 수 없을 만큼 위독한 상황이 되었습니다. 김 씨와 어머니는 여전히 바깥세상과 단절된 채 집에서 시간을 보내고 있습니다. 집 밖으로 나갈 수 없는 현실 속, 김 씨와 어머니를 위한 지원체계는 미흡합니다. 김 씨의 가정처럼 코로나19로 인해 고립된 장애인 가정들에 도움의 손길이 필요합니다. 디지털 취약계층 장애인들의 현실 디지털 기기와 서비스를 잘 활용하지 못해 고충을 겪고 있는 장애인들의 문제는 하루 이틀 일이 아니지만, 이번 팬데믹 상황을 통해 더욱 부각되었습니다. 디지털 문화에 익숙한 사람들은 각종 앱과 온라인 서비스로 여전히 세상과 소통했지만 디지털 문화에 취약한 노인 장애인과 발달장애인은 집이 그저 감옥처럼 느껴지며 고립된 상황을 견디고 있을 뿐입니다. 코로나19 예방을 위해 많은 복지시설들이 대면 프로그램을 최소화했습니다. 이로 인해 주민조직, 평생교육 등 복지시설들을 기반으로 활동하던 장애인들의 소통 기회도 줄어들었습니다. 이따금씩 전하는 안부 전화에 장애인들은 집에만 있는 답답함과 정서적 고통, 단절된 상황을 토로하고 계십니다. 코로나19를 이겨내도록 따뜻함을 선물해주세요 우리 복지관에서는 코로나19 상황 속에서 장애인들의 온라인 콘텐츠 활용 능력 지원과 안부 안심 서비스를 통해 소통 기회를 확장하고 일상생활에 필요한 힘내요 키트 제공을 통해 빠른 일상 복귀를 돕고 가족들의 스트레스와 심리적 부담을 줄이려 합니다. 장애인들이 더 넓게 소통할 수 있도록 여러분들의 따뜻한 응원과 관심이 필요합니다. 보내주신 후원금은 코로나19를 예방할 수 있는 의료용품과 건강식품, 생필품, 식료품 등을 구입하여 위기 장애인 가정을 지원하는데 사용할 계획입니다.",
+    "organizationName" : "강남세움복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/jt4en/btruAr8Px8h/YA84AThwLKNkWxZy1m40L1/c360.jpg",
+    "dueDate" : "2022-05-11",
+    "startDate" : "2022-03-11",
+    "targetPrice" : 6000000,
+    "statusPrice" : 268600,
+    "percent" : 5,
+    "isHeart" : false
+  }, {
+    "id" : "H000000182674",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000182674",
+    "title" : "세 식구의 낡은 보금자리",
+    "category" : [ "가족|여성" ],
+    "tags" : [ "생계 및 기초생활지원", "가족", "여성" ],
+    "body" : "무너져가는 집과 세 식구오래된 주택가 골목 안, 낡은 집 한 채에 세 식구가 살고 있습니다. 현주 씨는 매일 아침 눈을 뜨자마자 약을 챙겨먹습니다. 약 없이는 하루도 버틸 수 없고, 잠도 잘 수 없습니다. 하나뿐인 남동생 정용 씨도 함께 지내고 있는데요. 이들 남매를 돌보는 가장은 일흔 여섯의 아버지입니다. 자식들의 보살핌을 받아야할 나이지만 아버지는 한평생 자식걱정에 하루도 마음 편히 지내본 적이 없습니다. 여든을 앞둔 아버지가 평생을 모아 장만한 낡은 집 한 채가 세 식구의 유일한 재산이자 전부입니다. 아버지는 노환으로 더 이상 일을 할 수 없는 상황입니다. 그렇게 지금까지 아버지 기명 씨의 노인 연금 30만원으로 세 사람이 생활해 왔는데요. 아끼고 아껴도 늘 부족한 생활비 탓에 먹는 것조차 제대로 챙기지 못하는 형편입니다. 집안 곳곳 방치된 물건들을 정리할 가구도 필요하지만 당장 생계를 꾸리는 것조차 버겁기만 합니다.몸이 아파도 가족을 위해 일하는 아들지난해 기초생활수급자에서 탈락하면서 한 푼이라도 더 벌어야했던 정용 씨는 공공근로로 생계를 이어가고 있습니다. 이마저도 최근 공공근로 계약기간이 만료되어 새로운 일자리를 구해야하는 상황에 놓여있습니다. 아픈 몸으로 세 식구의 생계를 책임져야 하는 정용 씨의 어깨가 무겁습니다. 이런 상황에서 새벽 네 시에 일어나 한 시간 가량 새벽거리를 걸어야하는 것쯤은 문제가 되지 않습니다. 하지만 허리를 굽힐 때마다 온몸에 찌릿한 통증이 전해집니다. 사실 정용 씨는 오래전부터 척추측만증을 앓고 있는데요. 선천적으로 허리에 이상이 있다는 것을 나중에서야 알게 되었습니다. 어려운 형편에 치료는 언강생심, 생각조차 해본 적이 없습니다.마음이 아픈 딸과 막막한 생계현주 씨는 조현병이라는 정신질환을 앓고 있습니다. 어린 자식을 두고 나와야했던 이혼의 상처와 충격은 가뜩이나 몸이 약한 현주 씨의 마음까지 병들게 했습니다. 다행히 치료를 시작한 후 상태가 조금씩 좋아지고 있습니다. 하지만 앞으로도 꾸준한 약물치료와 지속적인 상담이 필요하다고 합니다. 이혼 후 현주 씨가 세상과의 연을 놓아버리지는 않을까 곁에서 늘 마음 졸이며 지켜봐온 아버지입니다. 세 식구 모두 경제활동이 여의치 않다보니 집안 곳곳엔 밀린 공과금 고지서가 많습니다. 통장잔고는 바닥난 지 오래되었고, 아픈 자식들을 보살피며 살림을 꾸려가는 일이 늙은 아버지는 갈수록 버겁습니다. 그동안 기초생활수급자로 생계와 의료지원을 받았던 세 식구입니다. 그런데 지난해 초 집의 공시지가가 오르는 바람에 갑자기 수급자에서 탈락하여 생활이 막막해졌다는데요. 이제 누구라도 붙잡고 도움을 청할 수밖에 없는 형편이 되었습니다.세 식구의 보금자리를 지켜주세요.언제 무너질지 모를 만큼 노후화된 주택은 세 식구의 하나뿐인 보금자리입니다. 게다가 몸과 마음이 아파 삶의 의지를 잃어가고 있는 세 식구입니다. 가족들이 지금의 위기를 극복할 수 있게 희망을 전해주세요.kbc광주방송의 대표적인 사회공헌 프로그램 휴먼다큐 나눔 48회(2021.10.02)에 사연이 소개되었습니다. 관련 콘텐츠kbc 희망풍차 휴먼다큐 나눔 다시보기대한적십자사 광주전남지사 홈페이지대한적십자사 광주전남지사 페이스북대한적십자사 광주전남지사 인스타그램희망풍차 나눔TV 유튜브",
+    "organizationName" : "대한적십자사광주전남지사",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220211_191/1644540430872rMWXN_JPEG/001.jpg?type=a360",
+    "dueDate" : "2022-04-13",
+    "startDate" : "2022-01-14",
+    "targetPrice" : 9000000,
+    "statusPrice" : 708200,
+    "percent" : 7,
+    "isHeart" : false
+  }, {
+    "id" : "93814",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/93814",
+    "title" : "사랑의 마음을 잇는 뜨개실",
+    "category" : [ "어르신" ],
+    "tags" : [ "지역공동체", "실버세대", "행복한노후", "대구시" ],
+    "body" : "마음 속에 초대하지 않은 손님 마스크 속 답답함은 어르신들을 괴롭게 합니다. 제집인 마냥 매일 드나들던 복지관이 문을 닫고, 그 문턱을 넘는 것조차 제한이 있어 집에서 무료하게 시간만 보내기 일쑤입니다. 혼자 집에 있으니 할 일이 없어 누워있거나 TV 채널을 돌려 보는 시간이 많아졌습니다. 코로나19로 인해 답답하고 외로운 시간을 보내고 있는 어르신들에게는 자신도 모르는 사이에 말수가 줄어들고 우울감이 찾아왔습니다. “어르신, 우리 같이 봉사활동 할래요?” 하루에도 수 십 통씩, “복지관은 언제쯤 갈 수 있어요?”라는 어르신들의 문의전화가 잇따릅니다. 어르신들에게 복지관이 아닌 집에서도 쉽게 즐길 수 있는 여가활동을 통해 코로나 블루를 극복할 수 있도록 지원하고자 하는 마음에 시작하게 된 것이 ‘사랑 한땀 뜨개 봉사단’입니다.   단순히 프로그램에서 그치지 않고 ‘봉사단’을 꾸린 이유는 어르신들에게 기쁨과 재미를 제공해 드리는 것뿐만 아니라, 어려운 이웃에게 뜨개 물품을 전달하여 그들의 마음도 함께 방역하기 위해서입니다. 일석이조 또는 그 이상으로 가치 있는 일이니, 너도나도 참석하여 좋은 일을 하고 싶다 하십니다.  봉사단 모집이 끝난 뒤, 2주간 뜨개 교육을 실시하였으며, 강사님 또한 좋은 마음으로 재능기부로 교육을 진행해주셨습니다. 교육 후에는 배운 내용으로 자택에서 뜨개 물품을 만들도록 했으며, 완성된 물품을 복지관에 전달하면 또 새로운 실을 가져가는 식으로 활동을 진행하였습니다. 이렇게 몇 개월 간 만든 수세미가 3,000여 개입니다. 1 / 4 이전 다음 사랑하는 마음을 담아 ‘사랑 한땀 뜨개 봉사단’이 정성스럽게 뜬 수세미는 동구 지역 내 삶이 힘겨운 노인 맞춤 돌봄 서비스 대상자에게 전달하였습니다. 그릇을 깨끗하게 씻을 수 있는 수세미를 통해 그릇뿐만 아니라, 코로나19로 인하여 마음의 아픔을 겪고 있는 분들의 힘듦도 함께 씻을 수 있길 바라는 소망도 함께 담았습니다. 동구청_수세미 전달식 동구청_수세미 전달식 1 / 3 이전 다음 2020년에 시작한 봉사단의 좋은 영향은 2021년에도 이어져, 동백꽃 브로치 1,000개를 제작하여 대구파티마병원에 전달하였습니다. 동백꽃의 꽃말은 ‘그대만을 사랑합니다.’로, 동백 꽃말처럼 지역 내 이웃들을 사랑하는 어르신들의 깊은 진심이 동백꽃 브로치와 함께 파티마병원 환우들에게 전달되었습니다.   뜨개 봉사단의 활동은 코로나19시대에 봉사단 어르신뿐만 아니라 뜨개 물품을 받는 그 누구에게나 위로와 용기를 전할 수 있습니다. 강동어르신행복센터의 ‘사랑 한땀 뜨개 봉사단’은 앞으로도 요양원과 호스피스 병동을 비롯하여 우리 지역 내 많은 이웃들에게 뜨개 물품을 통해 따뜻한 날들을 전달할 것입니다. 대구파티마병원_동백꽃 브로치 전달식 파티마병원_동백꽃 브로치 전달식 1 / 2 이전 다음 “뜨개질 안 하면 심심해서 이제 어떡하나”하시는 어르신께 2022년에도 다양한 뜨개 활동으로 코로나블루에서 벗어나 의미 있는 봉사단 활동을 지속적으로 할 수 있도록, 또 다른 이들의 마음도 방역할 수 있도록, 사랑의 마음을 잇는 뜨개실 구입에 여러분도 함께 해주세요.",
+    "organizationName" : "강동어르신행복센터",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/368KD/btrrDpfQAtj/SqV0zy0MF2kCnjNTfnk8nK/c360.jpg",
+    "dueDate" : "2022-04-09",
+    "startDate" : "2022-02-09",
+    "targetPrice" : 3000000,
+    "statusPrice" : 1866900,
+    "percent" : 63,
+    "isHeart" : false
+  }, {
+    "id" : "94131",
+    "siteType" : "kakao",
+    "url" : "https://together.kakao.com/fundraisings/94131",
+    "title" : "코로나19로 인해 3분 카레로 대체된 어르신의 밥상",
+    "category" : [ "어르신" ],
+    "tags" : [ "기본생활지원", "실버세대", "건강한식생활", "저소득가정" ],
+    "body" : "햇반, 김치, 3분 카레로 2년을 버텼습니다 많은 분께서 부산 중구에 대해 생각하실 때 ‘국제시장’과 ‘자갈치시장’ ‘보수동 책방골목’을 많이 떠올리시지만, 그 주변과 산복도로에 살고 계신 수많은 어르신들에 대해서는 쉽게 떠올리지 못하십니다.   주민등록 인구통계 행정안전부 2022년 1월 자료에 따르면 부산 중구에 살고 계신 만 65세 이상의 어르신은 전체 주민의 28퍼센트이며, 이는 부산은 물론이고 전국적으로도 매우 높은 수준입니다.   OECD 국가 중 노인 빈곤율 1위의 대한민국에서 어르신들이 가장 많은 부산 중구에는 저소득 어르신들(기초생활수급자, 차상위계층)도 당연히 많이 거주하고 계십니다. 1식 2,500원에 제공되는 식단 1식 2,500원에 제공되는 식단 보수동 책방골목에 위치한 중구노인복지관은 2021년 보조금으로 50인분의 식사를(한 끼 2500원) 지급받았습니다. 그러나 코로나 19 사태 이후 매일 꾸준하게 찾아오시는 140명에게 식사를 제공해 드리고 있어 복지관은 늘 적자로 대체식을 제공하고 있습니다.   다행히도 2022년에는 보조금으로 100인분의 식사를 지원받게 되었으나 여전히 제공 여건이 좋지 않은 것은 사실입니다. 지난 2년 동안 대체식을 제공하다 보니 식사 질이 더욱 안 좋아질 수밖에 없었습니다. ‘햇반’과 ‘3분 카레’, ‘건더기 없는 국’ 등 영양 불균형한 식단이 제공된 탓에 어르신들의 기력이 쇠하시고, 지쳐가는 모습을 마주하고 있습니다. 작지만 어르신들에게는 소중한 국물 요리 최근 새해를 맞아 저희 중구노인복지관에서는 대체식을 받는 저소득 어르신들을 대상으로 한 차례 설문조사를 실시했습니다. 거기에는 가장 먹고 싶은 음식이 무엇인지에 대한 질문도 포함돼 있었습니다. 평소에 불만을 가진 어르신들께서 가장 선호하신 것은 값비싼 고기반찬이 아닌 어느 가정에서나 흔하게 먹을 수 있는 ‘국’이었습니다.    “건더기가 좀 있고, 종류도 다양한 국이면 좋겠어.” “집에 반찬이 없다 보니 국물에 밥 말아 먹는 게 좋더라고.”   대부분 치아가 없어서 저작능력이 떨어지고 소화능력이 낮은 어르신들에게 국물요리는 가장 선호하는 음식입니다. 고기와 채소 등이 고루 들어가는 데다가 양도 많아 그나마 가성비 있게 제공될 수 있는 음식이기도 합니다. 2021년 카카오같이가치 모금 사업 지원물품 2021년 카카오같이가치 모금 사업 지원물품 앞서 말씀드린 코로나19로 열악해진 급식 문제를 개선하고자 저희는 예전부터 모금 사업도 진행해 왔습니다. 카카오같이가치 페이지에 이렇게 글을 올리는 것 또한 모금운동의 일환으로 진행되는 일입니다.   만약 이번 모금이 잘 이뤄진다면 어르신들의 의견을 반영하여 저희는 예전보다 더 나은 ‘국물요리 팩’을 제공해 드리고 싶습니다. 거기에다 마찬가지로 쉽게 드실 수 있는 영양만점의 ‘채소즙’도 제공해 드린다면 어르신들의 삶의 질이 조금은 더 나아질 수 있을 것이라고 기대합니다. 저소득 어르신들의 즐거운 식사를 위해 관심과 사랑을 베풀어 주신다면 감사하겠습니다. 어르신께 따끈한 국물과 영양만점 채소즙을 제공하고 싶습니다 어르신께 따끈한 국물과 영양만점 채소즙을 제공하고 싶습니다 통 큰 후원뿐만이 아니라, 한 분 한 분의 간단한 댓글만으로도 큰 사랑은 전해집니다. 모인 기금은 오직 어르신들의 급식 지원을 위해서 쓰이고, 지출 내역은 투명하게 공개될 것입니다. 코로나19로 건강한 식사가 어려워진 어르신들께 따스한 응원을 보내주세요!",
+    "organizationName" : "부산 중구노인복지관",
+    "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b4qDJk/btrtb3oVWxu/IWcLAStYqegzw8puDJ15x0/c360.jpg",
+    "dueDate" : "2022-04-17",
+    "startDate" : "2022-02-17",
+    "targetPrice" : 6873000,
+    "statusPrice" : 2922300,
+    "percent" : 43,
+    "isHeart" : false
+  }, {
+    "id" : "H000000183265",
+    "siteType" : "happybean",
+    "url" : "https://happybean.naver.com/donations/H000000183265",
+    "title" : "병과 싸움도 힘든데, 더 힘들게 하는 것은 치료비입니다",
+    "category" : [ "어려운이웃" ],
+    "tags" : [ "의료", "기타" ],
+    "body" : "조심 또 조심하고 생활했지만, 갑작스럽게 찾아온 뇌경색으로 긴 투병 중에 있습니다.서00 어르신(1952년생). 배우자의 가정폭력으로 인해 이혼 후 자녀들을 홀로 양육하며 힘들게 생활했지만 언제나 밝고 긍정적인 에너지가 넘치는 어르신이었습니다. 정년까지 공장에 다녀서 국민연금 55만 원 정도와 기초노령연금, 시장형 노인일자리 참여 등 월 100만 원 정도의 수입이 있어서 쪽방에 살고 있지만 생계비는 걱정이 없다며 자부심을 가기고 있었습니다. 어려서부터 힘들게 살았지만 남에게 피해 주지 않았고, 노후도 그러기 위해 준비했다며 건강관리만 잘하면 된다고 하시면서 평상시 고혈압, 협심증으로 인한 수술력이 있어서 건강 유지를 위해 유별나다 싶을 정도로 건강을 챙기셨습니다. 하지만 지난해 9월 초 갑작스럽게 찾아온 뇌경색으로 인해 긴 투병생활을 하고 있습니다. 왼쪽으로 편마비가 와서 말도, 걷는 것도, 왼손 사용도 할 수 없었지만 지금은 재활치료를 통해 말도, 걷는 것도 어느정도 회복됐습니다. 하지만 여전히 손에 힘이 없고 도움 없이 혼자 걷는 것은 불안정한 상황입니다.암을 극복하기 위해 암과 긴 싸움을 하고 있는 중입니다.김 00씨(1959년생). 여자의 몸으로 여인숙을 관리하며 생계를 유지하면서 생활하고 있습니다. 결혼은 했으나 배우자와 이별해 두 자녀들을 키우기 위해 여러 일을 전전하다가 여인숙 관리 일을 한지가 10년 정도 됩니다. 지난해 말 건강이 좋지 않아 건강검진을 받았는데 유방암 3기 판정을 받아 현재 항암치료를 받고 있습니다. 여러 차례 방사선 치료를 받았고 지금도 받고 있지만 아직 뚜렷한 효과가 없고 방사선 치료를 받으면 너무 힘들어 며칠 입원하지만 오래 있을 수 없어 여인숙으로 돌아올 수밖에 없는 상황입니다. 좁은 여인숙 방에서 홀로 투병하며, 생계를 위해 여인숙 청소 일을 하고 있습니다. 너무 기력이 없어 먹는 것도 힘들어, 먹지도 못하고 누워있는 모습을 종종 봅니다. 자녀들은 있지만 형평상 어머니를 돌봐줄 수 없는 형편이라 김 00씨 홀로 암과의 긴 사투를 벌이고 있는 중입니다.질병과의 싸움도 힘든데 더 힘들게 하는 것은 치료비입니다.현재 서 00어르신은 월수입이 80만 원 정도(노인 일자리 사업 수입 제외)로 공적부조를 받을 수 없는 상황에서 뇌경색 발현 후 시술과 병원 치료비는 본 상담소 협력병원의 도움으로 해결했으나 지난해 10월부터 재활병원 입원치료비는 어르신이 해결하고 있습니다. 한 달에 2백만 원 정도의 병원비는 너무나 큰돈이지만, 어르신께서 퇴원 후 혼자 화장실이 없는 쪽방에서 집 박에 별도로 설치된 공동화장실을 사용하면서 생활하려면 화장실 다닐 정도로 몸을 회복해야 하는 상황입니다. 병원비 문제로 어르신과 상담을 진행했는데 자신의 장례비용으로 모아둔 돈이 있어서 그 돈으로 병원비를 감당했는데, 앞으로가 문제라고 합니다. 아직 혼자 거동하는 것이 힘들고 왼손을 사용할 수 없어 재활훈련이 더 필요한 상황으로 병원비 지원이 필요합니다. 김 00씨도 방사선 치료를 하고 있어서 병원비도 문제지만 음식을 제대로 먹지 못하고 있어서 체력 유지를 위해 건강식을 드실 수 있도록 도움이 필요합니다.긴 투병생활과 코로나바이러스를 잘 극복할 수 있도록 돕고자 합니다.두 분 외에도 현재 정00(1958년생) 씨도 올해 1월 뇌경색으로 쓰러져 투병 중에 있습니다. 정 00씨는 뇌 수술 후 한 달 넘게 병원에 입원해 있는데 오른쪽 편마비와 말을 하지 못해 현재 눈으로만 의사소통을 하고 있으며, 움직일 수 없는 상황입니다. 많은 도움의 손길을 통해 병원비 문제는 해결했으나, 앞으로 긴 재활의 과정이 남아있어서 도움이 필요합니다. 또한 코로나 바이러스에 감염되지 않기 위해 개인방역 생활을 철저히 하고 생활했지만, 고시원, 쪽방 등 주거환경으로 인해 감염자가 발생하고 있습니다. 이00씨 감기처럼 생각한 오미크론 바이러스 감염, 잠깐 아프고 끝날 줄 알았는데... 몸이 예전 같지 않아 일용직으로 생계를 유지했는데 장기간 일을 하지 못하고 있다며 도움을 요청했습니다 삶의 위기를 잘 극복할 수 있도록 따뜻한 도움의 손길을 요청합니다.쪽방, 가장 열악한 주거환경에서 희망으로 더 나은 미래를 꿈꾸며 생활했지만, 갑자기 찾아온 질병으로 인해 힘든 투병 중에 있는 분들에게 도움의 손길이 절실합니다. 본 상담소는 인생의 위기 가운데서 힘들게 싸우고 있는 분들이 위기를 잘 극복하고 건강을 회복할 수 있도록 병원비로, 식료품(밑반찬,즉석식품,보충식 등) 지원으로, 생계비로 긴급 지원 활동을 하고자 합니다. 본 상담소에서는 직접적인 현금성 지원은 되도록 지양하고 있지만 대상자의 처한 상황에 따라 지원이 필요한 경우가 있어서 긴급지원을 시행하고 있습니다. 모두가 힘든 시기를 보내고 있지만 더 고통 중에 있는 분들에게 여러분의 따뜻한 손길을 보내 주시기 부탁드립니다.",
+    "organizationName" : "인천쪽방상담소",
+    "thumbnail" : "https://happybean-phinf.pstatic.net/20220225_61/1645773240913NLtsx_JPEG/%EB%A7%8C%EC%84%9D1%EA%B5%AC%EC%97%AD.jpg?type=a360",
+    "dueDate" : "2022-05-26",
+    "startDate" : "2022-02-25",
+    "targetPrice" : 9600000,
+    "statusPrice" : 4278900,
+    "percent" : 44,
+    "isHeart" : false
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_정보"><a class="link" href="#_응답_필드_정보">응답 필드 정보</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">캠페인 리스트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">캠페인 아이디</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].siteType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사이트 타입</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].category</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">카테고리</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].tags</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">태그 모음</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].body</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">본문</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].organizationName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기부 단체</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].thumbnail</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">썸네일 URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].dueDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">마감 날짜</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].startDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">시작 날짜</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].targetPrice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">목표 금액</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].statusPrice</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 금액</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].percent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">달성 정도</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>campaigns.[].isHeart</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">좋아요 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="categories"><a class="link" href="#categories">3. 카테고리</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>카테고리 API 입니다.</p>
+<p>카테고리를 반환합니다.</p>
 </div>
 <div class="sect3">
 <h4 id="_요청_5"><a class="link" href="#_요청_5">요청</a></h4>
@@ -1256,7 +1794,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_2"><a class="link" href="#_응답_2">응답</a></h4>
+<h4 id="_응답_3"><a class="link" href="#_응답_3">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -1283,9 +1821,6 @@ Content-Length: 169
 <div class="sect1">
 <h2 id="user"><a class="link" href="#user">4. 유저</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>유저 API 입니다.</p>
-</div>
 <div class="sect2">
 <h3 id="_회원가입"><a class="link" href="#_회원가입">4.1. 회원가입</a></h3>
 <div class="sect3">
@@ -1309,7 +1844,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보"><a class="link" href="#_요청_필드_정보">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_정보_2"><a class="link" href="#_요청_필드_정보_2">요청 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1374,7 +1909,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_3"><a class="link" href="#_응답_3">응답</a></h4>
+<h4 id="_응답_4"><a class="link" href="#_응답_4">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
@@ -1402,7 +1937,7 @@ Content-Length: 157
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보"><a class="link" href="#_응답_필드_정보">응답 필드 정보</a></h4>
+<h4 id="_응답_필드_정보_2"><a class="link" href="#_응답_필드_정보_2">응답 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1473,7 +2008,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_2"><a class="link" href="#_요청_필드_정보_2">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_정보_3"><a class="link" href="#_요청_필드_정보_3">요청 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1510,14 +2045,14 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_4"><a class="link" href="#_응답_4">응답</a></h4>
+<h4 id="_응답_5"><a class="link" href="#_응답_5">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkxNTAzNjZ9.AdwHAnXhYgerW508Iog_O-QIqU8mX1rMDet51K8A-jv_oxuk7FlaPDgvFaSHN3DOyrpvTuHuwXK0-p0icg_F_Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDg5MTcxMzd9.8gIY_de1UaRqOQl4E_LiTH5enpC6BopRDjDrdh-GFe7-Gs51nMZ258YV_vmhTyjISrHq2l8z1USzDZmjsy8TZg
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1528,7 +2063,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkxNTAzNjZ9.AdwHAnXhYgerW508Iog_O-QIqU8mX1rMDet51K8A-jv_oxuk7FlaPDgvFaSHN3DOyrpvTuHuwXK0-p0icg_F_Q"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDg5MTcxMzd9.8gIY_de1UaRqOQl4E_LiTH5enpC6BopRDjDrdh-GFe7-Gs51nMZ258YV_vmhTyjISrHq2l8z1USzDZmjsy8TZg"
 }</code></pre>
 </div>
 </div>
@@ -1555,7 +2090,7 @@ Content-Length: 208
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보_2"><a class="link" href="#_응답_필드_정보_2">응답 필드 정보</a></h4>
+<h4 id="_응답_필드_정보_3"><a class="link" href="#_응답_필드_정보_3">응답 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1587,7 +2122,7 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkxNTAzNjZ9.AdwHAnXhYgerW508Iog_O-QIqU8mX1rMDet51K8A-jv_oxuk7FlaPDgvFaSHN3DOyrpvTuHuwXK0-p0icg_F_Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDg5MTcxMzd9.8gIY_de1UaRqOQl4E_LiTH5enpC6BopRDjDrdh-GFe7-Gs51nMZ258YV_vmhTyjISrHq2l8z1USzDZmjsy8TZg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1615,7 +2150,7 @@ Host: localhost:8080</code></pre>
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_5"><a class="link" href="#_응답_5">응답</a></h4>
+<h4 id="_응답_6"><a class="link" href="#_응답_6">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -1634,27 +2169,27 @@ Content-Length: 724
 
 {
   "user" : {
-    "id" : "76c5916e-4e85-4888-8591-6e4e856888da",
+    "id" : "3028a829-8991-4948-a8a8-2989919948c3",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$fB5DYqN9W8rOdf7VSD3fNOBPRB/FY7g6bm1dm7NGnGR3P2lXPV.Y.",
+    "password" : "{bcrypt}$2a$10$eVt34UJozrZAmMv4cjsROuUPXoEY3.3HrmrSprqWsal2Ddd4PYv6e",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-04-04T18:19:23",
-    "modify_date" : "2022-04-04T18:19:23",
+    "create_date" : "2022-04-02T01:32:15",
+    "modify_date" : "2022-04-02T01:32:15",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 90,
+      "id" : 27,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 91,
+      "id" : 28,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1666,7 +2201,7 @@ Content-Length: 724
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보_3"><a class="link" href="#_응답_필드_정보_3">응답 필드 정보</a></h4>
+<h4 id="_응답_필드_정보_4"><a class="link" href="#_응답_필드_정보_4">응답 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1755,9 +2290,6 @@ Content-Length: 724
 <div class="sect1">
 <h2 id="heart"><a class="link" href="#heart">5. 좋아요</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>좋아요 API 입니다.</p>
-</div>
 <div class="sect2">
 <h3 id="_좋아요"><a class="link" href="#_좋아요">5.1. 좋아요</a></h3>
 <div class="sect3">
@@ -1777,7 +2309,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_3"><a class="link" href="#_요청_필드_정보_3">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_정보_4"><a class="link" href="#_요청_필드_정보_4">요청 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1814,7 +2346,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_6"><a class="link" href="#_응답_6">응답</a></h4>
+<h4 id="_응답_7"><a class="link" href="#_응답_7">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
@@ -1857,7 +2389,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_4"><a class="link" href="#_요청_필드_정보_4">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_정보_5"><a class="link" href="#_요청_필드_정보_5">요청 필드 정보</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1894,7 +2426,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_7"><a class="link" href="#_응답_7">응답</a></h4>
+<h4 id="_응답_8"><a class="link" href="#_응답_8">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -1924,7 +2456,7 @@ Content-Length: 92
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-04 18:18:29 +0900
+Last updated 2022-04-02 01:06:34 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

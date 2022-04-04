@@ -8,9 +8,11 @@ import static com.hsu.mamomo.document.DocumentFormatGenerator.getSortFormat;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import com.hsu.mamomo.util.CampaignDocumentUtil;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,18 +49,19 @@ class CampaignControllerTest {
                         getDocumentResponse(),
                         pathParameters(
                                 parameterWithName("sort").description(
-                                        "- 캠페인 리스트 정렬 방식\n\n"
-                                                + "default값은 최신 순\n\n"
-                                                + "- 사용 가능한 값:\n\n"
-                                                + "정렬 대상: start_date, due_date\n\n"
-                                                + "정렬 방법: asc, desc\n\n"
-                                                + "예) sort=start_date,desc (최신 순)\n\n"
-                                                + "sort=due_date,asc (마감 순)")
+                                                "- 캠페인 리스트 정렬 방식\n\n"
+                                                        + "default값은 최신 순\n\n"
+                                                        + "- 사용 가능한 값:\n\n"
+                                                        + "정렬 대상: start_date, due_date\n\n"
+                                                        + "정렬 방법: asc, desc\n\n"
+                                                        + "예) sort=start_date,desc (최신 순)\n\n"
+                                                        + "sort=due_date,asc (마감 순)")
                                         .optional()
                                         .attributes(getSortFormat()),
                                 CampaignDocumentUtil.getCampaginParameterWithName_Category()
                                         .optional()
-                                        .attributes(getCategoryFormat())
+                                        .attributes(getCategoryFormat()),
+                                parameterWithName("keyword").description("검색 키워드").optional()
                         ),
                         CampaignDocumentUtil.getCampaignResponseFields()
                 ));
@@ -67,10 +70,25 @@ class CampaignControllerTest {
         resultActions = CampaignDocumentUtil.getCampaignExpect(resultActions);
     }
 
+    @DisplayName("검색 키워드로 캠페인 글 검색")
+    @Test
+    public void searchCampaignsByKeyword() throws Exception {
+
+        mockMvc.perform(get("/api/search/campaigns?")
+                        .param("sort", "start_date,desc")
+                        .param("keyword", "노인")
+                        .contentType(MediaType.APPLICATION_JSON))
+
+                .andDo(document("search-campaigns-by-keyword",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                ));
+    }
+
     @Test
     void Campaign_All() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-default",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -80,8 +98,8 @@ class CampaignControllerTest {
     @Test
     void Campaign_Sort() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("sort", "start_date,desc")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("sort", "start_date,desc")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -91,11 +109,24 @@ class CampaignControllerTest {
     @Test
     void Campaign_Category() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("category", String.valueOf(8))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("category", String.valueOf(8))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-category",
                         getDocumentRequest(),
                         getDocumentResponse()
                 ));
     }
+
+    @Test
+    public void Campaign_Search() throws Exception {
+
+        mockMvc.perform(get("/api/campaigns")
+                        .param("keyword", "노인")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(document("campaigns-search",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                ));
+    }
+
 }
