@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.SearchPage;
 
 @Getter
 @Setter
@@ -17,5 +19,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CampaignDto {
     @NonNull
-    private List<Campaign> campaigns;
+    private Page<Campaign> campaigns;
 }
