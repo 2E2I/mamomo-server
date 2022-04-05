@@ -455,6 +455,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#campaigns-all">1.1. 전체 리스트</a>
 <ul class="sectlevel3">
 <li><a href="#_요청">요청</a></li>
+<li><a href="#_요청_헤더">요청 헤더</a></li>
+<li><a href="#_요청_파라미터">요청 파라미터</a></li>
+<li><a href="#_응답_바디">응답 바디</a></li>
+<li><a href="#_응답_예시">응답 예시</a></li>
 </ul>
 </li>
 <li><a href="#campaigns-category">1.2. 카테고리별 리스트</a>
@@ -465,9 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#starch-by-keyword">1.3. 키워드 검색</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_3">요청</a></li>
-<li><a href="#_요청_파라미터">요청 파라미터</a></li>
-<li><a href="#_응답_바디">응답 바디</a></li>
-<li><a href="#_응답_예시">응답 예시</a></li>
+<li><a href="#_요청_파라미터_2">요청 파라미터</a></li>
 </ul>
 </li>
 </ul>
@@ -493,26 +495,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_회원가입">4.1. 회원가입</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_6">요청</a></li>
-<li><a href="#_요청_필드_정보">요청 필드 정보</a></li>
+<li><a href="#_요청_필드">요청 필드</a></li>
 <li><a href="#_응답_3">응답</a></li>
-<li><a href="#_응답_필드_정보">응답 필드 정보</a></li>
+<li><a href="#_응답_필드">응답 필드</a></li>
 </ul>
 </li>
 <li><a href="#_토큰_발급_로그인">4.2. 토큰 발급 (로그인)</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_7">요청</a></li>
-<li><a href="#_요청_필드_정보_2">요청 필드 정보</a></li>
+<li><a href="#_요청_필드_2">요청 필드</a></li>
 <li><a href="#_응답_4">응답</a></li>
-<li><a href="#_응답_헤더_정보">응답 헤더 정보</a></li>
-<li><a href="#_응답_필드_정보_2">응답 필드 정보</a></li>
+<li><a href="#_응답_헤더">응답 헤더</a></li>
+<li><a href="#_응답_필드_2">응답 필드</a></li>
 </ul>
 </li>
 <li><a href="#_유저_정보_조회">4.3. 유저 정보 조회</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_8">요청</a></li>
-<li><a href="#_요청_헤더_정보">요청 헤더 정보</a></li>
+<li><a href="#_요청_헤더_2">요청 헤더</a></li>
 <li><a href="#_응답_5">응답</a></li>
-<li><a href="#_응답_필드_정보_3">응답 필드 정보</a></li>
+<li><a href="#_응답_필드_3">응답 필드</a></li>
 </ul>
 </li>
 </ul>
@@ -522,14 +524,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_좋아요">5.1. 좋아요</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_9">요청</a></li>
-<li><a href="#_요청_필드_정보_3">요청 필드 정보</a></li>
+<li><a href="#_요청_필드_3">요청 필드</a></li>
 <li><a href="#_응답_6">응답</a></li>
 </ul>
 </li>
 <li><a href="#_좋아요_취소">5.2. 좋아요 취소</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_10">요청</a></li>
-<li><a href="#_요청_필드_정보_4">요청 필드 정보</a></li>
+<li><a href="#_요청_필드_4">요청 필드</a></li>
 <li><a href="#_응답_7">응답</a></li>
 </ul>
 </li>
@@ -574,48 +576,118 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjUxMDJ9.LAyxe3IqGKQLYr6S3N6McHUxAnKB13w9Sctuv7orQPiKbnYQ8MAWWF5IfWdmFBbuQFW47HoYXtdilrb16J3bJg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNTd9.qJj6F-6K3Fcqbd3w7KmUOEMIfFX0YMSgve6e5ubhtz8VxklIU6I6z7VCMuEcDx1JuFCtiW65-9VBJI_elByX9g
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="campaigns-category"><a class="link" href="#campaigns-category">1.2. 카테고리별 리스트</a></h3>
 <div class="sect3">
-<h4 id="_요청_2"><a class="link" href="#_요청_2">요청</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=8 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Host: localhost:8080</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="starch-by-keyword"><a class="link" href="#starch-by-keyword">1.3. 키워드 검색</a></h3>
+<h4 id="_요청_헤더"><a class="link" href="#_요청_헤더">요청 헤더</a></h4>
 <div class="paragraph">
-<p>키워드로 캠페인을 검색합니다.</p>
+<p>모든 캠페인 API 에 모두 적용되는 요청 헤더 입니다.</p>
 </div>
-<div class="sect3">
-<h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Host: localhost:8080</code></pre>
-</div>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">발급받은 jwt 토큰.</p>
+<p class="tableblock">토큰 앞에 'Bearer '을 붙인다.인증 되었을 경우 유저에 따른 isHeart 여부가 표시된다.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_요청_파라미터"><a class="link" href="#_요청_파라미터">요청 파라미터</a></h4>
 <div class="paragraph">
-<p>Unresolved directive in index.adoc - include::./build/generated-snippets/ca/path-parameters.adoc[]</p>
+<p>검색 API 와 정렬 방식이 다릅니다. 유의해주세요!</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. /api/campaigns</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Form</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">한 페이지당 캠페인 개수</p>
+<p class="tableblock">default 값은 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지. 0부터 증가</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{정렬대상}, {정렬방법}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 리스트 정렬 방식</p>
+<p class="tableblock">default 값은 최신 순</p>
+<p class="tableblock">- 사용 가능한 값:</p>
+<p class="tableblock">정렬 대상: start_date, due_date &#8230;&#8203;</p>
+<p class="tableblock">정렬 방향: ASC,DESC</p>
+<p class="tableblock">예) sort=start_date,DESC (최신 순)</p>
+<p class="tableblock">sort=due_date,ASC (마감 순)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>category</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{카테고리 id}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 카테고리</p>
+<p class="tableblock">- 사용 가능한 값:</p>
+<p class="tableblock">1: 아동|청소년</p>
+<p class="tableblock">2: 어르신</p>
+<p class="tableblock">3: 장애인</p>
+<p class="tableblock">4: 어려운이웃</p>
+<p class="tableblock">5: 다문화</p>
+<p class="tableblock">6: 지구촌</p>
+<p class="tableblock">7: 가족|여성</p>
+<p class="tableblock">8: 우리사회</p>
+<p class="tableblock">9: 동물</p>
+<p class="tableblock">10: 환경</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_응답_바디"><a class="link" href="#_응답_바디">응답 바디</a></h4>
+<div class="paragraph">
+<p>모든 캠페인 API 에 모두 적용되는 요청 바디 입니다.</p>
+</div>
+<div class="paragraph">
+<p>isHeart의 경우 토큰 인증이 되었을 경우에만 해당 유저가 좋아요를 누른 캠페인에 대해서만
+true로 표시됩니다.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -800,6 +872,9 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_응답_예시"><a class="link" href="#_응답_예시">응답 예시</a></h4>
+<div class="paragraph">
+<p>모든 캠페인 API 에 모두 적용되는 응답 예시 입니다.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -872,14 +947,14 @@ Content-Length: 17182
     "pageable" : {
       "sort" : {
         "empty" : false,
-        "sorted" : true,
-        "unsorted" : false
+        "unsorted" : false,
+        "sorted" : true
       },
       "offset" : 0,
-      "pageSize" : 3,
       "pageNumber" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "pageSize" : 3,
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
     "totalPages" : 96,
@@ -888,8 +963,8 @@ Content-Length: 17182
     "number" : 0,
     "sort" : {
       "empty" : false,
-      "sorted" : true,
-      "unsorted" : false
+      "unsorted" : false,
+      "sorted" : true
     },
     "first" : true,
     "numberOfElements" : 3,
@@ -898,6 +973,91 @@ Content-Length: 17182
 }</code></pre>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="campaigns-category"><a class="link" href="#campaigns-category">1.2. 카테고리별 리스트</a></h3>
+<div class="sect3">
+<h4 id="_요청_2"><a class="link" href="#_요청_2">요청</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?category=8 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="starch-by-keyword"><a class="link" href="#starch-by-keyword">1.3. 키워드 검색</a></h3>
+<div class="paragraph">
+<p>키워드로 캠페인을 검색합니다.</p>
+</div>
+<div class="sect3">
+<h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_파라미터_2"><a class="link" href="#_요청_파라미터_2">요청 파라미터</a></h4>
+<div class="paragraph">
+<p>비 검색 API 와 정렬 방식이 다릅니다. 유의해주세요!</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. /api/campaigns</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Form</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">한 페이지당 캠페인 개수</p>
+<p class="tableblock">default 값은 20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 페이지. 0부터 증가</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{정렬대상}, {정렬방법}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">- 캠페인 리스트 정렬 방식</p>
+<p class="tableblock">정렬 하지 않으려면 sort=none,none이나 sort=none</p>
+<p class="tableblock">- 사용 가능한 값:</p>
+<p class="tableblock">정렬 대상: start_date, due_date &#8230;&#8203;</p>
+<p class="tableblock">정렬 방향: ASC,DESC</p>
+<p class="tableblock">예) sort=start_date,DESC (최신 순)</p>
+<p class="tableblock">sort=due_date,ASC (마감 순)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>keyword</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1019,7 +1179,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보"><a class="link" href="#_요청_필드_정보">요청 필드 정보</a></h4>
+<h4 id="_요청_필드"><a class="link" href="#_요청_필드">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1112,7 +1272,7 @@ Content-Length: 157
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보"><a class="link" href="#_응답_필드_정보">응답 필드 정보</a></h4>
+<h4 id="_응답_필드"><a class="link" href="#_응답_필드">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1183,7 +1343,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_2"><a class="link" href="#_요청_필드_정보_2">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_2"><a class="link" href="#_요청_필드_2">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1227,7 +1387,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjUxMTN9.q4QeHOVU_s31l5hwbolOw-lHAOe_mqRiICeOAHFcWN-IiVWGMS7V7ZbPJzjA1mcd_UPzq0fvJzXn4gmXGZUEVQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1238,13 +1398,13 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjUxMTN9.q4QeHOVU_s31l5hwbolOw-lHAOe_mqRiICeOAHFcWN-IiVWGMS7V7ZbPJzjA1mcd_UPzq0fvJzXn4gmXGZUEVQ"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA"
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_헤더_정보"><a class="link" href="#_응답_헤더_정보">응답 헤더 정보</a></h4>
+<h4 id="_응답_헤더"><a class="link" href="#_응답_헤더">응답 헤더</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -1265,7 +1425,7 @@ Content-Length: 208
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보_2"><a class="link" href="#_응답_필드_정보_2">응답 필드 정보</a></h4>
+<h4 id="_응답_필드_2"><a class="link" href="#_응답_필드_2">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1297,13 +1457,13 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjUxMTN9.q4QeHOVU_s31l5hwbolOw-lHAOe_mqRiICeOAHFcWN-IiVWGMS7V7ZbPJzjA1mcd_UPzq0fvJzXn4gmXGZUEVQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_헤더_정보"><a class="link" href="#_요청_헤더_정보">요청 헤더 정보</a></h4>
+<h4 id="_요청_헤더_2"><a class="link" href="#_요청_헤더_2">요청 헤더</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -1344,27 +1504,27 @@ Content-Length: 726
 
 {
   "user" : {
-    "id" : "8296bfd6-a82d-46f7-96bf-d6a82dd6f761",
+    "id" : "ad9bdd34-5bdc-4dfa-9bdd-345bdc8dfa31",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$J7GIk2NpL5VcoKmPkAq9eO2AGm28SzvCprKdKPyVDUJZOWqrqw/AC",
+    "password" : "{bcrypt}$2a$10$PKuVJAW2ZUsuW/s1qTEGgOmTJ39rvp.Syymhjb9mC2ZCF2OJNwy2O",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-04-05T15:05:12",
-    "modify_date" : "2022-04-05T15:05:12",
+    "create_date" : "2022-04-05T15:22:49",
+    "modify_date" : "2022-04-05T15:22:49",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 123,
+      "id" : 126,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 124,
+      "id" : 127,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1376,7 +1536,7 @@ Content-Length: 726
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_정보_3"><a class="link" href="#_응답_필드_정보_3">응답 필드 정보</a></h4>
+<h4 id="_응답_필드_3"><a class="link" href="#_응답_필드_3">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1487,7 +1647,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_3"><a class="link" href="#_요청_필드_정보_3">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_3"><a class="link" href="#_요청_필드_3">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1567,7 +1727,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_정보_4"><a class="link" href="#_요청_필드_정보_4">요청 필드 정보</a></h4>
+<h4 id="_요청_필드_4"><a class="link" href="#_요청_필드_4">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1634,7 +1794,7 @@ Content-Length: 92
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-05 15:04:46 +0900
+Last updated 2022-04-05 15:13:16 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
