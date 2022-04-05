@@ -29,30 +29,52 @@ MaMoMo API 문서입니다.
 [[campaigns-all]]
 === 전체 리스트
 
-====  요청
+==== 요청
+
+파라미터 없이
 
 include::{snippets}/campaigns-default/http-request.adoc[]
 
-정렬 추가 시
+모든 파라미터, 헤더 지정
 
-include::{snippets}/campaigns-sort/http-request.adoc[]
+include::{snippets}/campaigns/http-request.adoc[]
+
+==== 요청 헤더
+
+모든 캠페인 API 에 모두 적용되는 요청 헤더 입니다.
+
+include::{snippets}/campaigns/request-headers.adoc[]
+
+==== 요청 파라미터
+
+검색 API 와 정렬 방식이 다릅니다. 유의해주세요!
+
+include::{snippets}/campaigns/path-parameters.adoc[]
+
+==== 응답 바디
+
+모든 캠페인 API 에 모두 적용되는 요청 바디 입니다.
+
+isHeart의 경우 토큰 인증이 되었을 경우에만 해당 유저가 좋아요를 누른 캠페인에 대해서만
+true로 표시됩니다.
+
+include::{snippets}/campaigns/response-fields.adoc[]
+
+==== 응답 예시
+
+모든 캠페인 API 에 모두 적용되는 응답 예시 입니다.
+
+include::{snippets}/campaigns/http-response.adoc[]
 
 [[campaigns-category]]
-=== 카테고리 리스트
+=== 카테고리별 리스트
 
 ==== 요청
 
 include::{snippets}/campaigns-category/http-request.adoc[]
 
-정렬 추가 시
-
-include::{snippets}/campaigns/http-request.adoc[]
-
-==== 요청 파라미터
-
-include::{snippets}/campaigns/path-parameters.adoc[]
-
 [[starch-by-keyword]]
+
 === 키워드 검색
 
 키워드로 캠페인을 검색합니다.
@@ -61,21 +83,11 @@ include::{snippets}/campaigns/path-parameters.adoc[]
 
 include::{snippets}/campaigns-search/http-request.adoc[]
 
-정렬 추가 시
-
-include::{snippets}/search-campaigns-by-keyword/http-request.adoc[]
-
 ==== 요청 파라미터
 
-include::{snippets}/campaigns/path-parameters.adoc[]
+비 검색 API 와 정렬 방식이 다릅니다. 유의해주세요!
 
-==== 응답 바디
-
-include::{snippets}/campaigns/response-fields.adoc[]
-
-==== 응답 예시
-
-include::{snippets}/campaigns/http-response.adoc[]
+include::{snippets}/campaigns-search-with-keyword-sort/path-parameters.adoc[]
 
 
 [[tag]]
@@ -119,13 +131,13 @@ include::{snippets}/categories/http-response.adoc[]
 ==== 요청
 include::{snippets}/signup-success/http-request.adoc[]
 
-==== 요청 필드 정보
+==== 요청 필드
 include::{snippets}/signup-success/request-fields.adoc[]
 
 ==== 응답
 include::{snippets}/signup-success/http-response.adoc[]
 
-==== 응답 필드 정보
+==== 응답 필드
 include::{snippets}/signup-success/response-fields.adoc[]
 
 === 토큰 발급 (로그인)
@@ -134,16 +146,16 @@ include::{snippets}/signup-success/response-fields.adoc[]
 ==== 요청
 include::{snippets}/authenticate-user/http-request.adoc[]
 
-==== 요청 필드 정보
+==== 요청 필드
 include::{snippets}/authenticate-user/request-fields.adoc[]
 
 ==== 응답
 include::{snippets}/authenticate-user/http-response.adoc[]
 
-==== 응답 헤더 정보
+==== 응답 헤더
 include::{snippets}/authenticate-user/response-headers.adoc[]
 
-==== 응답 필드 정보
+==== 응답 필드
 include::{snippets}/authenticate-user/response-fields.adoc[]
 
 === 유저 정보 조회
@@ -151,13 +163,13 @@ include::{snippets}/authenticate-user/response-fields.adoc[]
 ==== 요청
 include::{snippets}/get-user-info-with-jwtToken/http-request.adoc[]
 
-==== 요청 헤더 정보
+==== 요청 헤더
 include::{snippets}/get-user-info-with-jwtToken/request-headers.adoc[]
 
 ==== 응답
 include::{snippets}/get-user-info-with-jwtToken/http-response.adoc[]
 
-==== 응답 필드 정보
+==== 응답 필드
 include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 
 [[heart]]
@@ -170,7 +182,7 @@ include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 ==== 요청
 include::{snippets}/doHeart-success/http-request.adoc[]
 
-==== 요청 필드 정보
+==== 요청 필드
 include::{snippets}/doHeart-success/request-fields.adoc[]
 
 ==== 응답
@@ -181,7 +193,7 @@ include::{snippets}/doHeart-success/http-response.adoc[]
 ==== 요청
 include::{snippets}/unHeart-success/http-request.adoc[]
 
-==== 요청 필드 정보
+==== 요청 필드
 include::{snippets}/unHeart-success/request-fields.adoc[]
 
 ==== 응답
