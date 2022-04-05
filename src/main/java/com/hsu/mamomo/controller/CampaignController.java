@@ -4,6 +4,9 @@ import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +23,12 @@ public class CampaignController {
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping
     public CampaignDto getAllCampaigns(
-            @RequestParam(value = "sort", defaultValue = "none,none", required = false) String sort,
+            @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable,
             @RequestParam(value = "category", required = false) Integer category_id,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
 
-        return campaignService.getCampaigns(sort, category_id, keyword, authorization);
+        return campaignService.getCampaigns(pageable, category_id, keyword, authorization);
     }
 
 }

@@ -2,6 +2,7 @@ package com.hsu.mamomo.service.factory;
 
 import java.util.Map;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -29,10 +30,11 @@ public class ElasticCategoryFactory extends ElasticSortFactory {
 
 
     @Override
-    public NativeSearchQuery createQuery(String keyword, String item, String direction) {
+    public NativeSearchQuery createQuery(String keyword, Pageable pageable) {
         return new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery("category", keyword))
-                .withSorts(createSortBuilder(item, direction))
+                .withSorts(createSortBuilder(pageable))
+                .withPageable(pageable)
                 .build();
     }
 

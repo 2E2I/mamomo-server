@@ -21,6 +21,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -50,39 +55,32 @@ public class CampaignService {
         return userService.getUserIdByJwtToken(jwtToken);
     }
 
-    public CampaignDto getCampaigns(String sort, Integer category_id, String keyword,
+    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword,
             String authorization) {
 
-        String[] _sort = sort.split(","); // sort = [field, direction]
-
+        // 검색
         if (keyword != null) {
             campaignDto = new CampaignDto(
-                    searchByTitleOrBody(keyword, _sort[0], _sort[1]));
+                    searchByTitleOrBody(keyword, pageable));
         } else {
-            if (Objects.equals(_sort[0], "none") && Objects.equals(_sort[1], "none")) {
-                _sort[0] = "start_date";
-                _sort[1] = "desc";
+            if (category_id != null) { // 카테고리 별 조회
+                campaignDto = new CampaignDto(
+                        findAllOfCategory(category_id, pageable));
+            } else { // 전체보기
+                campaignDto = new CampaignDto(
+                        findAll(pageable));
             }
 
-            if (category_id != null) {
-                campaignDto = new CampaignDto(
-                        findAllOfCategory(category_id, _sort[0], _sort[1]));
-            } else {
-                campaignDto = new CampaignDto(
-                        findAll(_sort[0], _sort[1]));
+            if (authorization != null) {
+                String userId = getUserIdFromAuth(authorization);
+                campaignDto = addIsHeartInfo(userId);
             }
-        }
-
-        if (authorization != null) {
-            String userId = getUserIdFromAuth(authorization);
-            campaignDto = addIsHeartInfo(userId);
         }
 
         // 좋아요 갯수 추가
         campaignDto = addHeartCountInfo();
 
         return campaignDto;
-
     }
 
     /*
@@ -100,7 +98,7 @@ public class CampaignService {
             }
 
             List<Heart> hearts = user.get().getHearts();
-            List<Campaign> campaigns = campaignDto.getCampaigns();
+            Page<Campaign> campaigns = campaignDto.getCampaigns();
 
             for (Heart heart : hearts) {
                 String campaignId = heart.getCampaignId();
@@ -136,25 +134,25 @@ public class CampaignService {
     /*
      * 캠페인 전체 보기
      * */
-    public List<Campaign> findAll(String item, String direction) {
+    public Page<Campaign> findAll(Pageable pageable) {
         return categoryFactory
-                .getCampaignList(ElasticSortFactory.createBasicQuery(item, direction));
+                .getCampaignSearchPage(ElasticSortFactory.createBasicQuery(pageable));
     }
 
     /*
      * 캠페인 카테고리 별로 보기
      * */
-    public List<Campaign> findAllOfCategory(Integer category_id, String item, String direction) {
+    public Page<Campaign> findAllOfCategory(Integer category_id, Pageable pageable) {
         String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
         return categoryFactory
-                .getCampaignList(categoryFactory.createQuery(keyword, item, direction));
+                .getCampaignSearchPage(categoryFactory.createQuery(keyword, pageable));
     }
 
     /*
      * 캠페인 검색 결과 보기
      * 제목 + 본문 검색 (OR)
      * */
-    public List<Campaign> searchByTitleOrBody(String keyword, String item, String direction) {
-        return searchFactory.getCampaignList(searchFactory.createQuery(keyword, item, direction));
+    public Page<Campaign> searchByTitleOrBody(String keyword, Pageable pageable) {
+        return searchFactory.getCampaignSearchPage(searchFactory.createQuery(keyword, pageable));
     }
 }
