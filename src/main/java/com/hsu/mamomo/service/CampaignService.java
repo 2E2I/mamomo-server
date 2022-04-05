@@ -70,11 +70,11 @@ public class CampaignService {
                 campaignDto = new CampaignDto(
                         findAll(pageable));
             }
+        }
 
-            if (authorization != null) {
-                String userId = getUserIdFromAuth(authorization);
-                campaignDto = addIsHeartInfo(userId);
-            }
+        if (authorization != null) {
+            String userId = getUserIdFromAuth(authorization);
+            campaignDto = addIsHeartInfo(userId);
         }
 
         // 좋아요 갯수 추가
