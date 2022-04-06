@@ -106,11 +106,4 @@ public class HeartControllerTest {
 
     }
 
-    @Test
-    public void countHeartGroupingByCampaignId() {
-        List<Heart> hearts = heartRepository.findAll();
-        Map<String, List<Heart>> heartsMap = hearts.stream().collect(Collectors.groupingBy(Heart::getCampaignId));
-        System.out.println("heartsMap = " + heartsMap);
-    }
-
 }
