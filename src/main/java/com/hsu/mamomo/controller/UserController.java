@@ -1,28 +1,18 @@
 package com.hsu.mamomo.controller;
 
-import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_FIELD;
-import static com.hsu.mamomo.controller.exception.ErrorCode.WRONG_OBJECT;
-
-import com.hsu.mamomo.controller.exception.CustomException;
-import com.hsu.mamomo.controller.exception.ErrorResponse;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.service.UserService;
-import java.util.Objects;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,29 +64,6 @@ public class UserController {
     @DeleteMapping("/{email}")
     public ResponseEntity<String> deleteUser(@PathVariable String email) {
         return userService.deleteUser(email);
-    }
-
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(
-            MethodArgumentNotValidException exception) {
-        ObjectError objectError = Objects.requireNonNull(
-                exception.getBindingResult().getAllErrors().stream().findFirst()
-                        .orElse(null));
-        log.error("handleValidationException throw MethodArgumentNotValidException : {}",
-                INVALID_FIELD);
-        return ErrorResponse.toResponseEntity(INVALID_FIELD, objectError.getDefaultMessage());
-    }
-
-    @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResponseEntity<ErrorResponse> handleNotReadableException() {
-        log.error("handleNotReadableException throw Exception : {}", WRONG_OBJECT);
-        return ErrorResponse.toResponseEntity(WRONG_OBJECT);
-    }
-
-    @ExceptionHandler(value = CustomException.class)
-    public ResponseEntity<ErrorResponse> handleCustomException(CustomException e) {
-        log.error("handleCustomException throw CustomException : {}", e.getErrorCode());
-        return ErrorResponse.toResponseEntity(e.getErrorCode());
     }
 
 }
