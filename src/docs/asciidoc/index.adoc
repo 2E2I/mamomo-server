@@ -39,6 +39,10 @@ include::{snippets}/campaigns-default/http-request.adoc[]
 
 include::{snippets}/campaigns/http-request.adoc[]
 
+좋아요순. 모든 캠페인 API에 적용
+
+include::{snippets}/campaigns-sort-heart/http-request.adoc[]
+
 ==== 요청 헤더
 
 모든 캠페인 API 에 모두 적용되는 요청 헤더 입니다.

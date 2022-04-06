@@ -71,7 +71,6 @@ class CampaignControllerTest {
         String responseBody = mvcResult.getResponse().getContentAsString();
         TokenDto tokenDto = objectMapper.readValue(responseBody, TokenDto.class);
         jwtToken = tokenDto.getToken();
-        System.out.println("jwtToken = " + jwtToken);
 
         // 발급된 토큰이 유효한 jwt 토큰인지 확인
         assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));
@@ -116,7 +115,10 @@ class CampaignControllerTest {
                                 CampaignDocumentUtil.getCampaginParameterWithName_Category()
                                         .optional()
                                         .attributes(getCategoryFormat()),
-                                parameterWithName("keyword").description("검색 키워드").optional()
+                                parameterWithName("keyword").description("검색 키워드").optional(),
+                                parameterWithName("heart").description("좋아요순 true/false\n\n"
+                                        + "default 값은 false\n\n"
+                                        + "true일 경우 앞의 sort 정렬기준은 무시됨").optional()
                         ),
                         CampaignDocumentUtil.getCampaignResponseFields()
                 ));
@@ -143,6 +145,18 @@ class CampaignControllerTest {
                 .param("sort", "start_date,DESC")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                ));
+    }
+
+    @Test
+    @DisplayName("캠페인 조회 테스트 - 성공 :: 좋아요순")
+    void Campaign_sortHeartCount() throws Exception {
+        mockMvc.perform(get("/api/campaigns")
+                .param("heart", String.valueOf(true))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(document("campaigns-sort-heart",
                         getDocumentRequest(),
                         getDocumentResponse()
                 ));

@@ -244,7 +244,6 @@ class UserControllerTest {
         String responseBody = mvcResult.getResponse().getContentAsString();
         TokenDto tokenDto = objectMapper.readValue(responseBody, TokenDto.class);
         jwtToken = tokenDto.getToken();
-        System.out.println("jwtToken = " + jwtToken);
 
         // 발급된 토큰이 유효한 jwt 토큰인지 확인
         assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));

@@ -576,7 +576,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNTd9.qJj6F-6K3Fcqbd3w7KmUOEMIfFX0YMSgve6e5ubhtz8VxklIU6I6z7VCMuEcDx1JuFCtiW65-9VBJI_elByX9g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkyODJ9.DjEKaeuXlNp7616FBvgAEeEm2f9icZdlsU-YONvlto3Kpl3ZPtu_iFeiZ9-UUqro9N2RahhFEv4QWGbsJkS-9Q
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -675,6 +675,14 @@ Host: localhost:8080</code></pre>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>heart</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">좋아요순 true/false</p>
+<p class="tableblock">default 값은 false</p>
+<p class="tableblock">true일 경우 앞의 sort 정렬기준은 무시됨</p></td>
 </tr>
 </tbody>
 </table>
@@ -947,27 +955,27 @@ Content-Length: 17182
     "pageable" : {
       "sort" : {
         "empty" : false,
-        "unsorted" : false,
-        "sorted" : true
+        "sorted" : true,
+        "unsorted" : false
       },
       "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 3,
-      "unpaged" : false,
-      "paged" : true
+      "paged" : true,
+      "unpaged" : false
     },
     "last" : false,
-    "totalPages" : 96,
     "totalElements" : 287,
+    "totalPages" : 96,
     "size" : 3,
     "number" : 0,
     "sort" : {
       "empty" : false,
-      "unsorted" : false,
-      "sorted" : true
+      "sorted" : true,
+      "unsorted" : false
     },
-    "first" : true,
     "numberOfElements" : 3,
+    "first" : true,
     "empty" : false
   }
 }</code></pre>
@@ -995,12 +1003,8 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="sect3">
 <h4 id="_요청_3"><a class="link" href="#_요청_3">요청</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?keyword=%EB%85%B8%EC%9D%B8 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Host: localhost:8080</code></pre>
-</div>
+<div class="paragraph">
+<p>Unresolved directive in index.adoc - include::./build/generated-snippets/campaigns-search/http-request.adoc[]</p>
 </div>
 </div>
 <div class="sect3">
@@ -1387,7 +1391,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1398,7 +1402,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w"
 }</code></pre>
 </div>
 </div>
@@ -1457,7 +1461,7 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkyMjYxNzB9.ns52_ftkyyBZ0iXjh5RabzeY9XwdQphNhCbjyubAIbYjEdxakuw9dO7YTY62zUyuNml7den3vKfqUDFrAYJkIA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1500,31 +1504,31 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 726
+Content-Length: 722
 
 {
   "user" : {
-    "id" : "ad9bdd34-5bdc-4dfa-9bdd-345bdc8dfa31",
+    "id" : "5de04c07-98ac-4f20-a04c-0798ac3f20ea",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$PKuVJAW2ZUsuW/s1qTEGgOmTJ39rvp.Syymhjb9mC2ZCF2OJNwy2O",
+    "password" : "{bcrypt}$2a$10$6wSO75/PStQugaF6czEU8OZBAHvI0hpbNODIYH86bNedmAhItSzly",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-04-05T15:22:49",
-    "modify_date" : "2022-04-05T15:22:49",
+    "create_date" : "2022-04-06T14:28:23",
+    "modify_date" : "2022-04-06T14:28:23",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 126,
+      "id" : 5,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 127,
+      "id" : 6,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1794,7 +1798,7 @@ Content-Length: 92
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-05 15:13:16 +0900
+Last updated 2022-04-05 15:23:22 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
