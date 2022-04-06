@@ -89,24 +89,21 @@ public class CampaignService {
      * */
     public CampaignDto addIsHeartInfo(String userId) {
 
-        if (!userId.equals("")) {
+        Optional<User> user = userRepository.findUserById(userId);
 
-            Optional<User> user = userRepository.findUserById(userId);
+        if (user.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
 
-            if (user.isEmpty()) {
-                throw new CustomException(MEMBER_NOT_FOUND);
-            }
+        List<Heart> hearts = user.get().getHearts();
+        Page<Campaign> campaigns = campaignDto.getCampaigns();
 
-            List<Heart> hearts = user.get().getHearts();
-            Page<Campaign> campaigns = campaignDto.getCampaigns();
-
-            for (Heart heart : hearts) {
-                String campaignId = heart.getCampaignId();
-                Optional<Campaign> campaignOpt = campaigns
-                        .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
-                        .findFirst();
-                campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
-            }
+        for (Heart heart : hearts) {
+            String campaignId = heart.getCampaignId();
+            Optional<Campaign> campaignOpt = campaigns
+                    .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
+                    .findFirst();
+            campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
         }
 
         return campaignDto;
