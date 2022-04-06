@@ -7,6 +7,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,15 +47,13 @@ public class HeartControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private CampaignRepository campaignRepository;
-    @Autowired
-    private HeartRepository heartRepository;
 
     ObjectMapper objectMapper = new ObjectMapper();
     Map<String, String> input = new HashMap<>();
 
     @BeforeEach
     void setBody() {
-        Optional<Campaign> campaign = campaignRepository.findAll().stream().findFirst();
+        Optional<Campaign> campaign = campaignRepository.findDistinctBySiteType("happybean");
         if (campaign.isEmpty()) {
             throw new ResourceNotFoundException("캠페인을 찾을 수 없음");
         }
@@ -85,6 +84,21 @@ public class HeartControllerTest {
     }
 
     @Test
+    @Order(101)
+    @DisplayName("좋아요 테스트 - 실패 :: 이미 좋아요 된 캠페인")
+    public void doHeartFailDuplicate() throws Exception {
+
+        mockMvc
+                .perform(post("/api/heart")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.code").value("ALREADY_HEARTED"))
+                .andExpect(jsonPath("$.message").value("이미 좋아요 된 캠페인 입니다."));
+    }
+
+    @Test
     @Order(200)
     @DisplayName("좋아요 취소 테스트 - 성공")
     public void unHeart() throws Exception {
@@ -103,6 +117,23 @@ public class HeartControllerTest {
                                 fieldWithPath("campaignId").description("좋아요 취소 할 캠페인 ID"),
                                 fieldWithPath("userId").description("좋아요 취소 누르는 유저 ID")
                         )));
+
+    }
+
+    @Test
+    @Order(201)
+    @DisplayName("좋아요 취소 테스트 - 실패 :: 없는 좋아요 취소 시도")
+    public void unHeartFailNotFound() throws Exception {
+
+        mockMvc
+                .perform(delete("/api/heart")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("HEART_NOT_FOUND"))
+                .andExpect(jsonPath("$.message").value("해당 좋아요 정보를 찾을 수 없습니다."));
+
 
     }
 

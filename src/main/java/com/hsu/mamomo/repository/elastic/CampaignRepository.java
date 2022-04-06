@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface CampaignRepository extends ElasticsearchRepository<Campaign, String> {
+
     List<Campaign> findAll();
-    Optional<Campaign> findFirstByIdExists();
+
+    Optional<Campaign> findDistinctBySiteType(String siteType);
 }
