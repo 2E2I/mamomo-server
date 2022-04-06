@@ -14,6 +14,8 @@ import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -55,7 +57,7 @@ public class CampaignService {
         return userService.getUserIdByJwtToken(jwtToken);
     }
 
-    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword,
+    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword, Boolean heart,
             String authorization) {
 
         // 검색
@@ -79,6 +81,10 @@ public class CampaignService {
 
         // 좋아요 갯수 추가
         campaignDto = addHeartCountInfo();
+
+        if (heart) {
+            campaignDto.setCampaigns(sortUnmodifiableList(campaignDto, pageable));
+        }
 
         return campaignDto;
     }
@@ -151,5 +157,16 @@ public class CampaignService {
      * */
     public Page<Campaign> searchByTitleOrBody(String keyword, Pageable pageable) {
         return searchFactory.getCampaignSearchPage(searchFactory.createQuery(keyword, pageable));
+    }
+
+    public Page<Campaign> sortUnmodifiableList(CampaignDto campaignDto, Pageable pageable) {
+
+        List<Campaign> campaignList = new ArrayList<>(campaignDto.getCampaigns().getContent());
+        campaignList.sort(Comparator.comparing(Campaign::getHeartCount).reversed());
+
+        int start = (int)pageable.getOffset();
+        int end = Math.min((start + pageable.getPageSize()), campaignList.size());
+
+        return new PageImpl<>(campaignList.subList(start, end), pageable, campaignList.size());
     }
 }
