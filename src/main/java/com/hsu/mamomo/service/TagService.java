@@ -2,6 +2,7 @@ package com.hsu.mamomo.service;
 
 import static java.util.stream.Collectors.toList;
 
+import com.hsu.mamomo.service.factory.ElasticTagFactory;
 import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -23,32 +25,13 @@ import org.springframework.stereotype.Service;
 public class TagService {
 
     private final RestHighLevelClient elasticsearchClient;
+    private final ElasticTagFactory elasticTagFactory;
 
     /*
      * 상위 태그 반환
      * */
     @SneakyThrows
-    public List<String> findTop10Tags() {
-
-        TermsAggregationBuilder aggregation =
-                AggregationBuilders.terms("tags")
-                        .field("tags.keyword");
-
-        SearchSourceBuilder builder = new SearchSourceBuilder().aggregation(aggregation);
-        SearchRequest searchRequest = new SearchRequest("campaigns").source(builder);
-
-        SearchResponse response = elasticsearchClient.search(searchRequest,
-                RequestOptions.DEFAULT);
-
-        Map<String, Aggregation> results = response.getAggregations()
-                .asMap();
-
-        ParsedStringTerms topTags = (ParsedStringTerms) results.get("tags");
-
-        return topTags.getBuckets()
-                .stream()
-                .map(MultiBucketsAggregation.Bucket::getKeyAsString)
-                .sorted()
-                .collect(toList());
+    public List<String> getRangeTags(int from, int to) {
+        return elasticTagFactory.getTags(from, to);
     }
 }

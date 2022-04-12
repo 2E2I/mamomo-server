@@ -14,8 +14,10 @@ import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
+import com.hsu.mamomo.service.factory.ElasticTagFactory;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -25,7 +27,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.stereotype.Service;
@@ -38,6 +43,7 @@ public class CampaignService {
     private final UserRepository userRepository;
     private final ElasticCategoryFactory categoryFactory;
     private final ElasticSearchFactory searchFactory;
+    private final ElasticTagFactory tagFactory;
     private final HeartRepository heartRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -57,7 +63,8 @@ public class CampaignService {
         return userService.getUserIdByJwtToken(jwtToken);
     }
 
-    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword, Boolean heart,
+    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword,
+            Boolean heart,
             String authorization) {
 
         // 검색
@@ -149,6 +156,14 @@ public class CampaignService {
         String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
         return categoryFactory
                 .getCampaignSearchPage(categoryFactory.createQuery(keyword, pageable));
+    }
+
+    /*
+     * 캠페인 태그별로 보기
+     * */
+    public CampaignDto findAllOfTag(String tag, Pageable pageable) {
+        Page<Campaign> campaigns = tagFactory.getCampaignSearchPage(tagFactory.createQuery(tag, pageable));
+        return new CampaignDto(campaigns);
     }
 
     /*

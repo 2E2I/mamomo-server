@@ -14,6 +14,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TagDto {
 
-    private List<String> top10Tags;
+    private List<String> tags;
 
 }
