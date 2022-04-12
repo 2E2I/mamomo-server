@@ -62,8 +62,7 @@ class TagControllerTest {
     @Test
     @DisplayName("태그 테스트 - 성공 :: 태그별 캠페인 조회")
     void Campaign_Category() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/tag")
-                .param("tagName", "아동")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/tag/{tagName}", "아동")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-tags",
                         getDocumentRequest(),

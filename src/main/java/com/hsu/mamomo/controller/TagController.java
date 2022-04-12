@@ -34,7 +34,7 @@ public class TagController {
 
     @GetMapping("/tag/{tagName}")
     public CampaignDto searchByTag(
-            @PathVariable(value = "tagName") String tagName,
+            @PathVariable String tagName,
             @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable
     ) {
         return campaignService.findAllOfTag(tagName, pageable);
