@@ -100,17 +100,31 @@ include::{snippets}/campaigns-search-with-keyword-sort/path-parameters.adoc[]
 태그 API 입니다.
 
 [[search-tags]]
-=== 상위 10개 태그 반환
+=== 인기 태그 반환
 
-검색 페이지에서 필요한 상위 10개 태그를 반환합니다.
+검색 페이지에서 필요한 인기 태그를 반환합니다. 범위를 설정 할 수 있습니다.
 
 ==== 요청
 
-include::{snippets}/return-top-10-tags/http-request.adoc[]
+include::{snippets}/return-tags-by-range/http-request.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/return-tags-by-range/request-parameters.adoc[]
 
 ==== 응답
 
-include::{snippets}/return-top-10-tags/http-response.adoc[]
+include::{snippets}/return-tags-by-range/http-response.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/return-tags-by-range/response-fields.adoc[]
+
+=== 태그별 캠페인 조회
+
+==== 요청
+
+include::{snippets}/campaigns-tags/http-request.adoc[]
 
 [[categories]]
 == 카테고리
