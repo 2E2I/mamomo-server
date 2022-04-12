@@ -85,7 +85,7 @@ include::{snippets}/campaigns-category/http-request.adoc[]
 
 ==== 요청
 
-include::{snippets}/campaigns-search/http-request.adoc[]
+include::{snippets}/campaigns-search-with-keyword-no-sort/http-request.adoc[]
 
 ==== 요청 파라미터
 
