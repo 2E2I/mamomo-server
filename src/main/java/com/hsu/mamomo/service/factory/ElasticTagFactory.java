@@ -63,7 +63,6 @@ public class ElasticTagFactory extends ElasticSortFactory {
         return topTags.getBuckets()
                 .stream()
                 .map(MultiBucketsAggregation.Bucket::getKeyAsString)
-                .sorted()
                 .collect(toList())
                 .subList(from, to);
     }
