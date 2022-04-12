@@ -476,10 +476,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#tag">2. 태그</a>
 <ul class="sectlevel2">
-<li><a href="#search-tags">2.1. 상위 10개 태그 반환</a>
+<li><a href="#search-tags">2.1. 인기 태그 반환</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_4">요청</a></li>
+<li><a href="#_요청_필드">요청 필드</a></li>
 <li><a href="#_응답">응답</a></li>
+<li><a href="#_응답_필드">응답 필드</a></li>
 </ul>
 </li>
 </ul>
@@ -495,18 +497,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_회원가입">4.1. 회원가입</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_6">요청</a></li>
-<li><a href="#_요청_필드">요청 필드</a></li>
+<li><a href="#_요청_필드_2">요청 필드</a></li>
 <li><a href="#_응답_3">응답</a></li>
-<li><a href="#_응답_필드">응답 필드</a></li>
+<li><a href="#_응답_필드_2">응답 필드</a></li>
 </ul>
 </li>
 <li><a href="#_토큰_발급_로그인">4.2. 토큰 발급 (로그인)</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_7">요청</a></li>
-<li><a href="#_요청_필드_2">요청 필드</a></li>
+<li><a href="#_요청_필드_3">요청 필드</a></li>
 <li><a href="#_응답_4">응답</a></li>
 <li><a href="#_응답_헤더">응답 헤더</a></li>
-<li><a href="#_응답_필드_2">응답 필드</a></li>
+<li><a href="#_응답_필드_3">응답 필드</a></li>
 </ul>
 </li>
 <li><a href="#_유저_정보_조회">4.3. 유저 정보 조회</a>
@@ -514,7 +516,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_요청_8">요청</a></li>
 <li><a href="#_요청_헤더_2">요청 헤더</a></li>
 <li><a href="#_응답_5">응답</a></li>
-<li><a href="#_응답_필드_3">응답 필드</a></li>
+<li><a href="#_응답_필드_4">응답 필드</a></li>
 </ul>
 </li>
 </ul>
@@ -524,14 +526,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_좋아요">5.1. 좋아요</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_9">요청</a></li>
-<li><a href="#_요청_필드_3">요청 필드</a></li>
+<li><a href="#_요청_필드_4">요청 필드</a></li>
 <li><a href="#_응답_6">응답</a></li>
 </ul>
 </li>
 <li><a href="#_좋아요_취소">5.2. 좋아요 취소</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_10">요청</a></li>
-<li><a href="#_요청_필드_4">요청 필드</a></li>
+<li><a href="#_요청_필드_5">요청 필드</a></li>
 <li><a href="#_응답_7">응답</a></li>
 </ul>
 </li>
@@ -576,7 +578,17 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkyODJ9.DjEKaeuXlNp7616FBvgAEeEm2f9icZdlsU-YONvlto3Kpl3ZPtu_iFeiZ9-UUqro9N2RahhFEv4QWGbsJkS-9Q
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTA1OTF9.1kcLnTHUNl2PcUWObgtxZs-3pnaDaUR-qkPMgct5MpqkA6v0yCYYWl4DxbdNR-n76KTBpBbRFzcdyoG7xVacSw
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>좋아요순. 모든 캠페인 API에 적용</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?heart=true HTTP/1.1
+Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -896,59 +908,59 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 17182
+Content-Length: 8922
 
 {
   "campaigns" : {
     "content" : [ {
-      "id" : "94535",
-      "siteType" : "kakao",
-      "url" : "https://together.kakao.com/fundraisings/94535",
-      "title" : "아이들에게 “할 수 있다”고 말해주세요",
+      "id" : "811",
+      "siteType" : "thedirectdonation",
+      "url" : "https://thedirectdonation.org/index/donate_view/811",
+      "title" : "#477. 서울시 양천구 아이들 35명에게",
       "category" : [ "아동|청소년" ],
-      "tags" : [ "기본생활지원", "아동|청소년", "다가치펀드", "카카오크루" ],
-      "body" : "결연(結緣) : 인연을 맺음, 또는 그런 관계 – 아이들과의 인연을 맺습니다 카카오 같이가치의 이름으로 세상 앞에 홀로선 아이들과 인연을 맺습니다.  저소득 가정, 조손 가정, 한부모 가정, 그리고 시설아동들까지. 저마다의 이유는 다르지만 늘 경제적인 어려움에 쫓기고, 보호자의 부재로 마음 한 켠이 허전한 외로움을 품고 살아갑니다.  “어떤 날엔 혼자가 아니어서 다행이라 느꼈다가,  어떤 날엔 사랑받을 순서를 기다리는 시간이 너무 더디게 간다고 느꼈다가, 작은 사회 속 아이들은 때로는 조금 외롭게, 때로는 서로가 서로를 의지하며 자라납니다. ‘자립’이라는 조금은 두려운 세상 속 낯선 자유를 마주하는 날까지.”  이 아이들이 다른 여느 아이들처럼 걱정 없이 자립을 준비할 수 있도록 인연을 맺어 힘이 되어주고자 합니다. 1 / 2 이전 다음 격차(隔差) : 수준이 벌어져 다른 정도 - 코로나19가 만든 아이들의 격차 3년간 지속된 코로나19로 모든 사람들이 힘든 이 시기. 모두가 힘든 시기라고는 하지만  코로나19 이전에도 겨우 살아가던 취약계층에게는 더 혹독한 시련으로 다가옵니다.  2021년 12월, 초록우산 어린이재단 아동복지연구소에서 발간한 &lt;2021 아동지표&gt;에 따르면 취약계층의 기초생활보장수급 가구수는 코로나19 이전이었던 2018년 185,111 가구에서 2020년 219,334 가구로 118% 증가하였습니다. 그리고 수급 가구의 유형은 일반가구를 제외하고 한부모가정(모자가구, 부자가구), 조손 가구, 소년소녀가장 가구, 미혼부모 가구의 순으로 높게 나타났습니다.  이러한 가정의 경제적인 어려움은 곧, 아이들이 누려야 할 가장 기본적인 권리 중 하나인 교육에서부터 그 격차가 발생합니다. 가구소득이 700만원 이상의 아이들은 79.9% 사교육에 참여하여 코로나19로 생긴 교육의 공백을 메울 수 있었지만, 가구소득 200만원 미만의 가정에서 자라나는 아이들은 39,9% 만이 사교육에 참여할 수 있었습니다.  교육의 격차가 곧 아이들의 꿈의 격차, 그리고 자립의 격차로 이어질 수 밖에 없는 현실에서 아이들이 저마다의 꿈으로 향할 수 있도록, 먼저 교육의 격차를 메워주어야 합니다. 1 / 3 이전 다음 격려(激勵) : 용기나 의욕이 솟아나도록 북돋게 하다 – “할 수 있다”고 말해주세요 저마다의 꿈을 가진 우리 아이들에게 모두 “할 수 있다” 고 말해주세요.  태어난 환경이, 처해진 상황이 좋지 않다고 해서, 꿈의 크기가 달라져서는 안됩니다.  아이들의 꿈을 향한 배움과 열정이 자립을 위한 든든한 받침이 되어 세상으로 멋지게 나아가는 힘이 됩니다.  카카오 같이가치와 함께 아이들의 꿈을 응원해주세요.  함께해주시는 마음을 모아 취약계층 아동 60 명에게 마음껏 공부하고 꿈을 꿀 수 있는 시간들을, 그리고 행복 가득한 선물을 만들어 지원합니다.  “넌 할 수 있어라고 말해주세요 그럼 우리는 무엇이든 할 수 있지요” - 동요 ‘넌 할 수 있어라고 말해주세요’ 가사  ※ 모금함을 통해 모인 후원금은 카카오 같이가치를 통해 결연을 맺은 아동들에게 학습비 / 보육비로 지원되며, 아이들에게 응원의 메시지를 전달하는 선물지원에도 사용됩니다.",
-      "organizationName" : "사회복지법인 어린이재단",
-      "thumbnail" : "https://mud-kage.kakaocdn.net/dn/b8vApt/btruxkcaSaD/r7Fk3UtcpTlM9QsgDcfycK/c360.jpg",
-      "dueDate" : "2022-06-30",
-      "startDate" : "2022-03-02",
-      "targetPrice" : 75000000,
-      "statusPrice" : 72523600,
-      "percent" : 97,
+      "tags" : [ "그리스도의교회지역아동센터", "놀이", "레고외3종" ],
+      "body" : "안녕하세요 양천구 목4동에 위치한 그리스도의교회 지역아동센터입니다. 현재 35명의 돌봄 취약계층 아동들에게 보호, 교육, 문화, 정서, 지역사회연계 등 종합적인 아동복지서비스를 제공하고 있습니다. 2003년 부터 개소하여 19년간 운영되고 있는 아동복지시설로 지역사회 내 돌봄이 필요한 아동들이 꾸준히 이용하고 있습니다.  그리스도의교회지역아동센터는 일상생활지도, 급간식지도, 안전교육 등으로 아동들을 안전하게 보호합니다. 또한 학습, 아동 권리교육, 교육프로그램 (미술, 놀이, 과학, 영어, 독서, 코딩) 아동들을 교육합니다. 영화, 전시 관람, 캠프 체험학습 등 아동들의 문화체험 기회를 제공합니다. 상담, 미술치료, 심리 운동 및 가족지원을 통해 아동의 정서를 지원합니다. 그리고 후원 물품과 학습멘토링 및 복지사업 등 지역사회연계를 통해 아동들이 더 건강하고 행복하게 성장할 수 있도록 돕고 있습니다.지역아동센터는 아동 돌봄과 함께 코로나로 바깥 외출을 할 수 없는 아동들에게 놀이활동 제공도 하고 있습니다. 35명의 많은 아이들이 이용하는 곳인 만큼 보드게임이나 놀이 교구들이 많이 필요합니다. 보드게임의 가격대가 비싼 편으로 센터에서 구입비를 충당하기엔 큰 어려움이 있습니다.  센터 이용하는 아동들은 경제적 여건 등으로 가정에서 여가활동을 거의 하지 못하고, 집에서 게임, 유튜브 등 혼자 하는 놀이에 몰두하고 좋지 않은 영향을 받습니다. 센터에서 지내는 시간만큼은 또래와 소통하는 건강한 놀이활동을 지원하고 싶습니다.  아이들은 놀이활동을 통해 단순히 즐겁게 시간을 보내는 것뿐만 아니라 친구와 갈등을 겪고 화해하는 법을 배우며 마음이 맞지 않는 친구와도 함께 할 수 있음을 알아갑니다. 아이들에게 친구와 함께할 수 있는 시간을 선물해주세요.",
+      "organizationName" : "그리스도의교회지역아동센터",
+      "thumbnail" : "https://thedirectdonation.org/uploads/donate_img/111566b83356cef1f849a41f23caa127_resize.PNG",
+      "dueDate" : "2099-01-01",
+      "startDate" : "2022-04-05",
+      "targetPrice" : 492100,
+      "statusPrice" : 252700,
+      "percent" : 51,
       "isHeart" : false,
       "heartCount" : 0
     }, {
-      "id" : "94403",
-      "siteType" : "kakao",
-      "url" : "https://together.kakao.com/fundraisings/94403",
-      "title" : "문화소외계층 아이들은 디지털을 잘 활용하고 있을까요?",
+      "id" : "809",
+      "siteType" : "thedirectdonation",
+      "url" : "https://thedirectdonation.org/index/donate_view/809",
+      "title" : "#483. (2차) 경상북도 상주시 아이들 25명에게",
       "category" : [ "아동|청소년" ],
-      "tags" : [ "모두의교육", "아동|청소년", "다가치펀드", "카카오크루" ],
-      "body" : "문화소외지역의 디지털 네이티브 세대는 정말 디지털 환경을 잘 활용하고 있을까요? 요즘 아동·청소년들은 디지털 네이티브(digital native) 세대로 불리우며 디지털 원어민으로서 개인용 컴퓨터, 휴대전화, 인터넷과 같은 디지털 환경을 태어나면서부터 생활처럼 활용하는 세대입니다. 이렇게 디지털 기술의 보급과 활용이 보편화되고 있기에 디지털 소외계층에 대해 디지털 정보 격차에 의한 차별보다는 정보 불평등으로 초점을 옮겨 생각해야 합니다.   또한, 코로나 사태가 장기화 되면서 일과 교육에서도 디지털화가 확산되고 있습니다. 따라서 초등학생에서 대학생에 이르기까지 온라인 원격 강의가 의무화 되면서 디지털 기기에 접근하고 활용하는 능력이 교육과정에 있어서 중요한 요소로 부각되고 있습니다. 이로 인해 소외계층 아동·청소년을 대상으로 다양한 디지털 기기 보급을 위한 여러 지원들이 시행되고 있지만, 기기 보급을 목적으로만 정책이 실행되고 있는 것이 현실입니다. 1 / 6 이전 다음 디지털 기기 보급만으로 디지털 소외 격차가 해소 될까요? 유스보이스는 2019년 문화소외지역(읍,면 단위) 아동,청소년을 만나 미디어/디지털 교육을 진행한경험이 있습니다. 지역에 있는 학교 현장의 디지털 기기 보급 수준은 수도권 학교와 별반 다를 것이 없을 정도로 충분히 갖춰져 있었으나, 사용하는 사람이 적었습니다. 즉, 디지털 기기를 다루는 교육자나 콘텐츠가 부족했기에 학생들의 활용도가 호기심에서 멈춘 것이었습니다. 유스보이스의 교육으로 만난 아동·청소년은 교육자와의 소통을 통해 자신만의 창작물로 표현 하며 또 다른 새로운 정보를 습득하고 기기의 폭넓은 활용을 경험하게 되었습니다.   코로나19 이전에도 문제로 제기되었던 디지털 소외 격차는 코로나19 이후로 더욱 심화되어 교육 기회의 불평등으로 까지 이어졌습니다. 특히 새로운 환경이나 기기에 대한 변화에 발빠르게 대처할 수 있는 기회가 많은 대도시에 비해 그렇지 못한 기타 지역(읍,면 단위)의 디지털 소외계층 아동·청소년들은 IT기기를 제대로 활용할 수 있도록 돕는 교육의 기회나 인프라가 부족합니다.  교육의 기회나 인프라는 ‘사람’이 만들어 가는 것입니다. 디지털 기기를 자유롭게 활용할 수 있는 전문가나 어른을 만나 대화를 나누는 것 만으로도 충분히 디지털 기기 활용에 대한 폭이 넓어집니다. 접근 기회에 따라 ‘정보를 가진 자’와 가지지 못한 자’로 새로운 불평등 계급이 발생하면서 ‘디지털 소외’ 현상이 발생되고 있기 때문에 이들을 위한 교육 콘텐츠와 어른(교육자)의 지속적인 도입이 필요합니다. 1 / 5 이전 다음 IT&amp;ART를 활용해 스스로 나다움을 찾아가기! 유스보이스는, 코로나 시대의 장점으로 발견할 수 있었던 지역의 한계를 넘는 온라인 교육과 전문가가 직접 찾아가 대면하며 멘토링을 진행할 수 있도록 하이브리드 교육방식을 이용하여 지역의 한계를 넘어 전국의 디지털 정보 불평등을 겪고 있는 디지털 소외계층 아동·청소년들이 새로운 인프라를 형성해갈 수 있는 환경을 제공하고자 합니다.   더불어, PBL(Project Based Learning)을 기반으로 협력이 이루어지는 학습 환경 속에서 학습자 스스로 내용과 방법을 선택함으로 요즘 시대가 요구하는 자기주도학습 능력까지도 함께 함양해 갈 수 있도록 IT와 ART를 융합시킨 프로그램으로 운영하고자 합니다.   프로젝트 전체 과정은 [발견 미션 게임- 찾아가는 멘토링-IT와 ART가 결합된 창작활동-공유회]로 이루어집니다. 발견 미션 게임은 스스로 표현하고 싶은 메세지를 발견하는 질문을 통해 미션을 수행하며 자연스럽게 나다움에 대해 알아갈 수 있도록 돕습니다. 찾아가는 멘토링으로 참여자가 관심 있는 IT기기를 활용하여 창작활동을 할 수 있도록 해당 분야 전문가와 교류할 수 있습니다. 이 모든 과정들을 통해 참여자들이 스스로 원하는 메세지를 창작물로 제작해보고, 다른 지역의 또래의 아동·청소년들과 자유롭게 공유하며 의견을 나누는 과정으로 마무리됩니다.  대도시에만 집중되어 있던 새로운 기술에 대한 학습과 전문적인 교육을 문화소외지역(읍,면 단위)의 아동·청소년들이 경험해보고 IT-ART를 표현의 도구로 삼아 스스로를 알아가고, 표현해 갈 수 있도록 여러분들의 많은 응원과 관심 부탁드립니다 !",
-      "organizationName" : "사단법인 유스보이스",
-      "thumbnail" : "https://mud-kage.kakaocdn.net/dn/oYCi2/btrt6e3kbcP/YiXcUwUgO7DiLPcItnMZBK/c360.jpg",
-      "dueDate" : "2022-06-30",
-      "startDate" : "2022-03-02",
-      "targetPrice" : 14000000,
-      "statusPrice" : 11421100,
-      "percent" : 82,
+      "tags" : [ "NCC지역아동센터", "간식", "참외외5종" ],
+      "body" : "NCC지역아동센터는 기초생활 보장 수급자, 차상위계층, 한부모, 다문화, 저소득 가정 등의 아동이 다니고 있습니다. 한부모가정이 많은데 그 중에서도 아버지께서 혼자 자녀를 돌보는 가정이 많이 있습니다.  저희 센터는 성실함을 중시하는데 매일 센터에 와서 친구들과 그림을 그리는 것이 행복하다는 아이, 집에 가서 컴퓨터 게임하는 것보다 센터에 있는 것만으로도 좋다는 아이, 집에서 공부하는 것보다 센터에서 하는 것을 원하는 아동들이 다니고 있습니다. 아동들을 보며 센터 종사자들은 배움을 얻고 뿌듯함을 느끼고 있습니다.  봉사, 성김, 사랑의 정신으로 아동들이 내면이 건강하고 긍정적으로 성장할 수 있도록 돕고 있으며 보호, 교육, 문화, 정서 지원, 지역사회연계 사업을 제공하고 있습니다.  센터 프로그램으로는 기초학습, 인내심과 집중력을 길러주는 서예수업, 다른 나라의 문화와 언어를 배우는 중국어/영어수업, 집중력과 창의력을 길러주는 꽃꽂이수업 등의 수업을 하고 있습니다. 작년에는 코로나19로 수업을 제대로 하지 못했지만 올해는 아이들이 좋아하는 수업을 많이 할 수 있었으면 좋겠습니다.안녕하세요 NCC지역아동센터 생활복지사 오민정입니다. 코로나19로 인하여 외출이 많이 줄어들었고 성장기인 아이들에게 맛있는 간식으로 즐거움을 주고 싶어서 신청을 하게 되었습니다. 곧장기부를 통하여 간식이 올 때마다 아이들이 궁금해 하고 맛있게 먹어주던 모습이 떠올라 다시 신청하게 되었습니다.  학교를 마치고 난 뒤, 저녁을 먹고 30분만 지나면 배고프다고 하는 아이들이 많이 있습니다. 성장기인 아이들에게 불량식품보다는 센터에서 건강하고 평소에 먹지 못하는 간식을 사 주면 더 좋겠다고 생각하여 장바구니에 담게 되었습니다. 아이들이 맛있게 먹고 즐거워할 모습을 생각하니 너무 행복할 것 같습니다. 아이들이 건강하게 자랄 수 있도록 도와주셔서 감사합니다.",
+      "organizationName" : "NCC지역아동센터",
+      "thumbnail" : "https://thedirectdonation.org/uploads/donate_img/97aa17d0fcea187ed9996bc2b769275c_resize.PNG",
+      "dueDate" : "2099-01-01",
+      "startDate" : "2022-04-06",
+      "targetPrice" : 492800,
+      "statusPrice" : 368800,
+      "percent" : 74,
       "isHeart" : false,
       "heartCount" : 0
     }, {
-      "id" : "94568",
-      "siteType" : "kakao",
-      "url" : "https://together.kakao.com/fundraisings/94568",
-      "title" : "코로나19, 우리 아이들을 결식의 위험에서 지켜요!",
+      "id" : "817",
+      "siteType" : "thedirectdonation",
+      "url" : "https://thedirectdonation.org/index/donate_view/817",
+      "title" : "#484. 충청북도 증평군 아이들 29명에게",
       "category" : [ "아동|청소년" ],
-      "tags" : [ "기본생활지원", "아동|청소년", "결식아동", "식사지원" ],
-      "body" : "코로나19, 당신은 어떻게 지내시나요 ? 전례 없는 코로나19 바이러스로 인해 우리의 생활 패턴 역시도 많이 변화하였습니다. 친구들과의 만남도, 기분전환을 위한 산책도, 하물며 일상생활을 위한 쇼핑 역시도 제한이 많아진 것 같습니다.   ‘집’에 머무는 시간이 많아진 요즘 ‘집밥’을 많이 먹으며 ‘확진자’가 아닌 ‘(살이) 확 찐자’라는 신조어도 생겨날 정도입니다. 그러나 우리 아이들은 조금 다릅니다. 하루 한 끼, 점심만큼은 꼬박꼬박 학교에서 챙기던 아이가 이제는 집에서 삼시 세 끼를 해결해야 해 결식의 우려가 생긴 것입니다.   코로나19로 인해 실직한 정훈이(가명)의 아빠, 가족의 해체로 인하여 아이를 홀로 돌볼 수 없는 희연이(가명)의 엄마, 건강이 나빠 일을 할 수 없는 현주(가명)의 할머니… 모두 각자 다른 이유로 아이들의 식사를 챙겨줄 수 없어 걱정만 앞섭니다. 코로나로 결식의 위험이 커진 아이들 코로나로 결식의 위험이 커진 아이들 # 정훈이(가명) 아빠의 이야기 정훈이 아빠는 원래 요식업을 하며 가족을 책임지는 누구보다 든든한 가장이었습니다. 그러나 코로나19 상황에 아빠가 하던 가게가 문을 닫게 되어 더 이상 생계를 책임질 수 없게 되자 엄마는 집을 나갔고 아빠 혼자 아이들을 키우게 되었습니다.   가게가 망하며 대출도 갚을 수 없게 되자 삼 형제가 살기에는 많이 좁은 작은 집으로 이사하였습니다. 그래도 아빠는 삼 형제가 있어 힘이 되었습니다. 누구보다 멋진 아이들로 키우기 위하여 일용직 근로도 하였으나, 설상가상 4층 높이에서 추락하여 이제는 일용직 근로도 할 수 없게 되었습니다.   한창 많이 먹고 쑥쑥 자라야 할 아이들이 자신 때문에 먹지 못해 성장에 방해가 되지 않을지, 아빠는 오늘도 자신을 원망하며 걱정만 앞섭니다. # 희연이(가명) 엄마의 이야기 희연이네 가족은 아픔이 많습니다. 희연이의 아빠는 언젠가부터 집에 들어오지 않고 생활비마저도 주지 않았습니다. 엄마가 생활을 위해 아빠에게 생활비를 요구하자 엄마를 폭력 하였고, 엄마는 이 일 이후로 공황장애가 생겨 집 밖을 나서는 것조차 두려워졌습니다.   어린 희연이는 아직도 엄마 아빠의 모습이 잊히질 않습니다. 희연이의 엄마는 어린 희연이가 이 일 이후 여느 아이들과는 달리 본인보다 엄마를 챙기는 모습에 마음이 아픕니다. 코로나19 이후, 하루 한 끼는 학교에서 먹고 오던 희연이가 이제는 집에서 세끼를 먹어야 하지만 엄마는 돈이 없어 희연이의 식사를 챙겨줄 수 없습니다.   그래도 희연이는 괜찮다고 하여 엄마의 마음은 더욱 무겁습니다. 우리 희연이의 한 끼가 엄마는 무엇보다도 절실합니다. # 현주(가명) 할머니의 이야기 현주의 할머니는 홀로 손녀를 키우고 있습니다. 애지중지 키웠던 아들이 손녀를 낳고 사고로 세상을 떠났기 때문인데요. 설상가상 며느리는 손녀를 혼자 키우지 못하겠다며 도망가버렸습니다. 솔직한 마음으로 처음에는 손녀가 아들을 하늘로 보낸 것 같아 원망하기도 했습니다.   그러나 부모 없이 자라날 현주가 불쌍하여 발품 팔아 현주를 키우고 있습니다. 부모가 없어서 그렇다는 말을 듣지 않게 하도록 하기 위해 누구보다 노력하고 있지만, 요즘은 조금 힘이 드는 것 같습니다. 나이가 많아 일자리 구하기 힘들어 사정사정하여 일할 수 있게 해 주었던 식당도 코로나19로 인해 문을 닫아버렸기 때문입니다.   설상가상 할머니는 건강까지 나빠져 이제는 작은 외출도 어려워졌습니다. 나 죽으면 손녀는 어떡하나… 한창 클 나이에 못 먹어서 나중에 현주가 나를 원망하지는 않을까… 하늘에 있는 아들을 무슨 면목으로 마주해야 하나… 할머니는 현주가 결식으로 인해 또래보다 성장이 더딜까 걱정은 날로 늘어가지만 아무것도 할 수 없어 마음이 아픕니다. 사랑의 도시락을 전달해주세요! 잠깐일 줄 알았던 코로나19 바이러스가 장기화되며 우리의 삶의 방식도 많이 변화하였습니다. 우리 아이들에게는 더 큰 영향을 끼치고 있는데요, 코로나19로 인하여 집에 머무는 시간이 많아지며 학교에 가지 못하게 되자 최소한 한 끼라도 영양 식단을 챙길 수 있었던 아이들이 이제는 영양 식단을 챙기지 못하게 된 것입니다.   한창 성장기의 아이들은 규칙적이고 영양이 있는 식단이 매우 중요하다는 것은 우리 모두가 알고 있는 사실입니다. 이에 우리 복지관은 결식 우려 아이들을 위하여 매주 2회, 영양 도시락을 지원하고 있습니다.   그리고 올해도 계속되는 코로나19를 대비하여 한창 잘 먹어야 할 아이들을 위해 추가로 국, 장조림 등 완전조리식품을 더하여 밀키트 제품도 구성하여 지원하고자 합니다. 도시락과 마스크를 함께 전달 받은 아동의 모습 아이들을 위해 조리한 도시락 1 / 4 이전 다음 우리 지역의 '정훈이', '희연이', '현주'와 같은 아이들을 위해 사랑의 도시락 전달에 함께 해주세요!",
-      "organizationName" : "홀트수영종합사회복지관",
-      "thumbnail" : "https://mud-kage.kakaocdn.net/dn/cnqT5a/btruThSkb8N/Xaui3PoiW0kHrh4gscA2s0/c360.jpg",
-      "dueDate" : "2022-06-11",
-      "startDate" : "2022-03-11",
-      "targetPrice" : 10000000,
-      "statusPrice" : 931900,
-      "percent" : 10,
+      "tags" : [ "행복이가득한지역아동센터", "놀이", "연습장외7종" ],
+      "body" : "행복이 가득한 지역아동센터에서는 증평지역의 저소득층, 한 부모, 맞벌이, 이혼가정 등 소외된 아동들에게 가정과 같은 보금자리를 제공하며 부모와 같은 마음으로 건전한 가치관과 인격형성을 도와 올바른 성장 과정을 돕는 것에 목적을 두고 2011년에 설립했고 2021년에 법인화하였습니다.  여러 가지 프로그램을 진행하여 단순한 학업 향상뿐 아니라 아동들의 특기와 적성을 발견하고 개발하여 창의성과 사회성을 향상시켜서 모두가 행복한 마음을 가질 수 있도록 돕고 있습니다. 지역자원연계도 활발히 진행하고 있어 보건소를 통해 년 2회 건강검사를 받고 체력증진프로그램을 진행하고 있으며, 청소년상담복지센터를 통해 아동발달심리검사와 학교폭력, 가정폭력, 성폭력 등 강사진을 보내 매년 주기적으로 교육을 받고 집단상담과 개별상담을 진행하고 있습니다.  그밖에 청소년 센터와 연계해 동아리 지원사업과 강당사용을 지원받고 있으며, 자원봉사센터, 여성발전센터, 푸드뱅크, 정신건강증진센터, 급식지원단, 복지관, 초등학교와도 연계해 다양한 활동을 활발히 하고 있습니다.아이들이 방학이 되고 코로나로 외부활동도 자유롭지 못하여서 프로그램을 진행하는 것이 한정되어 있고 아침 일찍부터 센터에서 온종일 생활을 하다 보니 놀이도 쉽게 싫증을 내곤 합니다.  그래서 곧장기부를 통해 우리 아이들에게 다양한 놀이를 할 수 있는 보드게임을 지원해 주고자 합니다.",
+      "organizationName" : "행복이가득한지역아동센터",
+      "thumbnail" : "https://thedirectdonation.org/uploads/donate_img/8181e029e31a97ea3c38031e75a8b7f9_resize.png",
+      "dueDate" : "2099-01-01",
+      "startDate" : "2022-04-06",
+      "targetPrice" : 498200,
+      "statusPrice" : 102800,
+      "percent" : 20,
       "isHeart" : false,
       "heartCount" : 0
     } ],
@@ -959,14 +971,14 @@ Content-Length: 17182
         "unsorted" : false
       },
       "offset" : 0,
-      "pageNumber" : 0,
       "pageSize" : 3,
-      "paged" : true,
-      "unpaged" : false
+      "pageNumber" : 0,
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
-    "totalElements" : 287,
-    "totalPages" : 96,
+    "totalPages" : 116,
+    "totalElements" : 348,
     "size" : 3,
     "number" : 0,
     "sort" : {
@@ -974,8 +986,8 @@ Content-Length: 17182
       "sorted" : true,
       "unsorted" : false
     },
-    "numberOfElements" : 3,
     "first" : true,
+    "numberOfElements" : 3,
     "empty" : false
   }
 }</code></pre>
@@ -1073,19 +1085,44 @@ Host: localhost:8080</code></pre>
 <p>태그 API 입니다.</p>
 </div>
 <div class="sect2">
-<h3 id="search-tags"><a class="link" href="#search-tags">2.1. 상위 10개 태그 반환</a></h3>
+<h3 id="search-tags"><a class="link" href="#search-tags">2.1. 인기 태그 반환</a></h3>
 <div class="paragraph">
-<p>검색 페이지에서 필요한 상위 10개 태그를 반환합니다.</p>
+<p>검색 페이지에서 필요한 인기 태그를 반환합니다. 범위를 설정 할 수 있습니다.</p>
 </div>
 <div class="sect3">
 <h4 id="_요청_4"><a class="link" href="#_요청_4">요청</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/search HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/search?from=0&amp;to=10 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_요청_필드"><a class="link" href="#_요청_필드">요청 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>from</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">시작 인덱스. 기본값은 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>to</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">종료? 인덱스. 기본값은 1000</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_응답"><a class="link" href="#_응답">응답</a></h4>
@@ -1102,13 +1139,37 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 183
+Content-Length: 178
 
 {
-  "top10Tags" : [ "교육지원", "생계 및 기초생활지원", "아동", "어르신", "의료", "인식 및 정책 개선", "장애인", "주거", "지구촌", "청소년" ]
+  "tags" : [ "교육지원", "생계 및 기초생활지원", "아동", "어르신", "의료", "인식 및 정책 개선", "장애인", "주거", "지구촌", "청소년" ]
 }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드"><a class="link" href="#_응답_필드">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tags</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">from 부터 to 까지 인기 태그 반환</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1183,7 +1244,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드"><a class="link" href="#_요청_필드">요청 필드</a></h4>
+<h4 id="_요청_필드_2"><a class="link" href="#_요청_필드_2">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1276,7 +1337,7 @@ Content-Length: 157
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드"><a class="link" href="#_응답_필드">응답 필드</a></h4>
+<h4 id="_응답_필드_2"><a class="link" href="#_응답_필드_2">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1347,7 +1408,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_2"><a class="link" href="#_요청_필드_2">요청 필드</a></h4>
+<h4 id="_요청_필드_3"><a class="link" href="#_요청_필드_3">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1391,7 +1452,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTA2MDR9.cel5mihPYQgCVhMIO_UvIwyrI_J10FRzpnNWwdDTAX0zF_Fpbpjd_2-T299kNQFNmla8qX1Np1_inW6o0FwNrg
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1402,7 +1463,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTA2MDR9.cel5mihPYQgCVhMIO_UvIwyrI_J10FRzpnNWwdDTAX0zF_Fpbpjd_2-T299kNQFNmla8qX1Np1_inW6o0FwNrg"
 }</code></pre>
 </div>
 </div>
@@ -1429,7 +1490,7 @@ Content-Length: 208
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_2"><a class="link" href="#_응답_필드_2">응답 필드</a></h4>
+<h4 id="_응답_필드_3"><a class="link" href="#_응답_필드_3">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1461,7 +1522,7 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDkzMDkzMDl9.eAgrnEYZTxUvm-kXAJz7uOyO8NVcZMpXyF-Pl3lxZIltMzeHmmNx5Tunj9eq5sC-IM-3liMphF87A7iSGrjh1w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTA2MDR9.cel5mihPYQgCVhMIO_UvIwyrI_J10FRzpnNWwdDTAX0zF_Fpbpjd_2-T299kNQFNmla8qX1Np1_inW6o0FwNrg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1504,31 +1565,31 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 722
+Content-Length: 724
 
 {
   "user" : {
-    "id" : "5de04c07-98ac-4f20-a04c-0798ac3f20ea",
+    "id" : "94310b1f-3efc-4f19-b10b-1f3efc6f19e4",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$6wSO75/PStQugaF6czEU8OZBAHvI0hpbNODIYH86bNedmAhItSzly",
+    "password" : "{bcrypt}$2a$10$28lVqXqavxeQvfTXtv71d.fApfqUVBpcFYi5uQAvA.zVakEhqu4xC",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-04-06T14:28:23",
-    "modify_date" : "2022-04-06T14:28:23",
+    "create_date" : "2022-04-12T20:50:04",
+    "modify_date" : "2022-04-12T20:50:04",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 5,
+      "id" : 29,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 6,
+      "id" : 30,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1540,7 +1601,7 @@ Content-Length: 722
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_필드_3"><a class="link" href="#_응답_필드_3">응답 필드</a></h4>
+<h4 id="_응답_필드_4"><a class="link" href="#_응답_필드_4">응답 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1644,14 +1705,14 @@ Content-Length: 92
 Host: localhost:8080
 
 {
-  "campaignId" : "H000000183441",
+  "campaignId" : "H000000184043",
   "userId" : "550e8400-e29b-41d4-a716-446655440000"
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_3"><a class="link" href="#_요청_필드_3">요청 필드</a></h4>
+<h4 id="_요청_필드_4"><a class="link" href="#_요청_필드_4">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1705,7 +1766,7 @@ X-Frame-Options: DENY
 Content-Length: 92
 
 {
-  "campaignId" : "H000000183441",
+  "campaignId" : "H000000184043",
   "userId" : "550e8400-e29b-41d4-a716-446655440000"
 }</code></pre>
 </div>
@@ -1724,14 +1785,14 @@ Content-Length: 92
 Host: localhost:8080
 
 {
-  "campaignId" : "H000000183441",
+  "campaignId" : "H000000184043",
   "userId" : "550e8400-e29b-41d4-a716-446655440000"
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_필드_4"><a class="link" href="#_요청_필드_4">요청 필드</a></h4>
+<h4 id="_요청_필드_5"><a class="link" href="#_요청_필드_5">요청 필드</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -1785,7 +1846,7 @@ X-Frame-Options: DENY
 Content-Length: 92
 
 {
-  "campaignId" : "H000000183441",
+  "campaignId" : "H000000184043",
   "userId" : "550e8400-e29b-41d4-a716-446655440000"
 }</code></pre>
 </div>
@@ -1798,7 +1859,7 @@ Content-Length: 92
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-05 15:23:22 +0900
+Last updated 2022-04-12 20:39:49 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
