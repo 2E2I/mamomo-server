@@ -154,7 +154,7 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 좋아요순")
     void Campaign_sortHeartCount() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("heart", String.valueOf(true))
+                .param("heart", "true")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort-heart",
                         getDocumentRequest(),
