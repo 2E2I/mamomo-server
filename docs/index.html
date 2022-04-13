@@ -546,6 +546,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
+<li><a href="#exception">에러 코드</a></li>
 </ul>
 </div>
 </div>
@@ -583,7 +584,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTMyODF9.j1pxMnUnKErtqXLpBOHhi20E4VcgYqhuNuXNXR-rgv8ziN5-ID4AQqNAJ_s9ay9MXCJFzg0DPuz_4wL-oDxfiQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk5MzAyMjh9.rdLC-PE2BN8oQMT5BFUKND-fu4JoNqWLVpa24xiDcmRKoLHnXI-A9YnPDrnFa3th2mWhE5Ano7jZdowzu_jRPQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -978,8 +979,8 @@ Content-Length: 8922
       "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 3,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
     "totalPages" : 116,
@@ -991,8 +992,8 @@ Content-Length: 8922
       "sorted" : true,
       "unsorted" : false
     },
-    "numberOfElements" : 3,
     "first" : true,
+    "numberOfElements" : 3,
     "empty" : false
   }
 }</code></pre>
@@ -1474,7 +1475,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTMyODl9.Lb4OgWmkiXA72ilgfkPkqdZmhnx5MLMtDHETulT9WxP8xhvKSNSrGDFajj7U3tTeJ6Og1tlms69R9370mUzIcQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk5MzAyMzl9.2OhV7x1ISmwDvJlin46TmFKRJ8t1geYJ3UGJ7CnBxMoq_6LpIRTHjTr6TXDshqo-pLiYHOnmZUgtGmba_iJj6g
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1485,7 +1486,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTMyODl9.Lb4OgWmkiXA72ilgfkPkqdZmhnx5MLMtDHETulT9WxP8xhvKSNSrGDFajj7U3tTeJ6Og1tlms69R9370mUzIcQ"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk5MzAyMzl9.2OhV7x1ISmwDvJlin46TmFKRJ8t1geYJ3UGJ7CnBxMoq_6LpIRTHjTr6TXDshqo-pLiYHOnmZUgtGmba_iJj6g"
 }</code></pre>
 </div>
 </div>
@@ -1544,7 +1545,7 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk4NTMyODl9.Lb4OgWmkiXA72ilgfkPkqdZmhnx5MLMtDHETulT9WxP8xhvKSNSrGDFajj7U3tTeJ6Og1tlms69R9370mUzIcQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NDk5MzAyMzl9.2OhV7x1ISmwDvJlin46TmFKRJ8t1geYJ3UGJ7CnBxMoq_6LpIRTHjTr6TXDshqo-pLiYHOnmZUgtGmba_iJj6g
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1591,27 +1592,27 @@ Content-Length: 724
 
 {
   "user" : {
-    "id" : "cc20cf1c-393c-4c30-a0cf-1c393c6c30ba",
+    "id" : "3317137d-2e46-475e-9713-7d2e46575e47",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$hJKfckkISaJhTK1vMARv3e41WjGPjL5YrNtlEiRuj0YHqXCnyvNgu",
+    "password" : "{bcrypt}$2a$10$Jl4l358Pnal.8XpjU6KXj.PPlFQBcTX2QfKfhdzse0so4hntmwrD6",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-04-12T21:34:48",
-    "modify_date" : "2022-04-12T21:34:48",
+    "create_date" : "2022-04-13T18:57:18",
+    "modify_date" : "2022-04-13T18:57:18",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 32,
+      "id" : 37,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 33,
+      "id" : 38,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1877,11 +1878,80 @@ Content-Length: 92
 </div>
 </div>
 </div>
+<h1 id="exception" class="sect0"><a class="link" href="#exception">에러 코드</a></h1>
+<div class="openblock partintro">
+<div class="content">
+<div class="paragraph">
+<p>전체 에러 코드 목록</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">HttpStatus</th>
+<th class="tableblock halign-left valign-top">code</th>
+<th class="tableblock halign-left valign-top">message</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WRONG_OBJECT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">객체 변환이 되지 않습니다. 옳은 형식을 보내주세요.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INVALID_FIELD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">인자 형식이 맞지 않습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INVALID_JWT_TOKEN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유효하지 않은 JWT 토큰입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MEMBER_NOT_FOUND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 유저 정보를 찾을 수 없습니다</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TOPIC_NOT_FOUND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 카테고리를 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HEART_NOT_FOUND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">해당 좋아요 정보를 찾을 수 없습니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DUPLICATE_EMAIL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 가입된 이메일입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DUPLICATE_NICKNAME</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 사용 중인 닉네임입니다.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ALREADY_HEARTED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미 좋아요 된 캠페인 입니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-12 21:21:26 +0900
+Last updated 2022-04-13 18:56:34 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
