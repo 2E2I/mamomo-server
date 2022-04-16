@@ -43,12 +43,14 @@ include::{snippets}/campaigns/http-request.adoc[]
 
 include::{snippets}/campaigns-sort-heart/http-request.adoc[]
 
+[[campagins-request-header]]
 ==== 요청 헤더
 
 모든 캠페인 API 에 모두 적용되는 요청 헤더 입니다.
 
 include::{snippets}/campaigns/request-headers.adoc[]
 
+[[campagins-request-param]]
 ==== 요청 파라미터
 
 검색 API 와 정렬 방식이 다릅니다. 유의해주세요!
@@ -121,6 +123,8 @@ include::{snippets}/return-tags-by-range/http-response.adoc[]
 include::{snippets}/return-tags-by-range/response-fields.adoc[]
 
 === 태그별 캠페인 조회
+
+페이지, 정렬, 하트 정보와 함께 요청하는 방법은 <<campagins-request-header>>와  <<campagins-request-param>> 와 동일하니 참고해 주세요.
 
 ==== 요청
 
