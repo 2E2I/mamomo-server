@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.common.recycler.Recycler.C;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -49,8 +50,6 @@ public class CampaignService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
 
-    private CampaignDto campaignDto;
-
     public String getUserIdFromAuth(String authorization) {
 
         String jwtToken = authorization.substring(7);
@@ -63,44 +62,49 @@ public class CampaignService {
         return userService.getUserIdByJwtToken(jwtToken);
     }
 
-    public CampaignDto getCampaigns(Pageable pageable, Integer category_id, String keyword,
-            Boolean heart,
-            String authorization) {
+    public CampaignDto getCampaigns(
+            Pageable pageable, Integer category_id, String keyword,
+            Boolean heart, String authorization, String tagName) {
+
+        List<Campaign> campaigns = new ArrayList<>();
 
         // 검색
         if (keyword != null) {
-            campaignDto = new CampaignDto(
-                    searchByTitleOrBody(keyword, pageable));
+            campaigns = searchByTitleOrBody(keyword, pageable);
         } else {
             if (category_id != null) { // 카테고리 별 조회
-                campaignDto = new CampaignDto(
-                        findAllOfCategory(category_id, pageable));
-            } else { // 전체보기
-                campaignDto = new CampaignDto(
-                        findAll(pageable));
+                campaigns = findAllOfCategory(category_id, pageable);
+            }
+            else if (tagName != null) { // tag/{tagName}
+                campaigns = findAllOfTag(tagName, pageable);
+            }
+            else { // 전체보기
+                campaigns = findAll(pageable);
             }
         }
 
+        // check isHeart
         if (authorization != null) {
             String userId = getUserIdFromAuth(authorization);
-            campaignDto = addIsHeartInfo(userId);
+            campaigns = addIsHeartInfo(userId, campaigns);
         }
 
-        // 좋아요 갯수 추가
-        campaignDto = addHeartCountInfo();
+        // add heartCount
+        campaigns = addHeartCountInfo(campaigns);
 
+        // 좋아요순 true
         if (heart) {
-            campaignDto.setCampaigns(sortUnmodifiableList(campaignDto, pageable));
+            campaigns = sortByHeartCount(campaigns);
         }
 
-        return campaignDto;
+        return pagingCampaigns(campaigns, pageable);
     }
 
     /*
      * 로그인 했을 경우
      * 좋아요(isHearted) true/false 정보 불러옴
      * */
-    public CampaignDto addIsHeartInfo(String userId) {
+    public List<Campaign> addIsHeartInfo(String userId, List<Campaign> campaigns) {
 
         Optional<User> user = userRepository.findUserById(userId);
 
@@ -109,7 +113,6 @@ public class CampaignService {
         }
 
         List<Heart> hearts = user.get().getHearts();
-        Page<Campaign> campaigns = campaignDto.getCampaigns();
 
         for (Heart heart : hearts) {
             String campaignId = heart.getCampaignId();
@@ -119,11 +122,10 @@ public class CampaignService {
             campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
         }
 
-        return campaignDto;
+        return campaigns;
     }
 
-    public CampaignDto addHeartCountInfo() {
-
+    public List<Campaign> addHeartCountInfo(List<Campaign> campaigns) {
         /*
          * 캠페인당 좋아요 갯수
          * */
@@ -132,56 +134,54 @@ public class CampaignService {
                 .collect(Collectors.groupingBy(Heart::getCampaignId));
         heartMap.keySet().forEach(campaignId -> {
             int count = heartMap.get(campaignId).size(); // 해당 캠페인 좋아요 수
-            Optional<Campaign> campaignOpt = campaignDto.getCampaigns().stream()
+            Optional<Campaign> campaignOpt = campaigns.stream()
                     .filter(v -> Objects.equals(v.getId(), campaignId))
                     .findFirst();
             campaignOpt.ifPresent(campaign -> campaign.setHeartCount(count));
         });
 
-        return campaignDto;
+        return campaigns;
     }
 
     /*
      * 캠페인 전체 보기
      * */
-    public Page<Campaign> findAll(Pageable pageable) {
+    public List<Campaign> findAll(Pageable pageable) {
         return categoryFactory
-                .getCampaignSearchPage(ElasticSortFactory.createBasicQuery(pageable));
+                .getCampaignSearchList(ElasticSortFactory.createBasicQuery(pageable));
     }
 
     /*
      * 캠페인 카테고리 별로 보기
      * */
-    public Page<Campaign> findAllOfCategory(Integer category_id, Pageable pageable) {
+    public List<Campaign> findAllOfCategory(Integer category_id, Pageable pageable) {
         String keyword = categoryFactory.matchCategoryNameByCategoryId(category_id);
         return categoryFactory
-                .getCampaignSearchPage(categoryFactory.createQuery(keyword, pageable));
+                .getCampaignSearchList(categoryFactory.createQuery(keyword, pageable));
     }
 
     /*
      * 캠페인 태그별로 보기
      * */
-    public CampaignDto findAllOfTag(String tag, Pageable pageable) {
-        Page<Campaign> campaigns = tagFactory.getCampaignSearchPage(tagFactory.createQuery(tag, pageable));
-        return new CampaignDto(campaigns);
+    public List<Campaign> findAllOfTag(String tagName, Pageable pageable) {
+        return tagFactory.getCampaignSearchList(tagFactory.createQuery(tagName, pageable));
     }
 
     /*
      * 캠페인 검색 결과 보기
      * 제목 + 본문 검색 (OR)
      * */
-    public Page<Campaign> searchByTitleOrBody(String keyword, Pageable pageable) {
-        return searchFactory.getCampaignSearchPage(searchFactory.createQuery(keyword, pageable));
+    public List<Campaign> searchByTitleOrBody(String keyword, Pageable pageable) {
+        return searchFactory.getCampaignSearchList(searchFactory.createQuery(keyword, pageable));
     }
 
-    public Page<Campaign> sortUnmodifiableList(CampaignDto campaignDto, Pageable pageable) {
+    public List<Campaign> sortByHeartCount(List<Campaign> campaigns) {
+        campaigns.sort(Comparator.comparing(Campaign::getHeartCount).reversed());
+        return campaigns;
+    }
 
-        List<Campaign> campaignList = new ArrayList<>(campaignDto.getCampaigns().getContent());
-        campaignList.sort(Comparator.comparing(Campaign::getHeartCount).reversed());
-
-        int start = (int)pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), campaignList.size());
-
-        return new PageImpl<>(campaignList.subList(start, end), pageable, campaignList.size());
+    public CampaignDto pagingCampaigns(List<Campaign> campaigns, Pageable pageable) {
+        log.info("campaigns size = {}", campaigns.size());
+        return new CampaignDto(new PageImpl<>(campaigns, pageable, campaigns.size()));
     }
 }

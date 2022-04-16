@@ -1,6 +1,8 @@
 package com.hsu.mamomo.service.factory;
 
 import com.hsu.mamomo.domain.Campaign;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHitSupport;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
@@ -54,22 +57,23 @@ public abstract class ElasticSortFactory {
     public static Query createBasicQuery(Pageable pageable) {
         return new NativeSearchQueryBuilder()
                 .withSorts(createSortBuilder(pageable))
-                .withPageable(pageable)
                 .build();
     }
 
     public abstract NativeSearchQuery createQuery(String keyword, Pageable pageable);
 
-    public Page<Campaign> getCampaignSearchPage(Query query) {
+    public List<Campaign> getCampaignSearchList(Query query) {
         SearchHits<Campaign> searchHits =
                 elasticsearchOperations.search(
                         query,
                         Campaign.class,
                         IndexCoordinates.of(CAMPAIGN_INDEX));
 
-        SearchPage<Campaign> searchPage = SearchHitSupport.searchPageFor(searchHits, query.getPageable());
+        System.out.println("searchHits.getSearchHits().size() = " + searchHits.getSearchHits().size());
 
-        return (Page)SearchHitSupport.unwrapSearchHits(searchPage);
+        return searchHits.stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
 
     }
 
