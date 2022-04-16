@@ -1,5 +1,6 @@
 package com.hsu.mamomo.service;
 
+import static com.hsu.mamomo.controller.exception.ErrorCode.CAMPAIGN_NOT_FOUND;
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_JWT_TOKEN;
 import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 
@@ -9,6 +10,7 @@ import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.repository.jpa.HeartRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
@@ -42,6 +44,7 @@ import org.springframework.stereotype.Service;
 public class CampaignService {
 
     private final UserRepository userRepository;
+    private final CampaignRepository campaignRepository;
     private final ElasticCategoryFactory categoryFactory;
     private final ElasticSearchFactory searchFactory;
     private final ElasticTagFactory tagFactory;
@@ -98,6 +101,15 @@ public class CampaignService {
         }
 
         return pagingCampaigns(campaigns, pageable);
+    }
+
+    public Campaign findCampaignById(String id) {
+        Optional<Campaign> campaignOpt = campaignRepository.findById(id);
+
+        if (campaignOpt.isEmpty())
+            throw new CustomException(CAMPAIGN_NOT_FOUND);
+
+        return campaignOpt.get();
     }
 
     /*

@@ -1,5 +1,6 @@
 package com.hsu.mamomo.controller;
 
+import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.service.CampaignService;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/api/campaigns")
+@RequestMapping("/api")
 @RestController
 public class CampaignController {
 
@@ -22,7 +23,7 @@ public class CampaignController {
 
 
     @PreAuthorize("hasAnyRole('USER')")
-    @GetMapping
+    @GetMapping("/campaigns")
     public CampaignDto getAllCampaigns(
             @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable,
             @RequestParam(value = "category", required = false) Integer category_id,
@@ -31,6 +32,11 @@ public class CampaignController {
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
 
         return campaignService.getCampaigns(pageable, category_id, keyword, heart, authorization, null);
+    }
+
+    @GetMapping("/campaign/{id}")
+    public Campaign getCampaignById(@PathVariable(value = "id") String id) {
+        return campaignService.findCampaignById(id);
     }
 
 }

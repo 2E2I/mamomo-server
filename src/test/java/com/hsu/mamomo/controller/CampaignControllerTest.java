@@ -12,14 +12,19 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.util.CampaignDocumentUtil;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,6 +40,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -52,6 +58,9 @@ class CampaignControllerTest {
 
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
+    private CampaignRepository campaignRepository;
 
     @BeforeEach
     void authenticate() throws Exception {
@@ -215,6 +224,37 @@ class CampaignControllerTest {
                                 parameterWithName("keyword").description("검색 키워드").optional()
                         )
                 ));
+    }
+
+    @Test
+    @DisplayName("캠페인 테스트 - 성공 :: 캠페인 id로 캠페인 하나 찾기")
+    public void findCampaignByIdTest() throws Exception {
+
+        String campaignId = campaignRepository.findDistinctBySiteType("happybean").get().getId();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/campaign/{id}", campaignId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(document("get-campaign-by-id",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                ))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("캠페인 테스트 - 실패 :: 캠페인 찾을 수 없음")
+    public void findCampaignByIdFailNotFoundTest() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/campaign/{id}", "this is not valid id")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(document("get-campaign-by-id",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                )).andDo(print())
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("CAMPAIGN_NOT_FOUND"))
+                .andExpect(jsonPath("$.message").value("해당 캠페인 정보를 찾을 수 없습니다."));
     }
 
 }

@@ -13,4 +13,7 @@ public interface CampaignRepository extends ElasticsearchRepository<Campaign, St
     List<Campaign> findAll();
 
     Optional<Campaign> findDistinctBySiteType(String siteType);
+
+    @Override
+    Optional<Campaign> findById(String s);
 }
