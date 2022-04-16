@@ -2,6 +2,7 @@ package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.service.CampaignService;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +30,7 @@ public class CampaignController {
             @RequestParam(defaultValue = "false") Boolean heart,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
 
-        return campaignService.getCampaigns(pageable, category_id, keyword, heart, authorization);
+        return campaignService.getCampaigns(pageable, category_id, keyword, heart, authorization, null);
     }
 
 }

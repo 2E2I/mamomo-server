@@ -8,9 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,9 +37,11 @@ public class TagController {
     @GetMapping("/tag/{tagName}")
     public CampaignDto searchByTag(
             @PathVariable String tagName,
-            @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable
+            @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable,
+            @RequestParam(defaultValue = "false") Boolean heart,
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization
     ) {
-        return campaignService.findAllOfTag(tagName, pageable);
+        return campaignService.getCampaigns(pageable, null, null, heart, authorization, tagName);
     }
 
 }
