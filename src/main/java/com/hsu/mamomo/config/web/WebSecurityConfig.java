@@ -3,7 +3,6 @@ package com.hsu.mamomo.config.web;
 import com.hsu.mamomo.jwt.JwtAccessDeniedHandler;
 import com.hsu.mamomo.jwt.JwtAuthenticationEntryPoint;
 import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
-import com.hsu.mamomo.jwt.JwtSecurityConfig;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
