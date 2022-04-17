@@ -16,4 +16,6 @@ public interface CampaignRepository extends ElasticsearchRepository<Campaign, St
 
     @Override
     Optional<Campaign> findById(String s);
+
+
 }

@@ -2,6 +2,7 @@ package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.dto.HeartDto;
 import com.hsu.mamomo.service.HeartService;
+import java.io.IOException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +23,15 @@ public class HeartController {
     private final HeartService heartService;
 
     @PostMapping
-    public ResponseEntity<HeartDto> heart(@RequestBody @Valid HeartDto heartDto) {
+    public ResponseEntity<HeartDto> heart(@RequestBody @Valid HeartDto heartDto)
+            throws IOException {
         heartService.heart(heartDto);
         return new ResponseEntity<>(heartDto, HttpStatus.CREATED);
     }
 
     @DeleteMapping
-    public ResponseEntity<HeartDto> unHeart(@RequestBody @Valid HeartDto heartDto) {
+    public ResponseEntity<HeartDto> unHeart(@RequestBody @Valid HeartDto heartDto)
+            throws IOException {
         heartService.unHeart(heartDto);
         return new ResponseEntity<>(heartDto, HttpStatus.OK);
     }

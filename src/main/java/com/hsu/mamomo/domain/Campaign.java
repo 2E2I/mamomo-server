@@ -68,7 +68,7 @@ public class Campaign {
     @Field(name = "percent", type = FieldType.Integer)
     private Integer percent;
 
-    @Field(name = "heartCount", type = FieldType.Integer)
+    @Field(name = "heart_count", type = FieldType.Integer)
     private Integer heartCount;
 
     private Boolean isHeart = false;
