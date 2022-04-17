@@ -39,7 +39,7 @@ include::{snippets}/campaigns-default/http-request.adoc[]
 
 include::{snippets}/campaigns/http-request.adoc[]
 
-좋아요순. 모든 캠페인 API에 적용
+좋아요순 (sort=heart_count,DESC)
 
 include::{snippets}/campaigns-sort-heart/http-request.adoc[]
 
@@ -253,6 +253,10 @@ include::{snippets}/unHeart-success/http-response.adoc[]
 |404
 |HEART_NOT_FOUND
 |해당 좋아요 정보를 찾을 수 없습니다.
+
+|404
+|CAMPAIGN_NOT_FOUND
+|해당 캠페인 정보를 찾을 수 없습니다.
 
 |409
 |DUPLICATE_EMAIL

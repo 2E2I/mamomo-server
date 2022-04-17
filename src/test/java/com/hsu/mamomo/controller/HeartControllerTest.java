@@ -53,7 +53,7 @@ public class HeartControllerTest {
 
     @BeforeEach
     void setBody() {
-        Optional<Campaign> campaign = campaignRepository.findDistinctBySiteType("happybean");
+        Optional<Campaign> campaign = campaignRepository.findFirstBySiteTypeIs("kakao");
         if (campaign.isEmpty()) {
             throw new ResourceNotFoundException("캠페인을 찾을 수 없음");
         }

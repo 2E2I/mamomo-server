@@ -60,7 +60,7 @@ public class CampaignService {
 
     public CampaignDto getCampaigns(
             Pageable pageable, Integer category_id, String keyword,
-            Boolean heart, String authorization, String tagName) {
+            String authorization, String tagName) {
 
         List<Campaign> campaigns = new ArrayList<>();
 

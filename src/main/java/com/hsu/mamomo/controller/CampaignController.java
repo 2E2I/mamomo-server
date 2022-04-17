@@ -28,10 +28,9 @@ public class CampaignController {
             @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable,
             @RequestParam(value = "category", required = false) Integer category_id,
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(defaultValue = "false") Boolean heart,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
 
-        return campaignService.getCampaigns(pageable, category_id, keyword, heart, authorization, null);
+        return campaignService.getCampaigns(pageable, category_id, keyword, authorization, null);
     }
 
     @GetMapping("/campaign/{id}")

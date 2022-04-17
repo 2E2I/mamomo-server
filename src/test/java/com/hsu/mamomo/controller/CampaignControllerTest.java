@@ -115,7 +115,7 @@ class CampaignControllerTest {
                                         "- 캠페인 리스트 정렬 방식\n\n"
                                                 + "default 값은 최신 순\n\n"
                                                 + "- 사용 가능한 값:\n\n"
-                                                + "정렬 대상: start_date, due_date ...\n\n"
+                                                + "정렬 대상: start_date, due_date, heart_count ...\n\n"
                                                 + "정렬 방향: ASC,DESC\n\n"
                                                 + "예) sort=start_date,DESC (최신 순)\n\n"
                                                 + "sort=due_date,ASC (마감 순)")
@@ -124,10 +124,7 @@ class CampaignControllerTest {
                                 CampaignDocumentUtil.getCampaginParameterWithName_Category()
                                         .optional()
                                         .attributes(getCategoryFormat()),
-                                parameterWithName("keyword").description("검색 키워드").optional(),
-                                parameterWithName("heart").description("좋아요순 true/false\n\n"
-                                        + "default 값은 false\n\n"
-                                        + "true일 경우 앞의 sort 정렬기준은 무시됨").optional()
+                                parameterWithName("keyword").description("검색 키워드").optional()
                         ),
                         CampaignDocumentUtil.getCampaignResponseFields()
                 ));
@@ -163,7 +160,7 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 좋아요순")
     void Campaign_sortHeartCount() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("heart", "true")
+                .param("sort", "heart_count,DESC")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort-heart",
                         getDocumentRequest(),
@@ -230,7 +227,7 @@ class CampaignControllerTest {
     @DisplayName("캠페인 테스트 - 성공 :: 캠페인 id로 캠페인 하나 찾기")
     public void findCampaignByIdTest() throws Exception {
 
-        String campaignId = campaignRepository.findDistinctBySiteType("happybean").get().getId();
+        String campaignId = campaignRepository.findFirstBySiteTypeIs("kakao").get().getId();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/campaign/{id}", campaignId)
                 .contentType(MediaType.APPLICATION_JSON))

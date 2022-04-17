@@ -38,10 +38,9 @@ public class TagController {
     public CampaignDto searchByTag(
             @PathVariable String tagName,
             @PageableDefault(size = 20, sort = "start_date", direction = Direction.DESC) Pageable pageable,
-            @RequestParam(defaultValue = "false") Boolean heart,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization
     ) {
-        return campaignService.getCampaigns(pageable, null, null, heart, authorization, tagName);
+        return campaignService.getCampaigns(pageable, null, null, authorization, tagName);
     }
 
 }
