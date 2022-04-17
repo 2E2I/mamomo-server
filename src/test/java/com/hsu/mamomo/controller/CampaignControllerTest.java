@@ -105,20 +105,20 @@ class CampaignControllerTest {
                         requestHeaders(
                                 headerWithName(HttpHeaders.AUTHORIZATION)
                                         .description("발급받은 jwt 토큰.\n\n"
-                                                + "토큰 앞에 'Bearer '을 붙인다."
-                                                + "인증 되었을 경우 유저에 따른 isHeart 여부가 표시된다.")
+                                                             + "토큰 앞에 'Bearer '을 붙인다."
+                                                             + "인증 되었을 경우 유저에 따른 isHeart 여부가 표시된다.")
                         ),
                         pathParameters(
                                 CampaignDocumentUtil.getCampaignParameterWithName_Size(),
                                 CampaignDocumentUtil.getCampaignParameterWithName_Page(),
                                 parameterWithName("sort").description(
-                                        "- 캠페인 리스트 정렬 방식\n\n"
-                                                + "default 값은 최신 순\n\n"
-                                                + "- 사용 가능한 값:\n\n"
-                                                + "정렬 대상: start_date, due_date, heart_count ...\n\n"
-                                                + "정렬 방향: ASC,DESC\n\n"
-                                                + "예) sort=start_date,DESC (최신 순)\n\n"
-                                                + "sort=due_date,ASC (마감 순)")
+                                                "- 캠페인 리스트 정렬 방식\n\n"
+                                                        + "default 값은 최신 순\n\n"
+                                                        + "- 사용 가능한 값:\n\n"
+                                                        + "정렬 대상: start_date, due_date, heart_count ...\n\n"
+                                                        + "정렬 방향: ASC,DESC\n\n"
+                                                        + "예) sort=start_date,DESC (최신 순)\n\n"
+                                                        + "sort=due_date,ASC (마감 순)")
                                         .optional()
                                         .attributes(getSortFormat()),
                                 CampaignDocumentUtil.getCampaginParameterWithName_Category()
@@ -137,7 +137,7 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 아무 옵션 없이")
     void Campaign_All() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-default",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -148,8 +148,8 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 정렬 추가")
     void Campaign_Sort() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("sort", "start_date,DESC")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("sort", "start_date,DESC")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -160,8 +160,8 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 좋아요순")
     void Campaign_sortHeartCount() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("sort", "heart_count,DESC")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("sort", "heart_count,DESC")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-sort-heart",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -172,8 +172,8 @@ class CampaignControllerTest {
     @DisplayName("캠페인 조회 테스트 - 성공 :: 카테고리 추가")
     void Campaign_Category() throws Exception {
         mockMvc.perform(get("/api/campaigns")
-                .param("category", String.valueOf(8))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("category", String.valueOf(8))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-category",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -185,8 +185,8 @@ class CampaignControllerTest {
     public void Campaign_Search() throws Exception {
 
         mockMvc.perform(get("/api/campaigns")
-                .param("keyword", "노인")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("keyword", "노인")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("campaigns-search-with-keyword-no-sort",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -198,9 +198,9 @@ class CampaignControllerTest {
     public void searchCampaignsByKeyword() throws Exception {
 
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/campaigns?")
-                .param("sort", "start_date,DESC")
-                .param("keyword", "노인")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .param("sort", "start_date,DESC")
+                        .param("keyword", "노인")
+                        .contentType(MediaType.APPLICATION_JSON))
 
                 .andDo(document("campaigns-search-with-keyword-sort",
                         getDocumentRequest(),
@@ -209,13 +209,13 @@ class CampaignControllerTest {
                                 CampaignDocumentUtil.getCampaignParameterWithName_Size(),
                                 CampaignDocumentUtil.getCampaignParameterWithName_Page(),
                                 parameterWithName("sort").description(
-                                        "- 캠페인 리스트 정렬 방식\n\n"
-                                                + "정렬 하지 않으려면 sort=none,none이나 sort=none\n\n"
-                                                + "- 사용 가능한 값:\n\n"
-                                                + "정렬 대상: start_date, due_date ...\n\n"
-                                                + "정렬 방향: ASC,DESC\n\n"
-                                                + "예) sort=start_date,DESC (최신 순)\n\n"
-                                                + "sort=due_date,ASC (마감 순)")
+                                                "- 캠페인 리스트 정렬 방식\n\n"
+                                                        + "정렬 하지 않으려면 sort=none,none이나 sort=none\n\n"
+                                                        + "- 사용 가능한 값:\n\n"
+                                                        + "정렬 대상: start_date, due_date ...\n\n"
+                                                        + "정렬 방향: ASC,DESC\n\n"
+                                                        + "예) sort=start_date,DESC (최신 순)\n\n"
+                                                        + "sort=due_date,ASC (마감 순)")
                                         .optional()
                                         .attributes(getSortFormat()),
                                 parameterWithName("keyword").description("검색 키워드").optional()
@@ -230,7 +230,7 @@ class CampaignControllerTest {
         String campaignId = campaignRepository.findFirstBySiteTypeIs("kakao").get().getId();
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/campaign/{id}", campaignId)
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("get-campaign-by-id",
                         getDocumentRequest(),
                         getDocumentResponse()
@@ -244,7 +244,7 @@ class CampaignControllerTest {
     public void findCampaignByIdFailNotFoundTest() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/campaign/{id}", "this is not valid id")
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andDo(document("get-campaign-by-id",
                         getDocumentRequest(),
                         getDocumentResponse()

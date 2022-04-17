@@ -3,7 +3,6 @@ package com.hsu.mamomo.controller;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.service.CampaignService;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;

@@ -38,7 +38,7 @@ public class CampaignDocumentUtil {
 
     static public ParameterDescriptor getCampaignParameterWithName_Size() {
         return parameterWithName("size").description("한 페이지당 캠페인 개수\n\n"
-                + "default 값은 20").optional();
+                                                             + "default 값은 20").optional();
     }
 
     static public ParameterDescriptor getCampaignParameterWithName_Page() {

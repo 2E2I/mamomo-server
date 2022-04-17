@@ -11,18 +11,14 @@ import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
-import com.hsu.mamomo.repository.jpa.HeartRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import com.hsu.mamomo.service.factory.ElasticTagFactory;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -39,7 +35,6 @@ public class CampaignService {
     private final ElasticCategoryFactory categoryFactory;
     private final ElasticSearchFactory searchFactory;
     private final ElasticTagFactory tagFactory;
-    private final HeartRepository heartRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
@@ -61,8 +56,6 @@ public class CampaignService {
     public CampaignDto getCampaigns(
             Pageable pageable, Integer category_id, String keyword,
             String authorization, String tagName) {
-
-        List<Campaign> campaigns = new ArrayList<>();
 
         // 검색
         if (keyword != null) {
@@ -122,24 +115,6 @@ public class CampaignService {
         }
 
     }
-
-    /*public List<Campaign> addHeartCountInfo(List<Campaign> campaigns) {
-        *//*
-         * 캠페인당 좋아요 갯수
-         * *//*
-        List<Heart> hearts = heartRepository.findAll();
-        Map<String, List<Heart>> heartMap = hearts.stream()
-                .collect(Collectors.groupingBy(Heart::getCampaignId));
-        heartMap.keySet().forEach(campaignId -> {
-            int count = heartMap.get(campaignId).size(); // 해당 캠페인 좋아요 수
-            Optional<Campaign> campaignOpt = campaigns.stream()
-                    .filter(v -> Objects.equals(v.getId(), campaignId))
-                    .findFirst();
-            campaignOpt.ifPresent(campaign -> campaign.setHeartCount(count));
-        });
-
-        return campaigns;
-    }*/
 
     /*
      * 캠페인 전체 보기
