@@ -21,7 +21,8 @@ public class ElasticSearchFactory extends ElasticSortFactory {
     public NativeSearchQuery createQuery(String keyword, Pageable pageable) {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.multiMatchQuery(keyword, "title", "body")
-                        .operator(Operator.AND));
+                        .operator(Operator.OR))
+                .withPageable(pageable);
         /*
          * pageable -> sort -> order: property(정렬기준), direction(정렬방향)
          * property: none == 정확도순. 정렬 X

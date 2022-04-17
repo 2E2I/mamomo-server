@@ -34,6 +34,7 @@ public class ElasticCategoryFactory extends ElasticSortFactory {
         return new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery("category", keyword))
                 .withSorts(createSortBuilder(pageable))
+                .withPageable(pageable)
                 .build();
     }
 
