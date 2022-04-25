@@ -16,6 +16,8 @@ import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import com.hsu.mamomo.service.factory.ElasticTagFactory;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
@@ -81,7 +83,7 @@ public class CampaignService {
             addIsHeartInfo(userId);
         }
 
-        return getBase64EncodedImage(campaignDto);
+        return convertUrlToBase64EncodedImage(campaignDto);
     }
 
     public Campaign findCampaignById(String id) {
@@ -152,14 +154,26 @@ public class CampaignService {
 
 
     // thumbnail Image base64 encoding
-    public CampaignDto getBase64EncodedImage(CampaignDto campaignDto) {
+    public CampaignDto convertUrlToBase64EncodedImage(CampaignDto campaignDto) {
         campaignDto
                 .getCampaigns()
-                .stream()
+                .getContent()
                 .forEach(
                         campaign ->
-                                campaign.setThumbnail(Base64.encodeBase64String(
-                                        campaign.getThumbnail().getBytes(StandardCharsets.UTF_8))));
+                        {
+                            try {
+                                campaign.setThumbnail(getBase64EncodedImage(campaign.getThumbnail()));
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
         return campaignDto;
+    }
+
+    public static String getBase64EncodedImage(String imageURL) throws IOException {
+        java.net.URL url = new java.net.URL(imageURL);
+        InputStream is = url.openStream();
+        byte[] bytes = org.apache.commons.io.IOUtils.toByteArray(is);
+        return Base64.encodeBase64String(bytes);
     }
 }
