@@ -16,11 +16,13 @@ import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import com.hsu.mamomo.service.factory.ElasticTagFactory;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -79,7 +81,7 @@ public class CampaignService {
             addIsHeartInfo(userId);
         }
 
-        return campaignDto;
+        return getBase64EncodedImage(campaignDto);
     }
 
     public Campaign findCampaignById(String id) {
@@ -148,4 +150,16 @@ public class CampaignService {
         return searchFactory.getCampaignSearchList(searchFactory.createQuery(keyword, pageable));
     }
 
+
+    // thumbnail Image base64 encoding
+    public CampaignDto getBase64EncodedImage(CampaignDto campaignDto) {
+        campaignDto
+                .getCampaigns()
+                .stream()
+                .forEach(
+                        campaign ->
+                                campaign.setThumbnail(Base64.encodeBase64String(
+                                        campaign.getThumbnail().getBytes(StandardCharsets.UTF_8))));
+        return campaignDto;
+    }
 }
