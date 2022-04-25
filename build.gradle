@@ -53,8 +53,11 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	//javax.validation
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+	//java uuid
 	implementation 'com.fasterxml.uuid:java-uuid-generator:4.0.1'
+
+	implementation group: 'commons-io', name: 'commons-io', version: '2.5'
+
 }
 
 tasks.named('test') {
