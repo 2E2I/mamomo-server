@@ -2,6 +2,7 @@ package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
+import com.hsu.mamomo.dto.CampaignInfoDto;
 import com.hsu.mamomo.service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class CampaignController {
     }
 
     @GetMapping("/campaign/{id}")
-    public Campaign getCampaignById(@PathVariable(value = "id") String id) {
+    public CampaignInfoDto getCampaignById(@PathVariable(value = "id") String id) {
         return campaignService.findCampaignById(id);
     }
 
