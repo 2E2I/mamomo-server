@@ -1,6 +1,7 @@
 package com.hsu.mamomo.service;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.CAMPAIGN_NOT_FOUND;
+import static com.hsu.mamomo.controller.exception.ErrorCode.FAIL_ENCODING;
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_JWT_TOKEN;
 import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 
@@ -9,6 +10,8 @@ import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
+import com.hsu.mamomo.dto.CampaignInfoDto;
+import com.hsu.mamomo.dto.CampaignInfoDto.CampaignInfoDtoBuilder;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
@@ -17,14 +20,14 @@ import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import com.hsu.mamomo.service.factory.ElasticTagFactory;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -83,17 +86,39 @@ public class CampaignService {
             addIsHeartInfo(userId);
         }
 
-        return convertUrlToBase64EncodedImage(campaignDto);
+        return campaignDto;
     }
 
-    public Campaign findCampaignById(String id) {
-        Optional<Campaign> campaignOpt = campaignRepository.findById(id);
+    public CampaignInfoDto findCampaignById(String id) {
+        Campaign campaign = campaignRepository.findById(id).orElse(null);
 
-        if (campaignOpt.isEmpty()) {
+        if (campaign == null) {
             throw new CustomException(CAMPAIGN_NOT_FOUND);
         }
 
-        return campaignOpt.get();
+        CampaignInfoDtoBuilder campaignInfoDtoBuilder = CampaignInfoDto.builder()
+                .id(campaign.getId())
+                .siteType(campaign.getSiteType())
+                .url(campaign.getUrl())
+                .title(campaign.getTitle())
+                .category(campaign.getCategory())
+                .tags(campaign.getTags())
+                .body(campaign.getBody())
+                .organizationName(campaign.getOrganizationName())
+                .dueDate(campaign.getDueDate())
+                .startDate(campaign.getStartDate())
+                .targetPrice(campaign.getTargetPrice())
+                .statusPrice(campaign.getStatusPrice())
+                .percent(campaign.getPercent());
+
+        try {
+            campaignInfoDtoBuilder
+                    .thumbnail(getBase64EncodedImage(campaign.getThumbnail()));
+        } catch (IOException e) {
+            throw new CustomException(FAIL_ENCODING);
+        }
+
+        return campaignInfoDtoBuilder.build();
     }
 
     /*
@@ -152,28 +177,8 @@ public class CampaignService {
         return searchFactory.getCampaignSearchList(searchFactory.createQuery(keyword, pageable));
     }
 
-
     // thumbnail Image base64 encoding
-    public CampaignDto convertUrlToBase64EncodedImage(CampaignDto campaignDto) {
-        campaignDto
-                .getCampaigns()
-                .getContent()
-                .forEach(
-                        campaign ->
-                        {
-                            try {
-                                campaign.setThumbnail(getBase64EncodedImage(campaign.getThumbnail()));
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        });
-        return campaignDto;
-    }
-
     public static String getBase64EncodedImage(String imageURL) throws IOException {
-        java.net.URL url = new java.net.URL(imageURL);
-        InputStream is = url.openStream();
-        byte[] bytes = org.apache.commons.io.IOUtils.toByteArray(is);
-        return Base64.encodeBase64String(bytes);
+        return Base64.encodeBase64String(IOUtils.toByteArray(new URL(imageURL).openStream()));
     }
 }

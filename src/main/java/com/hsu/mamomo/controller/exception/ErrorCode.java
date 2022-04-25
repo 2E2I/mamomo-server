@@ -22,8 +22,10 @@ public enum ErrorCode {
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 가입된 이메일입니다."),
     DUPLICATE_NICKNAME(HttpStatus.CONFLICT, "이미 사용 중인 닉네임입니다."),
-    ALREADY_HEARTED(HttpStatus.CONFLICT, "이미 좋아요 된 캠페인 입니다.");
+    ALREADY_HEARTED(HttpStatus.CONFLICT, "이미 좋아요 된 캠페인 입니다."),
 
+    /* 500 SERVER_ERROR */
+    FAIL_ENCODING(HttpStatus.INTERNAL_SERVER_ERROR,"IO 에러로 이미지 URL 인코딩을 실패했습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;

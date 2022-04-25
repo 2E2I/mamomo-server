@@ -1,8 +1,10 @@
 package com.hsu.mamomo.controller.exception;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_FIELD;
+import static com.hsu.mamomo.controller.exception.ErrorCode.IO_ERROR;
 import static com.hsu.mamomo.controller.exception.ErrorCode.WRONG_OBJECT;
 
+import java.io.IOException;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +40,5 @@ public class ExceptionController {
         log.error("handleCustomException throw CustomException : {}", e.getErrorCode());
         return ErrorResponse.toResponseEntity(e.getErrorCode());
     }
+
 }
