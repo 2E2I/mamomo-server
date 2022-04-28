@@ -57,7 +57,8 @@ public abstract class ElasticSortFactory {
                 .build();
     }
 
-    public abstract NativeSearchQuery createQuery(String keyword, Pageable pageable);
+    public abstract NativeSearchQuery createQuery(Object keyword, Pageable pageable);
+
 
     public Page<Campaign> getCampaignSearchList(Query query) {
         SearchHits<Campaign> searchHits =
