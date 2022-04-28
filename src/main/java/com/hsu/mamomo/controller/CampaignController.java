@@ -1,6 +1,5 @@
 package com.hsu.mamomo.controller;
 
-import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.CampaignInfoDto;
 import com.hsu.mamomo.service.CampaignService;
