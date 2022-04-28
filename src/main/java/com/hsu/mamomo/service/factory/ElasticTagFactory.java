@@ -35,7 +35,7 @@ public class ElasticTagFactory extends ElasticSortFactory {
     }
 
     @Override
-    public NativeSearchQuery createQuery(String keyword, Pageable pageable) {
+    public NativeSearchQuery createQuery(Object keyword, Pageable pageable) {
         return new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery("tags.keyword", keyword))
                 .withSorts(createSortBuilder(pageable))

@@ -17,7 +17,7 @@ public class ElasticSearchFactory extends ElasticSortFactory {
     }
 
     @Override
-    public NativeSearchQuery createQuery(String keyword, Pageable pageable) {
+    public NativeSearchQuery createQuery(Object keyword, Pageable pageable) {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.multiMatchQuery(keyword, "title", "body")
                         .operator(Operator.OR))

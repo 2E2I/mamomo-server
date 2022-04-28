@@ -30,7 +30,7 @@ public class ElasticCategoryFactory extends ElasticSortFactory {
 
 
     @Override
-    public NativeSearchQuery createQuery(String keyword, Pageable pageable) {
+    public NativeSearchQuery createQuery(Object keyword, Pageable pageable) {
         return new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.matchQuery("category", keyword))
                 .withSorts(createSortBuilder(pageable))
