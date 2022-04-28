@@ -1,5 +1,5 @@
 ifndef::snippets[]
-:snippets: ./build/generated-snippets
+:snippets: build/generated-snippets
 endif::[]
 
 :doctype: book
@@ -95,6 +95,19 @@ include::{snippets}/campaigns-search-with-keyword-no-sort/http-request.adoc[]
 
 include::{snippets}/campaigns-search-with-keyword-sort/path-parameters.adoc[]
 
+[[campaigns-id]]
+=== 캠페인 id로 조회
+
+==== 요청
+
+include::{snippets}/get-campaign-by-id/http-request.adoc[]
+
+[[campaigns-heart-list]]
+=== 좋아요한 캠페인 리스트
+
+==== 요청
+요청 시 <<campagins-request-header>>가 필요합니다.
+include::{snippets}/campaigns-heart-list/http-request.adoc[]
 
 [[tag]]
 == 태그
@@ -269,4 +282,8 @@ include::{snippets}/unHeart-success/http-response.adoc[]
 |409
 |ALREADY_HEARTED
 |이미 좋아요 된 캠페인 입니다.
+
+|500
+|FAIL_ENCODING
+|IO 에러로 이미지 URL 인코딩을 실패했습니다.
 |===

@@ -17,14 +17,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.util.CampaignDocumentUtil;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -237,6 +235,17 @@ class CampaignControllerTest {
                 ))
                 .andExpect(status().isOk())
                 .andDo(print());
+    }
+
+    @Test
+    @DisplayName(("캠페인 테스트 - 성공 :: 좋아요 누른 캠페인"))
+    public void findCampaignsByHeartList() throws Exception {
+        mockMvc.perform(get("/api/campaigns/heartList")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(document("campaigns-heart-list",
+                        getDocumentRequest(),
+                        getDocumentResponse()
+                ));
     }
 
     @Test
