@@ -37,4 +37,12 @@ public class CampaignController {
         return campaignService.findCampaignById(id);
     }
 
+    @PreAuthorize("hasAnyRole('USER')")
+    @GetMapping("/campaigns/heartList")
+    public CampaignDto getCampaignsByHeartList(
+            @PageableDefault(size = 20) Pageable pageable,
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
+        return campaignService.getCampaignsByHeartList(authorization,pageable);
+    }
+
 }
