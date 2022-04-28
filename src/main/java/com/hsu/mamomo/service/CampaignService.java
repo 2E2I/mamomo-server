@@ -14,8 +14,10 @@ import com.hsu.mamomo.dto.CampaignInfoDto;
 import com.hsu.mamomo.dto.CampaignInfoDto.CampaignInfoDtoBuilder;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
+import com.hsu.mamomo.repository.jpa.HeartRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
+import com.hsu.mamomo.service.factory.ElasticHeartFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
 import com.hsu.mamomo.service.factory.ElasticSortFactory;
 import com.hsu.mamomo.service.factory.ElasticTagFactory;
@@ -24,6 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
@@ -38,10 +41,12 @@ import org.springframework.stereotype.Service;
 public class CampaignService {
 
     private final UserRepository userRepository;
+    private final HeartRepository heartRepository;
     private final CampaignRepository campaignRepository;
     private final ElasticCategoryFactory categoryFactory;
     private final ElasticSearchFactory searchFactory;
     private final ElasticTagFactory tagFactory;
+    private final ElasticHeartFactory heartFactory;
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
@@ -58,6 +63,37 @@ public class CampaignService {
         }
 
         return userService.getUserIdByJwtToken(jwtToken);
+    }
+
+    /*
+     * 로그인 했을 경우
+     * 좋아요(isHearted) true/false 정보 불러옴
+     * */
+    public void addIsHeartInfo(String userId) {
+
+        Optional<User> user = userRepository.findUserById(userId);
+
+        if (user.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+
+        List<Heart> hearts = user.get().getHearts();
+
+        for (Heart heart : hearts) {
+            String campaignId = heart.getCampaignId();
+            Optional<Campaign> campaignOpt = campaignDto.getCampaigns().getContent()
+                    .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
+                    .findFirst();
+            campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
+        }
+
+    }
+
+    public void checkAuthAndAddHeartInfo(String authorization) {
+        if (authorization != null) {
+            String userId = getUserIdFromAuth(authorization);
+            addIsHeartInfo(userId);
+        }
     }
 
     public CampaignDto getCampaigns(
@@ -80,11 +116,8 @@ public class CampaignService {
             }
         }
 
-        // check isHeart
-        if (authorization != null) {
-            String userId = getUserIdFromAuth(authorization);
-            addIsHeartInfo(userId);
-        }
+        // check isHeart and add HeartInfo
+        checkAuthAndAddHeartInfo(authorization);
 
         return campaignDto;
     }
@@ -121,28 +154,13 @@ public class CampaignService {
         return campaignInfoDtoBuilder.build();
     }
 
-    /*
-     * 로그인 했을 경우
-     * 좋아요(isHearted) true/false 정보 불러옴
-     * */
-    public void addIsHeartInfo(String userId) {
+    public CampaignDto getCampaignsByHeartList(String authorization, Pageable pageable) {
+        campaignDto = new CampaignDto(findAllOfHeartList(authorization, pageable));
 
-        Optional<User> user = userRepository.findUserById(userId);
+        // check isHeart and add HeartInfo
+        checkAuthAndAddHeartInfo(authorization);
 
-        if (user.isEmpty()) {
-            throw new CustomException(MEMBER_NOT_FOUND);
-        }
-
-        List<Heart> hearts = user.get().getHearts();
-
-        for (Heart heart : hearts) {
-            String campaignId = heart.getCampaignId();
-            Optional<Campaign> campaignOpt = campaignDto.getCampaigns().getContent()
-                    .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
-                    .findFirst();
-            campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
-        }
-
+        return campaignDto;
     }
 
     /*
@@ -175,6 +193,20 @@ public class CampaignService {
      * */
     public Page<Campaign> searchByTitleOrBody(String keyword, Pageable pageable) {
         return searchFactory.getCampaignSearchList(searchFactory.createQuery(keyword, pageable));
+    }
+
+    /*
+     * 캠페인 검색 결과 보기
+     * 제목 + 본문 검색 (OR)
+     * */
+    public Page<Campaign> findAllOfHeartList(String authorization, Pageable pageable) {
+        String userId = authorization != null ? getUserIdFromAuth(authorization) : null;
+        List<Heart> heartList = heartRepository.findHeartsByUserId(userId).get();
+        List<String> campaignIdListByHeart = heartList.stream().map(Heart::getCampaignId).collect(
+                Collectors.toList());
+
+        return heartFactory.getCampaignSearchList(
+                heartFactory.createQuery(campaignIdListByHeart, pageable));
     }
 
     // thumbnail Image base64 encoding
