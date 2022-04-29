@@ -30,7 +30,7 @@ public class TextMiningService {
     public CampaignDto requestTextMining(Pageable pageable, TextDto textDto) {
         URI uri = UriComponentsBuilder
                 .fromUriString(flaskApiUrl)
-                .path("/")
+                .path("/textMining")
                 .build()
                 .toUri();
 
