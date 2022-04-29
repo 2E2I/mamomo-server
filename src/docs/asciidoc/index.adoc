@@ -217,6 +217,9 @@ include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 ==== 요청
 include::{snippets}/doHeart-success/http-request.adoc[]
 
+==== 요청 헤더
+include::{snippets}/doHeart-success/request-headers.adoc[]
+
 ==== 요청 필드
 include::{snippets}/doHeart-success/request-fields.adoc[]
 
@@ -229,6 +232,7 @@ include::{snippets}/doHeart-success/http-response.adoc[]
 include::{snippets}/unHeart-success/http-request.adoc[]
 
 ==== 요청 필드
+요청 헤더는 좋아요 요청 해더와 동일
 include::{snippets}/unHeart-success/request-fields.adoc[]
 
 ==== 응답
@@ -254,6 +258,10 @@ include::{snippets}/unHeart-success/http-response.adoc[]
 |400
 |INVALID_JWT_TOKEN
 |유효하지 않은 JWT 토큰입니다.
+
+|400
+|MISMATCH_JWT_USER
+|jwt 토큰과 요청 유저가 일치하지 않습니다.
 
 |404
 |MEMBER_NOT_FOUND
