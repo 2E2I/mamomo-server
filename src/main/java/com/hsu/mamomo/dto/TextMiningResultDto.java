@@ -1,6 +1,7 @@
 package com.hsu.mamomo.dto;
 
 import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,5 +15,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TextMiningResultDto {
 
-    private List<String> result;
+    private List<Map<String,String>> result;
 }
