@@ -603,7 +603,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4MjN9.2Txw2CtHFE9pTMftdHsneM27OlSdYSX0XqK5JlIratGfOJJvLVkbVr676HjM0ZHazuUc0hVFB7Y1llf-kcbrpQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2Nzh9.gQG4t5bIg1WRiomOfMZ2kbmHk29Hjdw08miBB61XVidqriVrEX7TIV0TjO9DIiZdnEhXyz8qilyY9wknDHIG1A
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -990,12 +990,12 @@ Content-Length: 9116
       "offset" : 0,
       "pageSize" : 3,
       "pageNumber" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
-    "totalPages" : 120,
     "totalElements" : 359,
+    "totalPages" : 120,
     "size" : 3,
     "number" : 0,
     "sort" : {
@@ -1518,7 +1518,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4Mjl9.VrY-ooaKhhZoseO4ZglkRuU91-nqJ5Mnpx-47GRrzxZ6Peg8820v4zbGMFqGoUK1xIZ3Fb_K2XbaAet4z9xWkQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODV9.ANxXnrh_tAL2AUv37Gr_YwOA8T4Fx4BqlHUIZvDOw8YVbwaVvWjQx8hg5-OXxLtsaGp-haCTMPKNF4wKdIwN4w
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1529,7 +1529,7 @@ X-Frame-Options: DENY
 Content-Length: 208
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4Mjl9.VrY-ooaKhhZoseO4ZglkRuU91-nqJ5Mnpx-47GRrzxZ6Peg8820v4zbGMFqGoUK1xIZ3Fb_K2XbaAet4z9xWkQ"
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODV9.ANxXnrh_tAL2AUv37Gr_YwOA8T4Fx4BqlHUIZvDOw8YVbwaVvWjQx8hg5-OXxLtsaGp-haCTMPKNF4wKdIwN4w"
 }</code></pre>
 </div>
 </div>
@@ -1588,7 +1588,7 @@ Content-Length: 208
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4Mjl9.VrY-ooaKhhZoseO4ZglkRuU91-nqJ5Mnpx-47GRrzxZ6Peg8820v4zbGMFqGoUK1xIZ3Fb_K2XbaAet4z9xWkQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODV9.ANxXnrh_tAL2AUv37Gr_YwOA8T4Fx4BqlHUIZvDOw8YVbwaVvWjQx8hg5-OXxLtsaGp-haCTMPKNF4wKdIwN4w
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1635,27 +1635,27 @@ Content-Length: 726
 
 {
   "user" : {
-    "id" : "e2376758-c1b8-4358-b767-58c1b83358ed",
+    "id" : "688b22ba-e1cf-4da9-8b22-bae1cf8da91f",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$SmeO1vcSYi5p/3PraMnm/esSmjocmq76rbF2eMzzZX2lDf3svUSB6",
+    "password" : "{bcrypt}$2a$10$xcPTMAxWU1N8JjEmr/xKa.V0liMXtf5p3Fy1d6NJhW57OCbOFPBGW",
     "nickname" : "user1",
     "profile" : null,
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-05-04T14:17:09",
-    "modify_date" : "2022-05-04T14:17:09",
+    "create_date" : "2022-05-04T20:04:45",
+    "modify_date" : "2022-05-04T20:04:45",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 126,
+      "id" : 135,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 127,
+      "id" : 136,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1767,7 +1767,7 @@ Content-Length: 726
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/heart HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4Mjd9.fDTl0u10eOwbG18xf0VFEtHl3meQytDnZ082_M9izKiDASIITsGZZRkGqk5ie26777OSiQfjeCdkDNCZB4qdiQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODN9.T7-dO3ezKZ-aRiUdrBxtxG0GCWKBaZfTZKxSca-iBCTQHN0kAhgWEEBX8sYnGIuMdPH2frFrREYXKCeMGYWTRA
 Content-Length: 92
 Host: localhost:8080
 
@@ -1870,7 +1870,7 @@ Content-Length: 92
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/heart HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3Mjc4Mjh9.tiLftI_gWw5b6XtUE669ZoIfKs0snxLgtERJw2HOqW3fi27H-kSPT9OsjfGAlMXi3FHTHI7CCeMVgXdowwBNCw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODN9.T7-dO3ezKZ-aRiUdrBxtxG0GCWKBaZfTZKxSca-iBCTQHN0kAhgWEEBX8sYnGIuMdPH2frFrREYXKCeMGYWTRA
 Content-Length: 92
 Host: localhost:8080
 
@@ -1960,6 +1960,7 @@ Content-Length: 92
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/textMining?page=0&amp;size=20 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NDg2ODR9.9Xp1GBv_3Rjwxwxj-qqOixvq0D2OKB_g_a6iqwaZ7oYu6IPwKfawJOOZGBAM4_oUloxtI6L1HTrejwZdnaGkbg
 Content-Length: 2156
 Host: localhost:8080
 
@@ -1971,8 +1972,11 @@ Host: localhost:8080
 </div>
 <div class="sect3">
 <h4 id="textMining-request-param"><a class="link" href="#textMining-request-param">요청 파라미터</a></h4>
+<div class="paragraph">
+<p>요청 시 <a href="#campagins-request-header">요청 헤더</a>가 필요합니다.
+./api/textMining</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. /api/textMining</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -2029,7 +2033,7 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">텍스트 마이닝할 텍스트</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">텍스트 마이닝 요청할 텍스트</p></td>
 </tr>
 </tbody>
 </table>
@@ -2130,7 +2134,7 @@ Host: localhost:8080
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-05-04 15:56:05 +0900
+Last updated 2022-05-04 20:06:42 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
