@@ -4,6 +4,7 @@ import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.TextDto;
 import com.hsu.mamomo.dto.TextMiningResultDto;
+import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.service.factory.ElasticTextMiningFactory;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
@@ -22,14 +23,22 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Service
 public class TextMiningService {
 
-    @Value("http://127.0.0.1:5000")
-    private String flaskApiUrl;
-
     private final ElasticTextMiningFactory textMiningFactory;
+    private final LoginAuthenticationUtil loginAuthenticationUtil;
 
-    public CampaignDto requestTextMining(Pageable pageable, TextDto textDto) {
+    private CampaignDto campaignDto;
+
+    @Value("http://34.64.234.137:5000")
+    private String FLASK_API_URL;
+
+    /*
+     * Flask 서버로 텍스트 마이닝 요청
+     * requestBody - TextDto: {text: 텍스트 마이닝할 텍스트}
+     * responseType - TextMiningResultDto: {keyword: 텍스트 키워드, value: 텍스트 마이닝 결과 값} 리스트
+     * */
+    public CampaignDto requestTextMining(Pageable pageable, String authorization, TextDto textDto) {
         URI uri = UriComponentsBuilder
-                .fromUriString(flaskApiUrl)
+                .fromUriString(FLASK_API_URL)
                 .path("/textMining")
                 .build()
                 .toUri();
@@ -40,15 +49,26 @@ public class TextMiningService {
                 .body(textDto);
 
         RestTemplate restTemplate = new RestTemplate();
-        TextMiningResultDto textMiningResultDto = restTemplate.exchange(requestEntity, TextMiningResultDto.class).getBody();
-        return getCampaignsByTextMining(textMiningResultDto, pageable);
+        TextMiningResultDto textMiningResultDto = restTemplate.exchange(requestEntity,
+                TextMiningResultDto.class).getBody();
+
+        campaignDto = getCampaignsByTextMining(textMiningResultDto, pageable);
+        loginAuthenticationUtil.checkAuthAndAddHeartInfo(authorization, campaignDto);
+
+        return campaignDto;
     }
 
-    public CampaignDto getCampaignsByTextMining(TextMiningResultDto textMiningResultDto, Pageable pageable) {
+    /*
+     * ElasticSearch에서 텍스트 키워드 리스트(TextMiningResultDto)로 캠페인 검색
+     * */
+    public CampaignDto getCampaignsByTextMining(TextMiningResultDto textMiningResultDto,
+            Pageable pageable) {
         return new CampaignDto(findCampaignsByTextMining(textMiningResultDto, pageable));
     }
 
-    public Page<Campaign> findCampaignsByTextMining(TextMiningResultDto textMiningResultDto, Pageable pageable) {
-        return textMiningFactory.getCampaignSearchList(textMiningFactory.createQuery(textMiningResultDto,pageable));
+    public Page<Campaign> findCampaignsByTextMining(TextMiningResultDto textMiningResultDto,
+            Pageable pageable) {
+        return textMiningFactory.getCampaignSearchList(
+                textMiningFactory.createQuery(textMiningResultDto, pageable));
     }
 }
