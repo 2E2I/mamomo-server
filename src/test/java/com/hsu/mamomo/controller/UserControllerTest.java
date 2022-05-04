@@ -319,11 +319,48 @@ class UserControllerTest {
                 .isEqualTo(userDto);
     }
 
+    /*
+     * 프로필 수정 테스트
+     */
+    @Order(400)
+    @DisplayName("프로필 수정 테스트 - 성공")
+    @Test
+    public void updateProfile() throws Exception {
+
+        Map<String, String> input = new HashMap<>();
+        input.put("nickname", "changed");
+        input.put("sex", "F");
+
+        MvcResult mvcResult = mockMvc
+                .perform(RestDocumentationRequestBuilders.patch("/api/user/profile/{email}",
+                        userDto.getEmail())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                        .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isOk())
+
+                // 문서화
+                .andDo(document("update-profile",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("email").description("조회할 유저의 이메일")
+                        ),
+                        // 요청 필드 문서화
+                        requestHeaders(
+                                headerWithName(HttpHeaders.AUTHORIZATION)
+                                        .description("api/user/authenticate 로 발급받은 조회할 유저의 토큰.\n"
+                                                + "토큰 문자열 앞에 'Bearer '(공백 한 개 포함) 을 붙입니다.")
+                        )))
+                .andDo(print())
+                .andReturn();
+    }
+
     /**
      * 회원탈퇴 테스트
      */
 
-    @Order(400)
+    @Order(500)
     @DisplayName("회원탈퇴 테스트 - 성공")
     @Test
     public void deleteUserTest() throws Exception {
@@ -331,7 +368,7 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Order(401)
+    @Order(501)
     @DisplayName("회원탈퇴 테스트 - 실패 :: 존재하지 않는 회원일때")
     @Test
     public void deleteUserNotFoundFailTest() throws Exception {
