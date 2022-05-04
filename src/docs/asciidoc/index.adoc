@@ -238,6 +238,28 @@ include::{snippets}/unHeart-success/request-fields.adoc[]
 ==== 응답
 include::{snippets}/unHeart-success/http-response.adoc[]
 
+[[textMining]]
+== 텍스트 마이닝
+
+텍스트 마이닝 API 입니다.
+
+[[textMining-reqeust]]
+==== 요청
+include::{snippets}/text-mining/http-request.adoc[]
+
+[[textMining-request-param]]
+==== 요청 파라미터
+
+include::{snippets}/text-mining/path-parameters.adoc[]
+
+[[textMining-request-field]]
+==== 요청 필드
+include::{snippets}/text-mining/request-fields.adoc[]
+
+[[textMining-response]]
+==== 응답
+캠페인 API와 동일합니다.
+
 [[exception]]
 = 에러 코드
 
