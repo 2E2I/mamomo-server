@@ -2,20 +2,16 @@ package com.hsu.mamomo.service;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.CAMPAIGN_NOT_FOUND;
 import static com.hsu.mamomo.controller.exception.ErrorCode.FAIL_ENCODING;
-import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_JWT_TOKEN;
-import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
-import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.CampaignInfoDto;
 import com.hsu.mamomo.dto.CampaignInfoDto.CampaignInfoDtoBuilder;
-import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.repository.jpa.HeartRepository;
-import com.hsu.mamomo.repository.jpa.UserRepository;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticHeartFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
@@ -24,8 +20,6 @@ import com.hsu.mamomo.service.factory.ElasticTagFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +34,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class CampaignService {
 
-    private final UserRepository userRepository;
     private final HeartRepository heartRepository;
     private final CampaignRepository campaignRepository;
     private final ElasticCategoryFactory categoryFactory;
@@ -48,53 +41,9 @@ public class CampaignService {
     private final ElasticTagFactory tagFactory;
     private final ElasticHeartFactory heartFactory;
 
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
+    private final LoginAuthenticationUtil loginAuthenticationUtil;
 
     private CampaignDto campaignDto;
-
-    public String getUserIdFromAuth(String authorization) {
-
-        String jwtToken = authorization.substring(7);
-
-        // 유효한 토큰인지 검증
-        if (!jwtTokenProvider.validateToken(jwtToken)) {
-            throw new CustomException(INVALID_JWT_TOKEN);
-        }
-
-        return userService.getUserIdByJwtToken(jwtToken);
-    }
-
-    /*
-     * 로그인 했을 경우
-     * 좋아요(isHearted) true/false 정보 불러옴
-     * */
-    public void addIsHeartInfo(String userId) {
-
-        Optional<User> user = userRepository.findUserById(userId);
-
-        if (user.isEmpty()) {
-            throw new CustomException(MEMBER_NOT_FOUND);
-        }
-
-        List<Heart> hearts = user.get().getHearts();
-
-        for (Heart heart : hearts) {
-            String campaignId = heart.getCampaignId();
-            Optional<Campaign> campaignOpt = campaignDto.getCampaigns().getContent()
-                    .stream().filter(campaign -> Objects.equals(campaign.getId(), campaignId))
-                    .findFirst();
-            campaignOpt.ifPresent(campaign -> campaign.setIsHeart(true));
-        }
-
-    }
-
-    public void checkAuthAndAddHeartInfo(String authorization) {
-        if (authorization != null) {
-            String userId = getUserIdFromAuth(authorization);
-            addIsHeartInfo(userId);
-        }
-    }
 
     public CampaignDto getCampaigns(
             Pageable pageable, Integer category_id, String keyword,
@@ -116,8 +65,7 @@ public class CampaignService {
             }
         }
 
-        // check isHeart and add HeartInfo
-        checkAuthAndAddHeartInfo(authorization);
+        loginAuthenticationUtil.checkAuthAndAddHeartInfo(authorization, campaignDto);
 
         return campaignDto;
     }
@@ -157,8 +105,7 @@ public class CampaignService {
     public CampaignDto getCampaignsByHeartList(String authorization, Pageable pageable) {
         campaignDto = new CampaignDto(findAllOfHeartList(authorization, pageable));
 
-        // check isHeart and add HeartInfo
-        checkAuthAndAddHeartInfo(authorization);
+        loginAuthenticationUtil.checkAuthAndAddHeartInfo(authorization, campaignDto);
 
         return campaignDto;
     }
@@ -200,7 +147,7 @@ public class CampaignService {
      * 제목 + 본문 검색 (OR)
      * */
     public Page<Campaign> findAllOfHeartList(String authorization, Pageable pageable) {
-        String userId = authorization != null ? getUserIdFromAuth(authorization) : null;
+        String userId = authorization != null ? loginAuthenticationUtil.getUserIdFromAuth(authorization) : null;
         List<Heart> heartList = heartRepository.findHeartsByUserId(userId).get();
         List<String> campaignIdListByHeart = heartList.stream().map(Heart::getCampaignId).collect(
                 Collectors.toList());
