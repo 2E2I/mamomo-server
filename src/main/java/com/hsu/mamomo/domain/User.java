@@ -50,10 +50,10 @@ public class User {
     @Column
     private LocalDate birth;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DATE DEFAULT (datetime('now','localtime'))")
     private LocalDateTime create_date;
 
-    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(columnDefinition = "TIMESTAMP DATE DEFAULT (datetime('now','localtime')) ON UPDATE DATE DEFAULT (datetime('now','localtime'))")
     private LocalDateTime modify_date;
 
     @ManyToMany
