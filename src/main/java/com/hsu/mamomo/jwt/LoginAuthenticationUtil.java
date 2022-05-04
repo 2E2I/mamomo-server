@@ -36,6 +36,17 @@ public class LoginAuthenticationUtil {
     }
 
     /*
+     * JWT 토큰에서 유저 이메일 추출
+     * */
+    public String getUserEmailByJwtToken(String token) {
+        Optional<User> user = userRepository.findByEmail(jwtTokenProvider.getUserPk(token));
+        if (user.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+        return user.get().getEmail();
+    }
+
+    /*
      * JWT 토큰 유효 검증
      * */
     public String getUserIdFromAuth(String authorization) {
@@ -48,6 +59,18 @@ public class LoginAuthenticationUtil {
         }
 
         return getUserIdByJwtToken(jwtToken);
+    }
+
+    public String getUserEmailFromAuth(String authorization) {
+
+        String jwtToken = authorization.substring(7);
+
+        // 유효한 토큰인지 검증
+        if (!jwtTokenProvider.validateToken(jwtToken)) {
+            throw new CustomException(INVALID_JWT_TOKEN);
+        }
+
+        return getUserEmailByJwtToken(jwtToken);
     }
 
     /*

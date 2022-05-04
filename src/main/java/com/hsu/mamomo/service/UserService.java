@@ -12,6 +12,7 @@ import com.hsu.mamomo.domain.FavTopic;
 import com.hsu.mamomo.domain.Topic;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
+import com.hsu.mamomo.dto.ProfileDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
@@ -22,6 +23,7 @@ import com.hsu.mamomo.repository.jpa.TopicRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -141,6 +143,37 @@ public class UserService {
             throw new CustomException(MEMBER_NOT_FOUND);
         }
         return new ResponseEntity<>(email + " 유저 삭제됨", HttpStatus.OK);
+    }
+
+    public ResponseEntity<ProfileDto> updateProfile(String email, ProfileDto profileDto) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+        if (userOpt.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+
+        User user = userOpt.get();
+        if (profileDto.getProfile() != null) {
+            user.setProfile(profileDto.getProfile());
+        }
+        if (profileDto.getNickname() != null) {
+            user.setNickname(profileDto.getNickname());
+        }
+        if (profileDto.getBirth() != null) {
+            user.setBirth(profileDto.getBirth());
+        }
+        if (profileDto.getSex() != null) {
+            user.setSex(profileDto.getSex());
+        }
+        if (profileDto.getFavTopics() != null) {
+            user.setFavTopic(profileDto.getFavTopics());
+        }
+
+        LocalDateTime modifiedAt = LocalDateTime.now();
+        user.setModify_date(modifiedAt);
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok().body(profileDto);
     }
 
 }
