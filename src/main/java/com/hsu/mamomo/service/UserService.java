@@ -18,7 +18,6 @@ import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.SecurityUtil;
-import com.hsu.mamomo.repository.jpa.FavTopicRepository;
 import com.hsu.mamomo.repository.jpa.TopicRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.nio.charset.StandardCharsets;
@@ -48,7 +47,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final FavTopicRepository favTopicRepository;
     private final TopicRepository topicRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     @Autowired
@@ -133,16 +131,6 @@ public class UserService {
         } else {
             throw new CustomException(MEMBER_NOT_FOUND);
         }
-    }
-
-    /*
-     * JWT 토큰에서 유저 아이디 추출
-     * */
-    public String getUserIdByJwtToken(String token) {
-        Optional<User> user = userRepository.findByEmail(jwtTokenProvider.getUserPk(token));
-        if (user.isEmpty())
-            throw new CustomException(MEMBER_NOT_FOUND);
-        return user.get().getId();
     }
 
     public ResponseEntity<String> deleteUser(String email) {
