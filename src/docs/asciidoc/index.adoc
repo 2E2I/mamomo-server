@@ -207,6 +207,47 @@ include::{snippets}/get-user-info-with-jwtToken/http-response.adoc[]
 ==== 응답 필드
 include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 
+=== 프로필 수정
+
+다음 항목중 변경하고자 하는 프로필 항목들만 부분 수정이 가능합니다.
+
+[cols="1,1,1"]
+|===
+|Name | Type | Description
+
+|profile
+|String
+|프로필 사진 이미지 링크
+
+|nickname
+|String
+|닉네임
+
+|sex
+|String
+|성별
+
+|birth
+|LocalDate
+|생년월일
+
+|favTopics
+|List<FavTopic>
+|관심분야 id 배열
+
+|===
+==== 요청
+include::{snippets}/update-profile/http-request.adoc[]
+
+==== 요청 파라미터
+include::{snippets}/update-profile/path-parameters.adoc[]
+
+==== 요청 헤더
+include::{snippets}/update-profile/request-headers.adoc[]
+
+==== 응답
+include::{snippets}/update-profile/http-response.adoc[]
+
 [[heart]]
 == 좋아요
 
@@ -265,55 +306,73 @@ include::{snippets}/text-mining/request-fields.adoc[]
 
 전체 에러 코드 목록
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
-|HttpStatus | code | message
+|HttpStatus | code | message | Description
 
 |400
 |WRONG_OBJECT
 |객체 변환이 되지 않습니다. 옳은 형식을 보내주세요.
+|
 
 |400
 |INVALID_FIELD
 |인자 형식이 맞지 않습니다.
+|
 
 |400
 |INVALID_JWT_TOKEN
 |유효하지 않은 JWT 토큰입니다.
+|
 
 |400
 |MISMATCH_JWT_USER
 |jwt 토큰과 요청 유저가 일치하지 않습니다.
+|
+
+|401
+|UNAUTHORIZED
+|유효한 인증 자격 증명이 없습니다.
+|Authorization 헤더에 토큰을 입력하지 않았을 때 발생합니다.
 
 |404
 |MEMBER_NOT_FOUND
 |해당 유저 정보를 찾을 수 없습니다
+|
 
 |404
 |TOPIC_NOT_FOUND
 |해당 카테고리를 찾을 수 없습니다.
+|
 
 |404
 |HEART_NOT_FOUND
 |해당 좋아요 정보를 찾을 수 없습니다.
+|
 
 |404
 |CAMPAIGN_NOT_FOUND
 |해당 캠페인 정보를 찾을 수 없습니다.
+|
 
 |409
 |DUPLICATE_EMAIL
 |이미 가입된 이메일입니다.
+|
 
 |409
 |DUPLICATE_NICKNAME
 |이미 사용 중인 닉네임입니다.
+|
 
 |409
 |ALREADY_HEARTED
 |이미 좋아요 된 캠페인 입니다.
+|
 
 |500
 |FAIL_ENCODING
 |IO 에러로 이미지 URL 인코딩을 실패했습니다.
+|
+
 |===
