@@ -2,6 +2,7 @@ package com.hsu.mamomo.controller;
 
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
@@ -10,7 +11,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsu.mamomo.dto.TextDto;
+import com.hsu.mamomo.dto.TokenDto;
+import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.util.CampaignDocumentUtil;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,10 +24,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -38,6 +45,34 @@ class TextMiningControllerTest {
 
     static private TextDto textDto;
 
+    static private String jwtToken;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @BeforeEach
+    void authenticate() throws Exception {
+
+        Map<String, String> input = new HashMap<>();
+        input.put("email", "test@email.com");
+        input.put("password", "testPassword");
+
+        MvcResult mvcResult = mockMvc
+                .perform(RestDocumentationRequestBuilders.post("/api/user/authenticate")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(input)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        // 응답 바디의 jwt 토큰 추출
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        TokenDto tokenDto = objectMapper.readValue(responseBody, TokenDto.class);
+        jwtToken = tokenDto.getToken();
+
+        // 발급된 토큰이 유효한 jwt 토큰인지 확인
+        assertTrue(jwtTokenProvider.validateToken(tokenDto.getToken()));
+    }
+
     @BeforeEach
     public void setTextDto() {
         textDto = TextDto.builder()
@@ -51,8 +86,10 @@ class TextMiningControllerTest {
         mockMvc.perform(RestDocumentationRequestBuilders.post("/api/textMining")
                         .param("page", String.valueOf(0))
                         .param("size", String.valueOf(20))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(textDto)))
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                        .content(objectMapper.writeValueAsString(textDto))
+                        .contentType(MediaType.APPLICATION_JSON))
+
                 .andExpect(status().isOk())
 
                 // document
@@ -61,7 +98,7 @@ class TextMiningControllerTest {
                         getDocumentResponse(),
                         // 요청 필드 문서화
                         requestFields(
-                                fieldWithPath("text").description("텍스트 마이닝할 텍스트")
+                                fieldWithPath("text").description("텍스트 마이닝 요청할 텍스트")
                         ),
                         pathParameters(
                                 CampaignDocumentUtil.getCampaignParameterWithName_Size(),
