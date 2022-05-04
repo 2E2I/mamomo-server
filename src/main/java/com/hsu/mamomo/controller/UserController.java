@@ -1,10 +1,16 @@
 package com.hsu.mamomo.controller;
 
+import static com.hsu.mamomo.controller.exception.ErrorCode.MISMATCH_JWT_USER;
+import static com.hsu.mamomo.controller.exception.ErrorCode.UNAUTHORIZED;
+
+import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.dto.LoginDto;
+import com.hsu.mamomo.dto.ProfileDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
+import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.service.UserService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final LoginAuthenticationUtil loginAuthenticationUtil;
 
     /**
      * 회원가입
@@ -56,14 +63,26 @@ public class UserController {
     @GetMapping("/{email}")
     public UserInfoDto getUserInfo(@PathVariable String email,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorization) {
-        log.info("{} 의 정보를 찾습니다 ..", email);
-        log.info("getUserPk() = {}", jwtTokenProvider.getUserPk(authorization.substring(7)));
         return userService.getUserInfo();
     }
 
     @DeleteMapping("/{email}")
     public ResponseEntity<String> deleteUser(@PathVariable String email) {
         return userService.deleteUser(email);
+    }
+
+    @PreAuthorize("hasAnyRole('USER')")
+    @PatchMapping("/profile/{email}")
+    public ResponseEntity<ProfileDto> updateProfile(@Valid @PathVariable("email") String email,
+            @RequestBody ProfileDto profileDto,
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
+        if (authorization == null) {
+            throw new CustomException(UNAUTHORIZED);
+        }
+        if (!loginAuthenticationUtil.getUserEmailFromAuth(authorization).equals(email)) {
+            throw new CustomException(MISMATCH_JWT_USER);
+        }
+        return userService.updateProfile(email, profileDto);
     }
 
 }
