@@ -121,7 +121,25 @@ public class UserService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtAuthenticationFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
-        return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
+        Optional<User> userOpt = userRepository.findByEmail(loginDto.getEmail());
+        if (userOpt.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+
+        User user = userOpt.get();
+        ProfileDto profile = ProfileDto.builder()
+                .profile(user.getProfile())
+                .nickname(user.getNickname())
+                .sex(user.getSex())
+                .birth(user.getBirth())
+                .favTopics(user.getFavTopic()).build();
+
+        return new ResponseEntity<>(
+                TokenDto.builder()
+                .token(jwt)
+                .profile(profile)
+                .build(),
+                httpHeaders, HttpStatus.OK);
     }
 
     public UserInfoDto getUserInfo() {
