@@ -534,23 +534,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_응답_필드_4">응답 필드</a></li>
 </ul>
 </li>
+<li><a href="#_프로필_수정">4.4. 프로필 수정</a>
+<ul class="sectlevel3">
+<li><a href="#_요청_12">요청</a></li>
+<li><a href="#_요청_파라미터_2">요청 파라미터</a></li>
+<li><a href="#_요청_헤더_2">요청 헤더</a></li>
+<li><a href="#_응답_6">응답</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#heart">5. 좋아요</a>
 <ul class="sectlevel2">
 <li><a href="#_좋아요">5.1. 좋아요</a>
 <ul class="sectlevel3">
-<li><a href="#_요청_12">요청</a></li>
-<li><a href="#_요청_헤더_2">요청 헤더</a></li>
+<li><a href="#_요청_13">요청</a></li>
+<li><a href="#_요청_헤더_3">요청 헤더</a></li>
 <li><a href="#_요청_필드_4">요청 필드</a></li>
-<li><a href="#_응답_6">응답</a></li>
+<li><a href="#_응답_7">응답</a></li>
 </ul>
 </li>
 <li><a href="#_좋아요_취소">5.2. 좋아요 취소</a>
 <ul class="sectlevel3">
-<li><a href="#_요청_13">요청</a></li>
+<li><a href="#_요청_14">요청</a></li>
 <li><a href="#_요청_필드_5">요청 필드</a></li>
-<li><a href="#_응답_7">응답</a></li>
+<li><a href="#_응답_8">응답</a></li>
 </ul>
 </li>
 </ul>
@@ -1751,6 +1759,148 @@ Content-Length: 726
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_프로필_수정"><a class="link" href="#_프로필_수정">4.4. 프로필 수정</a></h3>
+<div class="paragraph">
+<p>다음 항목중 변경하고자 하는 프로필 항목들만 부분 수정이 가능합니다.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로필 사진 이미지 링크</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nickname</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">닉네임</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">성별</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">birth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LocalDate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">생년월일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">favTopics</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List&lt;FavTopic&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">관심분야 id 배열</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_요청_12"><a class="link" href="#_요청_12">요청</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PATCH /api/user/profile/user@email.com HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTE3NzE5NTN9.hlRWM3ympX50Iap_c-rV1QvgjHuCuYtVaHXDW9tjLA305Lv78xwpqVzYvg7th3mps3smYQjXuc4YDE5ysUWwjA
+Content-Length: 46
+Host: localhost:8080
+
+{
+  "sex" : "F",
+  "nickname" : "changed"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_파라미터_2"><a class="link" href="#_요청_파라미터_2">요청 파라미터</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. /api/user/profile/{email}</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Form</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">조회할 유저의 이메일</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_2"><a class="link" href="#_요청_헤더_2">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">api/user/authenticate 로 발급받은 조회할 유저의 토큰.
+토큰 문자열 앞에 'Bearer '(공백 한 개 포함) 을 붙입니다.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_6"><a class="link" href="#_응답_6">응답</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Disposition: inline;filename=f.txt
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 109
+
+{
+  "profile" : null,
+  "nickname" : "changed",
+  "sex" : "F",
+  "birth" : null,
+  "favTopics" : null
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1762,7 +1912,7 @@ Content-Length: 726
 <div class="sect2">
 <h3 id="_좋아요"><a class="link" href="#_좋아요">5.1. 좋아요</a></h3>
 <div class="sect3">
-<h4 id="_요청_12"><a class="link" href="#_요청_12">요청</a></h4>
+<h4 id="_요청_13"><a class="link" href="#_요청_13">요청</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/heart HTTP/1.1
@@ -1779,7 +1929,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_요청_헤더_2"><a class="link" href="#_요청_헤더_2">요청 헤더</a></h4>
+<h4 id="_요청_헤더_3"><a class="link" href="#_요청_헤더_3">요청 헤더</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -1838,7 +1988,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_6"><a class="link" href="#_응답_6">응답</a></h4>
+<h4 id="_응답_7"><a class="link" href="#_응답_7">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
@@ -1865,7 +2015,7 @@ Content-Length: 92
 <div class="sect2">
 <h3 id="_좋아요_취소"><a class="link" href="#_좋아요_취소">5.2. 좋아요 취소</a></h3>
 <div class="sect3">
-<h4 id="_요청_13"><a class="link" href="#_요청_13">요청</a></h4>
+<h4 id="_요청_14"><a class="link" href="#_요청_14">요청</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/heart HTTP/1.1
@@ -1922,7 +2072,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect3">
-<h4 id="_응답_7"><a class="link" href="#_응답_7">응답</a></h4>
+<h4 id="_응답_8"><a class="link" href="#_응답_8">응답</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -2054,15 +2204,17 @@ Host: localhost:8080
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">HttpStatus</th>
 <th class="tableblock halign-left valign-top">code</th>
 <th class="tableblock halign-left valign-top">message</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
@@ -2070,61 +2222,79 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">WRONG_OBJECT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">객체 변환이 되지 않습니다. 옳은 형식을 보내주세요.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INVALID_FIELD</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">인자 형식이 맞지 않습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INVALID_JWT_TOKEN</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">유효하지 않은 JWT 토큰입니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MISMATCH_JWT_USER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰과 요청 유저가 일치하지 않습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNAUTHORIZED</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유효한 인증 자격 증명이 없습니다.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authorization 헤더에 토큰을 입력하지 않았을 때 발생합니다.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MEMBER_NOT_FOUND</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">해당 유저 정보를 찾을 수 없습니다</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TOPIC_NOT_FOUND</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">해당 카테고리를 찾을 수 없습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HEART_NOT_FOUND</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">해당 좋아요 정보를 찾을 수 없습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">CAMPAIGN_NOT_FOUND</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">해당 캠페인 정보를 찾을 수 없습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DUPLICATE_EMAIL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">이미 가입된 이메일입니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DUPLICATE_NICKNAME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">이미 사용 중인 닉네임입니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ALREADY_HEARTED</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">이미 좋아요 된 캠페인 입니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">500</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FAIL_ENCODING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IO 에러로 이미지 URL 인코딩을 실패했습니다.</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -2134,7 +2304,7 @@ Host: localhost:8080
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-05-04 21:17:56 +0900
+Last updated 2022-05-05 13:48:23 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
