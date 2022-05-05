@@ -95,8 +95,8 @@ class UserControllerTest {
     void signUpTest() throws Exception {
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userDto)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(userDto)))
                 .andExpect(status().isCreated())
 
                 // 문서화
@@ -145,8 +145,8 @@ class UserControllerTest {
                 .build();
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(duplicatedEmailUser)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(duplicatedEmailUser)))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("DUPLICATE_EMAIL"))
                 .andExpect(jsonPath("$.message").value("이미 가입된 이메일입니다."));
@@ -166,8 +166,8 @@ class UserControllerTest {
                 .build();
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(duplicatedNicknameUser)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(duplicatedNicknameUser)))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.code").value("DUPLICATE_NICKNAME"))
                 .andExpect(jsonPath("$.message").value("이미 사용 중인 닉네임입니다."));
@@ -179,7 +179,7 @@ class UserControllerTest {
     void signUpBadRequestAbsenceOfEssentialFieldFailTest() throws Exception {
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("WRONG_OBJECT"))
                 .andExpect(jsonPath("$.message").value("객체 변환이 되지 않습니다. 옳은 형식을 보내주세요."));
@@ -199,8 +199,8 @@ class UserControllerTest {
                 .build();
 
         mockMvc.perform(post("/api/user/signup")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(invalidEmailFieldUser)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidEmailFieldUser)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("INVALID_FIELD"))
                 .andExpect(jsonPath("$.message").value("이메일 형식에 맞지 않습니다."));
@@ -241,7 +241,14 @@ class UserControllerTest {
                         // 응답 바디 문서화
                         responseFields(
                                 fieldWithPath("token")
-                                        .description("요청한 인증 정보가 유효하다면 JWT 토큰이 발급됩니다.")
+                                        .description("요청한 인증 정보가 유효하다면 JWT 토큰이 발급됩니다."),
+                                fieldWithPath("profile")
+                                        .description("유저 프로필 정보 입니다."),
+                                fieldWithPath("profile.profile").description("프로필 이미지 입니다."),
+                                fieldWithPath("profile.nickname").description("닉네임 입니다."),
+                                fieldWithPath("profile.sex").description("성별 정보 입니다."),
+                                fieldWithPath("profile.birth").description("생년월일 입니다."),
+                                subsectionWithPath("profile.favTopics").description("관심 기부 분야 입니다.")
                         )))
 
                 .andReturn();
@@ -265,7 +272,7 @@ class UserControllerTest {
     public void getUserInfoTest() throws Exception {
         MvcResult mvcResult = mockMvc
                 .perform(RestDocumentationRequestBuilders.get("/api/user/{email}",
-                                userDto.getEmail())
+                        userDto.getEmail())
                         .contentType(MediaType.APPLICATION_JSON)
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken))
                 .andExpect(status().isOk())
@@ -281,7 +288,7 @@ class UserControllerTest {
                         requestHeaders(
                                 headerWithName(HttpHeaders.AUTHORIZATION)
                                         .description("api/user/authenticate 로 발급받은 조회할 유저의 토큰.\n"
-                                                             + "토큰 문자열 앞에 'Bearer '(공백 한 개 포함) 을 붙입니다.")
+                                                + "토큰 문자열 앞에 'Bearer '(공백 한 개 포함) 을 붙입니다.")
                         ),
                         // 응답 바디 문서화
                         responseFields(

@@ -15,6 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.hsu.mamomo.config.jpa.JpaConfig;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
@@ -87,7 +88,8 @@ public class HeartControllerTest {
 
         // 응답 바디의 jwt 토큰 추출
         String responseBody = mvcResult.getResponse().getContentAsString();
-        TokenDto tokenDto = objectMapper.readValue(responseBody, TokenDto.class);
+        TokenDto tokenDto = objectMapper.registerModule(new JavaTimeModule())
+                .readValue(responseBody, TokenDto.class);
         jwtToken = tokenDto.getToken();
 
         // 발급된 토큰이 유효한 jwt 토큰인지 확인
