@@ -55,8 +55,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	//java uuid
 	implementation 'com.fasterxml.uuid:java-uuid-generator:4.0.1'
-
+	// IO Utils
 	implementation group: 'commons-io', name: 'commons-io', version: '2.5'
+	//gcp cloud storage
+	implementation group: 'com.google.cloud', name: 'google-cloud-storage', version: '2.3.0'
 
 }
 
