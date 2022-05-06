@@ -9,6 +9,12 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+  cloud:
+    gcp:
+      storage:
+        credentials:
+          location:
+            classpath: digital-shadow-343012-fbddea22c098.json
 
   datesource:
     driver-class-name: com.mysql.cj.jdbc.Driver
