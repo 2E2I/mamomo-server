@@ -22,6 +22,7 @@ public enum ErrorCode {
     TOPIC_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 카테고리를 찾을 수 없습니다."),
     HEART_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 좋아요 정보를 찾을 수 없습니다."),
     CAMPAIGN_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 캠페인 정보를 찾을 수 없습니다."),
+    BANNER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 배너 이미지를 찾을 수 없습니다."),
 
     /* 409 CONFLICT : Resource 의 현재 상태와 충돌. 보통 중복된 데이터 존재 */
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 가입된 이메일입니다."),
@@ -29,7 +30,8 @@ public enum ErrorCode {
     ALREADY_HEARTED(HttpStatus.CONFLICT, "이미 좋아요 된 캠페인 입니다."),
 
     /* 500 SERVER_ERROR */
-    FAIL_ENCODING(HttpStatus.INTERNAL_SERVER_ERROR,"IO 에러로 이미지 URL 인코딩을 실패했습니다.");
+    FAIL_ENCODING(HttpStatus.INTERNAL_SERVER_ERROR,"IO 에러로 이미지 URL 인코딩을 실패했습니다."),
+    FAIL_SAVE_BANNER(HttpStatus.INTERNAL_SERVER_ERROR,"배너 만들기 실패했습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;
