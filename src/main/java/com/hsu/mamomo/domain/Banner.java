@@ -35,6 +35,10 @@ public class Banner {
     @JsonIgnore
     private User user;
 
+    @Column(name = "banner_id")
+    @NonNull
+    private String bannerId;
+
     @Column(name = "img_url")
     @NonNull
     private String imgUrl;
