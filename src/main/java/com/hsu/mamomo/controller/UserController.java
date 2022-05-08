@@ -6,12 +6,14 @@ import static com.hsu.mamomo.controller.exception.ErrorCode.UNAUTHORIZED;
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.ProfileDto;
+import com.hsu.mamomo.dto.ProfileModifyDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.service.UserService;
+import java.util.Map;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +76,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('USER')")
     @PatchMapping("/profile/{email}")
     public ResponseEntity<ProfileDto> updateProfile(@Valid @PathVariable("email") String email,
-            @RequestBody ProfileDto profileDto,
+            @RequestBody ProfileModifyDto profileModifyDto,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
         if (authorization == null) {
             throw new CustomException(UNAUTHORIZED);
@@ -82,7 +84,7 @@ public class UserController {
         if (!loginAuthenticationUtil.getUserEmailFromAuth(authorization).equals(email)) {
             throw new CustomException(MISMATCH_JWT_USER);
         }
-        return userService.updateProfile(email, profileDto);
+        return userService.updateProfile(email, profileModifyDto);
     }
 
 }

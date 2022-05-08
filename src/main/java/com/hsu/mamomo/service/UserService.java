@@ -13,6 +13,7 @@ import com.hsu.mamomo.domain.Topic;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.LoginDto;
 import com.hsu.mamomo.dto.ProfileDto;
+import com.hsu.mamomo.dto.ProfileModifyDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
@@ -26,8 +27,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,7 +136,8 @@ public class UserService {
                 .nickname(user.getNickname())
                 .sex(user.getSex())
                 .birth(user.getBirth())
-                .favTopics(user.getFavTopic()).build();
+                .favTopics(user.getFavTopic())
+                .build();
 
         return new ResponseEntity<>(
                 TokenDto.builder()
@@ -163,27 +168,47 @@ public class UserService {
         return new ResponseEntity<>(email + " 유저 삭제됨", HttpStatus.OK);
     }
 
-    public ResponseEntity<ProfileDto> updateProfile(String email, ProfileDto profileDto) {
+    public ResponseEntity<ProfileDto> updateProfile(String email, ProfileModifyDto profileModifyDto) {
         Optional<User> userOpt = userRepository.findByEmail(email);
         if (userOpt.isEmpty()) {
             throw new CustomException(MEMBER_NOT_FOUND);
         }
 
         User user = userOpt.get();
-        if (profileDto.getProfile() != null) {
-            user.setProfile(profileDto.getProfile());
+
+        Map<String, ProfileDto> result = new HashMap<>();
+        ProfileDto previous = convertUserToProfileDto(user);
+
+        if (profileModifyDto.getProfile() != null) {
+            user.setProfile(profileModifyDto.getProfile());
         }
-        if (profileDto.getNickname() != null) {
-            user.setNickname(profileDto.getNickname());
+        if (profileModifyDto.getNickname() != null) {
+            user.setNickname(profileModifyDto.getNickname());
         }
-        if (profileDto.getBirth() != null) {
-            user.setBirth(profileDto.getBirth());
+        if (profileModifyDto.getBirth() != null) {
+            user.setBirth(profileModifyDto.getBirth());
         }
-        if (profileDto.getSex() != null) {
-            user.setSex(profileDto.getSex());
+        if (profileModifyDto.getSex() != null) {
+            user.setSex(profileModifyDto.getSex());
         }
-        if (profileDto.getFavTopics() != null) {
-            user.setFavTopic(profileDto.getFavTopics());
+        if (profileModifyDto.getFavTopics() != null) {
+            List<FavTopic> favTopics = new ArrayList<>();
+            profileModifyDto.getFavTopics().forEach(
+                    topicId -> {
+                        Optional<Topic> topic = topicRepository.findTopicById(topicId);
+                        if (topic.isPresent()) {
+                            FavTopic favTopic = FavTopic.builder()
+                                    .user(user)
+                                    .topic(topic.get())
+                                    .build();
+                            favTopics.add(favTopic);
+                        } else {
+                            throw new CustomException(TOPIC_NOT_FOUND);
+                        }
+                    }
+            );
+            user.getFavTopic().clear();
+            user.getFavTopic().addAll(favTopics);
         }
 
         LocalDateTime modifiedAt = LocalDateTime.now();
@@ -191,7 +216,17 @@ public class UserService {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok().body(profileDto);
+        return ResponseEntity.ok().body(convertUserToProfileDto(user));
+    }
+
+    public ProfileDto convertUserToProfileDto(User user) {
+        return ProfileDto.builder()
+                .profile(user.getProfile())
+                .nickname(user.getNickname())
+                .birth(user.getBirth())
+                .sex(user.getSex())
+                .favTopics(user.getFavTopic())
+                .build();
     }
 
 }
