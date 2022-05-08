@@ -334,9 +334,12 @@ class UserControllerTest {
     @Test
     public void updateProfile() throws Exception {
 
-        Map<String, String> input = new HashMap<>();
-        input.put("nickname", "changed");
+        Map<String, Object> input = new HashMap<>();
+        input.put("profile", "바꿀 프로필 URL");
+        input.put("nickname", "바꿀 닉네임");
         input.put("sex", "F");
+        input.put("birth", "2005-08-20");
+        input.put("favTopics", List.of(2, 3, 4));
 
         MvcResult mvcResult = mockMvc
                 .perform(RestDocumentationRequestBuilders.patch("/api/user/profile/{email}",
