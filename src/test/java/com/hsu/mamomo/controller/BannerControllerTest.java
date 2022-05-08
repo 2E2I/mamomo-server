@@ -5,13 +5,21 @@ import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.partWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParts;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hsu.mamomo.dto.GcsBannerImageDto;
 import com.hsu.mamomo.dto.TokenDto;
+import com.hsu.mamomo.dto.banner.BannerDto;
+import com.hsu.mamomo.dto.banner.BannerSaveDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -19,7 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -37,6 +48,7 @@ import org.springframework.test.web.servlet.MvcResult;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class BannerControllerTest {
 
     @Autowired
@@ -50,10 +62,9 @@ class BannerControllerTest {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
+    private BannerSaveDto bannerSaveDto;
     private String userId;
-    private String campaignId;
-    private MockMultipartFile multipartFile;
-    private GcsBannerImageDto gcsBannerImageDto;
+    private String bannerId;
 
     @BeforeEach
     void authenticate() throws Exception {
@@ -80,21 +91,25 @@ class BannerControllerTest {
 
     @BeforeEach
     public void setBannerDto() throws IOException {
+        bannerSaveDto = BannerSaveDto.builder()
+                .email("test@gmail.com")
+                .campaignId("824")
+                .bannerImg(new MockMultipartFile("bannerImg",
+                        "test.jpg",
+                        "image/jpeg",
+                        new FileInputStream("src/test/resources/bannerTest.jpg")))
+                .build();
         userId = "dbb485f4-f588-4bfe-b485-f4f5885bfe9d";
-        campaignId = "824";
-        multipartFile = new MockMultipartFile("bannerImg",
-                "test.jpg",
-                "image/jpeg",
-                new FileInputStream("src/test/resources/bannerTest.jpg"));
     }
 
-    @DisplayName("배너 저장하기 테스트 - 성공 :: ")
     @Test
+    @Order(100)
+    @DisplayName("배너 저장 테스트 - 성공 :: ")
     public void saveBanner() throws Exception {
-        mockMvc.perform(multipart("/api/banner")
-                        .file(multipartFile)
-                        .param("userId", userId)
-                        .param("campaignId", campaignId)
+        MvcResult mvcResult = mockMvc.perform(multipart("/api/banner")
+                        .file((MockMultipartFile) bannerSaveDto.getBannerImg())
+                        .param("email", bannerSaveDto.getEmail())
+                        .param("campaignId", bannerSaveDto.getCampaignId())
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
 
@@ -105,14 +120,74 @@ class BannerControllerTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
 
+                        // 요청 필드 문서화
+                        requestParts(
+                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
+                        ),
+                        requestParameters(
+                                parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("campaignId").description("배너 이미지를 만들 캠페인 id")
+                        ),
                         // 응답 필드 문서화
                         responseFields(
-                                fieldWithPath("bucketName").description(
-                                        "GCS 버킷 이름 (mamomo-banner-storage)"),
-                                fieldWithPath("filePath").description("디렉터리 이름 (userId와 동일)"),
-                                fieldWithPath("fileName").description(
-                                        "파일 이름 ( {캠페인id_yyyyMMddHHss} 형식)")
+                                fieldWithPath("bannerId").description("배너 아이디"),
+                                fieldWithPath("imgUrl").description("배너 이미지 주소")
+                        )
+                ))
+                .andReturn();
+
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        BannerDto responseBanner = objectMapper.readValue(responseBody, BannerDto.class);
+        bannerId = responseBanner.getBannerId();
+        System.out.println(bannerId);
+
+    }
+
+    @Test
+    @Order(200)
+    @DisplayName("배너 리스트 테스트 - 성공 :: ")
+    public void getBannerList() throws Exception {
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner/{email}",
+                                bannerSaveDto.getEmail())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken))
+                .andExpect(status().isOk())
+
+                // 문서화
+                .andDo(document("banner-list",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("email").description("사용자 이메일")
+                        ),
+                        relaxedResponseFields(
+                                fieldWithPath("bannerList.[]").description("배너 리스트"),
+                                fieldWithPath("bannerList.[].bannerId").description("배너 아이디"),
+                                fieldWithPath("bannerList.[].imgUrl").description(
+                                        "base64 인코딩된 배너 이미지 url")
                         )
                 ));
+    }
+
+    @Test
+    @Order(300)
+    @DisplayName("배너 삭제 테스트 - 성공 :: ")
+    public void deleteBanner() throws Exception {
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/api/banner/{email}/{bannerId}",
+                                bannerSaveDto.getEmail(), bannerId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken))
+                .andExpect(status().isOk())
+
+                // 문서화
+                .andDo(document("banner-delete",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("bannerId").description("삭제할 배너 id")
+                        )))
+                .andDo(print()
+                );
     }
 }

@@ -301,6 +301,65 @@ include::{snippets}/text-mining/request-fields.adoc[]
 ==== 응답
 캠페인 API와 동일합니다.
 
+[[banner]]
+== 배너
+
+배너 API 입니다.
+
+[[banner-save]]
+=== 배너 저장
+
+[[banner-save-reqeust]]
+==== 요청
+include::{snippets}/banner-save/httpie-request.adoc[]
+
+[[banner-save-param]]
+==== 요청 form-data
+요청 시 <<campagins-request-header>>가 필요합니다.
+include::{snippets}/banner-save/request-parameters.adoc[]
+include::{snippets}/banner-save/request-parts.adoc[]
+
+[[banner-save-response]]
+==== 응답
+include::{snippets}/banner-save/response-body.adoc[]
+
+[[banner-list]]
+=== 배너 리스트
+
+[[banner-list-reqeust]]
+==== 요청
+include::{snippets}/banner-list/http-request.adoc[]
+
+[[banner-list-param]]
+==== 요청 파라미터
+요청 시 <<campagins-request-header>>가 필요합니다.
+include::{snippets}/banner-list/path-parameters.adoc[]
+
+[[banner-list-response]]
+==== 응답
+include::{snippets}/banner-list/response-body.adoc[]
+
+[[banner-list-response-body]]
+==== 응답 필드
+include::{snippets}/banner-list/response-fields.adoc[]
+
+[[banner-delete]]
+=== 배너 삭제
+
+[[banner-delete-reqeust]]
+==== 요청
+include::{snippets}/banner-delete/http-request.adoc[]
+
+[[banner-delete-param]]
+==== 요청 파라미터
+요청 시 <<campagins-request-header>>가 필요합니다.
+include::{snippets}/banner-delete/path-parameters.adoc[]
+
+[[banner-delete-response]]
+==== 응답
+include::{snippets}/banner-delete/response-body.adoc[]
+
+
 [[exception]]
 = 에러 코드
 
