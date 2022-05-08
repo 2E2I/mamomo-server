@@ -31,7 +31,7 @@ public enum ErrorCode {
 
     /* 500 SERVER_ERROR */
     FAIL_ENCODING(HttpStatus.INTERNAL_SERVER_ERROR,"IO 에러로 이미지 URL 인코딩을 실패했습니다."),
-    FAIL_SAVE_BANNER(HttpStatus.INTERNAL_SERVER_ERROR,"배너 만들기 실패했습니다.");
+    FAIL_SAVE_BANNER(HttpStatus.INTERNAL_SERVER_ERROR,"IO 에러로 배너 이미지 저장을 실패했습니다.");
 
     private final HttpStatus httpStatus;
     private final String detail;
