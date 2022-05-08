@@ -1,4 +1,4 @@
-package com.hsu.mamomo.dto;
+package com.hsu.mamomo.dto.banner;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -16,11 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class BannerDto {
 
     @NonNull
-    private MultipartFile bannerImg;
+    private String bannerId;
 
     @NonNull
-    private String userId;
-
-    @NonNull
-    private String campaignId;
+    private String imgUrl;
 }

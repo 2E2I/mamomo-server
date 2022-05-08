@@ -1,5 +1,6 @@
-package com.hsu.mamomo.dto;
+package com.hsu.mamomo.dto.banner;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,9 +12,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GcsBannerImageDto {
+public class BannerListDto {
 
-    private String bucketName;
-    private String filePath;
-    private String fileName;
+    private List<BannerDto> bannerList;
 }
