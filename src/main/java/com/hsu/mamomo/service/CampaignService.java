@@ -12,6 +12,7 @@ import com.hsu.mamomo.dto.CampaignInfoDto.CampaignInfoDtoBuilder;
 import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.repository.elastic.CampaignRepository;
 import com.hsu.mamomo.repository.jpa.HeartRepository;
+import com.hsu.mamomo.service.encoding.EncodingImage;
 import com.hsu.mamomo.service.factory.ElasticCategoryFactory;
 import com.hsu.mamomo.service.factory.ElasticHeartFactory;
 import com.hsu.mamomo.service.factory.ElasticSearchFactory;
@@ -92,12 +93,8 @@ public class CampaignService {
                 .statusPrice(campaign.getStatusPrice())
                 .percent(campaign.getPercent());
 
-        try {
-            campaignInfoDtoBuilder
-                    .thumbnail(getBase64EncodedImage(campaign.getThumbnail()));
-        } catch (IOException e) {
-            throw new CustomException(FAIL_ENCODING);
-        }
+        campaignInfoDtoBuilder
+                .thumbnail(EncodingImage.getBase64EncodedImage(campaign.getThumbnail()));
 
         return campaignInfoDtoBuilder.build();
     }
@@ -147,7 +144,9 @@ public class CampaignService {
      * 제목 + 본문 검색 (OR)
      * */
     public Page<Campaign> findAllOfHeartList(String authorization, Pageable pageable) {
-        String userId = authorization != null ? loginAuthenticationUtil.getUserIdFromAuth(authorization) : null;
+        String userId =
+                authorization != null ? loginAuthenticationUtil.getUserIdFromAuth(authorization)
+                        : null;
         List<Heart> heartList = heartRepository.findHeartsByUserId(userId).get();
         List<String> campaignIdListByHeart = heartList.stream().map(Heart::getCampaignId).collect(
                 Collectors.toList());
@@ -156,8 +155,4 @@ public class CampaignService {
                 heartFactory.createQuery(campaignIdListByHeart, pageable));
     }
 
-    // thumbnail Image base64 encoding
-    public static String getBase64EncodedImage(String imageURL) throws IOException {
-        return Base64.encodeBase64String(IOUtils.toByteArray(new URL(imageURL).openStream()));
-    }
 }
