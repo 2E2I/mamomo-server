@@ -38,12 +38,5 @@ public interface DocumentFormatGenerator {
         return key("format").value("1~10 사이의 Integer 배열");
     }
 
-    static Attributes.Attribute getBannerImgFormat() {
-        return key("format").value("File 객체입니다.");
-    }
-
-    static Attributes.Attribute getBannerDateFormat() {
-        return key("format").value("날짜 형식 [yyyy-MM-dd HH:mm:ss]입니다.");
-    }
 
 }

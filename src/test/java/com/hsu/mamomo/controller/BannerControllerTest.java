@@ -2,8 +2,6 @@ package com.hsu.mamomo.controller;
 
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
-import static com.hsu.mamomo.document.DocumentFormatGenerator.getBannerDateFormat;
-import static com.hsu.mamomo.document.DocumentFormatGenerator.getBannerImgFormat;
 import static com.hsu.mamomo.document.DocumentFormatGenerator.getSortFormat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -133,13 +131,13 @@ class BannerControllerTest {
 
                         // 요청 필드 문서화
                         requestParts(
-                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
-                                        .attributes(getBannerImgFormat())
+                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일\n\n"
+                                                                              + "File 객체입니다.")
                         ),
                         requestParameters(
                                 parameterWithName("email").description("사용자 이메일"),
-                                parameterWithName("date").description("배너 만든/수정한 시간")
-                                        .attributes(getBannerDateFormat())
+                                parameterWithName("date").description("배너 만든/수정한 시간\n\n"
+                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다.")
                         ),
                         // 응답 필드 문서화
                         relaxedResponseFields(
@@ -262,9 +260,51 @@ class BannerControllerTest {
 
     @Test
     @Order(300)
+    @DisplayName("배너 수정 테스트 - 성공 :: ")
+    public String modifyBanner() throws Exception {
+        bannerId = saveBanner();
+        mockMvc.perform(multipart("/api/banner/modify")
+                        .file((MockMultipartFile) bannerSaveDto.getBannerImg())
+                        .param("bannerId", bannerId)
+                        .param("email", bannerSaveDto.getEmail())
+                        .param("date", localDateTime)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
+                )
+                .andExpect(status().isOk())
+
+                // 문서화
+                .andDo(document("banner-modify",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        // 요청 필드 문서화
+                        requestParts(
+                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일\n\n"
+                                                                              + "File 객체입니다.")
+                        ),
+                        requestParameters(
+                                parameterWithName("bannerId").description("배너 아이디"),
+                                parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("date").description("배너 만든/수정한 시간\n\n"
+                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다.")
+                        ),
+                        // 응답 필드 문서화
+                        relaxedResponseFields(
+                                fieldWithPath("banner.bannerId").description("배너 아이디"),
+                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.date").description("배너 만든/수정한 시간")
+                        ))
+                )
+                .andDo(print()
+                );
+        return bannerId;
+    }
+
+    @Test
+    @Order(400)
     @DisplayName("배너 삭제 테스트 - 성공 :: ")
     public void deleteBanner() throws Exception {
-        bannerId = saveBanner();
+        bannerId = modifyBanner();
         mockMvc.perform(RestDocumentationRequestBuilders.delete("/api/banner/{email}/{bannerId}",
                                 bannerSaveDto.getEmail(), bannerId)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -283,44 +323,4 @@ class BannerControllerTest {
                 );
     }
 
-    @Test
-    @Order(400)
-    @DisplayName("배너 수정 테스트 - 성공 :: ")
-    public void modifyBanner() throws Exception {
-        bannerId = saveBanner();
-        mockMvc.perform(multipart("/api/banner/modify")
-                        .file((MockMultipartFile) bannerSaveDto.getBannerImg())
-                        .param("bannerId", bannerId)
-                        .param("email", bannerSaveDto.getEmail())
-                        .param("date", localDateTime)
-                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
-                        .contentType(MediaType.MULTIPART_FORM_DATA)
-                )
-                .andExpect(status().isOk())
-
-                // 문서화
-                .andDo(document("banner-modify",
-                        getDocumentRequest(),
-                        getDocumentResponse(),
-                        // 요청 필드 문서화
-                        requestParts(
-                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
-                                        .attributes(getBannerImgFormat())
-                        ),
-                        requestParameters(
-                                parameterWithName("bannerId").description("배너 아이디"),
-                                parameterWithName("email").description("사용자 이메일"),
-                                parameterWithName("date").description("배너 만든/수정한 시간")
-                                        .attributes(getBannerDateFormat())
-                        ),
-                        // 응답 필드 문서화
-                        relaxedResponseFields(
-                                fieldWithPath("banner.bannerId").description("배너 아이디"),
-                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
-                                fieldWithPath("banner.date").description("배너 만든/수정한 시간")
-                        ))
-                )
-                .andDo(print()
-                );
-    }
 }
