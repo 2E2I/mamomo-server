@@ -17,6 +17,7 @@ import com.hsu.mamomo.dto.ProfileModifyDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.dto.UserInfoDto;
+import com.hsu.mamomo.dto.banner.GcsFIleDto;
 import com.hsu.mamomo.jwt.JwtAuthenticationFilter;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import com.hsu.mamomo.jwt.SecurityUtil;
@@ -31,7 +32,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +51,10 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+
+    private final String BUCKET_NAME = "mamomo-profile-storage";
+    private final String DEFAULT_IMG_URL = "https://storage.googleapis.com/mamomo-profile-storage/default.png";
+    private final GcsService gcsService;
 
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
@@ -76,6 +80,7 @@ public class UserService {
         User user = User.builder()
                 .id(user_id)
                 .email(userDto.getEmail())
+                .profileImgUrl(DEFAULT_IMG_URL)
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .nickname(userDto.getNickname())
                 .sex(userDto.getSex())
@@ -132,7 +137,8 @@ public class UserService {
 
         User user = userOpt.get();
         ProfileDto profile = ProfileDto.builder()
-                .profile(user.getProfile())
+                // 회원가입 시에는 default img로 설정
+                .profileImgUrl(user.getProfileImgUrl())
                 .nickname(user.getNickname())
                 .sex(user.getSex())
                 .birth(user.getBirth())
@@ -179,8 +185,18 @@ public class UserService {
         Map<String, ProfileDto> result = new HashMap<>();
         ProfileDto previous = convertUserToProfileDto(user);
 
-        if (profileModifyDto.getProfile() != null) {
-            user.setProfile(profileModifyDto.getProfile());
+        // GCS에 프로필 이미지 저장
+        // filepath : /userEmail/userEmail
+        GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
+                .bucketName(BUCKET_NAME)
+                .filePath(user.getEmail())
+                .fileName(user.getEmail())
+                .build();
+
+        String imgUrl = gcsService.uploadFileToGCS(gcsFIleDto, profileModifyDto.getProfileImg());
+
+        if (profileModifyDto.getProfileImg() != null) {
+            user.setProfileImgUrl(imgUrl);
         }
         if (profileModifyDto.getNickname() != null) {
             user.setNickname(profileModifyDto.getNickname());
@@ -221,7 +237,7 @@ public class UserService {
 
     public ProfileDto convertUserToProfileDto(User user) {
         return ProfileDto.builder()
-                .profile(user.getProfile())
+                .profileImgUrl(user.getProfileImgUrl())
                 .nickname(user.getNickname())
                 .birth(user.getBirth())
                 .sex(user.getSex())

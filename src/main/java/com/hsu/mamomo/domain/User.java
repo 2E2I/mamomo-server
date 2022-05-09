@@ -1,5 +1,6 @@
 package com.hsu.mamomo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,12 +43,13 @@ public class User {
     private String nickname;
 
     @Column
-    private String profile;
+    private String profileImgUrl;
 
     @Column(length = 1)
     private String sex;
 
     @Column
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate birth;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

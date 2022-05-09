@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -76,7 +77,7 @@ public class UserController {
     @PreAuthorize("hasAnyRole('USER')")
     @PatchMapping("/profile/{email}")
     public ResponseEntity<ProfileDto> updateProfile(@Valid @PathVariable("email") String email,
-            @RequestBody ProfileModifyDto profileModifyDto,
+            @ModelAttribute ProfileModifyDto profileModifyDto,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
         if (authorization == null) {
             throw new CustomException(UNAUTHORIZED);
@@ -84,6 +85,8 @@ public class UserController {
         if (!loginAuthenticationUtil.getUserEmailFromAuth(authorization).equals(email)) {
             throw new CustomException(MISMATCH_JWT_USER);
         }
+
+        System.out.println("profileModifyDto = " + profileModifyDto);
         return userService.updateProfile(email, profileModifyDto);
     }
 
