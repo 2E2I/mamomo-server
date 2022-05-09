@@ -15,7 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BannerSaveDto {
+public class BannerModifyDto {
+
+    @NonNull
+    private String bannerId;
 
     @NonNull
     private MultipartFile bannerImg;

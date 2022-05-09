@@ -1,5 +1,6 @@
 package com.hsu.mamomo.dto.banner;
 
+import com.hsu.mamomo.domain.Banner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +16,6 @@ import lombok.Setter;
 public class BannerDto {
 
     @NonNull
-    private String bannerId;
-
-    @NonNull
-    private String imgUrl;
+    private Banner banner;
 }
+

@@ -1,11 +1,13 @@
 package com.hsu.mamomo.dto.banner;
 
-import java.util.List;
+import com.hsu.mamomo.domain.Banner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 
 @Getter
 @Setter
@@ -14,5 +16,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BannerListDto {
 
-    private List<BannerDto> bannerList;
+    @NonNull
+    private Page<Banner> bannerList;
 }
