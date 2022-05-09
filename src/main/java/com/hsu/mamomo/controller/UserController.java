@@ -75,7 +75,7 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('USER')")
-    @PatchMapping("/profile/{email}")
+    @PostMapping("/profile/{email}")
     public ResponseEntity<ProfileDto> updateProfile(@Valid @PathVariable("email") String email,
             @ModelAttribute ProfileModifyDto profileModifyDto,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization) {
@@ -86,7 +86,6 @@ public class UserController {
             throw new CustomException(MISMATCH_JWT_USER);
         }
 
-        System.out.println("profileModifyDto = " + profileModifyDto);
         return userService.updateProfile(email, profileModifyDto);
     }
 
