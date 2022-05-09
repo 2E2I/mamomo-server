@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,6 +38,8 @@ public class BannerService {
     private final GcsService gcsService;
     private final LoginAuthenticationUtil loginAuthenticationUtil;
 
+
+    @Transactional
     public ResponseEntity<BannerDto> saveBanner(String authorization,
             BannerSaveDto bannerSaveDto) {
         User user = loginAuthenticationUtil.getUserIdByEmail(authorization,
@@ -120,6 +123,7 @@ public class BannerService {
         return new ResponseEntity<>(bannerId + " 파일 삭제됨", HttpStatus.OK);
     }
 
+    @Transactional
     public ResponseEntity<BannerDto> modifyBanner(String authorization, BannerModifyDto bannerModifyDto) {
 
         User user = loginAuthenticationUtil.getUserIdByEmail(authorization, bannerModifyDto.getEmail());
@@ -143,6 +147,7 @@ public class BannerService {
                     bannerModifyDto.getBannerImg());
 
             banner.setImgUrl(imgUrl);
+            System.out.println("bannerModifyDto.getDate() = " + bannerModifyDto.getDate());
             banner.setDate(bannerModifyDto.getDate());
 
             BannerDto bannerDto = BannerDto.builder()
