@@ -72,7 +72,7 @@ public class HeartControllerTest {
 //            throw new ResourceNotFoundException("캠페인을 찾을 수 없음");
 //        }
 
-        input.put("campaignId", "H000000184164");
+        input.put("campaignId", "H000000184003");
         input.put("userId", "550e8400-e29b-41d4-a716-446655440000"); // testUser
 
         Map<String, String> auth = new HashMap<>();
