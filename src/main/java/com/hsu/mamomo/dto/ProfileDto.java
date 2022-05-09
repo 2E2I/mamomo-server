@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProfileDto {
 
-    private String profile;
+    private String profileImgUrl;
     private String nickname;
     private String sex;
     private LocalDate birth;
