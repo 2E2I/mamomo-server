@@ -323,25 +323,44 @@ include::{snippets}/banner-save/request-parts.adoc[]
 ==== 응답
 include::{snippets}/banner-save/response-body.adoc[]
 
-[[banner-list]]
-=== 배너 리스트
+[[banner-list-by-user-by-user]]
+=== 유저 배너 리스트
 
-[[banner-list-reqeust]]
+[[banner-list-by-user-reqeust]]
 ==== 요청
-include::{snippets}/banner-list/http-request.adoc[]
+include::{snippets}/banner-list-by-user/http-request.adoc[]
 
-[[banner-list-param]]
+[[banner-list-by-user-param]]
 ==== 요청 파라미터
 요청 시 <<campagins-request-header>>가 필요합니다.
-include::{snippets}/banner-list/path-parameters.adoc[]
+include::{snippets}/banner-list-by-user/path-parameters.adoc[]
 
-[[banner-list-response]]
+[[banner-list-by-user-response]]
 ==== 응답
-include::{snippets}/banner-list/response-body.adoc[]
+include::{snippets}/banner-list-by-user/response-body.adoc[]
 
-[[banner-list-response-body]]
+[[banner-list-by-user-response-body]]
 ==== 응답 필드
-include::{snippets}/banner-list/response-fields.adoc[]
+include::{snippets}/banner-list-by-user/response-fields.adoc[]
+
+[[banner-list-by-all]]
+=== 전체 배너 리스트
+
+[[banner-list-by-all-reqeust]]
+==== 요청
+include::{snippets}/banner-list-by-all/http-request.adoc[]
+
+[[banner-list-by-all-param]]
+==== 요청 파라미터
+include::{snippets}/banner-list-by-all/path-parameters.adoc[]
+
+[[banner-list-by-all-response]]
+==== 응답
+include::{snippets}/banner-list-by-all/response-body.adoc[]
+
+[[banner-list-by-all-response-body]]
+==== 응답 필드
+유저 배너 리스트의 <<banner-list-by-user-response-body>>와 같습니다.
 
 [[banner-delete]]
 === 배너 삭제
@@ -350,15 +369,29 @@ include::{snippets}/banner-list/response-fields.adoc[]
 ==== 요청
 include::{snippets}/banner-delete/http-request.adoc[]
 
-[[banner-delete-param]]
-==== 요청 파라미터
-요청 시 <<campagins-request-header>>가 필요합니다.
-include::{snippets}/banner-delete/path-parameters.adoc[]
-
 [[banner-delete-response]]
 ==== 응답
 include::{snippets}/banner-delete/response-body.adoc[]
 
+[[banner-modify]]
+=== 배너 수정
+
+[[banner-modify-reqeust]]
+==== 요청 form-data
+include::{snippets}/banner-modify/httpie-request.adoc[]
+
+[[banner-modify-reqeust]]
+==== 요청 파라미터
+include::{snippets}/banner-modify/request-parts.adoc[]
+include::{snippets}/banner-modify/request-parameters.adoc[]
+
+[[banner-modify-response]]
+==== 응답
+include::{snippets}/banner-modify/response-body.adoc[]
+
+[[banner-modify-response-field]]
+==== 응답 필드
+include::{snippets}/banner-modify/response-fields.adoc[]
 
 [[exception]]
 = 에러 코드
