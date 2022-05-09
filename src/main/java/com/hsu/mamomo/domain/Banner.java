@@ -1,6 +1,8 @@
 package com.hsu.mamomo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,4 +44,9 @@ public class Banner {
     @Column(name = "img_url")
     @NonNull
     private String imgUrl;
+
+    @NonNull
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private LocalDateTime date;
+
 }
