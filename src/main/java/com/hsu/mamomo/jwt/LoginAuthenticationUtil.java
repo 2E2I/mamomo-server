@@ -2,12 +2,15 @@ package com.hsu.mamomo.jwt;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.INVALID_JWT_TOKEN;
 import static com.hsu.mamomo.controller.exception.ErrorCode.MEMBER_NOT_FOUND;
+import static com.hsu.mamomo.controller.exception.ErrorCode.MISMATCH_JWT_USER;
+import static com.hsu.mamomo.controller.exception.ErrorCode.UNAUTHORIZED;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.domain.Heart;
 import com.hsu.mamomo.domain.User;
 import com.hsu.mamomo.dto.CampaignDto;
+import com.hsu.mamomo.dto.banner.BannerSaveDto;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.util.List;
 import java.util.Objects;
@@ -107,5 +110,24 @@ public class LoginAuthenticationUtil {
 
     }
 
+    public User getUserIdByEmail(String authorization, String email) {
+        if (authorization == null) {
+            throw new CustomException(UNAUTHORIZED);
+        }
+
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new CustomException(MEMBER_NOT_FOUND);
+        }
+
+        String userId = user.get().getId();
+
+        if (!getUserIdFromAuth(authorization).equals(userId)) {
+            throw new CustomException(MISMATCH_JWT_USER);
+        }
+
+        return user.get();
+    }
 
 }
