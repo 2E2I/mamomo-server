@@ -369,6 +369,10 @@ include::{snippets}/banner-list-by-all/response-body.adoc[]
 ==== 요청
 include::{snippets}/banner-delete/http-request.adoc[]
 
+[[banner-delete-reqeust-parameter]]
+==== 요청 파라미터
+include::{snippets}/banner-delete/path-parameters.adoc[]
+
 [[banner-delete-response]]
 ==== 응답
 include::{snippets}/banner-delete/response-body.adoc[]
@@ -376,6 +380,7 @@ include::{snippets}/banner-delete/response-body.adoc[]
 [[banner-modify]]
 === 배너 수정
 
+요청 시 <<campagins-request-header>>가 필요합니다.
 [[banner-modify-reqeust]]
 ==== 요청 form-data
 include::{snippets}/banner-modify/httpie-request.adoc[]
@@ -465,6 +470,10 @@ include::{snippets}/banner-modify/response-fields.adoc[]
 |500
 |FAIL_ENCODING
 |IO 에러로 이미지 URL 인코딩을 실패했습니다.
+
+||500
+|FAIL_SAVE_BANNER
+|IO 에러로 배너 이미지 저장을 실패했습니다.
 |
 
 |===

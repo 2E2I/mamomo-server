@@ -2,6 +2,8 @@ package com.hsu.mamomo.controller;
 
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentRequest;
 import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getBannerDateFormat;
+import static com.hsu.mamomo.document.DocumentFormatGenerator.getBannerImgFormat;
 import static com.hsu.mamomo.document.DocumentFormatGenerator.getSortFormat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -132,10 +134,12 @@ class BannerControllerTest {
                         // 요청 필드 문서화
                         requestParts(
                                 partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
+                                        .attributes(getBannerImgFormat())
                         ),
                         requestParameters(
                                 parameterWithName("email").description("사용자 이메일"),
                                 parameterWithName("date").description("배너 만든/수정한 시간")
+                                        .attributes(getBannerDateFormat())
                         ),
                         // 응답 필드 문서화
                         relaxedResponseFields(
@@ -175,7 +179,7 @@ class BannerControllerTest {
                                                 "- 배너 리스트 정렬 방식\n\n"
                                                         + "default 값은 최신 순\n\n"
                                                         + "- 사용 가능한 값:\n\n"
-                                                        + "정렬 대상: date"
+                                                        + "정렬 대상: date\n\n"
                                                         + "정렬 방향: ASC,DESC\n\n"
                                                         + "예) sort=date,DESC (최신 순)\n\n"
                                                         + "sort=date,ASC (마감 순)")
@@ -232,7 +236,7 @@ class BannerControllerTest {
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner",
                                 bannerSaveDto.getEmail())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken))
+                )
                 .andExpect(status().isOk())
 
                 // 문서화
@@ -296,24 +300,25 @@ class BannerControllerTest {
 
                 // 문서화
                 .andDo(document("banner-modify",
-                                getDocumentRequest(),
-                                getDocumentResponse(),
-                                // 요청 필드 문서화
-                                requestParts(
-                                        partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
-                                ),
-                                requestParameters(
-                                        parameterWithName("bannerId").description("배너 아이디"),
-                                        parameterWithName("email").description("사용자 이메일"),
-                                        parameterWithName("date").description("배너 만든/수정한 시간\n\n"
-                                                                                      + "형식: yyyy-MM-dd HH:mm:ss")
-                                ),
-                                // 응답 필드 문서화
-                                relaxedResponseFields(
-                                        fieldWithPath("banner.bannerId").description("배너 아이디"),
-                                        fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
-                                        fieldWithPath("banner.date").description("배너 만든/수정한 시간")
-                                ))
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        // 요청 필드 문서화
+                        requestParts(
+                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일")
+                                        .attributes(getBannerImgFormat())
+                        ),
+                        requestParameters(
+                                parameterWithName("bannerId").description("배너 아이디"),
+                                parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("date").description("배너 만든/수정한 시간")
+                                        .attributes(getBannerDateFormat())
+                        ),
+                        // 응답 필드 문서화
+                        relaxedResponseFields(
+                                fieldWithPath("banner.bannerId").description("배너 아이디"),
+                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.date").description("배너 만든/수정한 시간")
+                        ))
                 )
                 .andDo(print()
                 );
