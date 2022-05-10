@@ -76,7 +76,7 @@ class BannerControllerTest {
     void authenticate() throws Exception {
 
         Map<String, String> input = new HashMap<>();
-        input.put("email", "test@gmail.com");
+        input.put("email", "bannerTest@email.com");
         input.put("password", "password");
 
         MvcResult mvcResult = mockMvc
@@ -101,14 +101,14 @@ class BannerControllerTest {
         localDateTime = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         bannerSaveDto = BannerSaveDto.builder()
-                .email("test@gmail.com")
+                .email("bannerTest@email.com")
                 .bannerImg(new MockMultipartFile("bannerImg",
                         "test.jpg",
                         "image/jpeg",
                         new FileInputStream("src/test/resources/bannerTest.jpg")))
                 .date(now)
                 .build();
-        userId = "dbb485f4-f588-4bfe-b485-f4f5885bfe9d";
+        userId = "6a79273a-6c30-4615-b927-3a6c30d6150c";
     }
 
     @Test
