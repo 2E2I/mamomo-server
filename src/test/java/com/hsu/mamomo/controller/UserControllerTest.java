@@ -19,9 +19,11 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.partWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParts;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -29,17 +31,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hsu.mamomo.domain.User;
-import com.hsu.mamomo.dto.ProfileModifyDto;
 import com.hsu.mamomo.dto.TokenDto;
 import com.hsu.mamomo.dto.UserDto;
 import com.hsu.mamomo.jwt.JwtTokenProvider;
 import java.io.FileInputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.time.LocalDate;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
@@ -54,7 +52,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.mock.web.MockPart;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -252,7 +249,8 @@ class UserControllerTest {
                                         .description("요청한 인증 정보가 유효하다면 JWT 토큰이 발급됩니다."),
                                 fieldWithPath("profile")
                                         .description("유저 프로필 정보 입니다."),
-                                fieldWithPath("profile.profileImgUrl").description("프로필 이미지 url 입니다."),
+                                fieldWithPath("profile.profileImgUrl")
+                                        .description("프로필 이미지 url 입니다."),
                                 fieldWithPath("profile.nickname").description("닉네임 입니다."),
                                 fieldWithPath("profile.sex").description("성별 정보 입니다."),
                                 fieldWithPath("profile.birth").description("생년월일 입니다."),
@@ -350,12 +348,13 @@ class UserControllerTest {
         System.out.println("profileTestImg = " + profileTestImg);
 
         mockMvc
-                .perform(RestDocumentationRequestBuilders.multipart("/api/user/profile/{email}", userDto.getEmail())
+                .perform(RestDocumentationRequestBuilders
+                        .multipart("/api/user/profile/{email}", userDto.getEmail())
                         .file(profileTestImg)
-                        .part(new MockPart("nickname", "changed".getBytes(StandardCharsets.UTF_8)))
-                        .part(new MockPart("sex", "M".getBytes(StandardCharsets.UTF_8)))
-                        .part(new MockPart("birth", "2000-10-08".getBytes(StandardCharsets.UTF_8)))
-                        .part(new MockPart("favTopics", "4".getBytes(StandardCharsets.UTF_8)))
+                        .param("nickname", "changed")
+                        .param("sex", "M")
+                        .param("birth", "2000-10-08")
+                        .param("favTopics", "1,2")
                         .contentType(MediaType.MULTIPART_FORM_DATA)
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken))
 
@@ -373,6 +372,17 @@ class UserControllerTest {
                                 headerWithName(HttpHeaders.AUTHORIZATION)
                                         .description("api/user/authenticate 로 발급받은 조회할 유저의 토큰.\n"
                                                 + "토큰 문자열 앞에 'Bearer '(공백 한 개 포함) 을 붙입니다.")
+                        ),
+                        requestParts(
+                                partWithName("profileImg").description("프로필 이미지. File 객체입니다.")
+                        ),
+                        requestParameters(
+                                parameterWithName("nickname").description("변경 할 닉네임"),
+                                parameterWithName("sex").description("성별 입니다."),
+                                parameterWithName("birth")
+                                        .description("생년월일이며 형식은 yyyy-MM-dd 입니다."),
+                                parameterWithName("favTopics")
+                                        .description("관심 기부분야 리스트이며 정수 배열입니다.")
                         )))
                 .andDo(print());
     }

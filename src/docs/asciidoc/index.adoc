@@ -209,41 +209,20 @@ include::{snippets}/get-user-info-with-jwtToken/response-fields.adoc[]
 
 === 프로필 수정
 
-다음 항목중 변경하고자 하는 프로필 항목들만 부분 수정이 가능합니다.
-
-[cols="1,1,1"]
-|===
-|Name | Type | Description
-
-|profile
-|String
-|프로필 사진 이미지 링크
-
-|nickname
-|String
-|닉네임
-
-|sex
-|String
-|성별
-
-|birth
-|LocalDate
-|생년월일
-
-|favTopics
-|List<FavTopic>
-|관심분야 id 배열
-
-|===
 ==== 요청
-include::{snippets}/update-profile/http-request.adoc[]
-
-==== 요청 파라미터
-include::{snippets}/update-profile/path-parameters.adoc[]
+include::{snippets}/update-profile/httpie-request.adoc[]
 
 ==== 요청 헤더
 include::{snippets}/update-profile/request-headers.adoc[]
+
+==== 요청 파라미터
+
+include::{snippets}/update-profile/path-parameters.adoc[]
+
+다음 항목중 변경하고자 하는 프로필 항목들만 부분 수정이 가능합니다.
+
+include::{snippets}/update-profile/request-parts.adoc[]
+include::{snippets}/update-profile/request-parameters.adoc[]
 
 ==== 응답
 include::{snippets}/update-profile/http-response.adoc[]
