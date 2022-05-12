@@ -82,25 +82,13 @@ public class BannerService {
             throw new CustomException(BANNER_NOT_FOUND);
         }
 
-        return new BannerListDto(
-                bannerRepository.findByUser(user, pageable)
-                        .map(banner -> {
-                            banner.setImgUrl(
-                                    EncodingImage.getBase64EncodedImage(banner.getImgUrl()));
-                            return banner;
-                        }));
+        return new BannerListDto(bannerRepository.findByUser(user, pageable));
 
     }
 
     public BannerListDto getBannerList(Pageable pageable) {
 
-        return new BannerListDto(
-                bannerRepository.findAll(pageable)
-                        .map(banner -> {
-                            banner.setImgUrl(
-                                    EncodingImage.getBase64EncodedImage(banner.getImgUrl()));
-                            return banner;
-                        }));
+        return new BannerListDto(bannerRepository.findAll(pageable));
 
     }
 
@@ -124,12 +112,15 @@ public class BannerService {
     }
 
     @Transactional
-    public ResponseEntity<BannerDto> modifyBanner(String authorization, BannerModifyDto bannerModifyDto) {
+    public ResponseEntity<BannerDto> modifyBanner(String authorization,
+            BannerModifyDto bannerModifyDto) {
 
-        User user = loginAuthenticationUtil.getUserIdByEmail(authorization, bannerModifyDto.getEmail());
+        User user = loginAuthenticationUtil.getUserIdByEmail(authorization,
+                bannerModifyDto.getEmail());
         String userId = user.getId();
 
-        Optional<Banner> bannerOptional = bannerRepository.findBannerByBannerId(bannerModifyDto.getBannerId());
+        Optional<Banner> bannerOptional = bannerRepository.findBannerByBannerId(
+                bannerModifyDto.getBannerId());
         if (bannerOptional.isEmpty()) {
             throw new CustomException(BANNER_NOT_FOUND);
         } else {
