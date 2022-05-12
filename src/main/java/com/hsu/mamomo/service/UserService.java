@@ -185,17 +185,16 @@ public class UserService {
         Map<String, ProfileDto> result = new HashMap<>();
         ProfileDto previous = convertUserToProfileDto(user);
 
-        // GCS에 프로필 이미지 저장
-        // filepath : /userEmail/userEmail
-        GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
-                .bucketName(BUCKET_NAME)
-                .filePath(user.getEmail())
-                .fileName(user.getEmail())
-                .build();
-
-        String imgUrl = gcsService.uploadFileToGCS(gcsFIleDto, profileModifyDto.getProfileImg());
-
         if (profileModifyDto.getProfileImg() != null) {
+            // GCS에 프로필 이미지 저장
+            // filepath : /userEmail/userEmail
+            GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
+                    .bucketName(BUCKET_NAME)
+                    .filePath(user.getEmail())
+                    .fileName(user.getEmail())
+                    .build();
+
+            String imgUrl = gcsService.uploadFileToGCS(gcsFIleDto, profileModifyDto.getProfileImg());
             user.setProfileImgUrl(imgUrl);
         }
         if (profileModifyDto.getNickname() != null) {
