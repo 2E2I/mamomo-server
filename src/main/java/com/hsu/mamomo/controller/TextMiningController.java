@@ -2,6 +2,7 @@ package com.hsu.mamomo.controller;
 
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.TextDto;
+import com.hsu.mamomo.dto.TextMiningCampaignDto;
 import com.hsu.mamomo.service.TextMiningService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ public class TextMiningController {
     private final TextMiningService textMiningService;
 
     @PostMapping
-    public CampaignDto textMining(
+    public TextMiningCampaignDto textMining(
             @PageableDefault(size = 20) Pageable pageable,
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
             @RequestBody TextDto textDto) {
