@@ -276,12 +276,12 @@ include::{snippets}/text-mining/path-parameters.adoc[]
 ==== 요청 필드
 include::{snippets}/text-mining/request-fields.adoc[]
 
-[[textMining-response-body]]
+[[textMining-response]]
 ==== 응답
 include::{snippets}/text-mining/response-body.adoc[]
 
 [[textMining-response-body]]
-==== 응답 필드
+==== 응답 바디
 include::{snippets}/campaigns/response-fields.adoc[]
 include::{snippets}/text-mining/response-fields.adoc[]
 
@@ -324,7 +324,7 @@ include::{snippets}/banner-list-by-user/path-parameters.adoc[]
 include::{snippets}/banner-list-by-user/response-body.adoc[]
 
 [[banner-list-by-user-response-body]]
-==== 응답 필드
+==== 응답 바디
 include::{snippets}/banner-list-by-user/response-fields.adoc[]
 
 [[banner-list-by-all]]
@@ -361,16 +361,36 @@ include::{snippets}/banner-delete/path-parameters.adoc[]
 ==== 응답
 include::{snippets}/banner-delete/response-body.adoc[]
 
+[[banner-status]]
+=== 배너 상태
+
+요청 시 <<campagins-request-header>>가 필요합니다.
+[[banner-status-reqeust]]
+==== 요청
+include::{snippets}/banner-status/httpie-request.adoc[]
+
+[[banner-status-reqeust]]
+==== 요청 form-data
+include::{snippets}/banner-status/request-parameters.adoc[]
+
+[[banner-status-response]]
+==== 응답
+include::{snippets}/banner-status/response-body.adoc[]
+
+[[banner-status-response-field]]
+==== 응답 필드
+include::{snippets}/banner-status/response-fields.adoc[]
+
 [[banner-modify]]
 === 배너 수정
 
 요청 시 <<campagins-request-header>>가 필요합니다.
 [[banner-modify-reqeust]]
-==== 요청 form-data
+==== 요청
 include::{snippets}/banner-modify/httpie-request.adoc[]
 
 [[banner-modify-reqeust]]
-==== 요청 파라미터
+==== 요청 form-data
 include::{snippets}/banner-modify/request-parts.adoc[]
 include::{snippets}/banner-modify/request-parameters.adoc[]
 

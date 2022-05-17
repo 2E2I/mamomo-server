@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.partWithName;
@@ -102,11 +103,24 @@ class BannerControllerTest {
 
         bannerSaveDto = BannerSaveDto.builder()
                 .email("bannerTest@email.com")
-                .bannerImg(new MockMultipartFile("bannerImg",
+                .imgData(new MockMultipartFile("imgData",
                         "test.jpg",
                         "image/jpeg",
                         new FileInputStream("src/test/resources/bannerTest.jpg")))
                 .date(now)
+                .siteType("SiteType")
+                .title("Title")
+                .info("Info(")
+                .width("Width")
+                .height("Height")
+                .bgColor1("BgColor1")
+                .bgColor2("BgColor2")
+                .textColor1("TextColor1")
+                .textColor2("TextColor2")
+                .textColor3("TextColor3")
+                .textFont1("TextFont1")
+                .textFont2("TextFont2")
+                .textFont3("TextFont3")
                 .build();
         userId = "6a79273a-6c30-4615-b927-3a6c30d6150c";
     }
@@ -116,9 +130,22 @@ class BannerControllerTest {
     @DisplayName("배너 저장 테스트 - 성공 :: ")
     public String saveBanner() throws Exception {
         MvcResult mvcResult = mockMvc.perform(multipart("/api/banner")
-                        .file((MockMultipartFile) bannerSaveDto.getBannerImg())
+                        .file((MockMultipartFile) bannerSaveDto.getImgData())
                         .param("email", bannerSaveDto.getEmail())
                         .param("date", localDateTime)
+                        .param("siteType", bannerSaveDto.getSiteType())
+                        .param("title", bannerSaveDto.getTitle())
+                        .param("info", bannerSaveDto.getInfo())
+                        .param("width", bannerSaveDto.getWidth())
+                        .param("height", bannerSaveDto.getHeight())
+                        .param("bgColor1", bannerSaveDto.getBgColor1())
+                        .param("bgColor2", bannerSaveDto.getBgColor2())
+                        .param("textColor1", bannerSaveDto.getTextColor1())
+                        .param("textColor2", bannerSaveDto.getTextColor2())
+                        .param("textColor3", bannerSaveDto.getTextColor3())
+                        .param("textFont1", bannerSaveDto.getTextFont1())
+                        .param("textFont2", bannerSaveDto.getTextFont2())
+                        .param("textFont3", bannerSaveDto.getTextFont3())
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
 
@@ -131,19 +158,58 @@ class BannerControllerTest {
 
                         // 요청 필드 문서화
                         requestParts(
-                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일\n\n"
-                                                                              + "File 객체입니다.")
+                                partWithName("imgData").description("업로드 할 배너 이미지 파일\n\n"
+                                                                            + "File 객체입니다.")
                         ),
                         requestParameters(
                                 parameterWithName("email").description("사용자 이메일"),
                                 parameterWithName("date").description("배너 만든/수정한 시간\n\n"
-                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다.")
+                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다."),
+                                parameterWithName("siteType").description("배너 사이트 타입\n\n"
+                                                                                  + "타입: String"),
+                                parameterWithName("title").description("배너 제목"
+                                                                               + "타입: String"),
+                                parameterWithName("info").description("배너 내용"
+                                                                              + "타입: String"),
+                                parameterWithName("width").description("배너 너비"
+                                                                               + "타입: String"),
+                                parameterWithName("height").description("배너 높이"
+                                                                                + "타입: String"),
+                                parameterWithName("bgColor1").description("배너 배경 컬러1"
+                                                                                  + "타입: String"),
+                                parameterWithName("bgColor2").description("배너 배경 컬러2"
+                                                                                  + "타입: String"),
+                                parameterWithName("textColor1").description("배너 텍스트 컬러1"
+                                                                                    + "타입: String"),
+                                parameterWithName("textColor2").description("배너 텍스트 컬러2"
+                                                                                    + "타입: String"),
+                                parameterWithName("textColor3").description("배너 텍스트 컬러3"
+                                                                                    + "타입: String"),
+                                parameterWithName("textFont1").description("배너 텍스트 폰트1"
+                                                                                   + "타입: String"),
+                                parameterWithName("textFont2").description("배너 텍스트 폰트2"
+                                                                                   + "타입: String"),
+                                parameterWithName("textFont3").description("배너 텍스트 폰트3"
+                                                                                   + "타입: String")
                         ),
                         // 응답 필드 문서화
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
-                                fieldWithPath("banner.date").description("배너 만든/수정한 시간")
+                                fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
+                                fieldWithPath("banner.siteType").description("배너 사이트 타입"),
+                                fieldWithPath("banner.title").description("배너 제목"),
+                                fieldWithPath("banner.info").description("배너 내용"),
+                                fieldWithPath("banner.width").description("배너 너비"),
+                                fieldWithPath("banner.height").description("배너 높이"),
+                                fieldWithPath("banner.bgColor1").description("배너 배경 컬러1"),
+                                fieldWithPath("banner.bgColor2").description("배너 배경 컬러2"),
+                                fieldWithPath("banner.textColor1").description("배너 텍스트 컬러1"),
+                                fieldWithPath("banner.textColor2").description("배너 텍스트 컬러2"),
+                                fieldWithPath("banner.textColor3").description("배너 텍스트 컬러3"),
+                                fieldWithPath("banner.textFont1").description("배너 텍스트 폰트1"),
+                                fieldWithPath("banner.textFont2").description("배너 텍스트 폰트2"),
+                                fieldWithPath("banner.textFont3").description("배너 텍스트 폰트3")
                         )
                 ))
                 .andReturn();
@@ -260,14 +326,74 @@ class BannerControllerTest {
 
     @Test
     @Order(300)
+    @DisplayName("배너 상태 테스트 - 성공 :: ")
+    public String getBannerStatus() throws Exception {
+        bannerId = saveBanner();
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner/status")
+                        .param("bannerId", bannerId)
+                        .param("email", bannerSaveDto.getEmail())
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                        .contentType(MediaType.MULTIPART_FORM_DATA)
+                )
+                .andExpect(status().isOk())
+
+                // 문서화
+                .andDo(document("banner-status",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        // 요청 필드 문서화
+                        requestParameters(
+                                parameterWithName("bannerId").description("배너 아이디"),
+                                parameterWithName("email").description("사용자 이메일")
+                        ),
+                        // 응답 필드 문서화
+                        relaxedResponseFields(
+                                fieldWithPath("banner.bannerId").description("배너 아이디"),
+                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
+                                fieldWithPath("banner.siteType").description("배너 사이트 타입"),
+                                fieldWithPath("banner.title").description("배너 제목"),
+                                fieldWithPath("banner.info").description("배너 내용"),
+                                fieldWithPath("banner.width").description("배너 너비"),
+                                fieldWithPath("banner.height").description("배너 높이"),
+                                fieldWithPath("banner.bgColor1").description("배너 배경 컬러1"),
+                                fieldWithPath("banner.bgColor2").description("배너 배경 컬러2"),
+                                fieldWithPath("banner.textColor1").description("배너 텍스트 컬러1"),
+                                fieldWithPath("banner.textColor2").description("배너 텍스트 컬러2"),
+                                fieldWithPath("banner.textColor3").description("배너 텍스트 컬러3"),
+                                fieldWithPath("banner.textFont1").description("배너 텍스트 폰트1"),
+                                fieldWithPath("banner.textFont2").description("배너 텍스트 폰트2"),
+                                fieldWithPath("banner.textFont3").description("배너 텍스트 폰트3")
+                        ))
+                )
+                .andDo(print()
+                );
+        return bannerId;
+    }
+
+    @Test
+    @Order(301)
     @DisplayName("배너 수정 테스트 - 성공 :: ")
     public String modifyBanner() throws Exception {
-        bannerId = saveBanner();
+        bannerId = getBannerStatus();
         mockMvc.perform(multipart("/api/banner/modify")
-                        .file((MockMultipartFile) bannerSaveDto.getBannerImg())
+                        .file((MockMultipartFile) bannerSaveDto.getImgData())
                         .param("bannerId", bannerId)
                         .param("email", bannerSaveDto.getEmail())
                         .param("date", localDateTime)
+                        .param("siteType", bannerSaveDto.getSiteType())
+                        .param("title", bannerSaveDto.getTitle())
+                        .param("info", bannerSaveDto.getInfo())
+                        .param("width", bannerSaveDto.getWidth())
+                        .param("height", bannerSaveDto.getHeight())
+                        .param("bgColor1", bannerSaveDto.getBgColor1())
+                        .param("bgColor2", bannerSaveDto.getBgColor2())
+                        .param("textColor1", bannerSaveDto.getTextColor1())
+                        .param("textColor2", bannerSaveDto.getTextColor2())
+                        .param("textColor3", bannerSaveDto.getTextColor3())
+                        .param("textFont1", bannerSaveDto.getTextFont1())
+                        .param("textFont2", bannerSaveDto.getTextFont2())
+                        .param("textFont3", bannerSaveDto.getTextFont3())
                         .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
                         .contentType(MediaType.MULTIPART_FORM_DATA)
                 )
@@ -279,24 +405,64 @@ class BannerControllerTest {
                         getDocumentResponse(),
                         // 요청 필드 문서화
                         requestParts(
-                                partWithName("bannerImg").description("업로드 할 배너 이미지 파일\n\n"
-                                                                              + "File 객체입니다.")
+                                partWithName("imgData").description("업로드 할 배너 이미지 파일\n\n"
+                                                                            + "File 객체입니다.")
                         ),
                         requestParameters(
                                 parameterWithName("bannerId").description("배너 아이디"),
                                 parameterWithName("email").description("사용자 이메일"),
                                 parameterWithName("date").description("배너 만든/수정한 시간\n\n"
-                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다.")
+                                                                              + "형식 [yyyy-MM-dd HH:mm:ss]입니다."),
+                                parameterWithName("siteType").description("배너 사이트 타입\n\n"
+                                                                                  + "타입: String"),
+                                parameterWithName("title").description("배너 제목"
+                                                                               + "타입: String"),
+                                parameterWithName("info").description("배너 내용"
+                                                                              + "타입: String"),
+                                parameterWithName("width").description("배너 너비"
+                                                                               + "타입: String"),
+                                parameterWithName("height").description("배너 높이"
+                                                                                + "타입: String"),
+                                parameterWithName("bgColor1").description("배너 배경 컬러1"
+                                                                                  + "타입: String"),
+                                parameterWithName("bgColor2").description("배너 배경 컬러2"
+                                                                                  + "타입: String"),
+                                parameterWithName("textColor1").description("배너 텍스트 컬러1"
+                                                                                    + "타입: String"),
+                                parameterWithName("textColor2").description("배너 텍스트 컬러2"
+                                                                                    + "타입: String"),
+                                parameterWithName("textColor3").description("배너 텍스트 컬러3"
+                                                                                    + "타입: String"),
+                                parameterWithName("textFont1").description("배너 텍스트 폰트1"
+                                                                                   + "타입: String"),
+                                parameterWithName("textFont2").description("배너 텍스트 폰트2"
+                                                                                   + "타입: String"),
+                                parameterWithName("textFont3").description("배너 텍스트 폰트3"
+                                                                                   + "타입: String")
                         ),
                         // 응답 필드 문서화
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
-                                fieldWithPath("banner.date").description("배너 만든/수정한 시간")
+                                fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
+                                fieldWithPath("banner.siteType").description("배너 사이트 타입"),
+                                fieldWithPath("banner.title").description("배너 제목"),
+                                fieldWithPath("banner.info").description("배너 내용"),
+                                fieldWithPath("banner.width").description("배너 너비"),
+                                fieldWithPath("banner.height").description("배너 높이"),
+                                fieldWithPath("banner.bgColor1").description("배너 배경 컬러1"),
+                                fieldWithPath("banner.bgColor2").description("배너 배경 컬러2"),
+                                fieldWithPath("banner.textColor1").description("배너 텍스트 컬러1"),
+                                fieldWithPath("banner.textColor2").description("배너 텍스트 컬러2"),
+                                fieldWithPath("banner.textColor3").description("배너 텍스트 컬러3"),
+                                fieldWithPath("banner.textFont1").description("배너 텍스트 폰트1"),
+                                fieldWithPath("banner.textFont2").description("배너 텍스트 폰트2"),
+                                fieldWithPath("banner.textFont3").description("배너 텍스트 폰트3")
                         ))
                 )
                 .andDo(print()
                 );
+
         return bannerId;
     }
 
