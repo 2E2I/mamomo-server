@@ -5,7 +5,9 @@ import static com.hsu.mamomo.document.ApiDocumentUtils.getDocumentResponse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,6 +29,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -104,7 +107,13 @@ class TextMiningControllerTest {
                                 CampaignDocumentUtil.getCampaignParameterWithName_Size(),
                                 CampaignDocumentUtil.getCampaignParameterWithName_Page()
                         ),
-                        CampaignDocumentUtil.getCampaignResponseFields()
+                        CampaignDocumentUtil.getCampaignResponseFields(),
+                        relaxedResponseFields(
+                                fieldWithPath("textMining.[].keyword").type(JsonFieldType.STRING)
+                                        .description("텍스트 마이닝 키워드"),
+                                fieldWithPath("textMining.[].keyword").type(JsonFieldType.STRING)
+                                        .description("키워드 빈도수 ")
+                        )
                 ));
     }
 }

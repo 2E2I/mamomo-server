@@ -276,9 +276,14 @@ include::{snippets}/text-mining/path-parameters.adoc[]
 ==== 요청 필드
 include::{snippets}/text-mining/request-fields.adoc[]
 
-[[textMining-response]]
+[[textMining-response-body]]
 ==== 응답
-캠페인 API와 동일합니다.
+include::{snippets}/text-mining/response-body.adoc[]
+
+[[textMining-response-body]]
+==== 응답 필드
+include::{snippets}/campaigns/response-fields.adoc[]
+include::{snippets}/text-mining/response-fields.adoc[]
 
 [[banner]]
 == 배너
