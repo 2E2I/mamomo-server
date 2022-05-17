@@ -4,6 +4,7 @@ import com.hsu.mamomo.dto.banner.BannerDto;
 import com.hsu.mamomo.dto.banner.BannerModifyDto;
 import com.hsu.mamomo.dto.banner.BannerSaveDto;
 import com.hsu.mamomo.dto.banner.BannerListDto;
+import com.hsu.mamomo.dto.banner.BannerStatusDto;
 import com.hsu.mamomo.service.BannerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +41,24 @@ public class BannerController {
     }
 
     @PreAuthorize("hasAnyRole('USER')")
+    @GetMapping("/status")
+    public ResponseEntity<BannerDto> getBannerStatus(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @ModelAttribute BannerStatusDto bannerStatusDto) {
+
+        return bannerService.getBannerStatus(authorization, bannerStatusDto);
+    }
+
+    @PreAuthorize("hasAnyRole('USER')")
+    @PostMapping("/modify")
+    public ResponseEntity<BannerDto> modifyBanner(
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
+            @ModelAttribute BannerModifyDto bannerModifyDto) {
+
+        return bannerService.modifyBanner(authorization, bannerModifyDto);
+    }
+
+    @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/{email}")
     public BannerListDto getBannerListByUser(
             @PageableDefault(size = 20, sort = "date", direction = Direction.DESC) Pageable pageable,
@@ -63,14 +82,5 @@ public class BannerController {
             @PathVariable String bannerId) {
 
         return bannerService.deleteBanner(email, bannerId);
-    }
-
-    @PreAuthorize("hasAnyRole('USER')")
-    @PostMapping("/modify")
-    public ResponseEntity<BannerDto> modifyBanner(
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorization,
-            @ModelAttribute BannerModifyDto bannerModifyDto) {
-
-        return bannerService.modifyBanner(authorization, bannerModifyDto);
     }
 }

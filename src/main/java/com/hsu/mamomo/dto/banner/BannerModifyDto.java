@@ -21,13 +21,51 @@ public class BannerModifyDto {
     private String bannerId;
 
     @NonNull
-    private MultipartFile bannerImg;
+    private String email;
 
     @NonNull
-    private String email;
+    private MultipartFile imgData;
 
     @NonNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
 
+    @NonNull
+    private String siteType;
+
+    @NonNull
+    private String title;
+
+    @NonNull
+    private String info;
+
+    @NonNull
+    private String width;
+
+    @NonNull
+    private String height;
+
+    @NonNull
+    private String bgColor1;
+
+    @NonNull
+    private String bgColor2;
+
+    @NonNull
+    private String textColor1;
+
+    @NonNull
+    private String textColor2;
+
+    @NonNull
+    private String textColor3;
+
+    @NonNull
+    private String textFont1;
+
+    @NonNull
+    private String textFont2;
+
+    @NonNull
+    private String textFont3;
 }
