@@ -3,6 +3,7 @@ package com.hsu.mamomo.service;
 import com.hsu.mamomo.domain.Campaign;
 import com.hsu.mamomo.dto.CampaignDto;
 import com.hsu.mamomo.dto.TextDto;
+import com.hsu.mamomo.dto.TextMiningCampaignDto;
 import com.hsu.mamomo.dto.TextMiningResultDto;
 import com.hsu.mamomo.jwt.LoginAuthenticationUtil;
 import com.hsu.mamomo.service.factory.ElasticTextMiningFactory;
@@ -36,7 +37,8 @@ public class TextMiningService {
      * requestBody - TextDto: {text: 텍스트 마이닝할 텍스트}
      * responseType - TextMiningResultDto: {keyword: 텍스트 키워드, value: 텍스트 마이닝 결과 값} 리스트
      * */
-    public CampaignDto requestTextMining(Pageable pageable, String authorization, TextDto textDto) {
+    public TextMiningCampaignDto requestTextMining(Pageable pageable, String authorization,
+            TextDto textDto) {
         URI uri = UriComponentsBuilder
                 .fromUriString(FLASK_API_URL)
                 .path("/textMining")
@@ -55,7 +57,12 @@ public class TextMiningService {
         campaignDto = getCampaignsByTextMining(textMiningResultDto, pageable);
         loginAuthenticationUtil.checkAuthAndAddHeartInfo(authorization, campaignDto);
 
-        return campaignDto;
+        TextMiningCampaignDto textMiningCampaignDto = TextMiningCampaignDto.builder()
+                .campaigns(campaignDto.getCampaigns())
+                .textMining(textMiningResultDto.getResult())
+                .build();
+
+        return textMiningCampaignDto;
     }
 
     /*
