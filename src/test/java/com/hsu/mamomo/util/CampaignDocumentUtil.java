@@ -1,6 +1,7 @@
 package com.hsu.mamomo.util;
 
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
@@ -62,7 +63,7 @@ public class CampaignDocumentUtil {
     }
 
     static public ResponseFieldsSnippet getCampaignResponseFields() {
-        return responseFields(
+        return relaxedResponseFields(
                 fieldWithPath("campaigns.content").type(JsonFieldType.ARRAY)
                         .description("캠페인 리스트"),
                 fieldWithPath("campaigns.content.[].id").type(JsonFieldType.STRING)
