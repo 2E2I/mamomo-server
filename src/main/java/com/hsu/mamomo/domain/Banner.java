@@ -49,4 +49,56 @@ public class Banner {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime date;
 
+    @Column(name = "site_type")
+    @NonNull
+    private String siteType;
+
+    @Column(name = "title")
+    @NonNull
+    private String title;
+
+    @Column(name = "info")
+    @NonNull
+    private String info;
+
+    @Column(name = "width")
+    @NonNull
+    private String width;
+
+    @Column(name = "height")
+    @NonNull
+    private String height;
+
+    @Column(name = "bg_color1")
+    @NonNull
+    private String bgColor1;
+
+    @Column(name = "bg_color2")
+    @NonNull
+    private String bgColor2;
+
+    @Column(name = "text_color1")
+    @NonNull
+    private String textColor1;
+
+    @Column(name = "text_color2")
+    @NonNull
+    private String textColor2;
+
+    @Column(name = "text_color3")
+    @NonNull
+    private String textColor3;
+
+    @Column(name = "text_font1")
+    @NonNull
+    private String textFont1;
+
+    @Column(name = "text_font2")
+    @NonNull
+    private String textFont2;
+
+    @Column(name = "text_font3")
+    @NonNull
+    private String textFont3;
+
 }
