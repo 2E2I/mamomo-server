@@ -26,12 +26,9 @@ public class TagController {
     private final CampaignService campaignService;
 
     @GetMapping("/search")
-    public ResponseEntity<TagDto> getTags(
-            @RequestParam(value = "from", defaultValue = "0") Integer from,
-            @RequestParam(value = "to", defaultValue = "1000") Integer to
-    ) {
+    public ResponseEntity<TagDto> getTags() {
         return ResponseEntity.ok()
-                .body(new TagDto(tagService.getRangeTags(from, to)));
+                .body(new TagDto(tagService.getAllTags()));
     }
 
     @GetMapping("/tag/{tagName}")

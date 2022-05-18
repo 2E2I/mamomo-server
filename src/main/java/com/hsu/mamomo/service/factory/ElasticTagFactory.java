@@ -43,11 +43,11 @@ public class ElasticTagFactory extends ElasticSortFactory {
                 .build();
     }
 
-    public List<String> getTags(int from, int to) throws IOException {
+    public List<String> getTags() throws IOException {
         TermsAggregationBuilder aggregation =
                 AggregationBuilders.terms("tags")
                         .field("tags.keyword")
-                        .size(to);
+                .size(10000);
 
         SearchSourceBuilder builder = new SearchSourceBuilder().aggregation(aggregation);
         SearchRequest searchRequest = new SearchRequest("campaigns").source(builder);
@@ -63,7 +63,6 @@ public class ElasticTagFactory extends ElasticSortFactory {
         return topTags.getBuckets()
                 .stream()
                 .map(MultiBucketsAggregation.Bucket::getKeyAsString)
-                .collect(toList())
-                .subList(from, to);
+                .collect(toList());
     }
 }
