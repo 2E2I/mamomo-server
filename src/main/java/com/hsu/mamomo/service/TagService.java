@@ -19,7 +19,7 @@ public class TagService {
      * 상위 태그 반환
      * */
     @SneakyThrows
-    public List<String> getRangeTags(int from, int to) {
-        return elasticTagFactory.getTags(from, to);
+    public List<String> getAllTags() {
+        return elasticTagFactory.getTags();
     }
 }
