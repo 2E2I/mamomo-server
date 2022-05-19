@@ -59,7 +59,7 @@ public class BannerService {
         Banner banner = Banner.builder()
                 .user(user)
                 .bannerId(bannerId)
-                .imgUrl(imgUrl)
+                .img(imgUrl)
                 .date(bannerSaveDto.getDate())
                 .siteType(bannerSaveDto.getSiteType())
                 .title(bannerSaveDto.getTitle())
@@ -132,7 +132,7 @@ public class BannerService {
 
             String imgUrl = gcsService.uploadFileToGCS(gcsFIleDto, bannerModifyDto.getImgData());
 
-            banner.setImgUrl(imgUrl);
+            banner.setImg(imgUrl);
             banner.setDate(bannerModifyDto.getDate());
             banner.setSiteType(bannerModifyDto.getSiteType());
             banner.setTitle(bannerModifyDto.getTitle());

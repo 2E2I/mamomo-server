@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.relaxedResponseFields;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.subsectionWithPath;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.partWithName;
@@ -195,7 +194,7 @@ class BannerControllerTest {
                         // 응답 필드 문서화
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
-                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.img").description("배너 이미지 주소"),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),
@@ -254,7 +253,7 @@ class BannerControllerTest {
                                 fieldWithPath("bannerList.content").description("배너 리스트"),
                                 fieldWithPath("bannerList.content.[].bannerId").description(
                                         "배너 아이디"),
-                                fieldWithPath("bannerList.content.[].imgUrl").description(
+                                fieldWithPath("bannerList.content.[].img").description(
                                         "base64 인코딩된 배너 이미지 url"),
                                 fieldWithPath("bannerList.pageable")
                                         .type(JsonFieldType.OBJECT).description("페이지 정보"),
@@ -349,7 +348,7 @@ class BannerControllerTest {
                         // 응답 필드 문서화
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
-                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.img").description("배너 이미지 주소"),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),
@@ -443,7 +442,7 @@ class BannerControllerTest {
                         // 응답 필드 문서화
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
-                                fieldWithPath("banner.imgUrl").description("배너 이미지 주소"),
+                                fieldWithPath("banner.img").description("배너 이미지 주소"),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),

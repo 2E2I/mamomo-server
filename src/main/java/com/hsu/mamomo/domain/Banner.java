@@ -41,9 +41,9 @@ public class Banner {
     @NonNull
     private String bannerId;
 
-    @Column(name = "img_url")
+    @Column(name = "img")
     @NonNull
-    private String imgUrl;
+    private String img;
 
     @NonNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
