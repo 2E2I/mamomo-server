@@ -35,27 +35,18 @@ class TagControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @DisplayName("태그 테스트 - 성공 :: 인기태그 from 부터 to 까지 반환")
+    @DisplayName("태그 테스트 - 성공 :: 모든 태그 반환")
     @Test
     public void returnRangeTags() throws Exception {
         mockMvc.perform(get("/api/search")
-                        .param("from", String.valueOf(0))
-                        .param("to", String.valueOf(10))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.tags").isArray())
-                .andExpect(jsonPath("$.tags", hasSize(10)))
                 .andDo(document("return-tags-by-range",
                         getDocumentRequest(),
                         getDocumentResponse(),
-                        requestParameters(
-                                parameterWithName("from").optional()
-                                        .description("시작 인덱스. 기본값은 0"),
-                                parameterWithName("to").optional()
-                                        .description("종료? 인덱스. 기본값은 1000")
-                        ),
                         responseFields(
-                                fieldWithPath("tags").description("from 부터 to 까지 인기 태그 반환")
+                                fieldWithPath("tags").description("모든 태그 반환")
                         )));
     }
 
