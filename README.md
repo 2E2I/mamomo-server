@@ -33,6 +33,19 @@
 </div>
 
 ## Table of Contents
+- [Overview](#overview)
+- [Build With](#build-with)
+- [Getting Started](#getting-started)
+  * [Installation](#installation)
+  * [Quickstart](#quickstart)
+- [System Architecture](#system-architecture)
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [About Us](#about-us)
+
+## Overview
+국내 온라인에서 크라우드 펀딩이 활성화됨과 동시에 온라인을 통한 기부가 증가하고 있다. 하지만 기부 캠페인들이 해피빈, 카카오같이가치, 체리 등 다양한 기부형 크라우드 펀딩 플랫폼에 흩어져 있다.
+본 프로젝트는 다양한 플랫폼의 기부 글을 크롤링해 한 곳에 모아 볼 수 있는 검색 엔진을 제공한다. 이와 더불어 기부를 홍보를 효과적으로 할 수 있는 배너 제작 기능과 텍스트 마이닝 기반 기부 추천 기능을 제공하는 통합 기부 플랫폼이다.
 
 ## Build With
 - Language:`Java` `JavaScript` `Python`
@@ -41,10 +54,6 @@
 - Target: `Web Browser`
 - Tool: `IntelliJ` `VSCode`
 - etc: `Spring Security` `Spring REST Docs` `Figma` `Notion` `Slack`
-
-## Overview
-국내 온라인에서 크라우드 펀딩이 활성화됨과 동시에 온라인을 통한 기부가 증가하고 있다. 하지만 기부 캠페인들이 해피빈, 카카오같이가치, 체리 등 다양한 기부형 크라우드 펀딩 플랫폼에 흩어져 있다.
-본 프로젝트는 다양한 플랫폼의 기부 글을 크롤링해 한 곳에 모아 볼 수 있는 검색 엔진을 제공한다. 이와 더불어 기부를 홍보를 효과적으로 할 수 있는 배너 제작 기능과 텍스트 마이닝 기반 기부 추천 기능을 제공하는 통합 기부 플랫폼이다.
 
 ## Getting Started
 
@@ -68,5 +77,3 @@
 |이혜진|Frontend|
 |임서영|Backend|
 |임유선|Backend|
-
-
