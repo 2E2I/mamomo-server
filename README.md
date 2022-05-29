@@ -103,6 +103,7 @@
 
 ## 👩‍👩‍👧‍👦 팀 정보
 
+<div sytle="overflow:scroll;">
 <table>
    <tr>
       <td colspan="2" align="center"><strong>Front-End Developer</strong></td>
@@ -123,4 +124,5 @@
      </td>
   <tr>
 
-</table
+</table>
+</div>
