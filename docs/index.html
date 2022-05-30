@@ -661,7 +661,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/campaigns?page=0&amp;size=3&amp;sort=due_date%2CDESC&amp;category=1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMDN9.-hJf7WcFSQRZBNahD5UfWK9lrVf4g1MatLZg4Ki_RcPEpbqih70Ht-oCfbh3WsgJ8517k_FfhUN68q3ymU5e9A
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5Mjh9.KSpCU5gZZfLF3txiLtDgcVDduDfyEg8S_HHnkYINhq-Ikx2DWUGDuhBkby9k0HiXBBhHw1m9GiFn4zJw3-awbw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1041,28 +1041,28 @@ Content-Length: 9958
     } ],
     "pageable" : {
       "sort" : {
-        "unsorted" : false,
+        "empty" : false,
         "sorted" : true,
-        "empty" : false
+        "unsorted" : false
       },
+      "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 3,
-      "offset" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
     "totalPages" : 152,
     "totalElements" : 456,
-    "first" : true,
-    "numberOfElements" : 3,
     "size" : 3,
     "number" : 0,
     "sort" : {
-      "unsorted" : false,
+      "empty" : false,
       "sorted" : true,
-      "empty" : false
+      "unsorted" : false
     },
+    "first" : true,
+    "numberOfElements" : 3,
     "empty" : false
   }
 }</code></pre>
@@ -1551,7 +1551,7 @@ Host: localhost:8080
 Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMTF9.3wIJGoClKZlmyeqyacRv16FThkfSzNSc-ni91l38ewauzry2Ck3sxeIkZFL7yIS7UVBRqs1fl6_qMT8X9DuEJA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5Mzd9.CeYP3ia7y5n6gLRghrk_dp_10IAxBhKO6iLEAI34t9VDzMcwJbGaxPSwh4NMVAeVJRYgYQThrx9N_JKkph_nXg
 Content-Type: application/json
 X-Content-Type-Options: nosniff
 X-XSS-Protection: 1; mode=block
@@ -1562,20 +1562,20 @@ X-Frame-Options: DENY
 Content-Length: 648
 
 {
-  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMTF9.3wIJGoClKZlmyeqyacRv16FThkfSzNSc-ni91l38ewauzry2Ck3sxeIkZFL7yIS7UVBRqs1fl6_qMT8X9DuEJA",
+  "token" : "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5Mzd9.CeYP3ia7y5n6gLRghrk_dp_10IAxBhKO6iLEAI34t9VDzMcwJbGaxPSwh4NMVAeVJRYgYQThrx9N_JKkph_nXg",
   "profile" : {
     "profileImgUrl" : "https://storage.googleapis.com/mamomo-profile-storage/default.png",
     "nickname" : "user1",
     "sex" : "M",
     "birth" : "2000-01-01",
     "favTopics" : [ {
-      "id" : 617,
+      "id" : 634,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 618,
+      "id" : 635,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1670,7 +1670,7 @@ Content-Length: 648
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user/user@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMTF9.3wIJGoClKZlmyeqyacRv16FThkfSzNSc-ni91l38ewauzry2Ck3sxeIkZFL7yIS7UVBRqs1fl6_qMT8X9DuEJA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5Mzd9.CeYP3ia7y5n6gLRghrk_dp_10IAxBhKO6iLEAI34t9VDzMcwJbGaxPSwh4NMVAeVJRYgYQThrx9N_JKkph_nXg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1717,27 +1717,27 @@ Content-Length: 795
 
 {
   "user" : {
-    "id" : "d71f4a84-4117-44cc-9f4a-84411794cc7c",
+    "id" : "65a222bf-4cac-428a-a222-bf4cac428a27",
     "email" : "user@email.com",
-    "password" : "{bcrypt}$2a$10$B96LcAVu3cnk3N/wquAUD.VJ2.ROzGWUn5RXc2Z1YhnNu.iBByvFS",
+    "password" : "{bcrypt}$2a$10$ormgqLb9txHLGzT.WAmHu.qPaL4dX7jHPPdnQ.x9..DGaVjRw5ZKG",
     "nickname" : "user1",
     "profileImgUrl" : "https://storage.googleapis.com/mamomo-profile-storage/default.png",
     "sex" : "M",
     "birth" : "2000-01-01",
-    "create_date" : "2022-05-30T14:16:42",
-    "modify_date" : "2022-05-30T14:16:42",
+    "create_date" : "2022-05-30T16:25:28",
+    "modify_date" : "2022-05-30T16:25:28",
     "authorities" : [ {
       "authorityName" : "ROLE_USER"
     } ],
     "hearts" : [ ],
     "favTopic" : [ {
-      "id" : 617,
+      "id" : 634,
       "topic" : {
         "id" : 1,
         "topicName" : "아동|청소년"
       }
     }, {
-      "id" : 618,
+      "id" : 635,
       "topic" : {
         "id" : 2,
         "topicName" : "어르신"
@@ -1841,7 +1841,7 @@ Content-Length: 795
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http --multipart POST 'http://localhost:8080/api/user/profile/user@email.com' \
     'profileImg'@'profileTest.jpg' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMTF9.3wIJGoClKZlmyeqyacRv16FThkfSzNSc-ni91l38ewauzry2Ck3sxeIkZFL7yIS7UVBRqs1fl6_qMT8X9DuEJA' \
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5Mzd9.CeYP3ia7y5n6gLRghrk_dp_10IAxBhKO6iLEAI34t9VDzMcwJbGaxPSwh4NMVAeVJRYgYQThrx9N_JKkph_nXg' \
     'nickname=changed' \
     'sex=M' \
     'birth=2000-10-08' \
@@ -1974,13 +1974,13 @@ Content-Length: 407
   "sex" : "M",
   "birth" : "2000-10-08",
   "favTopics" : [ {
-    "id" : 619,
+    "id" : 636,
     "topic" : {
       "id" : 1,
       "topicName" : "아동|청소년"
     }
   }, {
-    "id" : 620,
+    "id" : 637,
     "topic" : {
       "id" : 2,
       "topicName" : "어르신"
@@ -2007,7 +2007,7 @@ Content-Length: 407
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/heart HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMDl9.9r95oNqFtn7HiFWEFWYcS1-yjk9iND1M2bOdl3_PTk_dWUammLffvgBRMKxm1LFIAw6YG3f7M7rzbl1qEinmXw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MzR9.VpcoMrta8ub_n1HU89bppC62vX-aD5j-SSGTodHTpD-tcSlAcMEmH3LennI8yJ5mql_MbmMCD3O2DPS9JrqJOw
 Content-Length: 92
 Host: localhost:8080
 
@@ -2110,7 +2110,7 @@ Content-Length: 92
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/heart HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQyMDl9.9r95oNqFtn7HiFWEFWYcS1-yjk9iND1M2bOdl3_PTk_dWUammLffvgBRMKxm1LFIAw6YG3f7M7rzbl1qEinmXw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MzV9.nQ9o_ijRBbdhfGH-2SuwV-54EvIViBi2xL3p9o0pnxOzCOugCGedBE5X3NXzni0LVPOpbk6cw7p_EGNsMRZhTg
 Content-Length: 92
 Host: localhost:8080
 
@@ -2200,7 +2200,7 @@ Content-Length: 92
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/textMining?page=0&amp;size=20 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQxODV9.p2w6nE-fp6glc_CpVEDwYRKHc2dB7Rbrt5NOjSOgAS288yeUadWRMtKhEtVIRrgJ3cp6lkvLHAvxBOCZ7pOgGg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MzV9.nQ9o_ijRBbdhfGH-2SuwV-54EvIViBi2xL3p9o0pnxOzCOugCGedBE5X3NXzni0LVPOpbk6cw7p_EGNsMRZhTg
 Content-Length: 2491
 Host: localhost:8080
 
@@ -2508,28 +2508,28 @@ Host: localhost:8080
     } ],
     "pageable" : {
       "sort" : {
-        "unsorted" : true,
+        "empty" : true,
         "sorted" : false,
-        "empty" : true
+        "unsorted" : true
       },
+      "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 20,
-      "offset" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : true,
     "totalPages" : 1,
     "totalElements" : 13,
-    "first" : true,
-    "numberOfElements" : 13,
     "size" : 20,
     "number" : 0,
     "sort" : {
-      "unsorted" : true,
+      "empty" : true,
       "sorted" : false,
-      "empty" : true
+      "unsorted" : true
     },
+    "first" : true,
+    "numberOfElements" : 13,
     "empty" : false
   },
   "textMining" : [ {
@@ -2839,9 +2839,10 @@ Host: localhost:8080
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http --multipart POST 'http://localhost:8080/api/banner' \
     'imgData'@'test.jpg' \
     'originalImgData'@'originalTest.jpg' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQxOTl9.Km6VwXWrwDH57lD3J6CiEm_fdyxljFB8twK1qIQMZezot18DwhgSz-NBaa28B9FGoBG40UFBMgXNoOQjxG0jDQ' \
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MjR9.1dWVD-USTl4emkCxFTCM5sAEix74MhWKCVZXSeYa9DWeGLWjZeQCOcxvU6naW-gGNR_FsSGAIiQW1dbLRgTJSw' \
     'email=bannerTest@email.com' \
-    'date=2022-05-30 14:16:39' \
+    'url=https://github.com/2E2I/mamomo-server' \
+    'date=2022-05-30 16:25:24' \
     'siteType=SiteType' \
     'title=Title' \
     'info=Info(' \
@@ -2878,6 +2879,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자 이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 컨텐츠 url</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>date</code></p></td>
@@ -2953,7 +2958,7 @@ Host: localhost:8080
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>originalImgData</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">배너 원본 이미지 파일</p>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 썸네일 이미지 파일</p>
 <p class="tableblock">File 객체입니다.</p></td>
 </tr>
 <tr>
@@ -2970,11 +2975,12 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "banner" : {
-    "id" : 615,
-    "bannerId" : "202205301439",
-    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301439",
-    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301439",
-    "date" : "2022-05-30 14:16:39",
+    "id" : 632,
+    "bannerId" : "202205301624",
+    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301624",
+    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301624",
+    "url" : "https://github.com/2E2I/mamomo-server",
+    "date" : "2022-05-30 16:25:24",
     "siteType" : "SiteType",
     "title" : "Title",
     "info" : "Info(",
@@ -3002,7 +3008,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/banner/bannerTest@email.com HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQxOTh9.2zOFInEbezFVc38R8FAGnEB4AbPKdLLYaZHECClNl_WfqgjqFLsYb-204XVqaAIWSJM6LiUX-kgmSGk8J_iUow
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MjR9.1dWVD-USTl4emkCxFTCM5sAEix74MhWKCVZXSeYa9DWeGLWjZeQCOcxvU6naW-gGNR_FsSGAIiQW1dbLRgTJSw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3070,10 +3076,31 @@ Host: localhost:8080</code></pre>
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "bannerList" : {
     "content" : [ {
+      "id" : 630,
+      "bannerId" : "202205301603",
+      "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301603",
+      "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301603",
+      "url" : "https://github.com/2E2I/mamomo-server",
+      "date" : "2022-05-30 16:21:03",
+      "siteType" : "SiteType",
+      "title" : "Title",
+      "info" : "Info(",
+      "width" : "Width",
+      "height" : "Height",
+      "bgColor1" : "BgColor1",
+      "bgColor2" : "BgColor2",
+      "textColor1" : "TextColor1",
+      "textColor2" : "TextColor2",
+      "textColor3" : "TextColor3",
+      "textFont1" : "TextFont1",
+      "textFont2" : "TextFont2",
+      "textFont3" : "TextFont3"
+    }, {
       "id" : 373,
       "bannerId" : "202205180258",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180258",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:27:57",
       "siteType" : "SiteType",
       "title" : "Title",
@@ -3093,6 +3120,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180221",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180221",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:25:21",
       "siteType" : "SiteType",
       "title" : "Title",
@@ -3112,6 +3140,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180255",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180255",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:23:55",
       "siteType" : "SiteType",
       "title" : "Title",
@@ -3131,6 +3160,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180253",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180253",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:21:52",
       "siteType" : "SiteType",
       "title" : "Title",
@@ -3150,6 +3180,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301202",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301202",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3169,6 +3200,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301217",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301217",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3188,6 +3220,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301219",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301219",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3207,6 +3240,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301220",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301220",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3226,6 +3260,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301250",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301250",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3245,6 +3280,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301251",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301251",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3264,6 +3300,27 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205301348",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301348",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
+      "date" : "2022-05-09 21:50:28",
+      "siteType" : "siteType",
+      "title" : "title",
+      "info" : "info",
+      "width" : "width",
+      "height" : "height",
+      "bgColor1" : "bgColor1",
+      "bgColor2" : "bgColor2",
+      "textColor1" : "textColor1",
+      "textColor2" : "textColor2",
+      "textColor3" : "textColor3",
+      "textFont1" : "textFont1",
+      "textFont2" : "textFont2",
+      "textFont3" : "textFont3"
+    }, {
+      "id" : 621,
+      "bannerId" : "202205301453",
+      "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301453",
+      "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301453",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3283,6 +3340,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180136",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180136",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType!",
       "title" : "title!",
@@ -3302,6 +3360,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180239",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180239",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-09 21:50:28",
       "siteType" : "siteType",
       "title" : "title",
@@ -3319,28 +3378,28 @@ Host: localhost:8080</code></pre>
     } ],
     "pageable" : {
       "sort" : {
-        "unsorted" : false,
+        "empty" : false,
         "sorted" : true,
-        "empty" : false
+        "unsorted" : false
       },
+      "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 20,
-      "offset" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : true,
     "totalPages" : 1,
-    "totalElements" : 13,
-    "first" : true,
-    "numberOfElements" : 13,
+    "totalElements" : 15,
     "size" : 20,
     "number" : 0,
     "sort" : {
-      "unsorted" : false,
+      "empty" : false,
       "sorted" : true,
-      "empty" : false
+      "unsorted" : false
     },
+    "first" : true,
+    "numberOfElements" : 15,
     "empty" : false
   }
 }</code></pre>
@@ -3381,7 +3440,12 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>bannerList.content.[].originalImg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">배너 원본 이미지 주소</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 썸네일 이미지 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bannerList.content.[].url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 컨텐츠 url</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>bannerList.content.[].date</code></p></td>
@@ -3602,10 +3666,31 @@ Host: localhost:8080</code></pre>
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "bannerList" : {
     "content" : [ {
+      "id" : 630,
+      "bannerId" : "202205301603",
+      "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301603",
+      "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301603",
+      "url" : "https://github.com/2E2I/mamomo-server",
+      "date" : "2022-05-30 16:21:03",
+      "siteType" : "SiteType",
+      "title" : "Title",
+      "info" : "Info(",
+      "width" : "Width",
+      "height" : "Height",
+      "bgColor1" : "BgColor1",
+      "bgColor2" : "BgColor2",
+      "textColor1" : "TextColor1",
+      "textColor2" : "TextColor2",
+      "textColor3" : "TextColor3",
+      "textFont1" : "TextFont1",
+      "textFont2" : "TextFont2",
+      "textFont3" : "TextFont3"
+    }, {
       "id" : 600,
       "bannerId" : "202205300147",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300147",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:08:47",
       "siteType" : "happybean",
       "title" : "휠체어장애인의 이동지원에 동참해 주세요.",
@@ -3625,6 +3710,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300102",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300102",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:08:02",
       "siteType" : "happybean",
       "title" : "하루만 이라도 학비 걱정 없이 공부하고 싶어요",
@@ -3644,6 +3730,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300100",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300100",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:08:00",
       "siteType" : "happybean",
       "title" : "하루만 이라도 학비 걱정 없이 공부하고 싶어요",
@@ -3663,6 +3750,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300111",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300111",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:05:11",
       "siteType" : "happybean",
       "title" : "어린이날~! 아이들 얼굴에 웃음꽃이 활짝 피기를 ",
@@ -3682,6 +3770,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300109",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300109",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:05:08",
       "siteType" : "happybean",
       "title" : "어린이날~! 아이들 얼굴에 웃음꽃이 활짝 피기를 ",
@@ -3701,6 +3790,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300136",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300136",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:04:36",
       "siteType" : "happybean",
       "title" : "어린이날~! 아이들 얼굴에 웃음꽃이 활짝 피기를 ",
@@ -3720,6 +3810,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300101",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300101",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:03:01",
       "siteType" : "happybean",
       "title" : "죽음을 감수하였고 이제 아들과 살 수 있게 되었습니다.",
@@ -3739,6 +3830,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300159",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300159",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:00:59",
       "siteType" : "happybean",
       "title" : "\"세계 다문화 엄마나라 음식체험\"",
@@ -3758,6 +3850,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300105",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300105",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 01:00:05",
       "siteType" : "happybean",
       "title" : "우크라이나에서 일어나는 전쟁범죄, 멈춰야 합니다",
@@ -3777,6 +3870,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300055",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300055",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 00:58:55",
       "siteType" : "kakao",
       "title" : "울진. 강원 산불 피해 아동과 주민들의 손을 잡아주세요",
@@ -3796,6 +3890,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205300046",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205300046",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-30 00:09:45",
       "siteType" : "happybean",
       "title" : "여행을 꿈꾸지 못하는 아이들에게 꿈을 선물해주세요",
@@ -3815,6 +3910,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205292210",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/550e8400-e29b-41d4-a716-446655440000/202205292210",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-29 22:28:10",
       "siteType" : "kakao",
       "title" : "그림으로 표현하는 우리들의 꿈! 이야기",
@@ -3834,6 +3930,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205292234",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205292234",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-29 22:24:33",
       "siteType" : "happybean",
       "title" : "취약계층 아동을 위한 꿈키움 멘토링에 함께해 주세요.",
@@ -3853,6 +3950,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205291634",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/3a45a5c2-c885-4f19-85a5-c2c8859f19a4/202205291634",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-29 16:26:34",
       "siteType" : "happybean",
       "title" : "익산시민 희망공약제안 캠페인을 응원해주세요.",
@@ -3872,6 +3970,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205291634",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/3a45a5c2-c885-4f19-85a5-c2c8859f19a4/202205291634",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-29 16:26:34",
       "siteType" : "happybean",
       "title" : "익산시민 희망공약제안 캠페인을 응원해주세요.",
@@ -3891,6 +3990,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205281140",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205281140",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-28 11:14:39",
       "siteType" : "happybean",
       "title" : "서글픈 가정의달, 다문화가정에 작은 행복을 배달합니다",
@@ -3910,6 +4010,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205182159",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/fa5c8d30-78e7-49c3-9c8d-3078e739c318/202205182159",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 21:03:59",
       "siteType" : "happybean",
       "title" : "익산시민 희망공약제안 캠페인을 응원해주세요.",
@@ -3929,6 +4030,7 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180258",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180258",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:27:57",
       "siteType" : "SiteType",
       "title" : "Title",
@@ -3948,26 +4050,8 @@ Host: localhost:8080</code></pre>
       "bannerId" : "202205180221",
       "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180221",
       "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
+      "url" : null,
       "date" : "2022-05-18 02:25:21",
-      "siteType" : "SiteType",
-      "title" : "Title",
-      "info" : "Info(",
-      "width" : "Width",
-      "height" : "Height",
-      "bgColor1" : "BgColor1",
-      "bgColor2" : "BgColor2",
-      "textColor1" : "TextColor1",
-      "textColor2" : "TextColor2",
-      "textColor3" : "TextColor3",
-      "textFont1" : "TextFont1",
-      "textFont2" : "TextFont2",
-      "textFont3" : "TextFont3"
-    }, {
-      "id" : 371,
-      "bannerId" : "202205180255",
-      "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205180255",
-      "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301348",
-      "date" : "2022-05-18 02:23:55",
       "siteType" : "SiteType",
       "title" : "Title",
       "info" : "Info(",
@@ -3984,28 +4068,28 @@ Host: localhost:8080</code></pre>
     } ],
     "pageable" : {
       "sort" : {
-        "unsorted" : false,
+        "empty" : false,
         "sorted" : true,
-        "empty" : false
+        "unsorted" : false
       },
+      "offset" : 0,
       "pageNumber" : 0,
       "pageSize" : 20,
-      "offset" : 0,
-      "paged" : true,
-      "unpaged" : false
+      "unpaged" : false,
+      "paged" : true
     },
     "last" : false,
     "totalPages" : 2,
-    "totalElements" : 30,
-    "first" : true,
-    "numberOfElements" : 20,
+    "totalElements" : 32,
     "size" : 20,
     "number" : 0,
     "sort" : {
-      "unsorted" : false,
+      "empty" : false,
       "sorted" : true,
-      "empty" : false
+      "unsorted" : false
     },
+    "first" : true,
+    "numberOfElements" : 20,
     "empty" : false
   }
 }</code></pre>
@@ -4025,7 +4109,7 @@ Host: localhost:8080</code></pre>
 <h4 id="banner-delete-reqeust"><a class="link" href="#banner-delete-reqeust">요청</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/banner/bannerTest@email.com/202205301439 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/banner/bannerTest@email.com/202205301624 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -4069,7 +4153,7 @@ Host: localhost:8080</code></pre>
 <h4 id="banner-delete-response"><a class="link" href="#banner-delete-response">응답</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-none hljs">202205301439 파일 삭제됨</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">202205301624 파일 삭제됨</code></pre>
 </div>
 </div>
 </div>
@@ -4083,9 +4167,9 @@ Host: localhost:8080</code></pre>
 <h4 id="banner-status-reqeust"><a class="link" href="#banner-status-reqeust">요청</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/api/banner/status?bannerId=202205301439&amp;email=bannerTest%40email.com' \
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http GET 'http://localhost:8080/api/banner/status?bannerId=202205301624&amp;email=bannerTest%40email.com' \
     'Content-Type:multipart/form-data;charset=UTF-8' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQxOTl9.Km6VwXWrwDH57lD3J6CiEm_fdyxljFB8twK1qIQMZezot18DwhgSz-NBaa28B9FGoBG40UFBMgXNoOQjxG0jDQ'</code></pre>
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MjR9.1dWVD-USTl4emkCxFTCM5sAEix74MhWKCVZXSeYa9DWeGLWjZeQCOcxvU6naW-gGNR_FsSGAIiQW1dbLRgTJSw'</code></pre>
 </div>
 </div>
 </div>
@@ -4120,11 +4204,12 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "banner" : {
-    "id" : 615,
-    "bannerId" : "202205301439",
-    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301439",
-    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301439",
-    "date" : "2022-05-30 14:16:39",
+    "id" : 632,
+    "bannerId" : "202205301624",
+    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301624",
+    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301624",
+    "url" : "https://github.com/2E2I/mamomo-server",
+    "date" : "2022-05-30 16:25:24",
     "siteType" : "SiteType",
     "title" : "Title",
     "info" : "Info(",
@@ -4172,7 +4257,12 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.originalImg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">배너 원본 이미지 주소</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 썸네일 이미지 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 컨텐츠 url</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.date</code></p></td>
@@ -4259,10 +4349,11 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ http --multipart POST 'http://localhost:8080/api/banner/modify' \
     'imgData'@'test.jpg' \
-    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5NzQxOTl9.Km6VwXWrwDH57lD3J6CiEm_fdyxljFB8twK1qIQMZezot18DwhgSz-NBaa28B9FGoBG40UFBMgXNoOQjxG0jDQ' \
-    'bannerId=202205301439' \
+    'Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYW5uZXJUZXN0QGVtYWlsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2NTM5ODE5MjR9.1dWVD-USTl4emkCxFTCM5sAEix74MhWKCVZXSeYa9DWeGLWjZeQCOcxvU6naW-gGNR_FsSGAIiQW1dbLRgTJSw' \
+    'bannerId=202205301624' \
     'email=bannerTest@email.com' \
-    'date=2022-05-30 14:16:39' \
+    'url=https://github.com/2E2I/mamomo-server' \
+    'date=2022-05-30 16:25:24' \
     'siteType=SiteType' \
     'title=Title' \
     'info=Info(' \
@@ -4319,6 +4410,10 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">사용자 이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 컨텐츠 url</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>date</code></p></td>
@@ -4387,11 +4482,12 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "banner" : {
-    "id" : 615,
-    "bannerId" : "202205301439",
-    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301439",
-    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301439",
-    "date" : "2022-05-30 14:16:39",
+    "id" : 632,
+    "bannerId" : "202205301624",
+    "img" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/202205301624",
+    "originalImg" : "https://storage.googleapis.com/mamomo-banner-storage/6a79273a-6c30-4615-b927-3a6c30d6150c/original_202205301624",
+    "url" : "https://github.com/2E2I/mamomo-server",
+    "date" : "2022-05-30 16:25:24",
     "siteType" : "SiteType",
     "title" : "Title",
     "info" : "Info(",
@@ -4439,7 +4535,12 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.originalImg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">배너 원본 이미지 주소</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 썸네일 이미지 주소</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">배너 컨텐츠 url</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>banner.date</code></p></td>

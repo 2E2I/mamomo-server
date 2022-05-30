@@ -110,6 +110,7 @@ class BannerControllerTest {
                         "test.jpg",
                         "image/jpeg",
                         new FileInputStream("src/test/resources/bannerTest.jpg")))
+                .url("https://github.com/2E2I/mamomo-server")
                 .date(now)
                 .siteType("SiteType")
                 .title("Title")
@@ -136,6 +137,7 @@ class BannerControllerTest {
                         .file((MockMultipartFile) bannerSaveDto.getImgData())
                         .file((MockMultipartFile) bannerSaveDto.getOriginalImgData())
                         .param("email", bannerSaveDto.getEmail())
+                        .param("url", bannerSaveDto.getUrl())
                         .param("date", localDateTime)
                         .param("siteType", bannerSaveDto.getSiteType())
                         .param("title", bannerSaveDto.getTitle())
@@ -162,13 +164,14 @@ class BannerControllerTest {
 
                         // 요청 필드 문서화
                         requestParts(
-                                partWithName("originalImgData").description("배너 원본 이미지 파일\n\n"
-                                                                            + "File 객체입니다."),
+                                partWithName("originalImgData").description("배너 썸네일 이미지 파일\n\n"
+                                                                                    + "File 객체입니다."),
                                 partWithName("imgData").description("업로드 할 배너 이미지 파일\n\n"
                                                                             + "File 객체입니다.")
                         ),
                         requestParameters(
                                 parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("url").description("배너 컨텐츠 url"),
                                 parameterWithName("date").description("배너 만든/수정한 시간\n\n"
                                                                               + "형식 [yyyy-MM-dd HH:mm:ss]입니다."),
                                 parameterWithName("siteType").description("배너 사이트 타입\n\n"
@@ -202,7 +205,8 @@ class BannerControllerTest {
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.img").description("배너 이미지 주소"),
-                                fieldWithPath("banner.originalImg").description("배너 원본 이미지 주소"),
+                                fieldWithPath("banner.originalImg").description("배너 썸네일 이미지 주소"),
+                                fieldWithPath("banner.url").description("배너 컨텐츠 url").optional(),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),
@@ -263,21 +267,33 @@ class BannerControllerTest {
                                         "배너 아이디"),
                                 fieldWithPath("bannerList.content.[].img").description(
                                         "배너 이미지 url"),
-                                fieldWithPath("bannerList.content.[].originalImg").description("배너 원본 이미지 주소"),
-                                fieldWithPath("bannerList.content.[].date").description("배너 만든/수정한 시간"),
-                                fieldWithPath("bannerList.content.[].siteType").description("배너 사이트 타입"),
+                                fieldWithPath("bannerList.content.[].originalImg").description(
+                                        "배너 썸네일 이미지 주소"),
+                                fieldWithPath("bannerList.content.[].url").optional().description("배너 컨텐츠 url"),
+                                fieldWithPath("bannerList.content.[].date").description(
+                                        "배너 만든/수정한 시간"),
+                                fieldWithPath("bannerList.content.[].siteType").description(
+                                        "배너 사이트 타입"),
                                 fieldWithPath("bannerList.content.[].title").description("배너 제목"),
                                 fieldWithPath("bannerList.content.[].info").description("배너 내용"),
                                 fieldWithPath("bannerList.content.[].width").description("배너 너비"),
                                 fieldWithPath("bannerList.content.[].height").description("배너 높이"),
-                                fieldWithPath("bannerList.content.[].bgColor1").description("배너 배경 컬러1"),
-                                fieldWithPath("bannerList.content.[].bgColor2").description("배너 배경 컬러2"),
-                                fieldWithPath("bannerList.content.[].textColor1").description("배너 텍스트 컬러1"),
-                                fieldWithPath("bannerList.content.[].textColor2").description("배너 텍스트 컬러2"),
-                                fieldWithPath("bannerList.content.[].textColor3").description("배너 텍스트 컬러3"),
-                                fieldWithPath("bannerList.content.[].textFont1").description("배너 텍스트 폰트1"),
-                                fieldWithPath("bannerList.content.[].textFont2").description("배너 텍스트 폰트2"),
-                                fieldWithPath("bannerList.content.[].textFont3").description("배너 텍스트 폰트3"),
+                                fieldWithPath("bannerList.content.[].bgColor1").description(
+                                        "배너 배경 컬러1"),
+                                fieldWithPath("bannerList.content.[].bgColor2").description(
+                                        "배너 배경 컬러2"),
+                                fieldWithPath("bannerList.content.[].textColor1").description(
+                                        "배너 텍스트 컬러1"),
+                                fieldWithPath("bannerList.content.[].textColor2").description(
+                                        "배너 텍스트 컬러2"),
+                                fieldWithPath("bannerList.content.[].textColor3").description(
+                                        "배너 텍스트 컬러3"),
+                                fieldWithPath("bannerList.content.[].textFont1").description(
+                                        "배너 텍스트 폰트1"),
+                                fieldWithPath("bannerList.content.[].textFont2").description(
+                                        "배너 텍스트 폰트2"),
+                                fieldWithPath("bannerList.content.[].textFont3").description(
+                                        "배너 텍스트 폰트3"),
                                 fieldWithPath("bannerList.pageable")
                                         .type(JsonFieldType.OBJECT).description("페이지 정보"),
                                 subsectionWithPath("bannerList.pageable.sort")
@@ -372,7 +388,8 @@ class BannerControllerTest {
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.img").description("배너 이미지 주소"),
-                                fieldWithPath("banner.originalImg").description("배너 원본 이미지 주소"),
+                                fieldWithPath("banner.originalImg").description("배너 썸네일 이미지 주소"),
+                                fieldWithPath("banner.url").description("배너 컨텐츠 url").optional(),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),
@@ -403,6 +420,7 @@ class BannerControllerTest {
                         .file((MockMultipartFile) bannerSaveDto.getImgData())
                         .param("bannerId", bannerId)
                         .param("email", bannerSaveDto.getEmail())
+                        .param("url", bannerSaveDto.getUrl())
                         .param("date", localDateTime)
                         .param("siteType", bannerSaveDto.getSiteType())
                         .param("title", bannerSaveDto.getTitle())
@@ -434,6 +452,7 @@ class BannerControllerTest {
                         requestParameters(
                                 parameterWithName("bannerId").description("배너 아이디"),
                                 parameterWithName("email").description("사용자 이메일"),
+                                parameterWithName("url").description("배너 컨텐츠 url").optional(),
                                 parameterWithName("date").description("배너 만든/수정한 시간\n\n"
                                                                               + "형식 [yyyy-MM-dd HH:mm:ss]입니다."),
                                 parameterWithName("siteType").description("배너 사이트 타입\n\n"
@@ -467,7 +486,8 @@ class BannerControllerTest {
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.img").description("배너 이미지 주소"),
-                                fieldWithPath("banner.originalImg").description("배너 원본 이미지 주소"),
+                                fieldWithPath("banner.originalImg").description("배너 썸네일 이미지 주소"),
+                                fieldWithPath("banner.url").description("배너 컨텐츠 url").optional(),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
                                 fieldWithPath("banner.title").description("배너 제목"),
