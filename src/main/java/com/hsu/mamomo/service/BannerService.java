@@ -2,6 +2,7 @@ package com.hsu.mamomo.service;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.BANNER_NOT_FOUND;
 import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_BANNER;
+import static com.hsu.mamomo.service.encoding.EncodingImage.getBase64EncodedImage;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Banner;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -115,6 +117,9 @@ public class BannerService {
         } else {
             Banner banner = bannerOptional.get();
 
+            // 이미지 URL 인코딩
+            banner.setOriginalImg(getBase64EncodedImage(banner.getOriginalImg()));
+
             BannerDto bannerDto = BannerDto.builder()
                     .banner(banner)
                     .build();
@@ -174,46 +179,61 @@ public class BannerService {
 
     public BannerListDto getBannerListByUser(Pageable pageable, String authorization,
             String email) {
+        // 배너 유무 검사
         User user = loginAuthenticationUtil.getUserIdByEmail(authorization, email);
-        String userId = user.getId();
-
-        List<Banner> banners = bannerRepository.findBannersByUser(user).orElse(null);
-        if (banners == null) {
+        if (bannerRepository.findBannersByUser(user).isEmpty()) {
             throw new CustomException(BANNER_NOT_FOUND);
         }
 
-        return new BannerListDto(bannerRepository.findByUser(user, pageable));
+        Page<Banner> banners = bannerRepository.findByUser(user, pageable);
 
+        // 이미지 URL 인코딩
+        banners.map(banner -> {
+            banner.setOriginalImg(getBase64EncodedImage(banner.getOriginalImg()));
+            return banner;
+        });
+
+        return new BannerListDto(banners);
     }
 
     public BannerListDto getBannerList(Pageable pageable) {
+        // 배너 유무 검사
+        if (bannerRepository.findAll().isEmpty()) {
+            throw new CustomException(BANNER_NOT_FOUND);
+        }
+        Page<Banner> banners = bannerRepository.findAll(pageable);
 
-        return new BannerListDto(bannerRepository.findAll(pageable));
+        // 이미지 URL 인코딩
+        banners.map(banner -> {
+            banner.setOriginalImg(getBase64EncodedImage(banner.getOriginalImg()));
+            return banner;
+        });
 
+        return new BannerListDto(banners);
     }
 
+    @Transactional
     public ResponseEntity<String> deleteBanner(String email, String bannerId) {
-
         Optional<Banner> banner = bannerRepository.findBannerByBannerId(bannerId);
         String userId = userRepository.findByEmail(email).get().getId();
         String originalImgUrl = banner.get().getOriginalImg().split(userId + "/")[1];
-
-        gcsService.deleteFile(GcsFIleDto.builder()
-                .bucketName(BUCKET_NAME)
-                .filePath(userId)
-                .fileName(bannerId)
-                .build());
-
-        gcsService.deleteFile(GcsFIleDto.builder()
-                .bucketName(BUCKET_NAME)
-                .filePath(userId)
-                .fileName(originalImgUrl)
-                .build());
 
         if (banner.isEmpty()) {
             throw new CustomException(BANNER_NOT_FOUND);
         } else {
             bannerRepository.delete(banner.get());
+
+            gcsService.deleteFile(GcsFIleDto.builder()
+                    .bucketName(BUCKET_NAME)
+                    .filePath(userId)
+                    .fileName(bannerId)
+                    .build());
+
+            gcsService.deleteFile(GcsFIleDto.builder()
+                    .bucketName(BUCKET_NAME)
+                    .filePath(userId)
+                    .fileName(originalImgUrl)
+                    .build());
         }
 
         return new ResponseEntity<>(bannerId + " 파일 삭제됨", HttpStatus.OK);
