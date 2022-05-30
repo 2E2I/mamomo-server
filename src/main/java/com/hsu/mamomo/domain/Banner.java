@@ -45,6 +45,10 @@ public class Banner {
     @NonNull
     private String img;
 
+    @Column(name = "original_img")
+    @NonNull
+    private String originalImg;
+
     @NonNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime date;
