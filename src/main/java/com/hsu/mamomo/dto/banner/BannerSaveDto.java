@@ -25,6 +25,9 @@ public class BannerSaveDto {
     private LocalDateTime date;
 
     @NonNull
+    private MultipartFile originalImgData;
+
+    @NonNull
     private MultipartFile imgData;
 
     @NonNull
