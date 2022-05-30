@@ -120,7 +120,7 @@
         <a href="https://github.com/im-shung"><img src="https://avatars.githubusercontent.com/u/67851738?v=4" width="150px" alt="임서영"/><br /><sub><b>임서영</b></sub></a>
      </td>
      <td align="center">
-        <a href="https://github.com/devyuseon5"><img src="https://avatars.githubusercontent.com/u/67352902?v=4" width="150px" alt="임유선"/><br /><sub><b>임유선</b></sub></a>
+        <a href="https://github.com/devyuseon"><img src="https://avatars.githubusercontent.com/u/67352902?v=4" width="150px" alt="임유선"/><br /><sub><b>임유선</b></sub></a>
      </td>
   <tr>
 
