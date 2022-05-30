@@ -203,12 +203,6 @@ public class BannerService {
         }
         Page<Banner> banners = bannerRepository.findAll(pageable);
 
-        // 이미지 URL 인코딩
-        banners.map(banner -> {
-            banner.setOriginalImg(getBase64EncodedImage(banner.getOriginalImg()));
-            return banner;
-        });
-
         return new BannerListDto(banners);
     }
 
