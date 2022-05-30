@@ -101,9 +101,32 @@
 
 ## 📸 주요 화면
 
+<div style="overflow:hidden">
+<table style="border:0">
+  <tr>
+    <td align="center">
+    <img src="https://user-images.githubusercontent.com/67352902/170922503-f952ea6f-6d9c-4d4b-85f5-42056eef6616.png" width="100%;" alt="메인화면"/><br />
+    </td>
+     <td align="center">
+        <img src="https://user-images.githubusercontent.com/67352902/170922509-16431913-c301-44ed-8c0e-17907ddcd8c4.png" width="100%;" alt="가부모아"/><br />
+     </td>
+  </tr>
+  <tr>
+     <td align="center">
+        <img src="https://user-images.githubusercontent.com/67352902/170922507-4956be4c-e621-4b12-a98e-48b1e855b231.png" width="100%;" alt="배너제작"/><br />
+     </td>
+     <td align="center">
+        <img src="https://user-images.githubusercontent.com/67352902/170922495-91850b3a-cafa-4f2d-92af-38f31b19caab.png" width="100%;" alt="기부추천"/><br />
+     </td>
+  </tr>
+
+</table>
+</div>
+
+
 ## 👩‍👩‍👧‍👦 팀 정보
 
-<div sytle="overflow:scroll;">
+<div sytle="overflow:hidden;">
 <table>
    <tr>
       <td colspan="2" align="center"><strong>Front-End Developer</strong></td>
