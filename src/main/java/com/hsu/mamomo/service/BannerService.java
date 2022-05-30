@@ -1,6 +1,7 @@
 package com.hsu.mamomo.service;
 
 import static com.hsu.mamomo.controller.exception.ErrorCode.BANNER_NOT_FOUND;
+import static com.hsu.mamomo.controller.exception.ErrorCode.DUPLICATE_BANNER;
 
 import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.domain.Banner;
@@ -46,6 +47,9 @@ public class BannerService {
                 bannerSaveDto.getEmail());
         String userId = user.getId();
         String bannerId = getBannerId();
+
+        // check bannerId is duplicate
+        checkBannerIdIsDuplicate(bannerId);
 
         GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
                 .bucketName(BUCKET_NAME)
@@ -201,4 +205,10 @@ public class BannerService {
         return localDateTime;
     }
 
+    public void checkBannerIdIsDuplicate(String bannerId) {
+        Optional<Banner> banner = bannerRepository.findBannerByBannerId(bannerId);
+        if (banner.isPresent()) {
+            throw new CustomException(DUPLICATE_BANNER);
+        }
+    }
 }
