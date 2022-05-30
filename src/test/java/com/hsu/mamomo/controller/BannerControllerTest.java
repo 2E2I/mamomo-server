@@ -228,14 +228,15 @@ class BannerControllerTest {
         String responseBody = mvcResult.getResponse().getContentAsString();
         BannerDto responseBanner = objectMapper.readValue(responseBody, BannerDto.class);
         bannerId = responseBanner.getBanner().getBannerId();
-        System.out.println(bannerId);
+
         return bannerId;
     }
 
     @Test
     @Order(200)
     @DisplayName("유저 배너 리스트 테스트 - 성공 :: ")
-    public void getBannerListByUser() throws Exception {
+    public String getBannerListByUser() throws Exception {
+        bannerId = saveBanner();
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner/{email}",
                                 bannerSaveDto.getEmail())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -268,7 +269,8 @@ class BannerControllerTest {
                                 fieldWithPath("bannerList.content.[].img").description(
                                         "배너 이미지 url"),
                                 fieldWithPath("bannerList.content.[].originalImg").description(
-                                        "배너 썸네일 이미지 주소"),
+                                        "배너 썸네일 이미지 주소\n\n"
+                                                + "(Base64 인코딩 됨)"),
                                 fieldWithPath("bannerList.content.[].url").optional().description("배너 컨텐츠 url"),
                                 fieldWithPath("bannerList.content.[].date").description(
                                         "배너 만든/수정한 시간"),
@@ -329,12 +331,14 @@ class BannerControllerTest {
                                         .type(JsonFieldType.BOOLEAN).description("비어있는지 여부")
                         )
                 ));
+        return bannerId;
     }
 
     @Test
     @Order(201)
     @DisplayName("전체 배너 리스트 테스트 - 성공 :: ")
-    public void getBannerList() throws Exception {
+    public String getBannerList() throws Exception {
+        bannerId = getBannerListByUser();
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner",
                                 bannerSaveDto.getEmail())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -360,13 +364,15 @@ class BannerControllerTest {
                                         .attributes(getSortFormat())
                         )
                 ));
+
+        return bannerId;
     }
 
     @Test
     @Order(300)
     @DisplayName("배너 상태 테스트 - 성공 :: ")
     public String getBannerStatus() throws Exception {
-        bannerId = saveBanner();
+        bannerId = getBannerList();
         mockMvc.perform(RestDocumentationRequestBuilders.get("/api/banner/status")
                         .param("bannerId", bannerId)
                         .param("email", bannerSaveDto.getEmail())
@@ -388,7 +394,8 @@ class BannerControllerTest {
                         relaxedResponseFields(
                                 fieldWithPath("banner.bannerId").description("배너 아이디"),
                                 fieldWithPath("banner.img").description("배너 이미지 주소"),
-                                fieldWithPath("banner.originalImg").description("배너 썸네일 이미지 주소"),
+                                fieldWithPath("banner.originalImg").description("배너 썸네일 이미지 주소\n\n"
+                                                                                        + "(Base64 인코딩 됨)"),
                                 fieldWithPath("banner.url").description("배너 컨텐츠 url").optional(),
                                 fieldWithPath("banner.date").description("배너 만든/수정한 시간"),
                                 fieldWithPath("banner.siteType").description("배너 사이트 타입"),
@@ -512,7 +519,7 @@ class BannerControllerTest {
 
     @Test
     @Order(400)
-    @DisplayName("배너 삭제 테스트 - 성공 :: ")
+    @DisplayName("배너 통합 테스트")
     public void deleteBanner() throws Exception {
         bannerId = modifyBanner();
         mockMvc.perform(RestDocumentationRequestBuilders.delete("/api/banner/{email}/{bannerId}",
