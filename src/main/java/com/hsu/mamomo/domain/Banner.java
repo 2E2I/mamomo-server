@@ -49,6 +49,9 @@ public class Banner {
     @NonNull
     private String originalImg;
 
+    @Column(name = "url")
+    private String url;
+
     @NonNull
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime date;

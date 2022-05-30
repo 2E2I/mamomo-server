@@ -26,6 +26,8 @@ public class BannerModifyDto {
     @NonNull
     private MultipartFile imgData;
 
+    private String url;
+
     @NonNull
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
