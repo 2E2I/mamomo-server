@@ -96,7 +96,7 @@
 
 ## 시스템 구조도
 
-![시스템 구조도 최종](https://user-images.githubusercontent.com/67352902/170868993-ab133e40-7ff7-4d0b-8073-6b6c56900155.png)
+![시스템 구조도 최종](img/시스템구조도.png)
 
 
 ## 📸 주요 화면
@@ -105,18 +105,18 @@
 <table style="border:0">
   <tr>
     <td align="center">
-    <img src="https://user-images.githubusercontent.com/67352902/170922503-f952ea6f-6d9c-4d4b-85f5-42056eef6616.png" width="100%;" alt="메인화면"/><br />
+    <img src="img/메인화면.png" width="100%;" alt="메인화면"/><br />
     </td>
      <td align="center">
-        <img src="https://user-images.githubusercontent.com/67352902/170922509-16431913-c301-44ed-8c0e-17907ddcd8c4.png" width="100%;" alt="가부모아"/><br />
+        <img src="img/기부모아.png" width="100%;" alt="기부모아"/><br />
      </td>
   </tr>
   <tr>
      <td align="center">
-        <img src="https://user-images.githubusercontent.com/67352902/170922507-4956be4c-e621-4b12-a98e-48b1e855b231.png" width="100%;" alt="배너제작"/><br />
+        <img src="img/배너제작.png" width="100%;" alt="배너제작"/><br />
      </td>
      <td align="center">
-        <img src="https://user-images.githubusercontent.com/67352902/170922495-91850b3a-cafa-4f2d-92af-38f31b19caab.png" width="100%;" alt="기부추천"/><br />
+        <img src="img/기부추천.png" width="100%;" alt="기부추천"/><br />
      </td>
   </tr>
 
