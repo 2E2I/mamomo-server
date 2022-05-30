@@ -75,6 +75,7 @@ public class BannerService {
                 .bannerId(bannerId)
                 .originalImg(originalImgUrl)
                 .img(imgUrl)
+                .url(bannerSaveDto.getUrl())
                 .date(bannerSaveDto.getDate())
                 .siteType(bannerSaveDto.getSiteType())
                 .title(bannerSaveDto.getTitle())
@@ -195,7 +196,7 @@ public class BannerService {
 
         Optional<Banner> banner = bannerRepository.findBannerByBannerId(bannerId);
         String userId = userRepository.findByEmail(email).get().getId();
-        String originalImgUrl = banner.get().getOriginalImg().split(userId+"/")[1];
+        String originalImgUrl = banner.get().getOriginalImg().split(userId + "/")[1];
 
         gcsService.deleteFile(GcsFIleDto.builder()
                 .bucketName(BUCKET_NAME)

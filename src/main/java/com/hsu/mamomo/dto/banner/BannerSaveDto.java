@@ -30,6 +30,8 @@ public class BannerSaveDto {
     @NonNull
     private MultipartFile imgData;
 
+    private String url;
+
     @NonNull
     private String siteType;
 
