@@ -18,12 +18,12 @@ spring:
 
   datesource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://34.64.234.137:3306/mamomo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://34.64.53.227:3306/mamomo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: root
     password: mamomo!mysql
 
 elasticsearch:
-  host: 34.64.234.137
+  host: 34.64.53.227
   port: 9200
   username: elastic
   password: hansung

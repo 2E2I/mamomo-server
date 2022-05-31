@@ -29,7 +29,7 @@ public class TextMiningService {
 
     private CampaignDto campaignDto;
 
-    @Value("http://34.64.234.137:5000")
+    @Value("http://34.64.53.227:5000")
     private String FLASK_API_URL;
 
     /*
