@@ -14,7 +14,7 @@ spring:
       storage:
         credentials:
           location:
-            classpath: digital-shadow-343012-fbddea22c098.json
+            classpath: regal-river-351911-7361d2f9aea0.json
 
   datesource:
     driver-class-name: com.mysql.cj.jdbc.Driver

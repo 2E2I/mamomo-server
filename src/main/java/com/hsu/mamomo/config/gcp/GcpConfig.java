@@ -20,9 +20,9 @@ public class GcpConfig {
     @Bean
     public Storage storage() throws IOException {
         StorageOptions storageOptions = StorageOptions.newBuilder()
-                .setProjectId("digital-shadow-343012")
+                .setProjectId("regal-river-351911")
                 .setCredentials(GoogleCredentials.fromStream(new FileInputStream(
-                        "src\\main\\resources\\digital-shadow-343012-fbddea22c098.json"))).build();
+                        "src\\main\\resources\\regal-river-351911-7361d2f9aea0.json"))).build();
         return storageOptions.getService();
     }
 
