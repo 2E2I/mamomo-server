@@ -18,7 +18,6 @@ import com.hsu.mamomo.repository.jpa.BannerRepository;
 import com.hsu.mamomo.repository.jpa.UserRepository;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BannerService {
 
-    private final String BUCKET_NAME = "mamomo-banner-storage";
+    private final String GCS_BUCKET_URL = "https://storage.googleapis.com/";
+    private final String GCS_BUCKET_NAME = "mamomo-banner-storage";
 
     private final BannerRepository bannerRepository;
     private final UserRepository userRepository;
@@ -50,33 +50,25 @@ public class BannerService {
         String userId = user.getId();
         String bannerId = getBannerId();
 
-        // check bannerId is duplicate
-        checkBannerIdIsDuplicate(bannerId);
-
         // 원본 이미지
         GcsFIleDto originalGcsFIleDto = GcsFIleDto.builder()
-                .bucketName(BUCKET_NAME)
+                .bucketName(GCS_BUCKET_NAME)
                 .filePath(userId)
                 .fileName("original_" + bannerId)
                 .build();
 
         // 배너 이미지
         GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
-                .bucketName(BUCKET_NAME)
+                .bucketName(GCS_BUCKET_NAME)
                 .filePath(userId)
                 .fileName(bannerId)
                 .build();
 
-        // GCS에 배너 저장, 이미지 URL을 imgUrl 변수에 저장
-        String originalImgUrl = gcsService.uploadFileToGCS(originalGcsFIleDto,
-                bannerSaveDto.getOriginalImgData());
-        String imgUrl = gcsService.uploadFileToGCS(gcsFIleDto, bannerSaveDto.getImgData());
-
         Banner banner = Banner.builder()
                 .user(user)
                 .bannerId(bannerId)
-                .originalImg(originalImgUrl)
-                .img(imgUrl)
+                .originalImg(getImgUrl(originalGcsFIleDto))
+                .img(getImgUrl(gcsFIleDto))
                 .url(bannerSaveDto.getUrl())
                 .date(bannerSaveDto.getDate())
                 .siteType(bannerSaveDto.getSiteType())
@@ -94,13 +86,25 @@ public class BannerService {
                 .textFont3(bannerSaveDto.getTextFont3())
                 .build();
 
-        bannerRepository.save(banner);
+        // check bannerId is duplicate
+        Optional<Banner> optionalBanner = bannerRepository.findBannerByBannerId(bannerId);
+        if (optionalBanner.isPresent() && optionalBanner.get().getUser() == user) {
+            throw new CustomException(DUPLICATE_BANNER);
+        } else {
+            // GCS에 이미지 저장
+            gcsService.uploadFileToGCS(originalGcsFIleDto, bannerSaveDto.getOriginalImgData());
+            gcsService.uploadFileToGCS(gcsFIleDto, bannerSaveDto.getImgData());
 
-        BannerDto bannerDto = BannerDto.builder()
-                .banner(banner)
-                .build();
+            // DB에 배너 저장
+            bannerRepository.save(banner);
 
-        return new ResponseEntity<>(bannerDto, HttpStatus.OK);
+            BannerDto bannerDto = BannerDto.builder()
+                    .banner(banner)
+                    .build();
+
+            return new ResponseEntity<>(bannerDto, HttpStatus.OK);
+        }
+
     }
 
     public ResponseEntity<BannerDto> getBannerStatus(String authorization,
@@ -144,7 +148,7 @@ public class BannerService {
             Banner banner = bannerOptional.get();
             String bannerId = bannerModifyDto.getBannerId();
             GcsFIleDto gcsFIleDto = GcsFIleDto.builder()
-                    .bucketName(BUCKET_NAME)
+                    .bucketName(GCS_BUCKET_NAME)
                     .filePath(userId)
                     .fileName(bannerId)
                     .build();
@@ -218,13 +222,13 @@ public class BannerService {
             bannerRepository.delete(banner.get());
 
             gcsService.deleteFile(GcsFIleDto.builder()
-                    .bucketName(BUCKET_NAME)
+                    .bucketName(GCS_BUCKET_NAME)
                     .filePath(userId)
                     .fileName(bannerId)
                     .build());
 
             gcsService.deleteFile(GcsFIleDto.builder()
-                    .bucketName(BUCKET_NAME)
+                    .bucketName(GCS_BUCKET_NAME)
                     .filePath(userId)
                     .fileName(originalImgUrl)
                     .build());
@@ -239,10 +243,8 @@ public class BannerService {
         return localDateTime;
     }
 
-    public void checkBannerIdIsDuplicate(String bannerId) {
-        Optional<Banner> banner = bannerRepository.findBannerByBannerId(bannerId);
-        if (banner.isPresent()) {
-            throw new CustomException(DUPLICATE_BANNER);
-        }
+    public String getImgUrl(GcsFIleDto gcsFIleDto) {
+        return GCS_BUCKET_URL + gcsFIleDto.getBucketName() + "/"
+                       + gcsFIleDto.getFilePath() + "/" + gcsFIleDto.getFileName();
     }
 }
