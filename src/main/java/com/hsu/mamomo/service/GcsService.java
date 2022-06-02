@@ -4,7 +4,6 @@ import static com.hsu.mamomo.controller.exception.ErrorCode.BANNER_NOT_FOUND;
 import static com.hsu.mamomo.controller.exception.ErrorCode.FAIL_SAVE_BANNER;
 
 import com.google.cloud.WriteChannel;
-import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -12,9 +11,6 @@ import com.hsu.mamomo.controller.exception.CustomException;
 import com.hsu.mamomo.dto.banner.GcsFIleDto;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
