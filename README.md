@@ -101,27 +101,48 @@
 
 ## 📸 주요 화면
 
-<div style="overflow:hidden">
-<table style="border:0">
-  <tr>
-    <td align="center">
-    <img src="img/메인화면.png" width="100%;" alt="메인화면"/><br />
-    </td>
-     <td align="center">
-        <img src="img/기부모아.png" width="100%;" alt="기부모아"/><br />
-     </td>
-  </tr>
-  <tr>
-     <td align="center">
-        <img src="img/배너제작.png" width="100%;" alt="배너제작"/><br />
-     </td>
-     <td align="center">
-        <img src="img/기부추천.png" width="100%;" alt="기부추천"/><br />
-     </td>
-  </tr>
+<details>
+  <summary>주요 화면 보기</summary>
+  
+  
+  - 메인화면
+  ![메인페이지](https://user-images.githubusercontent.com/67851738/171781790-3b6d3ab7-45e9-4a4e-b078-c35742925ffc.png)
 
-</table>
-</div>
+  - 회원가입
+  ![회원가입](https://user-images.githubusercontent.com/67851738/171782056-83cd262f-91e5-4c93-91bd-87e2fa466b77.png)
+
+  - 로그인
+  ![로그인](https://user-images.githubusercontent.com/67851738/171781914-d1d72cf3-7902-4fec-96b5-0ab785c65ef1.png)
+
+  - 검색
+  ![검색](https://user-images.githubusercontent.com/67851738/171782104-2fc599d4-7a41-42f8-8884-32411ee5ebee.png)
+
+  - 검색 결과
+  ![검색결과](https://user-images.githubusercontent.com/67851738/171782108-cdc94cf6-5e6e-4c9c-ba25-d5c65665acf6.png)
+
+  - 기부 모아
+  ![기부모아](https://user-images.githubusercontent.com/67851738/171782129-ec5d0aa8-38aa-450d-beac-d42ce8e3fe35.png)
+
+  - 기부 카드
+  ![기부카드](https://user-images.githubusercontent.com/67851738/171782165-78d6abea-e040-4fd0-877a-be85d5bc6653.png)
+
+  - 배너 모아
+  ![배너모아](https://user-images.githubusercontent.com/67851738/171782205-9860abd5-8bfa-44ac-b04f-36e1bba28012.png)
+
+  - 배너 제작
+  ![배너제작](https://user-images.githubusercontent.com/67851738/171782221-ac9240c1-f730-4321-b097-aca5b5f861f5.png)
+
+  - 프로필 관리
+  ![프로필관리](https://user-images.githubusercontent.com/67851738/171782242-03283e6b-66d9-439f-af04-fee66ba9772d.png)
+
+  - 좋아요한 기부
+  ![좋아요한기부](https://user-images.githubusercontent.com/67851738/171782260-72314404-bbc0-47db-9289-440f009edfa1.png)
+
+  - 내가 만든 배너
+  ![내가만든배너](https://user-images.githubusercontent.com/67851738/171782286-b4499384-5b0b-454b-81f2-dc8c9d1a27e5.png)
+  
+  
+</details>
 
 
 ## 👩‍👩‍👧‍👦 팀 정보
