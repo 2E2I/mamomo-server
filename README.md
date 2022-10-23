@@ -14,7 +14,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://flossy-thursday-5ea.notion.site/2022-2195650e0c2d4c589aa8a32016fae4ea">
+    <a href="https://imshung.notion.site/MaMoMo-2195650e0c2d4c589aa8a32016fae4ea">
       📖 Wiki
     </a>
     <span> | </span>
